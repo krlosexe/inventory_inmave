@@ -96,11 +96,11 @@ Route::get('tasks', function () {
     return view('tasks.gestion');
 });
 
-Route::get('raking-products', function () {
+Route::get('/raking/products', function () {
     return view('reports.productRanking');
 });
 
-Route::get('state-stock', function () {
+Route::get('/state/stock', function () {
     return view('reports.stateStock');
 });
 

@@ -326,7 +326,7 @@
 						"method":"POST",
 						"dataType":'JSON',
 						"url":''+url+'/api/state-stock',
-						"data": params ? params : params_init,
+						"data": {"bodega": $('#id_bodega').val()},
 						"dataSrc":""
 					},
 					"columns":[
