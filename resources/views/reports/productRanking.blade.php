@@ -356,7 +356,7 @@
 							}
 						},
 						{"data": "quantities",
-							"orderable": false
+							"order": [[ 2, "desc" ]]
 						},
 					],
 					"language": idioma_espanol,
