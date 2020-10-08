@@ -87,10 +87,13 @@ Route::get('output/export/excel', 'InvoiceController@ExportExcel');
 
 
 Route::resource('tasks', 'TasksController');
-Route::get('tasks/status/{id}/{status}', 'TasksController@status');
 
+Route::get('tasks/status/{id}/{status}', 'TasksController@status');
 
 Route::resource('reemisiones', 'ReemisionesController');
 
 
 Route::get('reemision/print/{id}', 'InvoiceController@ShowInvoiceReemision');
+
+Route::get('rakin-producto', 'ProductsRankingController@listRankinProducts');
+Route::post('state-stock', 'StateStockController@listStateStock');

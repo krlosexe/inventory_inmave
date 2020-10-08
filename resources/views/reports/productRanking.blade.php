@@ -235,13 +235,8 @@
 			                    <tr>
 								  <!-- <th>Acciones</th> -->
 								  <th>#</th>
-								  <th>Responsable</th>
-								  <th>Asunto</th>
-								  <th>Fecha</th>
-								  <th>Hora</th>
-								  <th>Estatus</th>
-			                      <th>Fecha de registro</th>
-								  <th>Registrado por</th>
+								  <th>descripción</th>
+								  <th>Cantidad</th>
 			                    </tr>
 			                  </thead>
 			                  <tbody></tbody>
@@ -340,21 +335,20 @@
 
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/tasks',
-						 "data": {
-							"rol"     : name_rol,
-							"id_user" : id_user,
-							"token"   : tokens,
-							"adviser" : adviser,
-							"overdue" : overdue,
-							"date_init"   : date_init,
-							"date_finish" : date_finish
-						},
+						 "url":''+url+'/api/rakin-producto',
+						//  "data": {
+						// 	"rol"     : name_rol,
+						// 	"id_user" : id_user,
+						// 	"token"   : tokens,
+						// 	"adviser" : adviser,
+						// 	"overdue" : overdue,
+						// 	"date_init"   : date_init,
+						// 	"date_finish" : date_finish
+						// },
 						"dataSrc":""
 					},
 					"columns":[
@@ -374,23 +368,19 @@
 						// 		return botones;
 						// 	}
 						// },
-						{"data": "id_tasks"},
-
-
-						{"data":"name_responsable", 
+						{"data": "id_product",
+							"orderable": false
+						},
+						{"data":"description", 
+							"orderable": false,
 							render : function(data, type, row) {
-								return data+" "+row.last_name_responsable;
-								
+								return row.description;
+						
 							}
 						},
-						{"data": "issue"},
-						{"data": "fecha"},
-						{"data": "time"},
-						{"data": "status_task"},
-						
-						{"data": "fec_regins"},
-						{"data": "email_regis"}
-						
+						{"data": "quantities",
+							"orderable": false
+						},
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
