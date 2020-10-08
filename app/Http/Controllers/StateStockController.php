@@ -18,7 +18,8 @@ class StateStockController extends Controller
             ->join("product_output_items", "products.id", "product_output_items.id_product")
             ->join("product_output", "product_output_items.id_output", "product_output.id")
             ->where("auditoria.tabla", "products")
-            ->where("auditoria.status", "!=", "0")
+            ->where("auditoria.status", "!=", "0") 
+            ->where("product_output.warehouse", $request->bodega)
             ->orderBy("products.id", "DESC")
             ->groupBy("products.id")
             ->get();
@@ -35,7 +36,7 @@ class StateStockController extends Controller
         }
     }
     public function GetExistence($id_product,$bodega){
-                // dd($id_product);
+            //   dd($bodega);
         try {
                 $entry = DB::table("product_entry_items")
                             ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
