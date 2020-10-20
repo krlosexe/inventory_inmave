@@ -33,9 +33,9 @@ class ReemisionesController extends Controller
 
         $total = 0;
         foreach($data as $value){
-            
+
             foreach($value["products"] as $product){
-                
+
                 $entry_medellin = DB::table("product_entry_items")
                             ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
                             ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
@@ -54,26 +54,26 @@ class ReemisionesController extends Controller
                                     ->groupBy("product_output_items.id_product")
                                     ->first();
 
-                                
+
                 $total = 0;
                 if($entry_medellin){
                     $total_output_medellin = 0;
                     if($output_medellin){
                         $total_output_medellin = $output_medellin->total;
                     }
-        
+
                     $total = $entry_medellin->total - $total_output_medellin;
                 }else{
                     $total = 0;
                 }
 
-               
+
             }
 
             $product["existence"] = $total;
 
         }
-   
+
         return response()->json($data)->setStatusCode(200);
     }
 
@@ -94,7 +94,7 @@ class ReemisionesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
 
         isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
 
@@ -120,12 +120,12 @@ class ReemisionesController extends Controller
                 $producs_items["total"]       = str_replace(",", "", $request["total"][$key]);
 
                 ReemisionesItems::create($producs_items);
-            }   
+            }
         }
-        
+
 
         if ($output) {
-            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");    
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -169,8 +169,8 @@ class ReemisionesController extends Controller
 
         if(isset($request["id_product"])){
             foreach($request["id_product"] as $key => $value){
-                $producs_items["id_reemision"]  = $value;
-                $producs_items["id_output"]     = $reemisiones;
+                $producs_items["id_reemision"]  = $reemisiones;
+                $producs_items["id_product"]     = $value;
                 $producs_items["qty"]           = $request["qty"][$key];
                 $producs_items["price"]         = str_replace(",", "", $request["price"][$key]);
                 $producs_items["vat"]           = $request["vat"][$key];
@@ -178,12 +178,12 @@ class ReemisionesController extends Controller
 
                 ReemisionesItems::create($producs_items);
 
-            }   
+            }
         }
 
 
         if ($update) {
-            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("A ocurrido un error")->setStatusCode(400);
