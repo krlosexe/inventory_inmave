@@ -11,12 +11,13 @@ class ProductsRankingController extends Controller
 {
     public function listRankinProducts()
     {
-        try {            
+        try {
              $data = DB::table('product_output_items')
             ->select('product_output_items.id_product','products.description',
               DB::raw('SUM(product_output_items.qty) as quantities')
             )
             ->leftJoin('products','product_output_items.id_product','products.id')
+            ->Join('product_output','product_output_items.id_output','product_output.id')
             ->groupBy('product_output_items.id_product')
             ->orderBy('quantities','ASC')
             ->get();

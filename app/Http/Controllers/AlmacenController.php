@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{Products, 
+use App\{Products,
          ProductsEntryItems,
          ProductusOutputItems,
          ReemisionesItems
@@ -18,13 +18,14 @@ class AlmacenController extends Controller
             ->leftJoin('product_entry_items','products.id','product_entry_items.id_product')
             ->leftJoin('products_entry','product_entry_items.id_entry','products_entry.id')
             ->where('products_entry.warehouse',$almacen)
+
             ->groupBy('products.id')
             ->withCount('total_productos')
             ->get();
 
             $data->map(function($item) use($almacen){
-                
-         
+
+
                 $item->qty_total = ProductsEntryItems::where('product_entry_items.id_product',$item->id)
                 ->leftJoin('products_entry','product_entry_items.id_entry','products_entry.id')
                 ->where('products_entry.warehouse',$almacen)
@@ -34,8 +35,8 @@ class AlmacenController extends Controller
                 ->leftJoin('product_output','product_output_items.id_output','product_output.id')
                 ->where('product_output.warehouse',$almacen)
                 ->sum('product_output_items.total');
-               
-               
+
+
                 $item->qty_salida = ProductusOutputItems::where('product_output_items.id_product',$item->id)
                 ->leftJoin('product_output','product_output_items.id_output','product_output.id')
                 ->where('product_output.warehouse',$almacen)
@@ -45,7 +46,7 @@ class AlmacenController extends Controller
                 ->leftJoin('reemisiones','reemisiones_items.id_reemision','reemisiones.id')
                 ->where('reemisiones.warehouse',$almacen)
                 ->sum('reemisiones_items.total');
-                
+
                 $item->qty_remision = ReemisionesItems::where('reemisiones_items.id_product',$item->id)
                 ->leftJoin('reemisiones','reemisiones_items.id_reemision','reemisiones.id')
                 ->where('reemisiones.warehouse',$almacen)
@@ -57,6 +58,6 @@ class AlmacenController extends Controller
         } catch (\Throwable $th) {
             return $th;
         }
-        
+
     }
 }

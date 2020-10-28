@@ -243,12 +243,12 @@
                                         <th>Almacen</th>
                                         <th>Descripción</th>
                                         <th>Codigo</th>
-                                        <th>Total Compras(Euros)</th>
-                                        <th>Precio Compra</th>
+                                        <th>Total Compras</th>
+                                        <th>Precio Compra(Euros)</th>
                                         <th>Ventas</th>
                                         <th>Venta Total</th>
-                                        <th>Cantidad Remisión</th>
-                                        <th>Total Remisión</th>
+                                        <th>Cantidad Reemisión</th>
+                                        <th>Total Venta Reemisión</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
