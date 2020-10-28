@@ -20,13 +20,14 @@ class AlmacenController extends Controller
             ->where('products_entry.warehouse',$almacen)
             ->groupBy('products.id')
             ->withCount('total_productos')
+            ->withCount('total_productos_salida')
             ->get();
-            
+
             $data->map(function($item){
 
                 $item->qty_total = ProductsEntryItems::where('id_product',$item->id)->sum('qty');
                 $item->qty_total_vendido = ProductusOutputItems::where('id_product',$item->id)->sum('total');
-                $item->qty_salida = ProductusOutputItems::where('id_product',$item->id)->count('qty');
+                $item->qty_salida = ProductusOutputItems::where('id_product',$item->id)->sum('qty');
                 $item->remision_total = ReemisionesItems::where('id_product',$item->id)->sum('total');
                 $item->qty_remision = ReemisionesItems::where('id_product',$item->id)->count('qty');
 

@@ -16,4 +16,8 @@ class Products extends Model
     public function total_productos(){
         return $this->hasMany(ProductsEntryItems::class,'id_product');
     }
+
+    public function total_productos_salida(){
+        return $this->hasMany(ProductusOutputItems::class,'id_product');
+    }
 }
