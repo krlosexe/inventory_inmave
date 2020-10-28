@@ -242,9 +242,13 @@
                                     <tr>
                                         <th>Almacen</th>
                                         <th>Descripción</th>
-                                        <th>Entradas</th>
-                                        <th>Precio</th>
-                                        <th>Cantidad</th>
+                                        <th>Codigo</th>
+                                        <th>Total Compras</th>
+                                        <th>Precio Compra</th>
+                                        <th>Ventas</th>
+                                        <th>Venta Total</th>
+                                        <th>Cantidad Remisión</th>
+                                        <th>Total Remisión</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -280,7 +284,6 @@
 
 <script>
     $(document).ready(function() {
-        list();
 
         $("#collapse_Tareas").addClass("show");
         $("#nav_tasks, #modulo_Tareas").addClass("active");
@@ -308,19 +311,28 @@
                 },
                 {
                     "data": "description",
-                    // render: function(data, type, row) {
-                    //     return row.description;
 
-                    // }
                 },
                 {
-                    "data": "total_productos_count",
+                    "data": "code",
+                },
+                {
+                    "data": "qty_total",
                 },
                 {
                     "data": "price",
                 },
                 {
-                    "data": "qty_total",
+                    "data":"qty_salida",
+                },
+                {
+                    "data": "qty_total_vendido",
+                },
+                {
+                    "data": "qty_remision",
+                },
+                {
+                    "data": "remision_total",
                 },
             ],
             "language": idioma_espanol,
