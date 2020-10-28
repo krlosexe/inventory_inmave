@@ -21,13 +21,35 @@ class AlmacenController extends Controller
             ->groupBy('products.id')
             ->withCount('total_productos')
             ->get();
-            $data->map(function($item){
-                $item->qty_total = ProductsEntryItems::where('id_product',$item->id)->sum('qty');
-                $item->qty_total_vendido = ProductusOutputItems::where('id_product',$item->id)->sum('total');
-                $item->qty_salida = ProductusOutputItems::where('id_product',$item->id)->count('qty');
-                $item->remision_total = ReemisionesItems::where('id_product',$item->id)->sum('total');
-                $item->qty_remision = ReemisionesItems::where('id_product',$item->id)->count('qty');
 
+            $data->map(function($item) use($almacen){
+                
+         
+                $item->qty_total = ProductsEntryItems::where('product_entry_items.id_product',$item->id)
+                ->leftJoin('products_entry','product_entry_items.id_entry','products_entry.id')
+                ->where('products_entry.warehouse',$almacen)
+                ->sum('product_entry_items.qty');
+
+                $item->qty_total_vendido = ProductusOutputItems::where('product_output_items.id_product',$item->id)
+                ->leftJoin('product_output','product_output_items.id_output','product_output.id')
+                ->where('product_output.warehouse',$almacen)
+                ->sum('product_output_items.total');
+               
+               
+                $item->qty_salida = ProductusOutputItems::where('product_output_items.id_product',$item->id)
+                ->leftJoin('product_output','product_output_items.id_output','product_output.id')
+                ->where('product_output.warehouse',$almacen)
+                ->sum('product_output_items.qty');
+
+                $item->remision_total = ReemisionesItems::where('reemisiones_items.id_product',$item->id)
+                ->leftJoin('reemisiones','reemisiones_items.id_reemision','reemisiones.id')
+                ->where('reemisiones.warehouse',$almacen)
+                ->sum('reemisiones_items.total');
+                
+                $item->qty_remision = ReemisionesItems::where('reemisiones_items.id_product',$item->id)
+                ->leftJoin('reemisiones','reemisiones_items.id_reemision','reemisiones.id')
+                ->where('reemisiones.warehouse',$almacen)
+                ->sum('reemisiones_items.qty');
 
                 return $item;
             });
