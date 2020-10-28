@@ -18,7 +18,7 @@ class ProductsRankingController extends Controller
             )
             ->leftJoin('products','product_output_items.id_product','products.id')
             ->groupBy('product_output_items.id_product')
-            ->orderBy('quantities','DESC')
+            ->orderBy('quantities','ASC')
             ->get();
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {

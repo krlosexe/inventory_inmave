@@ -234,8 +234,7 @@
 			                  <thead>
 			                    <tr>
 								  <!-- <th>Acciones</th> -->
-								  <th>#</th>
-								  <th>descripción</th>
+								  <th>Descripción</th>
 								  <th>Cantidad</th>
 			                    </tr>
 			                  </thead>
@@ -340,46 +339,17 @@
 					"ajax":{
 						"method":"GET",
 						 "url":''+url+'/api/rakin-producto',
-						//  "data": {
-						// 	"rol"     : name_rol,
-						// 	"id_user" : id_user,
-						// 	"token"   : tokens,
-						// 	"adviser" : adviser,
-						// 	"overdue" : overdue,
-						// 	"date_init"   : date_init,
-						// 	"date_finish" : date_finish
-						// },
+						
 						"dataSrc":""
 					},
-					"columns":[
-						// {"data": null,
-						// 	render : function(data, type, row) {
-						// 		var botones = "";
-						// 		if(consultar == 1)
-						// 			//botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
-						// 		if(actualizar == 1)
-						// 			botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-						// 		if(data.status == 1 && actualizar == 1)
-						// 			botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
-						// 		else if(data.status == 2 && actualizar == 1)
-						// 			botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
-						// 		if(borrar == 1)
-						// 			botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
-						// 		return botones;
-						// 	}
-						// },
-						{"data": "id_product",
-							"orderable": false
-						},
+					"columns":[		
 						{"data":"description", 
-							"orderable": false,
 							render : function(data, type, row) {
 								return row.description;
 						
 							}
 						},
 						{"data": "quantities",
-							"orderable": false
 						},
 					],
 					"language": idioma_espanol,
