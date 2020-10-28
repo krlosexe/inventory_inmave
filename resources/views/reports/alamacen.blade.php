@@ -243,7 +243,7 @@
                                         <th>Almacen</th>
                                         <th>Descripción</th>
                                         <th>Codigo</th>
-                                        <th>Total Compras</th>
+                                        <th>Total Compras(Euros)</th>
                                         <th>Precio Compra</th>
                                         <th>Ventas</th>
                                         <th>Venta Total</th>
