@@ -310,13 +310,6 @@
 				$("#div-input-edit").css("display", "none")
 				$('#table tbody').off('click');
 				var url=document.getElementById('ruta').value; 
-
-				const params = {
-				"bodega": $('#id_bodega').val()
-			    }
-				const params_init = {
-					"bodega":$('#id_bodega').val()
-			    }
 				var table=$("#table").DataTable({
 					
 					"destroy":true,
