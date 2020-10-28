@@ -12,4 +12,8 @@ class Products extends Model
 
     protected $table         = 'products';
     public    $timestamps    = false;
+
+    public function total_productos(){
+        return $this->hasMany(ProductsEntryItems::class,'id_product');
+    }
 }

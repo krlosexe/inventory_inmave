@@ -220,12 +220,12 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4" id="cuadro1">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Almacen</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Reporte por Almacen</h6>
                         <br>
                         <div class="col-md-4">
                             <label for=""><b>Bodega</b></label>
                             <div class="form-group valid-required">
-                                <select name="warehouse" class="form-control" id="warehouse" required>
+                                <select onchange="ProductsGetExistence(this)" name="warehouse" class="form-control" id="warehouse" required>
                                     <option value="">Seleccione</option>
                                     <option value="Medellin">Medellin</option>
                                     <option value="Bogota">Bogota</option>
@@ -240,8 +240,10 @@
                             <table class="table table-bordered" id="table" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <!-- <th>Acciones</th> -->
+                                        <th>Almacen</th>
                                         <th>Descripción</th>
+                                        <th>Entradas</th>
+                                        <th>Precio</th>
                                         <th>Cantidad</th>
                                     </tr>
                                 </thead>
@@ -250,22 +252,13 @@
                         </div>
                     </div>
                 </div>
-
-
                 @include('tasks.store')
                 @include('tasks.view')
                 @include('tasks.edit')
-
-
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- End of Main Content -->
-
-
-
-
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
@@ -283,60 +276,51 @@
 <input type="hidden" id="ruta" value="<?= url('/') ?>">
 @endsection
 
-
-
-
-
 @section('CustomJs')
 
 <script>
     $(document).ready(function() {
-
         list();
-      
+
         $("#collapse_Tareas").addClass("show");
         $("#nav_tasks, #modulo_Tareas").addClass("active");
 
         verifyPersmisos(id_user, tokens, "tasks");
     });
 
-
-    function list(cuadro) {
-        var data = {
-            "id_user": id_user,
-            "token": tokens,
-        };
-
-        var adviser = $("#id_asesora_valoracion-filter").val()
-        var overdue = $("#overdue-filter").val()
-
-        const date_init = $("#date_init").val()
-        const date_finish = $("#date_finish").val()
-
-        $("#div-input-edit").css("display", "none")
-        $('#table tbody').off('click');
+    function ProductsGetExistence(element) {
+        console.log($(element).val());
         var url = document.getElementById('ruta').value;
-        cuadros(cuadro, "#cuadro1");
-
         var table = $("#table").DataTable({
             "destroy": true,
             "stateSave": true,
             "serverSide": false,
             "ajax": {
                 "method": "GET",
-                "url": '' + url + '/api/rakin-producto',
+                "url": '' + url + '/api/almacen/existence/'+$(element).val(),
 
                 "dataSrc": ""
             },
-            "columns": [{
-                    "data": "description",
-                    render: function(data, type, row) {
-                        return row.description;
+            "columns": [
+                {
+                    "data": "warehouse",
 
-                    }
                 },
                 {
-                    "data": "quantities",
+                    "data": "description",
+                    // render: function(data, type, row) {
+                    //     return row.description;
+
+                    // }
+                },
+                {
+                    "data": "total_productos_count",
+                },
+                {
+                    "data": "price",
+                },
+                {
+                    "data": "qty_total",
                 },
             ],
             "language": idioma_espanol,
@@ -349,41 +333,8 @@
 
         table
             .search("").draw()
-  
+
     }
-
- 
-
-    $("#warehouse").change(function() {
-            
-     ProductsGetExistence("#warehouse", "#products", "#table_products")
-    
-    });
-
-    function ProductsGetExistence(warehouse, product, table) {
-				$(warehouse).unbind().change(function (e) { 
-
-					$(table+" tbody").html("")
-
-					$.ajax({
-						url: `${document.getElementById('ruta').value}/api/almacen/existence/${$(this).val()}`,
-						type:'GET',
-						dataType:'JSON',
-						async: false,
-						error: function() {
-							
-						},
-						success: function(data){
-
-		
-
-						}
-
-					});
-
-				});
-			}
-
 </script>
 
 @endsection

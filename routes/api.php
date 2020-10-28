@@ -97,4 +97,4 @@ Route::get('reemision/print/{id}', 'InvoiceController@ShowInvoiceReemision');
 
 Route::get('rakin-producto', 'ProductsRankingController@listRankinProducts');
 Route::post('state-stock', 'StateStockController@listStateStock');
-Route::get('almacen/existence/{warehouse}', 'AlmacenController@listStateStock');
+Route::get('almacen/existence/{warehouse}', 'AlmacenController@GetAlmacen');
