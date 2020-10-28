@@ -4,11 +4,11 @@
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
-      
+
         @csrf
 
         <input type="hidden" name="_method" value="put">
-        
+
 
         <div class="row">
 
@@ -16,17 +16,17 @@
 
              <div class="row">
                 <div class="col-md-6">
-                  
+
                     <label for=""><b>Cliente</b></label>
                     <div class="form-group valid-required">
                         <select name="id_client" class="form-control" id="clients_edit" required>
                         </select>
                     </div>
-                  
+
                 </div>
               </div>
 
-            
+
               <div class="row">
 
                 <div class="col-md-4">
@@ -64,7 +64,7 @@
 
 
 
-        
+
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -82,7 +82,7 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody>
-			                    
+
 			                  </tbody>
 
 
@@ -92,11 +92,17 @@
                             <th style="text-align: center;" id="descuento_text">
                               <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
                               <input type="checkbox" id="apply_discount_edit" class="form-control">
+
+                                    <br><br>
+                              <label for="apply_discount2">¿ Quieres Aplicar Descuento (15%)?</label>
+                             <!-- <input style="text-align: right;" type="text" class="form-control monto_formato_decimales discount" name="discount" id="discount" value="0">-->
+                              <input type="checkbox" id="apply_discount_edit2" class="form-control">
+
                             </th>
 
-                            <th colspan="6" style="text-align: right;">Subtotal 
-                              <input type="hidden" name="subtotal" id="subtotal_edit"> 
-                              <input type="hidden" name="subtotal_with_discount" id="subtotal_with_discount_edit"> 
+                            <th colspan="6" style="text-align: right;">Subtotal
+                              <input type="hidden" name="subtotal" id="subtotal_edit">
+                              <input type="hidden" name="subtotal_with_discount" id="subtotal_with_discount_edit">
                             </th>
                             <th style="text-align: right;" id="subtotal_text_edit">$0</th>
                           </tr>
@@ -192,6 +198,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 

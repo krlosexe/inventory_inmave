@@ -59,7 +59,7 @@
         @else
          <h4>REEMISIÓN {{ $warehouse == "Medellin" ? "MED-" : "BOG-" }}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
         @endif
-        
+
 
         <table>
 
@@ -105,7 +105,7 @@
         </table>
 
 
-        <br>   <br>  
+        <br>   <br>
 
 
         <table>
@@ -128,7 +128,7 @@
         </table>
 
 
-        <br>   <br>   <br> 
+        <br>   <br>   <br>
 
 
         <p style="font-size: 11px;" >Obervaciones: {{ $observations}}</p>
@@ -136,7 +136,7 @@
         <br>
         <table  width="100%" border="1" cellspacing="0" cellpadding="0">
 
-           
+
 
             <tr>
                 <td rowspan="5" style="border: 1px solid black; text-align: center;  width: 50px;"><b>SON:</b></td>
@@ -172,7 +172,7 @@
 
         </table>
 
-        <br> 
+        <br>
 
 
         <p style="font-size: 11px;" >Al efectuar su pago gire cheque a favor de  LABORATORIO MEDICO QUIRURGICO S.A.S NIT: 901.083.722-3, Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
@@ -180,7 +180,7 @@
 
 
 
-       
+
         <table width="100%" style="font-size: 11px" >
             <tr>
                 <th>Ventas: </th>
@@ -214,7 +214,7 @@
 
     </div>
 
-    
+
 
 </body>
 </html>
