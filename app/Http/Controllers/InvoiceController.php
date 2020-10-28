@@ -57,21 +57,11 @@ class InvoiceController extends Controller
 
     }
 
-
-
-
-
-
-
-    public function ExportExcel(){
+    public function ExportExcel($type){
        
-
-
         $xls = new ClientsExport;
         
         return Excel::download($xls, 'ClientExport.xlsx');
-
-
 
     }
 
