@@ -243,7 +243,7 @@
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$(".dt-buttons").append(a)
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel/factura" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 

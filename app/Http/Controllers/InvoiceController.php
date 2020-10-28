@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\ProductusOutput;
 use App\Reemisiones;
 use App\Exports\ClientsExport;
+use App\Exports\ClientsExportReemision;
 use Maatwebsite\Excel\Facades\Excel;
 class InvoiceController extends Controller
 {
     public function ShowInvoice($id){
 
         $data = ProductusOutput::select("product_output.*", "clients.name as name_client", "clients.address as address_client", "clients.nit", "clients.phone")
-        
+
                                 ->join("clients", "clients.id", "=", "product_output.id_client")
 
                                 ->with("products")
@@ -39,7 +40,7 @@ class InvoiceController extends Controller
     public function ShowInvoiceReemision($id){
 
         $data = Reemisiones::select("reemisiones.*", "clients.name as name_client", "clients.address as address_client", "clients.nit", "clients.phone")
-        
+
                                 ->join("clients", "clients.id", "=", "reemisiones.id_client")
 
                                 ->with("products")
@@ -57,13 +58,27 @@ class InvoiceController extends Controller
 
     }
 
-    public function ExportExcel($type){
-       
+    public function ExportExcel(){
+
         $xls = new ClientsExport;
-        
+
         return Excel::download($xls, 'ClientExport.xlsx');
 
     }
+
+
+
+    public function ExportExcelReemision(){
+
+        $xls = new ClientsExportReemision;
+
+        return Excel::download($xls, 'ClientExport.xlsx');
+
+    }
+
+
+
+
 
 
 
@@ -89,7 +104,7 @@ class InvoiceController extends Controller
         }
         if ($nummierod < 1000000000)
             $num_letrammd = $this->cienmillon($nummierod);
-        
+
         return $num_letrammd;
     }
 
@@ -99,7 +114,7 @@ class InvoiceController extends Controller
         if ($numcmeros == 100000000)
             $num_letracms = "CIEN MILLONES";
         if ($numcmeros >= 100000000 && $numcmeros <1000000000){
-            $num_letracms = $this->centena(Floor($numcmeros/1000000))." MILLONES ".($this->millon($numcmeros%1000000));       
+            $num_letracms = $this->centena(Floor($numcmeros/1000000))." MILLONES ".($this->millon($numcmeros%1000000));
         }
         if ($numcmeros < 100000000)
             $num_letracms = $this->decmillon($numcmeros);
@@ -112,14 +127,14 @@ class InvoiceController extends Controller
         if ($numerodm == 10000000)
             $num_letradmm = "DIEZ MILLONES";
         if ($numerodm > 10000000 && $numerodm <20000000){
-            $num_letradmm = $this->decena(Floor($numerodm/1000000))."MILLONES ".($this->cienmiles($numerodm%1000000));        
+            $num_letradmm = $this->decena(Floor($numerodm/1000000))."MILLONES ".($this->cienmiles($numerodm%1000000));
         }
         if ($numerodm >= 20000000 && $numerodm <100000000){
-            $num_letradmm = $this->decena(Floor($numerodm/1000000))." MILLONES ".($this->millon($numerodm%1000000));      
+            $num_letradmm = $this->decena(Floor($numerodm/1000000))." MILLONES ".($this->millon($numerodm%1000000));
         }
         if ($numerodm < 10000000)
             $num_letradmm = $this->millon($numerodm);
-        
+
         return $num_letradmm;
     }
 
@@ -135,7 +150,7 @@ class InvoiceController extends Controller
         }
         if ($nummiero < 1000000)
             $num_letramm = $this->cienmiles($nummiero);
-        
+
         return $num_letramm;
     }
 
@@ -147,7 +162,7 @@ class InvoiceController extends Controller
         if ($numcmero == 100000)
             $num_letracm = "CIEN MIL";
         if ($numcmero >= 100000 && $numcmero <1000000){
-            $num_letracm = $this->centena(Floor($numcmero/1000))." MIL ".($this->centena($numcmero%1000));        
+            $num_letracm = $this->centena(Floor($numcmero/1000))." MIL ".($this->centena($numcmero%1000));
         }
         if ($numcmero < 100000)
             $num_letracm = $this->decmiles($numcmero);
@@ -162,14 +177,14 @@ class InvoiceController extends Controller
         if ($numdmero == 10000)
             $numde = "DIEZ MIL";
         if ($numdmero > 10000 && $numdmero <20000){
-            $numde = $this->decena(Floor($numdmero/1000))."MIL ".($this->centena($numdmero%1000));        
+            $numde = $this->decena(Floor($numdmero/1000))."MIL ".($this->centena($numdmero%1000));
         }
         if ($numdmero >= 20000 && $numdmero <100000){
-            $numde = $this->decena(Floor($numdmero/1000))." MIL ".($this->miles($numdmero%1000));     
-        }       
+            $numde = $this->decena(Floor($numdmero/1000))." MIL ".($this->miles($numdmero%1000));
+        }
         if ($numdmero < 10000)
             $numde = $this->miles($numdmero);
-        
+
         return $numde;
     }
 
@@ -184,7 +199,7 @@ class InvoiceController extends Controller
         }
         if ($nummero < 1000)
             $numm = $this->centena($nummero);
-        
+
         return $numm;
     }
 
@@ -257,8 +272,8 @@ class InvoiceController extends Controller
         }
         else
             $numce = $this->decena($numc);
-        
-        return $numce;  
+
+        return $numce;
     }
 
 
@@ -267,7 +282,7 @@ class InvoiceController extends Controller
 
 
     public function decena($numdero){
-    
+
         if ($numdero >= 90 && $numdero <= 99)
         {
             $numd = "NOVENTA ";
@@ -326,7 +341,7 @@ class InvoiceController extends Controller
                 break;
             }
             case 11:
-            {               
+            {
                 $numd = "ONCE ";
                 break;
             }
@@ -370,7 +385,7 @@ class InvoiceController extends Controller
                 $numd = "DIECINUEVE ";
                 break;
             }
-            }   
+            }
         }
         else
             $numd = $this->unidad($numdero);
@@ -394,47 +409,47 @@ class InvoiceController extends Controller
         {
             $numu = "SIETE";
             break;
-        }       
+        }
         case 6:
         {
             $numu = "SEIS";
             break;
-        }       
+        }
         case 5:
         {
             $numu = "CINCO";
             break;
-        }       
+        }
         case 4:
         {
             $numu = "CUATRO";
             break;
-        }       
+        }
         case 3:
         {
             $numu = "TRES";
             break;
-        }       
+        }
         case 2:
         {
             $numu = "DOS";
             break;
-        }       
+        }
         case 1:
         {
             $numu = "UN";
             break;
-        }       
+        }
         case 0:
         {
             $numu = "";
             break;
-        }       
+        }
     }
-    return $numu;   
+    return $numu;
 }
 
-  
+
 
 
 

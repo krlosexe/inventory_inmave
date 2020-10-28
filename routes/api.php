@@ -81,7 +81,8 @@ Route::get('invoice/print/{id}', 'InvoiceController@ShowInvoice');
 
 
 
-Route::get('output/export/excel/{type}', 'InvoiceController@ExportExcel');
+Route::get('output/export/excel', 'InvoiceController@ExportExcel');
+Route::get('output/export/excel/reemision', 'InvoiceController@ExportExcelReemision');
 
 
 
