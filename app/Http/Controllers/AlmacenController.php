@@ -29,7 +29,7 @@ class AlmacenController extends Controller
                 $item->qty_total_vendido = ProductusOutputItems::where('id_product',$item->id)->sum('total');
                 $item->qty_salida = ProductusOutputItems::where('id_product',$item->id)->sum('qty');
                 $item->remision_total = ReemisionesItems::where('id_product',$item->id)->sum('total');
-                $item->qty_remision = ReemisionesItems::where('id_product',$item->id)->count('qty');
+                $item->qty_remision = ReemisionesItems::where('id_product',$item->id)->sum('qty');
 
                 return $item;
             });
