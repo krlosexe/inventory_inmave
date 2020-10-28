@@ -247,6 +247,8 @@
                                         <th>Precio Compra(Euros)</th>
                                         <th>Ventas</th>
                                         <th>Venta Total</th>
+                                        <th>Cantidad Reemisión</th>
+                                        <th>Total Venta Reemisión</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -325,6 +327,12 @@
                 },
                 {
                     "data": "qty_total_vendido",
+                },
+                {
+                    "data": "qty_remision",
+                },
+                {
+                    "data": "remision_total",
                 },
             ],
             "language": idioma_espanol,
