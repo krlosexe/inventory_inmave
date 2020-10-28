@@ -104,3 +104,8 @@ Route::get('state-stock', function () {
     return view('reports.stateStock');
 });
 
+
+Route::get('almacen', function () {
+    return view('reports.alamacen');
+});
+
