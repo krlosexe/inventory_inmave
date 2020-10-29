@@ -31,7 +31,7 @@ class AlmacenController extends Controller
                     ->where('product_output.warehouse',$almacen)
                     ->where('product_output_items.price', $item->price_distributor_x_caja)
                     ->where('product_output_items.id_product', $item->id)
-                    ->sum('product_output_items.price');
+                    ->sum('product_output_items.total');
 
                 $item->dx_vial = ProductusOutputItems::select('product_output_items.*')
                     ->leftJoin('product_output','product_output_items.id_output','product_output.id')
@@ -39,7 +39,7 @@ class AlmacenController extends Controller
                     ->where('product_output.warehouse',$almacen)
                     ->where('product_output_items.price', $item->price_distributor_x_vial)
                     ->where('product_output_items.id_product', $item->id)
-                    ->sum('product_output_items.price');
+                    ->sum('product_output_items.total');
 
 
                 $item->cx_caja = ProductusOutputItems::select('product_output_items.*')
@@ -48,7 +48,7 @@ class AlmacenController extends Controller
                     ->where('product_output.warehouse',$almacen)
                     ->where('product_output_items.price', $item->price_cliente_x_caja)
                     ->where('product_output_items.id_product', $item->id)
-                    ->sum('product_output_items.price');
+                    ->sum('product_output_items.total');
 
                 $item->cx_vial = ProductusOutputItems::select('product_output_items.*')
                     ->leftJoin('product_output','product_output_items.id_output','product_output.id')
@@ -56,7 +56,7 @@ class AlmacenController extends Controller
                     ->where('product_output.warehouse',$almacen)
                     ->where('product_output_items.price', $item->price_cliente_x_vial)
                     ->where('product_output_items.id_product', $item->id)
-                    ->sum('product_output_items.price');
+                    ->sum('product_output_items.total');
 
         
                 $item->qty_total = ProductsEntryItems::where('product_entry_items.id_product',$item->id)
