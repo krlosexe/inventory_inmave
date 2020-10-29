@@ -247,10 +247,10 @@
                                         <th>Precio Compra(Euros)</th>
                                         <th>Ventas</th>
                                         <th>Venta Total</th>
-                                        <th>Cantidad Reemisión</th>
-                                        <th>Total Venta Reemisión</th>
+                                        <!-- <th>Cantidad Reemisión</th>
+                                        <th>Total Venta Reemisión</th> -->
                                         <th>precio distribuidor por caja</th>
-                                        <th>precio distributor pot vial</th>
+                                        <th>precio distributor por vial</th>
                                         <th>precio cliente por caja</th>
                                         <th>precio cliente por vial</th>
                                     </tr>
@@ -332,12 +332,12 @@
                 {
                     "data": "qty_total_vendido",
                 },
-                {
-                    "data": "qty_remision",
-                },
-                {
-                    "data": "remision_total",
-                },
+                // {
+                //     "data": "qty_remision",
+                // },
+                // {
+                //     "data": "remision_total",
+                // },
                 {
                     "data": "dx_caja",
                 },
