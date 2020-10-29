@@ -249,6 +249,10 @@
                                         <th>Venta Total</th>
                                         <th>Cantidad Reemisión</th>
                                         <th>Total Venta Reemisión</th>
+                                        <th>precio distribuidor por caja</th>
+                                        <th>precio distributor pot vial</th>
+                                        <th>precio cliente por caja</th>
+                                        <th>precio cliente por vial</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -333,6 +337,18 @@
                 },
                 {
                     "data": "remision_total",
+                },
+                {
+                    "data": "dx_caja",
+                },
+                {
+                    "data": "dx_vial",
+                },
+                {
+                    "data": "cx_caja",
+                },
+                {
+                    "data": "cx_vial",
                 },
             ],
             "language": idioma_espanol,

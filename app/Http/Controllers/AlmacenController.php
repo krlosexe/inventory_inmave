@@ -14,18 +14,56 @@ class AlmacenController extends Controller
     public function GetAlmacen($almacen)
     {
         try {
-            $data = Products::select('products.id','products.code','products.description','product_entry_items.price','products_entry.warehouse')
+            $data = Products::select('products.*','product_entry_items.price','products_entry.warehouse')
             ->leftJoin('product_entry_items','products.id','product_entry_items.id_product')
             ->leftJoin('products_entry','product_entry_items.id_entry','products_entry.id')
             ->where('products_entry.warehouse',$almacen)
-
             ->groupBy('products.id')
             ->withCount('total_productos')
             ->get();
 
+
+
             $data->map(function($item) use($almacen){
 
 
+                 $price_distributor_x_caja = $item->price_distributor_x_caja;
+                 $price_distributor_x_vial = $item->price_distributor_x_vial;
+                 $price_cliente_x_caja  = $item->price_cliente_x_caja;
+                 $price_cliente_x_vial  = $item->price_cliente_x_vial;
+
+
+                $item->dx_caja = ProductusOutputItems::select('product_output_items.*')
+                    ->leftJoin('product_output','product_output_items.id_output','product_output.id')
+                    ->leftJoin('products','product_output_items.id_product','products.id')
+                    ->where('product_output.warehouse',$almacen)
+                    ->where('product_output_items.price', $price_distributor_x_caja)
+                    ->where('product_output_items.id_product', $item->id)->sum('product_output_items.price');
+
+                $item->dx_vial = ProductusOutputItems::select('product_output_items.*')
+                    ->leftJoin('product_output','product_output_items.id_output','product_output.id')
+                    ->leftJoin('products','product_output_items.id_product','products.id')
+                    ->where('product_output.warehouse',$almacen)
+                    ->where('product_output_items.price', $price_distributor_x_vial)
+                    ->where('product_output_items.id_product', $item->id)->sum('product_output_items.price');
+
+
+                $item->cx_caja = ProductusOutputItems::select('product_output_items.*')
+                    ->leftJoin('product_output','product_output_items.id_output','product_output.id')
+                    ->leftJoin('products','product_output_items.id_product','products.id')
+                    ->where('product_output.warehouse',$almacen)
+                    ->where('product_output_items.price', $price_cliente_x_caja)
+                    ->where('product_output_items.id_product', $item->id)->sum('product_output_items.price');
+
+                $item->cx_vial = ProductusOutputItems::select('product_output_items.*')
+                    ->leftJoin('product_output','product_output_items.id_output','product_output.id')
+                    ->leftJoin('products','product_output_items.id_product','products.id')
+                    ->where('product_output.warehouse',$almacen)
+                    ->where('product_output_items.price', $price_cliente_x_vial)
+                    ->where('product_output_items.id_product', $item->id)->sum('product_output_items.price');
+
+           
+        
                 $item->qty_total = ProductsEntryItems::where('product_entry_items.id_product',$item->id)
                 ->leftJoin('products_entry','product_entry_items.id_entry','products_entry.id')
                 ->where('products_entry.warehouse',$almacen)
