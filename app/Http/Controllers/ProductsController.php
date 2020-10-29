@@ -243,7 +243,7 @@ class ProductsController extends Controller
     public function GetExistenceWarehouse($warehouse){
 
         $entry = DB::table("product_entry_items")
-                    ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total, products.presentation, products.price_cop, products.price_distributor_x_caja, products.price_distributor_x_vial, products.price_cliente_x_caja, products.price_cliente_x_vial")
+                    ->selectRaw("product_entry_items.id_product, products.description,products.price_euro,product_entry_items.lote,product_entry_items.register_invima, product_entry_items.date_expiration, (SUM(product_entry_items.qty))  as total, products.presentation, products.price_cop, products.price_distributor_x_caja, products.price_distributor_x_vial, products.price_cliente_x_caja, products.price_cliente_x_vial")
                     ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
                     ->join("products", "products.id", "product_entry_items.id_product")
                     ->where("products_entry.warehouse", $warehouse)
