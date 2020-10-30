@@ -102,3 +102,4 @@ Route::get('almacen/existence/{warehouse}', 'AlmacenController@GetAlmacen');
 
 
 Route::post('products/movimiento/output', 'TraspasoController@createOuptTraspase');
+Route::get('products/movimiento/list', 'TraspasoController@ListOuptTraspase');

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Products;
+use App\{Products,ProductsTrapase};
 use App\Auditoria;
 use DB;
 use Illuminate\Http\Request;
@@ -190,6 +190,11 @@ class ProductsController extends Controller
                             ->where("products.id", $id_product)
                             ->groupBy("reemisiones_items.id_product")
                             ->first();
+
+
+                            // $data = ProductsTrapase::where("id_product", $id_product)->first();
+
+                            // dd($data);
 
 
         $data_medellin = [];

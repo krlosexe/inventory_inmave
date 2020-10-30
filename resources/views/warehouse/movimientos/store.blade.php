@@ -42,16 +42,6 @@
                                 Agregar
                             </button>
                         </div>
-
-                        <div class="col-md-4">
-                            <label for=""><b>Movimiento</b></label>
-                            <div class="form-group valid-required">
-                                <select name="movimiento" class="form-control" id="movimiento" required>
-                                    <option value="">Seleccione</option>
-                                    <option value="Traspaso">Traspaso</option>
-                                </select>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

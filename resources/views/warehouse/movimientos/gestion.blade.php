@@ -72,14 +72,16 @@
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
 			                  <thead>
 			                    <tr>
-								  <th>Acciones</th>
-								  <th>#</th>
-								  <th>Tipo</th>
-								  <th>Cliente</th>
-								  <th>Bodega</th>
-								  <th>Valor de Factura</th>
-			                      <th>Fecha de registro</th>
-								  <th>Registrado por</th>
+								  <th>Codigo Producto</th>
+								  <th>Descripcion</th>
+								  <th>Movimiento</th>
+								  <th>Precio Compra (Euro)</th>
+								  <th>Cantidad</th>
+								  <th>Lote</th>
+			                      <th>Origen</th>
+								  <th>Destino</th>
+								  <th>Responsable</th>
+								  <th>Fecha</th>
 			                    </tr>
 			                  </thead>
 			                  <tbody>
@@ -169,7 +171,7 @@
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/products/entry/output',
+						 "url":''+url+'/api/products/movimiento/list',
 						 "data": {
 							"id_user": id_user,
 							"token"  : tokens,
@@ -177,45 +179,18 @@
 						"dataSrc":""
 					},
 					"columns":[
-						{"data": null,
-							render : function(data, type, row) {
-								var botones = "";
-								if(consultar == 1)
-									botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
-								if(actualizar == 1)
-									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-
-								if(actualizar == 1)
-									botones += "<a href='api/invoice/print/"+row.id+"' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
-
-								return botones;
-							}
-						},
-						{"data":"id"},
-						{"data": "reissue",
-							render : function(data, type, row) {
-
-								if(data == 1){
-									return "Reemisión";
-								}else{
-									return "Factura";
-								}
-
-
-							}
-						},
-						{"data":"name_client"},
-						{"data":"warehouse"},
-						{"data": "total_invoice",
-							render : function(data, type, row) {
-								var botones = "";
-
-								return number_format(data, 2);
-							}
-						},
-						{"data": "fec_regins"},
-						{"data": "email_regis"}
-
+					
+						{"data":"code"},
+						{"data":"description"},
+						{"data":"type"},
+						{"data":"price"},
+						{"data":"qty"},
+						{"data":"lote"},
+						{"data":"origin"},
+						{"data":"destiny"},
+						{"data":"email"},
+						{"data":"created_at"},
+					
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
