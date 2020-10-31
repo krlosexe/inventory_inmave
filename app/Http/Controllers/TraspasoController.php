@@ -10,7 +10,7 @@ class TraspasoController extends Controller
 {
     public function createOuptTraspase(Request $request)
     {
-        // dd($request);
+        // dd($request->all());
         try {
             foreach ($request->id_product as $key => $value) {
                 

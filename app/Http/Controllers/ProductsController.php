@@ -191,12 +191,37 @@ class ProductsController extends Controller
                             ->groupBy("reemisiones_items.id_product")
                             ->first();
 
+        $entry_cali = DB::table("product_entry_items")
+                            ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
+                            ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
+                            ->join("products", "products.id", "product_entry_items.id_product")
+                            ->where("products_entry.warehouse", "Cali")
+                            ->where("products.id", $id_product)
+                            ->groupBy("product_entry_items.id_product")
+                            ->first();
 
-                            // $data = ProductsTrapase::where("id_product", $id_product)->first();
+        $output_cali = DB::table("product_output_items")
+                            ->selectRaw("product_output_items.id_product, products.description, (SUM(product_output_items.qty))  as total")
+                            ->join("product_output", "product_output.id", "product_output_items.id_output")
+                            ->join("products", "products.id", "product_output_items.id_product")
+                            ->where("product_output.warehouse", "Cali")
+                            ->where("products.id", $id_product)
+                            ->groupBy("product_output_items.id_product")
+                            ->first();
 
-                            // dd($data);
 
 
+        $output_cali_reemision = DB::table("reemisiones_items")
+                            ->selectRaw("reemisiones_items.id_product, products.description, (SUM(reemisiones_items.qty))  as total")
+                            ->join("reemisiones", "reemisiones.id", "reemisiones_items.id_reemision")
+                            ->join("products", "products.id", "reemisiones_items.id_product")
+                            ->where("reemisiones.warehouse", "Cali")
+                            ->where("products.id", $id_product)
+                            ->groupBy("reemisiones_items.id_product")
+                            ->first();
+
+
+    
         $data_medellin = [];
         if($entry_medellin){
             $total_output_medellin           = 0;
@@ -214,9 +239,6 @@ class ProductsController extends Controller
         }else{
             $data_medellin["medellin"]["total"] = 0;
         }
-
-
-
 
         if($entry_bogota){
 
@@ -237,6 +259,22 @@ class ProductsController extends Controller
             $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision;
         }else{
             $data_medellin["bogota"]["total"] = 0;
+        }
+
+        if($entry_cali){
+
+            $total_output_cali           = 0;
+            $total_output_cali_reemision = 0;
+            if($output_cali){
+                $total_output_cali = $output_cali->total;
+            }
+            if($output_cali_reemision){
+                $total_output_cali_reemision = $output_cali_reemision->total;
+            }
+
+            $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision;
+        }else{
+            $data_medellin["cali"]["total"] = 0;
         }
 
         return $data_medellin;

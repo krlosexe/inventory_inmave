@@ -17,15 +17,26 @@
                                     <option value="">Seleccione</option>
                                     <option value="Medellin">Medellin</option>
                                     <option value="Bogota">Bogota</option>
+                                    <option value="Cali">Cali</option>
                                 </select>
                             </div>
                         </div>
 
 
-                        <div class="col-auto">
+                        <!-- <div class="col-auto">
                             <label for=""><b class="ml-3">Bodega Destino</b></label>
                             <div class="form-group valid-required">
                                 <input type="text" name="destiny" class="form-control form-control-user" id="destiny" read-only>
+                            </div>
+                        </div> -->
+
+                        <div class="col-md-4">
+                            <label for=""><b>Bodega Origen</b></label>
+                            <div class="form-group valid-required">
+                                <select name="destiny" class="form-control" id="destiny" required>
+                                    <option value="">Seleccione</option>
+                                 
+                                </select>
                             </div>
                         </div>
 
