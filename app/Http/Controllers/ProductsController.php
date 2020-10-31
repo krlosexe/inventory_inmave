@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Products;
+use App\{Products,ProductsTrapase};
 use App\Auditoria;
 use DB;
 use Illuminate\Http\Request;
@@ -191,7 +191,37 @@ class ProductsController extends Controller
                             ->groupBy("reemisiones_items.id_product")
                             ->first();
 
+        $entry_cali = DB::table("product_entry_items")
+                            ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
+                            ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
+                            ->join("products", "products.id", "product_entry_items.id_product")
+                            ->where("products_entry.warehouse", "Cali")
+                            ->where("products.id", $id_product)
+                            ->groupBy("product_entry_items.id_product")
+                            ->first();
 
+        $output_cali = DB::table("product_output_items")
+                            ->selectRaw("product_output_items.id_product, products.description, (SUM(product_output_items.qty))  as total")
+                            ->join("product_output", "product_output.id", "product_output_items.id_output")
+                            ->join("products", "products.id", "product_output_items.id_product")
+                            ->where("product_output.warehouse", "Cali")
+                            ->where("products.id", $id_product)
+                            ->groupBy("product_output_items.id_product")
+                            ->first();
+
+
+
+        $output_cali_reemision = DB::table("reemisiones_items")
+                            ->selectRaw("reemisiones_items.id_product, products.description, (SUM(reemisiones_items.qty))  as total")
+                            ->join("reemisiones", "reemisiones.id", "reemisiones_items.id_reemision")
+                            ->join("products", "products.id", "reemisiones_items.id_product")
+                            ->where("reemisiones.warehouse", "Cali")
+                            ->where("products.id", $id_product)
+                            ->groupBy("reemisiones_items.id_product")
+                            ->first();
+
+
+    
         $data_medellin = [];
         if($entry_medellin){
             $total_output_medellin           = 0;
@@ -209,9 +239,6 @@ class ProductsController extends Controller
         }else{
             $data_medellin["medellin"]["total"] = 0;
         }
-
-
-
 
         if($entry_bogota){
 
@@ -234,6 +261,22 @@ class ProductsController extends Controller
             $data_medellin["bogota"]["total"] = 0;
         }
 
+        if($entry_cali){
+
+            $total_output_cali           = 0;
+            $total_output_cali_reemision = 0;
+            if($output_cali){
+                $total_output_cali = $output_cali->total;
+            }
+            if($output_cali_reemision){
+                $total_output_cali_reemision = $output_cali_reemision->total;
+            }
+
+            $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision;
+        }else{
+            $data_medellin["cali"]["total"] = 0;
+        }
+
         return $data_medellin;
        
     }
@@ -243,7 +286,7 @@ class ProductsController extends Controller
     public function GetExistenceWarehouse($warehouse){
 
         $entry = DB::table("product_entry_items")
-                    ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total, products.presentation, products.price_cop, products.price_distributor_x_caja, products.price_distributor_x_vial, products.price_cliente_x_caja, products.price_cliente_x_vial")
+                    ->selectRaw("product_entry_items.id_product, products.description,products.price_euro,product_entry_items.lote,product_entry_items.register_invima, product_entry_items.date_expiration, (SUM(product_entry_items.qty))  as total, products.presentation, products.price_cop, products.price_distributor_x_caja, products.price_distributor_x_vial, products.price_cliente_x_caja, products.price_cliente_x_vial")
                     ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
                     ->join("products", "products.id", "product_entry_items.id_product")
                     ->where("products_entry.warehouse", $warehouse)

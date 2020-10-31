@@ -109,3 +109,7 @@ Route::get('almacen', function () {
     return view('reports.alamacen');
 });
 
+Route::get('movimientos', function () {
+    return view('warehouse.movimientos.gestion');
+});
+

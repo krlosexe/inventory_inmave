@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductsEntry extends Model
 {
     protected $fillable = [
-      "warehouse", "number_invoice","date_invoice", "taxes", "transport", "subtotal", "total_invoice","created_at"
+      "warehouse", "number_invoice","date_invoice", "taxes", "transport", "subtotal", "total_invoice","id_traspase","created_at"
     ];
 
     protected $table         = 'products_entry';

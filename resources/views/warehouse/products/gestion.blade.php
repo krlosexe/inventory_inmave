@@ -78,6 +78,7 @@
 								  <th>Precio COP</th>
 								  <th>Existencia Medellin</th>
 								  <th>Existencia Bogota</th>
+								  <th>Existencia Cali</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -212,6 +213,11 @@
 						{"data": null,
 							render : (data, type, row) => {
 								return row.existence.bogota.total
+							}
+						},
+						{"data": null,
+							render : (data, type, row) => {
+								return row.existence.cali.total
 							}
 						},
 						{"data": "fec_regins"},

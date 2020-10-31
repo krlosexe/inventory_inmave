@@ -99,3 +99,7 @@ Route::get('reemision/print/{id}', 'InvoiceController@ShowInvoiceReemision');
 Route::get('rakin-producto', 'ProductsRankingController@listRankinProducts');
 Route::post('state-stock', 'StateStockController@listStateStock');
 Route::get('almacen/existence/{warehouse}', 'AlmacenController@GetAlmacen');
+
+
+Route::post('products/movimiento/output', 'TraspasoController@createOuptTraspase');
+Route::get('products/movimiento/list', 'TraspasoController@ListOuptTraspase');

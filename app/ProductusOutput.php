@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductusOutput extends Model
 {
     protected $fillable = [
-        "warehouse", "id_client", "reissue","subtotal", "subtotal_with_discount","vat_total", "discount_total", "rte_fuente", "rte_fuente_total", "total_invoice", "observations", "created_at"
+        "warehouse", "id_client", "reissue","subtotal", "subtotal_with_discount","vat_total", "discount_total", "rte_fuente", "rte_fuente_total", "total_invoice", "observations","id_traspase","created_at"
       ];
   
       protected $table         = 'product_output';
