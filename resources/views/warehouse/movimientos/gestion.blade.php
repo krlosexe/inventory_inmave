@@ -80,7 +80,7 @@
 										<!-- <th>Codigo Producto</th>
 										<th>Descripcion</th> -->
 										<th>Movimiento</th>
-										<th>Precio Compra (Euro)</th>
+										<!-- <th>Precio Compra (Euro)</th> -->
 										<!-- <th>Cantidad</th>
 										<th>Lote</th> -->
 										<th>Origen</th>
@@ -193,33 +193,25 @@
 						return botones;
 					}
 				},
-
-				// {
-				// 	"data": "code"
-				// },
-				// {
-				// 	"data": "description"
-				//},
 				{
 					"data": "type"
 				},
-				{
-					"data": "price"
-				},
 				// {
-				// 	"data": "qty"
+				// 	"data": "price"
 				// },
-				// {
-				// 	"data": "lote"
-				// },
+
 				{
-					"data": "origin"
+					"data": "warehouse"
 				},
 				{
 					"data": "destiny"
 				},
 				{
-					"data": "email"
+					"data": "email",
+					render: function(data, type, row) {
+						return row.usuario.email;
+
+					}
 				},
 				{
 					"data": "created_at"
@@ -265,6 +257,7 @@
 	}
 
 	function nuevo() {
+		$("#table_products" + " tbody").html("")
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
 		AddProductos("#add_product", "#products", "#table_products")
@@ -359,9 +352,6 @@
 					validaProduct = false;
 				}
 			});
-
-			
-
 			if (!validaProduct) {
 				html += "<tr>"
 				html += "<td>" + description + " <input type='hidden' class='id_product' name='id_product[]' value='" + id_product + "' ><input type='hidden' class='id_product' name='ext_total[]' value='" + total + "' ><input type='hidden' class='id_product' name='lote[]' value='" + lote + "' ><input type='hidden' class='id_product' name='price_euro[]' value='" + price_e + "' ><input type='hidden' class='id_product' name='date_expiration[]' value='" + date_expiration + "' ><input type='hidden' class='id_product' name='register_invima[]' value='" + register_invima + "' >  </td>"
@@ -377,111 +367,125 @@
 
 
 			$(table + " tbody").append(html)
+			
 
 		});
 	}
 
 	function ProductsGetExistence(warehouse, product, table) {
-				$(warehouse).unbind().change(function(e) {
+		$(warehouse).unbind().change(function(e) {
 
-					$(table + " tbody").html("")
-
-
-					$.ajax({
-						url: `${document.getElementById('ruta').value}/api/products/get/existence/warehouse/${$(this).val()}`,
-						type: 'GET',
-						data: {
-							"id_user": id_user,
-							"token": tokens,
-						},
-						dataType: 'JSON',
-						async: false,
-						error: function() {
-
-						},
-						success: function(data) {
-							var html
-
-							if ($("#warehouse").val() == 'Medellin') {
-
-								html += '<option value="Bogota">Bogota</option>'
-								html += '<option value="Cali">Cali</option>'
-
-								// $(product + " option").remove();
-								// 	$(product).append($('<option>', {
-								// 		value: "",
-								// 		text: "-Seleccione"
-								// 	}));
-							}
-
-							if ($("#warehouse").val() == 'Bogota') {
-
-								html += '<option value="Medellin">Medellin</option>'
-								html += '<option value="Cali">Cali</option>'
-
-								// $(product + " option").remove();
-								// 	$(product).append($('<option>', {
-								// 		value: "",
-								// 		text: "-Seleccione"
-								// 	}));
-							}
-
-							if ($("#warehouse").val() == 'Cali') {
-
-								html += '<option value="Bogota">Bogota</option>'
-								html += '<option value="Medellin">Medellin</option>'
-
-							}
-
-							$("#destiny").html(html)
+			$(table + " tbody").html("")
 
 
-							$(product + " option").remove();
-							$(product).append($('<option>', {
-								value: "",
-								text: "-Seleccione"
-							}));
+			$.ajax({
+				url: `${document.getElementById('ruta').value}/api/products/get/existence/warehouse/${$(this).val()}`,
+				type: 'GET',
+				data: {
+					"id_user": id_user,
+					"token": tokens,
+				},
+				dataType: 'JSON',
+				async: false,
+				error: function() {
 
-							$.each(data, function(i, item) {
+				},
+				success: function(data) {
+					var html
 
-								// console.log(item);
+					if ($("#warehouse").val() == 'Medellin') {
 
-								$(product).append($('<option>', {
-									value: `${item.id_product}|${item.total}|${item.price_cop}|${item.lote}|${item.price_euro}|${item.presentation}|${item.date_expiration}|${item.register_invima}`,
-									text: item.description,
+						html += '<option value="Bogota">Bogota</option>'
+						html += '<option value="Cali">Cali</option>'
 
-								}));
+						// $(product + " option").remove();
+						// 	$(product).append($('<option>', {
+						// 		value: "",
+						// 		text: "-Seleccione"
+						// 	}));
+					}
 
-							});
-							$(product).select2({
-								width: "100%",
-								sorter: function(data) {
-									/* Sort data using lowercase comparison */
-									return data.sort(function(a, b) {
-										a = a.text.toLowerCase();
-										b = b.text.toLowerCase();
-										if (a > b) {
-											return 1;
-										} else if (a < b) {
-											return -1;
-										}
-										return 0;
-									});
-								}
-							});
+					if ($("#warehouse").val() == 'Bogota') {
+
+						html += '<option value="Medellin">Medellin</option>'
+						html += '<option value="Cali">Cali</option>'
+
+						// $(product + " option").remove();
+						// 	$(product).append($('<option>', {
+						// 		value: "",
+						// 		text: "-Seleccione"
+						// 	}));
+					}
+
+					if ($("#warehouse").val() == 'Cali') {
+
+						html += '<option value="Bogota">Bogota</option>'
+						html += '<option value="Medellin">Medellin</option>'
+
+					}
+
+					$("#destiny").html(html)
 
 
-						}
+					$(product + " option").remove();
+					$(product).append($('<option>', {
+						value: "",
+						text: "-Seleccione"
+					}));
+
+					$.each(data, function(i, item) {
+
+						// console.log(item);
+
+						$(product).append($('<option>', {
+							value: `${item.id_product}|${item.total}|${item.price_cop}|${item.lote}|${item.price_euro}|${item.presentation}|${item.date_expiration}|${item.register_invima}`,
+							text: item.description,
+
+						}));
 
 					});
+					$(product).select2({
+						width: "100%",
+						sorter: function(data) {
+							/* Sort data using lowercase comparison */
+							return data.sort(function(a, b) {
+								a = a.text.toLowerCase();
+								b = b.text.toLowerCase();
+								if (a > b) {
+									return 1;
+								} else if (a < b) {
+									return -1;
+								}
+								return 0;
+							});
+						}
+					});
 
-				});
-			}
+
+				}
+
+			});
+
+		});
+	}
+
+	function deleteProduct(element, edit = '') {
+		var tr = $(element).parent("td").parent("tr").remove()
+
+		calcSubTotal(".price_product", edit)
+		calcTotalVat(".vat_product", edit)
+		calTotal(".total_product", edit)
+	}
 
 	function ver(tbody, table) {
 		$(tbody).on("click", "span.consultar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
+
+			console.log({
+				data
+			})
+
 			var url = document.getElementById('ruta').value;
 			var table2 = $("#table_view").DataTable({
 				"destroy": true,
@@ -490,7 +494,7 @@
 				"serverSide": false,
 				"ajax": {
 					"method": "GET",
-					"url": '' + url + '/api/products/movimiento/detail/' + data.id_product,
+					"url": '' + url + '/api/products/movimiento/detail/' + data.id,
 					"data": {
 						"id_user": id_user,
 						"token": tokens,
@@ -533,60 +537,6 @@
 		});
 	}
 
-
-
-	// function ShowProdcuts(table, data) {
-
-	// 	console.log(data)
-
-	// 	$(table + " tbody").html("")
-	// 	$.map(data, function(item, key) {
-
-	// 		let html = ""
-	// 		html += "<tr>"
-	// 		html += "<td>" + item.description + " <input type='hidden' class='id_product' name='id_product[]' value='" + item.id_product + "' >  </td>"
-	// 		html += "<td>" + item.presentation + "</td>"
-
-
-	// 		html += "<td>"
-	// 		html += "<select class='form-control items_calc price_product' id='price_edit_" + item.id + "' name='price[]' onchange='calcProduc(this, " + '"_edit"' + ")' required>"
-	// 		html += "<option value=''>Seleccione el precio</option>"
-	// 		html += "<option value='" + item.price_distributor_x_caja + "'>Precio Distribuidor x Caja - " + number_format(item.price_distributor_x_caja, 2) + "</option>"
-	// 		html += "<option value='" + item.price_distributor_x_vial + "'>Precio Distribuidor x Vial - " + number_format(item.price_distributor_x_vial, 2) + "</option>"
-	// 		html += "<option value='" + item.price_cliente_x_caja + "'>Precio Cliente Final x Caja - " + number_format(item.price_cliente_x_caja, 2) + "</option>"
-	// 		html += "<option value='" + item.price_cliente_x_vial + "'>Precio Cliente Final x Vial  - " + number_format(item.price_cliente_x_vial, 2) + "</option>"
-	// 		html += "</select>"
-
-	// 		html += "</td>"
-
-
-
-	// 		//html +="<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales price_product items_calc' value='"+number_format(item.price, 2)+"'  onkeyup='calcProduc(this, "+'"_edit"'+")' name='price[]' required></td>"
-
-
-	// 		html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' onchange='calcProduc(this, " + '"_edit"' + ")' required><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
-
-	// 		html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.existence + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.existence + "' disabled></td>"
-
-
-	// 		if (item.vat == 1) {
-	// 			html += "<td><input type='checkbox' class='form-control vat_product items_calc'checked onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='" + item.vat + "'></td>"
-	// 		} else {
-	// 			html += "<td><input type='checkbox' class='form-control vat_product items_calc' onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='" + item.vat + "'></td>"
-	// 		}
-
-	// 		html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.total, 2) + "'  name='total[]' readonly required></td>"
-	// 		html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-	// 		html += "</tr>"
-
-
-	// 		$(table + " tbody").append(html)
-	// 		$("#price_edit_" + item.id).val(item.price)
-
-	// 	});
-
-
-	// }
 </script>
 
 

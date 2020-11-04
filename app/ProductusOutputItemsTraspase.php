@@ -10,4 +10,9 @@ class ProductusOutputItemsTraspase extends Model
     protected $table  = 'product_output_items_trapase';
     public    $timestamps    = false; 
 
+
+    public function product(){
+        return $this->belongsTo(Products::class,'id_product');
+    }
+
 }
