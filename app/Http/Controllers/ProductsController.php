@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Products,ProductsTrapase};
+use App\{Products};
 use App\Auditoria;
 use DB;
 use Illuminate\Http\Request;
