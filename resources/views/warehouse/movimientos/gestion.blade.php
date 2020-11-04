@@ -143,7 +143,7 @@
 		update();
 
 		$("#collapse_Almacen").addClass("show");
-		$("#nav_output, #modulo_Almacen").addClass("active");
+		$("#nav_movimientos, #modulo_Almacen").addClass("active");
 
 		verifyPersmisos(id_user, tokens, "output");
 	});
@@ -360,7 +360,28 @@
 				}
 			});
 
-			function ProductsGetExistence(warehouse, product, table) {
+			
+
+			if (!validaProduct) {
+				html += "<tr>"
+				html += "<td>" + description + " <input type='hidden' class='id_product' name='id_product[]' value='" + id_product + "' ><input type='hidden' class='id_product' name='ext_total[]' value='" + total + "' ><input type='hidden' class='id_product' name='lote[]' value='" + lote + "' ><input type='hidden' class='id_product' name='price_euro[]' value='" + price_e + "' ><input type='hidden' class='id_product' name='date_expiration[]' value='" + date_expiration + "' ><input type='hidden' class='id_product' name='register_invima[]' value='" + register_invima + "' >  </td>"
+				html += "<td>" + presentation + " </td>"
+				html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='" + total + "' required></td>"
+				html += "<td><input type='number' disabled class='form-control items_calc existence' value='" + total + "' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + total + "'></td>"
+				html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+				html += "</tr>"
+			} else {
+				warning('¡La opción seleccionada ya se encuentra agregada!');
+			}
+
+
+
+			$(table + " tbody").append(html)
+
+		});
+	}
+
+	function ProductsGetExistence(warehouse, product, table) {
 				$(warehouse).unbind().change(function(e) {
 
 					$(table + " tbody").html("")
@@ -456,27 +477,6 @@
 
 				});
 			}
-
-			if (!validaProduct) {
-				html += "<tr>"
-				html += "<td>" + description + " <input type='hidden' class='id_product' name='id_product[]' value='" + id_product + "' ><input type='hidden' class='id_product' name='ext_total[]' value='" + total + "' ><input type='hidden' class='id_product' name='lote[]' value='" + lote + "' ><input type='hidden' class='id_product' name='price_euro[]' value='" + price_e + "' ><input type='hidden' class='id_product' name='date_expiration[]' value='" + date_expiration + "' ><input type='hidden' class='id_product' name='register_invima[]' value='" + register_invima + "' >  </td>"
-				html += "<td>" + presentation + " </td>"
-				html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='" + total + "' required></td>"
-				html += "<td><input type='number' disabled class='form-control items_calc existence' value='" + total + "' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + total + "'></td>"
-				html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-				html += "</tr>"
-			} else {
-				warning('¡La opción seleccionada ya se encuentra agregada!');
-			}
-
-
-
-			$(table + " tbody").append(html)
-
-		});
-	}
-
-
 
 	function ver(tbody, table) {
 		$(tbody).on("click", "span.consultar", function() {
