@@ -10,4 +10,9 @@ class ProductsTrapase extends Model
     protected $guarded =[];
     public $timestamps = false;
 
+
+      public function product(){
+        return $this->belongsTo(Products::class,'id_product');
+      }
+
 }

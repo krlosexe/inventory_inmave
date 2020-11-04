@@ -144,10 +144,23 @@ class ProductsController extends Controller
                             ->selectRaw("product_output_items.id_product, products.description, (SUM(product_output_items.qty))  as total")
                             ->join("product_output", "product_output.id", "product_output_items.id_output")
                             ->join("products", "products.id", "product_output_items.id_product")
+                            ->join("product_trapase", "products.id", "product_trapase.id_product")
                             ->where("product_output.warehouse", "Medellin")
                             ->where("products.id", $id_product)
                             ->groupBy("product_output_items.id_product")
                             ->first();
+
+
+       $traspase_medellin = DB::table("product_output_items_trapase")
+                            ->selectRaw("product_output_items_trapase.id_product, products.description, (SUM(product_output_items_trapase.qty))  as total")
+                            ->join("product_output_traspase", "product_output_traspase.id", "product_output_items_trapase.id_output_traspase")
+                            ->join("products", "products.id", "product_output_items_trapase.id_product")
+                            ->where("product_output_traspase.warehouse", "Medellin")
+                            ->where("products.id", $id_product)
+                            ->groupBy("product_output_items_trapase.id_product")
+                            ->first();
+
+                            // dd($traspase_medellin);
 
 
 
@@ -181,6 +194,16 @@ class ProductsController extends Controller
                             ->groupBy("product_output_items.id_product")
                             ->first();
 
+         $traspase_bogota = DB::table("product_output_items_trapase")
+                            ->selectRaw("product_output_items_trapase.id_product, products.description, (SUM(product_output_items_trapase.qty))  as total")
+                            ->join("product_output_traspase", "product_output_traspase.id", "product_output_items_trapase.id_output_traspase")
+                            ->join("products", "products.id", "product_output_items_trapase.id_product")
+                            ->where("product_output_traspase.warehouse", "Bogota")
+                            ->where("products.id", $id_product)
+                            ->groupBy("product_output_items_trapase.id_product")
+                            ->first();
+
+
 
         $output_bogota_reemision = DB::table("reemisiones_items")
                             ->selectRaw("reemisiones_items.id_product, products.description, (SUM(reemisiones_items.qty))  as total")
@@ -209,6 +232,15 @@ class ProductsController extends Controller
                             ->groupBy("product_output_items.id_product")
                             ->first();
 
+        $traspase_cali = DB::table("product_output_items_trapase")
+                            ->selectRaw("product_output_items_trapase.id_product, products.description, (SUM(product_output_items_trapase.qty))  as total")
+                            ->join("product_output_traspase", "product_output_traspase.id", "product_output_items_trapase.id_output_traspase")
+                            ->join("products", "products.id", "product_output_items_trapase.id_product")
+                            ->where("product_output_traspase.warehouse", "Cali")
+                            ->where("products.id", $id_product)
+                            ->groupBy("product_output_items_trapase.id_product")
+                            ->first();
+
 
 
         $output_cali_reemision = DB::table("reemisiones_items")
@@ -226,6 +258,7 @@ class ProductsController extends Controller
         if($entry_medellin){
             $total_output_medellin           = 0;
             $total_output_medellin_reemision = 0;
+            $total_traspaso_medellin = 0;
 
             if($output_medellin){
                 $total_output_medellin = $output_medellin->total;
@@ -235,7 +268,11 @@ class ProductsController extends Controller
                 $total_output_medellin_reemision = $output_medellin_reemision->total;
             }
 
-            $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision;
+            if($traspase_medellin){
+                $total_traspaso_medellin = $traspase_medellin->total;
+            }
+
+            $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
         }else{
             $data_medellin["medellin"]["total"] = 0;
         }
@@ -244,6 +281,7 @@ class ProductsController extends Controller
 
             $total_output_bogota           = 0;
             $total_output_bogota_reemision = 0;
+            $total_traspaso_bogota = 0;
             if($output_bogota){
                 $total_output_bogota = $output_bogota->total;
             }
@@ -253,10 +291,13 @@ class ProductsController extends Controller
                 $total_output_bogota_reemision = $output_bogota_reemision->total;
             }
 
+            if($traspase_bogota){
+                $total_traspaso_bogota = $traspase_bogota->total;
+            }
 
             
 
-            $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision;
+            $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
         }else{
             $data_medellin["bogota"]["total"] = 0;
         }
@@ -265,6 +306,7 @@ class ProductsController extends Controller
 
             $total_output_cali           = 0;
             $total_output_cali_reemision = 0;
+            $total_traspaso_cali = 0;
             if($output_cali){
                 $total_output_cali = $output_cali->total;
             }
@@ -272,7 +314,11 @@ class ProductsController extends Controller
                 $total_output_cali_reemision = $output_cali_reemision->total;
             }
 
-            $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision;
+            if($traspase_cali){
+                $total_traspaso_cali = $traspase_cali->total;
+            }
+
+            $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
         }else{
             $data_medellin["cali"]["total"] = 0;
         }

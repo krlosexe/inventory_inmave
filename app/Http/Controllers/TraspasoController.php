@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{ProductsTrapase,ProductsEntry,ProductsEntryItems,ProductusOutput,ProductusOutputItems};
+use App\{ProductsTrapase,ProductsEntry,ProductsEntryItems,ProductsOutputTraspase,ProductusOutputItemsTraspase};
 
 
 class TraspasoController extends Controller
@@ -29,14 +29,8 @@ class TraspasoController extends Controller
                 
                 $producs_output = [];
                 $producs_output['warehouse'] = $request->warehouse;
-                $producs_output['id_client'] = 0;
-                $producs_output['subtotal']  = 0;
-                $producs_output['subtotal_with_discount']  = 0;
-                $producs_output['vat_total']  = 0;
-                $producs_output['discount_total']  = 0;
-                $producs_output['total_invoice']  = 0;
                 $producs_output['id_traspase'] = $traspaso->id;
-                $salida =  ProductusOutput::create($producs_output);
+                $salida =  ProductsOutputTraspase::create($producs_output);
               
                 
             }   
@@ -44,14 +38,11 @@ class TraspasoController extends Controller
             foreach($request["id_product"] as $key => $value){
 
                 $producs_item_out = [];
-                $producs_item_out["id_output"]   = $salida->id;
+                $producs_item_out["id_output_traspase"]   = $salida->id;
                 $producs_item_out["id_product"]  = $value;
                 $producs_item_out["qty"]         = $request["qty"][$key];
-                $producs_item_out["price"]       = 0;
-                $producs_item_out["vat"]         = 0;
-                $producs_item_out["total"]       = 0;
                 
-                ProductusOutputItems::create($producs_item_out);
+                ProductusOutputItemsTraspase::create($producs_item_out);
                 
             } 
 
@@ -95,23 +86,39 @@ class TraspasoController extends Controller
         try {
 
             $data = ProductsTrapase::select(
+                'product_trapase.id',
                 'product_trapase.id_product',
                 'product_trapase.type',
-                'product_trapase.qty',
+                // 'product_trapase.qty',
                 'product_trapase.origin',
                 'product_trapase.destiny',
-                'products.code',
-                'products.description',
-                'product_entry_items.lote',
+                // 'products.code',
+                // 'products.description',
+                // 'product_entry_items.lote',
                 'product_entry_items.price',
                 'users.email',
                 'product_trapase.created_at'
             )
+            ->Join('product_output_traspase','product_trapase.id','product_output_traspase.id_traspase')
             ->Join('products_entry','product_trapase.id','products_entry.id_traspase')
             ->Join('product_entry_items','products_entry.id','product_entry_items.id_entry')
             ->Join('products','product_trapase.id_product','products.id')
             ->Join('users','product_trapase.id_user','users.id')
             ->get();
+
+
+           
+
+            return response()->json($data)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+    public function ListOuptTraspaseById($id)
+    {
+        try {
+            $data = ProductsTrapase::where('product_trapase.id_product',$id)->with('product')->get();
+
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;
