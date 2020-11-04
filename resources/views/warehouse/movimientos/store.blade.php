@@ -22,14 +22,6 @@
                             </div>
                         </div>
 
-
-                        <!-- <div class="col-auto">
-                            <label for=""><b class="ml-3">Bodega Destino</b></label>
-                            <div class="form-group valid-required">
-                                <input type="text" name="destiny" class="form-control form-control-user" id="destiny" read-only>
-                            </div>
-                        </div> -->
-
                         <div class="col-md-4">
                             <label for=""><b>Bodega Origen</b></label>
                             <div class="form-group valid-required">

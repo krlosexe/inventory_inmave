@@ -180,7 +180,8 @@
 						"dataSrc":""
 					},
 					"columns":[
-						{"data": null,
+						{
+							"data": null,
 							render : function(data, type, row) {
 								var botones = "";
 								if(consultar == 1)
