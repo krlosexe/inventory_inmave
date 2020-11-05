@@ -23,7 +23,7 @@ class ProductsController extends Controller
                             ->where("auditoria.status", "!=", "0")
                             ->orderBy("products.id", "DESC")
                             ->get();
-        
+
         foreach($products as $value){
             $existence = $this->GetExistence($value["id"]);
 
@@ -52,7 +52,7 @@ class ProductsController extends Controller
     {
         $config               = DB::table("config")->first();
         $request["price_cop"] = $config->valuation_euro * $request["price_euro"];
-      
+
         $products = Products::create($request->all());
 
         $auditoria              = new Auditoria;
@@ -64,7 +64,7 @@ class ProductsController extends Controller
         $auditoria->save();
 
         if ($products) {
-            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente", "data" => $products);    
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente", "data" => $products);
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -114,11 +114,11 @@ class ProductsController extends Controller
         $config               = DB::table("config")->first();
         $request["price_cop"] = $config->valuation_euro * $request["price_euro"];
 
-        
+
         $update_product = Products::find($products)->update($request->all());
 
         if ($update_product) {
-            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -129,7 +129,7 @@ class ProductsController extends Controller
 
 
     public function GetExistence($id_product){
- 
+
 
         $entry_medellin = DB::table("product_entry_items")
                             ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
@@ -144,11 +144,12 @@ class ProductsController extends Controller
                             ->selectRaw("product_output_items.id_product, products.description, (SUM(product_output_items.qty))  as total")
                             ->join("product_output", "product_output.id", "product_output_items.id_output")
                             ->join("products", "products.id", "product_output_items.id_product")
-                            ->join("product_output_items_trapase", "products.id", "product_output_items_trapase.id_product")
                             ->where("product_output.warehouse", "Medellin")
                             ->where("products.id", $id_product)
                             ->groupBy("product_output_items.id_product")
                             ->first();
+
+
 
 
        $traspase_medellin = DB::table("product_output_items_trapase")
@@ -253,7 +254,7 @@ class ProductsController extends Controller
                             ->first();
 
 
-    
+
         $data_medellin = [];
         if($entry_medellin){
             $total_output_medellin           = 0;
@@ -295,7 +296,7 @@ class ProductsController extends Controller
                 $total_traspaso_bogota = $traspase_bogota->total;
             }
 
-            
+
 
             $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
         }else{
@@ -324,7 +325,7 @@ class ProductsController extends Controller
         }
 
         return $data_medellin;
-       
+
     }
 
 
@@ -358,7 +359,7 @@ class ProductsController extends Controller
                     ->get();
 
 
-        
+
 
         foreach($entry as $value){
             foreach($output as $out){
@@ -379,20 +380,20 @@ class ProductsController extends Controller
             }
 
 
-        }  
-        
-        
+        }
+
+
         return response()->json($entry)->setStatusCode(200);
     }
 
 
 
-    
+
 
 
     public function status($id, $status, Request $request)
     {
-      
+
         $auditoria =  Auditoria::where("cod_reg", $id)
                                     ->where("tabla", "products")->first();
 
@@ -404,9 +405,9 @@ class ProductsController extends Controller
         }
         $auditoria->save();
 
-        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
-    
+
     }
 
 
