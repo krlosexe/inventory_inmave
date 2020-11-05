@@ -144,7 +144,7 @@ class ProductsController extends Controller
                             ->selectRaw("product_output_items.id_product, products.description, (SUM(product_output_items.qty))  as total")
                             ->join("product_output", "product_output.id", "product_output_items.id_output")
                             ->join("products", "products.id", "product_output_items.id_product")
-                            ->join("product_trapase", "products.id", "product_trapase.id_product")
+                            ->join("product_output_items_trapase", "products.id", "product_output_items_trapase.id_product")
                             ->where("product_output.warehouse", "Medellin")
                             ->where("products.id", $id_product)
                             ->groupBy("product_output_items.id_product")
