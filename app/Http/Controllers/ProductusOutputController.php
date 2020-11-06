@@ -115,7 +115,7 @@ class ProductusOutputController extends Controller
 
         if(isset($request["id_product"])){
             foreach($request["id_product"] as $key => $value){
-
+                $producs_items = [];
                 $producs_items["id_output"]   = $output->id;
                 $producs_items["id_product"]  = $value;
                 $producs_items["qty"]         = $request["qty"][$key];

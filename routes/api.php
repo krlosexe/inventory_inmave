@@ -104,3 +104,4 @@ Route::get('almacen/existence/{warehouse}', 'AlmacenController@GetAlmacen');
 Route::post('products/movimiento/output', 'TraspasoController@createOuptTraspase');
 Route::get('products/movimiento/list', 'TraspasoController@ListOuptTraspase');
 Route::get('products/movimiento/detail/{id}', 'TraspasoController@ListOuptTraspaseById');
+Route::get('products/remision/invoice/{id}', 'ReemisionesController@RemisionToInvoice');

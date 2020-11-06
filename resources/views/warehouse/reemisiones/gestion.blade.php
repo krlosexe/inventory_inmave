@@ -122,10 +122,6 @@
 
 	@endsection
 
-
-
-
-
 	@section('CustomJs')
 
 		<script>
@@ -138,22 +134,16 @@
 				$("#nav_reemisiones, #modulo_Almacen").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "reemisiones");
+
 			});
-
-
 
 			function update(){
 				enviarFormularioPut("#form-update", 'api/reemisiones', '#cuadro4', false, "#avatar-edit");
 			}
 
-
 			function store(){
 				enviarFormulario("#store", 'api/reemisiones', '#cuadro2');
 			}
-
-
-
-
 
 			function list(cuadro) {
 
@@ -280,14 +270,34 @@
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
-
-
-
-
 			/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
+			function InvoiceToremition(id){
+				try {	
+				$("#add_remision_invoice").click(function (e) {
+					// console.log("hola mundo",id);
+						$.ajax({
+							url: `${document.getElementById('ruta').value}/api/products/remision/invoice/${id}`,
+							type:'GET',
+							dataType:'JSON',
+							async: false,
+							error: function() {
+
+							},
+							success: function(data){
+								
+								location.href = "http://inmave.localhost/output";
+							}
+					});
+				});
+				} catch (e) {
+					console.log(e)
+				}
+					
+			}
+			
 			function ver(tbody, table){
 				$(tbody).on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
@@ -388,6 +398,7 @@
 
 
 					$("#id_edit").val(data.id)
+					InvoiceToremition(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
@@ -500,12 +511,6 @@
 
 				});
 			}
-
-
-
-
-
-
 
 
 			function getProducts(select, select_default = false){

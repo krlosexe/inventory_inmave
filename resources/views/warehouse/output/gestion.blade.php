@@ -119,11 +119,7 @@
 
 		  <input type="hidden" id="indicador_edit">
 
-
 	@endsection
-
-
-
 
 
 	@section('CustomJs')
@@ -138,22 +134,21 @@
 				$("#nav_output, #modulo_Almacen").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "output");
+
+				var url = $(location).attr('href').split("/").splice(-1);
+				if(url[0] == "output"){
+					$("#add_remision_invoice").css("display", "none");
+				}
+
 			});
-
-
 
 			function update(){
 				enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
 			}
 
-
 			function store(){
 				enviarFormulario("#store", 'api/products/entry/output', '#cuadro2');
 			}
-
-
-
-
 
 			function list(cuadro) {
 
@@ -235,10 +230,7 @@
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
 
-
-
 				$(".buttons-excel").remove()
-
 
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$(".dt-buttons").append(a)

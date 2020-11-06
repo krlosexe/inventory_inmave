@@ -24,8 +24,14 @@
                     </div>
 
                 </div>
-              </div>
 
+                <div class="col-md-2">
+                  <br>
+                  <button type="button" class="btn btn-primary btn-user" id="add_remision_invoice">
+                      Facturar
+                  </button>
+                </div>
+              </div>
 
               <div class="row">
 

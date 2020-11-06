@@ -17,16 +17,12 @@
                         <select name="products" class="form-control select2" id="products" required></select>
                       </div>
                 </div>
-
-
                 <div class="col-md-2">
                   <br>
                   <button type="button" class="btn btn-primary btn-user" id="add_product">
                       Agregar
                   </button>
                 </div>
-
-
 
                 <div class="col-md-4">
                       <label for=""><b>Bodega</b></label>
@@ -39,15 +35,9 @@
                           </select>
                         </div>
                 </div>
-
-                
               </div>
           </div>
-
         </div>
-
-
-
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -67,11 +57,6 @@
 			            </div>
              </div>
         </div>
-
-
-
-
-
         <input type="hidden" name="id_user" class="id_user">
         <input type="hidden" name="token" class="token">
           <br>
