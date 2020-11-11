@@ -86,36 +86,25 @@
             <tr>
                 <td><b>Señores:</b></td></td>
                 <td>{{$name_client}}</td>
-            </tr>
-
-
-
-
-            <tr>
-                <td><b>Direcciòn:</b></td>
-                <td>{{ $address_client }}</td>
-            </tr>
-
-
-
-
-            <tr>
                 <td><b>Nit:</b></td>
                 <td>{{$nit}}</td>
                 <td><b>Telefono:</b></td>
-                <td style="width: 90px;">{{$phone}}</td>
+                <td>{{$phone}}</td>
                 <td><b>Ciudad:</b></td>
                 <td>{{$city}}</td>
+        
+            </tr>
+            <tr>
                 <td><b>Correo:</b></td>
                 <td>{{$email}}</td>
+
             </tr>
         </table>
-
         <br>
-        <b>DETALLE:</b>
-        <br>   <br>
-
-
+        <b>Dirección:</b>
+      <span style="font-size:8"> {{ $address_client }}</span> 
+        <br><br>
+        <br><br>
         <table>
             <tr>
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 300px;"><b>NOMBRE DEL ARTICULO</b></td>
