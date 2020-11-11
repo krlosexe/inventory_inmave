@@ -119,11 +119,7 @@
 
 		  <input type="hidden" id="indicador_edit">
 
-
 	@endsection
-
-
-
 
 
 	@section('CustomJs')
@@ -138,22 +134,21 @@
 				$("#nav_output, #modulo_Almacen").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "output");
+
+				var url = $(location).attr('href').split("/").splice(-1);
+				if(url[0] == "output"){
+					$("#add_remision_invoice").css("display", "none");
+				}
+
 			});
-
-
 
 			function update(){
 				enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
 			}
 
-
 			function store(){
 				enviarFormulario("#store", 'api/products/entry/output', '#cuadro2');
 			}
-
-
-
-
 
 			function list(cuadro) {
 
@@ -235,10 +230,7 @@
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
 
-
-
 				$(".buttons-excel").remove()
-
 
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$(".dt-buttons").append(a)
@@ -259,12 +251,6 @@
 			}
 
 
-
-
-
-
-
-
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
@@ -277,6 +263,15 @@
 
 
 				cuadros("#cuadro1", "#cuadro2");
+
+				$('#table_products tbody').empty();
+
+				$('#subtotal_text').empty(0)
+				$('#vat_total_text').empty(0)
+				$('#discount_total_text').empty(0)	
+				$('#rte_fuente_text').empty(0)	
+				$('#total_invoice_text').empty(0)	
+
 			}
 
 
@@ -322,11 +317,6 @@
 
 
 					$("#observations_view").val(data.observations)
-
-
-
-
-
 
 
 					ShowProdcuts("#table_products_view", data.products)

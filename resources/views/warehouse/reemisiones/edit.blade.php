@@ -16,19 +16,15 @@
 
              <div class="row">
                 <div class="col-md-6">
-                  
                     <label for=""><b>Cliente</b></label>
                     <div class="form-group valid-required">
                         <select name="id_client" class="form-control" id="clients_edit" required>
                         </select>
                     </div>
-                  
                 </div>
               </div>
 
-            
               <div class="row">
-
                 <div class="col-md-4">
                       <label for=""><b>Bodega</b></label>
                       <div class="form-group valid-required">
@@ -56,7 +52,6 @@
                       Agregar
                   </button>
                 </div>
-
               </div>
           </div>
 

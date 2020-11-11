@@ -10,10 +10,7 @@ class TraspasoController extends Controller
 {
     public function createOuptTraspase(Request $request)
     {
-        // dd($request->all());
         try {
-       
-                
                 $producs_output = [];
                 $producs_output['warehouse'] = $request->warehouse;
                 $producs_output['destiny'] = $request->destiny;

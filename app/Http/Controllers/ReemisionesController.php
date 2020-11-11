@@ -1,15 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Reemisiones;
-
 use DB;
-use App\Auditoria;
-use App\ReemisionesItems;
-
-
 use Illuminate\Http\Request;
+use App\{Auditoria,ReemisionesItems,Reemisiones,ProductusOutput,ProductusOutputItems};
 
 class ReemisionesController extends Controller
 {
@@ -199,5 +193,49 @@ class ReemisionesController extends Controller
     public function destroy(Reemisiones $reemisiones)
     {
         //
+    }
+
+    public function RemisionToInvoice($id)
+    {
+        try {
+            $head = Reemisiones::where('id',$id)->first();
+            $items = ReemisionesItems::where('id_reemision',$id)->get();
+
+            // dd($head->warehouse);
+
+            $output                         = new ProductusOutput;
+            $output->warehouse              = $head->warehouse;
+            $output->id_client              = $head->id_client;
+            $output->reissue                = 0;
+            $output->subtotal               = $head->subtotal;
+            $output->subtotal_with_discount = $head->subtotal_with_discount;
+            $output->vat_total              = $head->vat_total;
+            $output->discount_total         = $head->discount_total;
+            $output->rte_fuente             = $head->rte_fuente;
+            $output->total_invoice          = $head->total_invoice;
+            $output->observations           = $head->observations;
+            $output->save();
+    
+            foreach($items as $key => $value){
+            
+                $producs_items               = new ProductusOutputItems;
+                $producs_items->id_output   = $output->id;
+                $producs_items->id_product  = $value->id_product;
+                $producs_items->qty         = $value->qty;
+                $producs_items->price       = str_replace(",", "", $value->price);
+                $producs_items->vat         = $value->vat;
+                $producs_items->total       = str_replace(",", "", $value->total);
+                $producs_items->save();
+
+            } 
+
+             Reemisiones::where('id',$id)->Delete();
+             ReemisionesItems::where('id_reemision',$id)->Delete();
+
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");    
+            return response()->json($data)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 }
