@@ -43,6 +43,7 @@
 
 
     <div class="resolucion">
+        <h3>NIT: 900 887 221-2</h3>
         <p>Resolucion Autorizada por la DIAN No. 18763006154625</p>
         <p>De Junio 02 de 2020 Numeracion 0041 a 0140</p>
         <p>Facturacion por Computador</p>
@@ -87,10 +88,15 @@
                 <td>{{$name_client}}</td>
             </tr>
 
+
+
+
             <tr>
                 <td><b>Direcciòn:</b></td>
                 <td>{{ $address_client }}</td>
             </tr>
+
+
 
 
             <tr>
@@ -99,6 +105,8 @@
 
                 <td><b>Telefono:</b></td>
                 <td style="width: 200px;">{{$phone}}</td>
+
+
 
                 <td><b>DETALLE:</b></td>
             </tr>
@@ -175,7 +183,7 @@
         <br>
 
 
-        <p style="font-size: 11px;" >Al efectuar su pago gire cheque a favor de  LABORATORIO MEDICO QUIRURGICO S.A.S NIT: 901.083.722-3, Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
+        <p style="font-size: 11px;" >Al efectuar su pago gire cheque a favor de  INMAVE COLOMBIA SAS NIT: 900 887 221-2,  Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
 
 
 
@@ -208,9 +216,9 @@
 
         <br><br>
 
-        <p style="font-size: 11px"><b>Favor consignar a la Cuenta de Ahorros  BANCOLOMBIA No. 34291233351 de LABORATORIO MEDICO QUIRURGICO S.A.S NIT: 901.083.722-3,  </b></p>
-        <p style="font-size: 11px">Cra 43A #17-106 of 3 Telefono: 7588574 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
+        <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
 
+            <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
 
     </div>
 

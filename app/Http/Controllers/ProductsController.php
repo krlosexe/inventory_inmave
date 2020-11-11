@@ -21,6 +21,7 @@ class ProductsController extends Controller
                             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                             ->where("auditoria.tabla", "products")
                             ->where("auditoria.status", "!=", "0")
+                           // ->where("products.id", 7)
                             ->orderBy("products.id", "DESC")
                             ->get();
 
