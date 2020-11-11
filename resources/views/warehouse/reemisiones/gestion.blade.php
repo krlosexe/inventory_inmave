@@ -268,6 +268,15 @@
 
 
 				cuadros("#cuadro1", "#cuadro2");
+
+				$('#table_products tbody').empty();
+
+				$('#subtotal_text').empty(0)
+				$('#vat_total_text').empty(0)
+				$('#discount_total_text').empty(0)	
+				$('#rte_fuente_text').empty(0)	
+				$('#total_invoice_text').empty(0)	
+
 			}
 
 			/* ------------------------------------------------------------------------------- */
