@@ -13,14 +13,21 @@ class InvoiceController extends Controller
 {
     public function ShowInvoice($id){
 
-        $data = ProductusOutput::select("product_output.*", "clients.name as name_client", "clients.address as address_client", "clients.nit", "clients.phone")
+        $data = ProductusOutput::select("product_output.*",
+        "clients.name as name_client",
+        "clients.address as address_client",
+        "clients.nit", 
+        "clients.phone",
+        "clients.email",
+        "clients.city",
+        )
 
-                                ->join("clients", "clients.id", "=", "product_output.id_client")
+        ->join("clients", "clients.id", "=", "product_output.id_client")
 
-                                ->with("products")
+        ->with("products")
 
-                                ->where("product_output.id", $id)
-                                ->first();
+        ->where("product_output.id", $id)
+        ->first();
 
         $pdf = app('dompdf.wrapper');
         $pdf->loadHTML('<h1>Styde.net</h1>');
