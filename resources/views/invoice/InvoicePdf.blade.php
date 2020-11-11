@@ -102,17 +102,17 @@
             <tr>
                 <td><b>Nit:</b></td>
                 <td>{{$nit}}</td>
-
                 <td><b>Telefono:</b></td>
-                <td style="width: 200px;">{{$phone}}</td>
-
-
-
-                <td><b>DETALLE:</b></td>
+                <td style="width: 90px;">{{$phone}}</td>
+                <td><b>Ciudad:</b></td>
+                <td>{{$city}}</td>
+                <td><b>Correo:</b></td>
+                <td>{{$email}}</td>
             </tr>
         </table>
 
-
+        <br>
+        <b>DETALLE:</b>
         <br>   <br>
 
 
