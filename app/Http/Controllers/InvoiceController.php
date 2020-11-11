@@ -16,10 +16,10 @@ class InvoiceController extends Controller
         $data = ProductusOutput::select("product_output.*",
         "clients.name as name_client",
         "clients.address as address_client",
-        "clients.nit", 
+        "clients.nit",
         "clients.phone",
         "clients.email",
-        "clients.city",
+        "clients.city"
         )
 
         ->join("clients", "clients.id", "=", "product_output.id_client")
