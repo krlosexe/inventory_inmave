@@ -46,7 +46,14 @@ class InvoiceController extends Controller
 
     public function ShowInvoiceReemision($id){
 
-        $data = Reemisiones::select("reemisiones.*", "clients.name as name_client", "clients.address as address_client", "clients.nit", "clients.phone")
+        $data = Reemisiones::select("reemisiones.*",
+        "clients.name as name_client",
+        "clients.address as address_client",
+        "clients.nit",
+        "clients.phone",
+        "clients.email",
+        "clients.city"
+           )
 
                                 ->join("clients", "clients.id", "=", "reemisiones.id_client")
 
