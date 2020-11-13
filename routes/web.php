@@ -80,10 +80,13 @@ Route::get('reemisiones', function () {
 
 
 
-Route::get('technical_reception', function () {
-    return view('warehouse.technical_reception.gestion');
-});
+// Route::get('technical_reception', function () {
+//     return view('warehouse.technical_reception.gestion');
+// });
 
+Route::get('technical_reception', function () {
+    return view('implantes.gestion');
+});
 
 
 Route::get('procedures', function () {
