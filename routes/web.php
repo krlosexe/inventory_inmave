@@ -112,7 +112,12 @@ Route::get('almacen', function () {
     return view('reports.alamacen');
 });
 
-Route::get('movimientos', function () {
-    return view('warehouse.movimientos.gestion');
+Route::get('ventas_implantes', function () {
+    return view('implantes.output.gestion');
+});
+
+
+Route::get('ventas_reemisiones', function () {
+    return view('implantes.reemisiones.gestion');
 });
 
