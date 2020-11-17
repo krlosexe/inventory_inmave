@@ -374,6 +374,14 @@
 					$("#observations_edit").val(data.observations)
 
 
+					$('#table_products tbody').empty();
+
+					$('#subtotal_text').empty(0)
+					$('#vat_total_text').empty(0)
+					$('#discount_total_text').empty(0)	
+					$('#rte_fuente_text').empty(0)	
+					$('#total_invoice_text').empty(0)	
+
 
 
 					$("#id_edit").val(data.id)
