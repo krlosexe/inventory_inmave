@@ -425,7 +425,7 @@
 						},
 						success: function(data){
 							var html 
-
+							$('#table_products tbody').empty();
 							// var validaProduct = false
 							// $(table + " tbody tr").each(function() {
 							// 	if (data.id == $(this).find(".id_product").val()) {
@@ -441,6 +441,7 @@
 									html +="<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
 									html +="<td><input style='text-align: right;width: 142px;' type='text'  class='form-control monto_formato_decimales price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
 									html +="<td><input type='text' class='form-control' name='gramaje[]' required></td>"
+									html +="<td><input type='text' class='form-control' name='total' required></td>"
 									
 									html +="<td><span onclick='deleteProduct(this)' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 								html += "</tr>"
@@ -492,7 +493,7 @@
 						},
 						success: function(data){
 							var html 
-
+							$('#table_products_edit tbody').empty();
 							// var validaProduct = false
 							// $(table + " tbody tr").each(function() {
 							// 	if (data.id == $(this).find(".id_product").val()) {
@@ -508,6 +509,7 @@
 									html +="<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
 									html +="<td><input style='text-align: right;width: 142px;' type='text'  class='form-control monto_formato_decimales price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
 									html +="<td><input type='text' class='form-control' name='gramaje[]' required></td>"
+									html +="<td><input type='text' class='form-control' name='total' required></td>"
 									html +="<td><span onclick='deleteProduct(this, "+'"_edit"'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 								html += "</tr>"
 							// }else{
@@ -543,6 +545,8 @@
 				getProviders("#provider")
 				ChangeProviders("#provider")
 				AddProductos("#add_product", "#products", "#table_products")
+
+				$('#table_products tbody').empty();
 
 				getProducts("#products")
 
@@ -586,7 +590,7 @@
 					getProducts("#products_edit")
 
 
-					ShowProdcuts("#table_products_edit", data.detalle)
+					ShowProdcuts("#table_products_edit", data)
 
 					$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 					$("#subtotal_edit").val(data.subtotal)
@@ -602,6 +606,7 @@
 
 					$("#observations_edit").val(data.observations)
 
+					$('#table_products tbody').empty();	
 
 					AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
 
@@ -615,10 +620,8 @@
 
 
 			function ShowProdcuts(table, data){
-
 				let html = ""
-				$.map(data, function (item, key) {
-					
+				$.map(data.detalle, function (item, key) {
 					html += "<tr>"
 					html +="<td><input type='text' class='form-control' name='serial[]'  value='"+item.serial+"'  required></td>"
 					html +="<td><input type='text' class='form-control' name='lotes[]'  value='"+item.lote+"'  required></td>"
@@ -626,6 +629,7 @@
 					html +="<td><input type='date' class='form-control' name='date_expiration[]'  value='"+item.date_expiration+"' required></td>"
 					html +="<td><input style='text-align: right;width: 142px;' type='text'  class='form-control monto_formato_decimales price_product items_calc' onkeyup='calcProduc(this)' name='price[]' value='"+number_format(item.price, 2)+"' required></td>"
 					html +="<td><input type='text' class='form-control' name='gramaje[]'  value='"+item.gramaje+"' required></td>"
+					html +="<td><input type='text' class='form-control' name='total'  value='"+data.total_invoice+"' required></td>"
 		            //html +="<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='"+number_format(item.total, 2)+"'  name='total[]' readonly required></td>"
 					html +="<td><span onclick='deleteProduct(this, "+'"_edit"'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 					html += "</tr>"
