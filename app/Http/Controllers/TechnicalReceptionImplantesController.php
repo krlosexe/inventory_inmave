@@ -12,7 +12,7 @@ class TechnicalReceptionImplantesController extends Controller
         try {
             $tri = new TechnicalReceptionImplante;
             $tri->id_provider = $request->id_provider;
-            $tri->total_invoice = 100;
+            $tri->total_invoice = $request->total;
             $tri->id_user = $request->id_user;
             $tri->save();
 
@@ -39,11 +39,9 @@ class TechnicalReceptionImplantesController extends Controller
     public function EditarTechnicalReceptionImplante(Request $request, $technicalReception)
     {
         try {     
-
-
             $update = TechnicalReceptionImplante::find($technicalReception);
             $update->id_provider = $request->id_provider;
-            $update->total_invoice = 100;
+            $update->total_invoice = $request->total;
             $update->id_user = $request->id_user;
             $update->save();
 
