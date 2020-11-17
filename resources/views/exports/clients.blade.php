@@ -1,6 +1,7 @@
 <table>
     <thead>
         <tr>
+            <th><b>Factura</b></th>
             <th><b>Tipo</b></th>
             <th><b>Cliente</b></th>
             <th><b>Bodega</b></th>
@@ -13,6 +14,7 @@
     <tbody>
     @foreach($data as $value)
         <tr>
+            <td>{{ $value->id }}</td>
             <td>{{ $value->reissue == 1 ? 'Reemision' : 'Factura' }}</td>
             <td>{{ $value->name_client }}</td>
             <td>{{ $value->warehouse }}</td>
