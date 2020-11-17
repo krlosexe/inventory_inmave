@@ -88,13 +88,9 @@
 			              </div>
 			            </div>
 			          </div>
-
-
-			          @include('warehouse.output.store')
-					  @include('warehouse.output.view')
-					  @include('warehouse.output.edit')
-
-
+			          @include('implantes.reemisiones.store')
+					  @include('implantes.reemisiones.view')
+					  @include('implantes.reemisiones.edit')
 			        </div>
 			        <!-- /.container-fluid -->
 
@@ -119,8 +115,8 @@
 
 		  <input type="hidden" id="indicador_edit">
 
-	@endsection
 
+	@endsection
 
 	@section('CustomJs')
 
@@ -131,23 +127,18 @@
 				update();
 
 				$("#collapse_Almacen").addClass("show");
-				$("#nav_output, #modulo_Almacen").addClass("active");
+				$("#nav_reemisiones, #modulo_Almacen").addClass("active");
 
-				verifyPersmisos(id_user, tokens, "output");
-
-				var url = $(location).attr('href').split("/").splice(-1);
-				if(url[0] == "output"){
-					$("#add_remision_invoice").css("display", "none");
-				}
+				verifyPersmisos(id_user, tokens, "reemisiones");
 
 			});
 
 			function update(){
-				enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
+				enviarFormularioPut("#form-update", 'api/reemisiones', '#cuadro4', false, "#avatar-edit");
 			}
 
 			function store(){
-				enviarFormulario("#store", 'api/products/entry/output', '#cuadro2');
+				enviarFormulario("#store", 'api/reemisiones', '#cuadro2');
 			}
 
 			function list(cuadro) {
@@ -167,7 +158,7 @@
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/products/entry/output',
+						 "url":''+url+'/api/reemisiones',
 						 "data": {
 							"id_user": id_user,
 							"token"  : tokens,
@@ -175,7 +166,8 @@
 						"dataSrc":""
 					},
 					"columns":[
-						{"data": null,
+						{
+							"data": null,
 							render : function(data, type, row) {
 								var botones = "";
 								if(consultar == 1)
@@ -184,7 +176,7 @@
 									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 
 								if(actualizar == 1)
-									botones += "<a href='api/invoice/print/"+row.id+"' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
+									botones += "<a href='api/reemision/print/"+row.id+"' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
 
 								return botones;
 							}
@@ -230,12 +222,15 @@
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
 
+
+
 				$(".buttons-excel").remove()
+
 
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$(".dt-buttons").append(a)
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel/reemision" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 
@@ -249,6 +244,12 @@
 
 
 			}
+
+
+
+
+
+
 
 
 			function nuevo() {
@@ -274,14 +275,34 @@
 
 			}
 
-
-
-
-
 			/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
+			function InvoiceToremition(id){
+				try {	
+				$("#add_remision_invoice").click(function (e) {
+					// console.log("hola mundo",id);
+						$.ajax({
+							url: `${document.getElementById('ruta').value}/api/products/remision/invoice/${id}`,
+							type:'GET',
+							dataType:'JSON',
+							async: false,
+							error: function() {
+
+							},
+							success: function(data){
+								
+								location.href = "http://inmave.localhost/output";
+							}
+					});
+				});
+				} catch (e) {
+					console.log(e)
+				}
+					
+			}
+			
 			function ver(tbody, table){
 				$(tbody).on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
@@ -317,6 +338,11 @@
 
 
 					$("#observations_view").val(data.observations)
+
+
+
+
+
 
 
 					ShowProdcuts("#table_products_view", data.products)
@@ -374,17 +400,10 @@
 					$("#observations_edit").val(data.observations)
 
 
-					$('#table_products tbody').empty();
-
-					$('#subtotal_text').empty(0)
-					$('#vat_total_text').empty(0)
-					$('#discount_total_text').empty(0)	
-					$('#rte_fuente_text').empty(0)	
-					$('#total_invoice_text').empty(0)	
-
 
 
 					$("#id_edit").val(data.id)
+					InvoiceToremition(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
@@ -394,7 +413,7 @@
 
 			$("#print").click(function (e) {
 
-				window.open(`api/invoice/print/${$("#id_edit").val()}`, "_blank");
+				window.open(`api/reemision/print/${$("#id_edit").val()}`, "_blank");
 
 			});
 
@@ -406,7 +425,7 @@
 			function desactivar(tbody, table){
 				$(tbody).on("click", "span.desactivar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/products/entry/output/status/'+data.id+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
+					statusConfirmacion('api/reemisiones/status/'+data.id+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
@@ -418,7 +437,7 @@
 			function activar(tbody, table){
 				$(tbody).on("click", "span.activar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/products/entry/output/status/'+data.id+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
+					statusConfirmacion('api/reemisiones/status/'+data.id+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
@@ -428,7 +447,7 @@
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/products/entry/output/status/'+data.id+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
+					statusConfirmacion('api/reemisiones/status/'+data.id+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}
 
@@ -497,12 +516,6 @@
 
 				});
 			}
-
-
-
-
-
-
 
 
 			function getProducts(select, select_default = false){
@@ -588,7 +601,7 @@
 					var validaProduct = false
 					$(table + " tbody tr").each(function() {
 						if (id_product == $(this).find(".id_product").val()) {
-							validaProduct = false;
+							validaProduct = true;
 						}
 					});
 
@@ -607,7 +620,7 @@
 								html += "</select>"
 								//html += "<input type='text' class='form-control items_calc price_product' name='price[]' min = '1' value='"+price+"' readonly required style='text-align: right'>"
 							html +="</td>"
-							html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='"+total+"' required></td>"
+							// html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='"+total+"' required></td>"
 							html +="<td><input type='number' disabled class='form-control items_calc existence' value='"+total+"' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+total+"'></td>"
 							html +="<td><input type='checkbox' class='form-control vat_product items_calc' checked  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
 							html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
@@ -616,9 +629,6 @@
 					}else{
 						warning('¡La opción seleccionada ya se encuentra agregada!');
 					}
-
-
-
 					$(table+" tbody").append(html)
 
 				});
@@ -650,7 +660,7 @@
 					var validaProduct = false
 					$(table + " tbody tr").each(function() {
 						if (id_product == $(this).find(".id_product").val()) {
-							validaProduct = false;
+							validaProduct = true;
 						}
 					});
 
@@ -716,7 +726,7 @@
 						//html +="<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales price_product items_calc' value='"+number_format(item.price, 2)+"'  onkeyup='calcProduc(this, "+'"_edit"'+")' name='price[]' required></td>"
 
 
-						html +="<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='"+item.qty+"' onchange='calcProduc(this, "+'"_edit"'+")' required><input type='hidden' class='form-control qty_product_hidden items_calc' value='"+item.qty+"' disabled></td>"
+						html +="<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='"+item.qty+"' max="+item.existence+" onchange='calcProduc(this, "+'"_edit"'+")' required><input type='hidden' class='form-control qty_product_hidden items_calc' value='"+item.qty+"' disabled></td>"
 
 						html +="<td><input type='number' class='form-control  items_calc existence' name='existence'  value='"+item.existence+"' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+item.existence+"' disabled></td>"
 
@@ -903,7 +913,7 @@
 
 
 
-				var discount_field2  = $(`#apply_discount${edit}2`)
+				var discount_field2  = $(`#apply_discount2${edit}`)
 
 
 				let discount_ammount2

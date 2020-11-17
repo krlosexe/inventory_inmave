@@ -80,10 +80,13 @@ Route::get('reemisiones', function () {
 
 
 
-Route::get('technical_reception', function () {
-    return view('warehouse.technical_reception.gestion');
-});
+// Route::get('technical_reception', function () {
+//     return view('warehouse.technical_reception.gestion');
+// });
 
+Route::get('technical_reception', function () {
+    return view('implantes.gestion');
+});
 
 
 Route::get('procedures', function () {
@@ -109,7 +112,12 @@ Route::get('almacen', function () {
     return view('reports.alamacen');
 });
 
-Route::get('movimientos', function () {
-    return view('warehouse.movimientos.gestion');
+Route::get('ventas_implantes', function () {
+    return view('implantes.output.gestion');
+});
+
+
+Route::get('ventas_reemisiones', function () {
+    return view('implantes.reemisiones.gestion');
 });
 
