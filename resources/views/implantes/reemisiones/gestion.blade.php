@@ -241,12 +241,12 @@
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
-				AddProductos("#add_product", "#products", "#table_products")
+				AddProductos("#add_product", "#serial", "#table_products")
 				// ProductsGetExistence("#warehouse", "#products", "#table_products")
 
 				getClients("#clients")
 
-				// searchClients("#add_product")
+				// searchSerial("#add_product")
 
 				$("#indicador_edit").val(0)
 
@@ -262,18 +262,22 @@
 
 			}
 
-			function searchClients(select, edit = '') {
-			$(select).click(function(e) {
+			function searchSerial(select,input, edit = '') {
+				let serial_data = '';
+			// console.log({select});
+			// console.log($(input).val());
+			// $(select).click(function(e) {
 				var url = document.getElementById('ruta').value;
 				$.ajax({
-					url: url + '/api/products/get/implante/' + $("#serial").val(),
-					// url: 'https://pdtclientsolutions.com/crm-public/api/client/indentification/' + $("#serial").val(),
+					url: url + '/api/products/get/implante/' + $(input).val(),
 					type: 'GET',
 					dataType: 'JSON',
 					async: false,
 					error: function() {},
 					success: function(data) {
-						console.log({data});
+						
+						 serial_data =  data;
+
 						// $(`#name${edit}`).val(data ? data.nombres : data.nombre = 'sin nombre')
 						// $(`#lastname${edit}`).val(data ? data.apellidos : data.apellido = 'sin apellido')
 						// $(`#email${edit}`).val(data ? data.email : data.email = 'sin email')
@@ -283,8 +287,8 @@
 
 					}
 				});
-
-			});
+				return serial_data
+			// });
 		}
 
 			/* ------------------------------------------------------------------------------- */
@@ -563,13 +567,12 @@
 				});
 			}
 
-			function AddProductos(btn, select_product, table){
+			function AddProductos(btn, input, table){
+				$(btn).unbind().click(function (e) {	
 
-
-				console.log($("#serial").val());
-
-				$(btn).unbind().click(function (e) {
-				// searchClients()
+				
+				  const data_serial = searchSerial(btn,input)
+				//   console.log({data_serial});
 
 					// const array_product       = $(select_product).val().split("|")
 					// const id_product          = array_product[0]
@@ -582,44 +585,45 @@
 					// const presentation    = array_product[7]
 					// const description   = $(`${select_product} option:selected`).text()
 
-					// var html
+					var html
 
-					// var validaProduct = false
-					// $(table + " tbody tr").each(function() {
-					// 	if (id_product == $(this).find(".id_product").val()) {
-					// 		validaProduct = true;
-					// 	}
-					// });
+					var validaProduct = false
+					$(table + " tbody tr").each(function() {
+						if (data_serial.serial == $(this).find(".id_product").val()) {
+							validaProduct = true;
+						}
+					});
 
-					// if(!validaProduct){
-					// 	html += "<tr>"
-					// 		html +="<td>"+description+" <input type='hidden' class='id_product' name='id_product[]' value='"+id_product+"' > </td>"
-					// 		html +="<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
-					// 		// html +="<td><input type='text' class='form-control items_calc qty_product' name='price[]' value='0' min = '1'  max='2' required></td>"	
+					if(!validaProduct){
+						html += "<tr>"
+							html +="<td>"+data_serial.serial+" <input type='hidden' class='id_product' name='id_product[]' value='"+data_serial.serial+"' > </td>"
+							html +="<td>"+data_serial.gramaje+" <input type='hidden' class='id_product' name='gramaje[]' value='"+data_serial.gramaje+"' > </td>"
+							html +="<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
+							// html +="<td><input type='text' class='form-control items_calc qty_product' name='price[]' value='0' min = '1'  max='2' required></td>"	
 							
-					// 		// html +="<td>"+presentation+" </td>"
+							// html +="<td>"+presentation+" </td>"
 
-					// 		// html +="<td>"
-					// 		// 	html += "<select class='form-control items_calc price_product' name='price[]' onchange='calcProduc(this)' required>"
-					// 		// 		html += "<option value=''>Seleccione el precio</option>"
-					// 		// 		html += "<option value='"+price_distributor_x_caja+"'>Precio Distribuidor x Caja - "+number_format(price_distributor_x_caja, 2)+"</option>"
-					// 		// 		html += "<option value='"+price_distributor_x_vial+"'>Precio Distribuidor x Vial - "+number_format(price_distributor_x_vial, 2)+"</option>"
-					// 		// 		html += "<option value='"+price_cliente_x_caja+"'>Precio Cliente Final x Caja - "+number_format(price_cliente_x_caja, 2)+"</option>"
-					// 		// 		html += "<option value='"+price_cliente_x_vial+"'>Precio Cliente Final x Vial  - "+number_format(price_cliente_x_vial, 2)+"</option>"
-					// 		// 	html += "</select>"
-					// 		// 	//html += "<input type='text' class='form-control items_calc price_product' name='price[]' min = '1' value='"+price+"' readonly required style='text-align: right'>"
-					// 		// html +="</td>"
-					// 		// html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='"+total+"' required></td>"
-					// 		html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' required></td>"	
-					// 		// html +="<td><input type='number' disabled class='form-control items_calc existence' value='"+total+"' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+total+"'></td>"
-					// 		// 	html +="<td><input type='checkbox' class='form-control vat_product items_calc' checked  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
-					// 		// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
-					// 		html +="<td><span onclick='deleteProduct(this, "+'""'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-					// 	html += "</tr>"
-					// }else{
-					// 	warning('¡La opción seleccionada ya se encuentra agregada!');
-					// }
-					// $(table+" tbody").append(html)
+							// html +="<td>"
+							// 	html += "<select class='form-control items_calc price_product' name='price[]' onchange='calcProduc(this)' required>"
+							// 		html += "<option value=''>Seleccione el precio</option>"
+							// 		html += "<option value='"+price_distributor_x_caja+"'>Precio Distribuidor x Caja - "+number_format(price_distributor_x_caja, 2)+"</option>"
+							// 		html += "<option value='"+price_distributor_x_vial+"'>Precio Distribuidor x Vial - "+number_format(price_distributor_x_vial, 2)+"</option>"
+							// 		html += "<option value='"+price_cliente_x_caja+"'>Precio Cliente Final x Caja - "+number_format(price_cliente_x_caja, 2)+"</option>"
+							// 		html += "<option value='"+price_cliente_x_vial+"'>Precio Cliente Final x Vial  - "+number_format(price_cliente_x_vial, 2)+"</option>"
+							// 	html += "</select>"
+							// 	//html += "<input type='text' class='form-control items_calc price_product' name='price[]' min = '1' value='"+price+"' readonly required style='text-align: right'>"
+							// html +="</td>"
+							// html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='"+total+"' required></td>"
+							html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' required></td>"	
+							// html +="<td><input type='number' disabled class='form-control items_calc existence' value='"+total+"' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+total+"'></td>"
+							// 	html +="<td><input type='checkbox' class='form-control vat_product items_calc' checked  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
+							// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
+							html +="<td><span onclick='deleteProduct(this, "+'""'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+						html += "</tr>"
+					}else{
+						warning('¡La opción seleccionada ya se encuentra agregada!');
+					}
+					$(table+" tbody").append(html)
 
 				});
 			}

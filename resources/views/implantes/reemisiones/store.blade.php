@@ -75,6 +75,7 @@
 			                  <thead>
 			                    <tr>
                             <th>serial</th>
+                            <th>Gramaje</th>
                             <!-- <th>Presentacion</th> -->
                             <th>Precio (COP)</th>
                             <!-- <th>Salida (Cantidad)</th> -->
