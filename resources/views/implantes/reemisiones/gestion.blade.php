@@ -598,8 +598,11 @@
 						html += "<tr>"
 							html +="<td>"+data_serial.serial+" <input type='hidden' class='id_product' name='id_product[]' value='"+data_serial.serial+"' > </td>"
 							html +="<td>"+data_serial.gramaje+" <input type='hidden' class='id_product' name='gramaje[]' value='"+data_serial.gramaje+"' > </td>"
+							html +="<td>"+data_serial.perfil+" <input type='hidden' class='id_product' name='perfil[]' value='"+data_serial.perfil+"' > </td>"
+							html +="<td>"+data_serial.lote+" <input type='hidden' class='id_product' name='lote[]' value='"+data_serial.lote+"' > </td>"
+							html +="<td>"+data_serial.register_invima+" <input type='hidden' class='id_product' name='register_invima[]' value='"+data_serial.register_invima+"' > </td>"
+							html +="<td>"+data_serial.date_expiration+" <input type='hidden' class='id_product' name='date_expiration[]' value='"+data_serial.date_expiration+"' > </td>"
 							html +="<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
-							// html +="<td><input type='text' class='form-control items_calc qty_product' name='price[]' value='0' min = '1'  max='2' required></td>"	
 							
 							// html +="<td>"+presentation+" </td>"
 

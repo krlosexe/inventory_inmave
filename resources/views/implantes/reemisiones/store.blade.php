@@ -39,8 +39,9 @@
                     <div class="form-group valid-required">
                         <select name="warehouse" class="form-control" id="warehouse" required>
                           <option value="">Seleccione</option>
-                          <option value="Medellin">Medellin</option>
                           <option value="Bogota">Bogota</option>
+                          <option value="Cali">Cali</option>
+                          <option value="Medellin">Medellin</option>
                         </select>
                     </div>
                 </div>
@@ -76,10 +77,14 @@
 			                    <tr>
                             <th>serial</th>
                             <th>Gramaje</th>
-                            <!-- <th>Presentacion</th> -->
+                            <th>Perfil</th>
+                            <th>Lote</th>
+                            <th>Registro invima</th>
+                            <th>Fecha Expiration</th>
                             <th>Precio (COP)</th>
-                            <!-- <th>Salida (Cantidad)</th> -->
                             <th>Cantidad</th>
+                            <!-- <th>Salida (Cantidad)</th> -->
+                            <!-- <th>Presentacion</th> -->
                             <!-- <th>%IVA</th>
                             <th>Total</th> -->
                             <th></th>

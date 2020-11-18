@@ -441,8 +441,8 @@
 									html +="<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
 									html +="<td><input style='text-align: right;width: 142px;' type='text'  class='form-control monto_formato_decimales price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
 									html +="<td><input type='text' class='form-control' name='gramaje[]' required></td>"
+									html +="<td><input type='text' class='form-control' name='perfil[]' required></td>"
 									html +="<td><input type='text' class='form-control' name='total' required></td>"
-									
 									html +="<td><span onclick='deleteProduct(this)' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 								html += "</tr>"
 							// }else{
@@ -509,6 +509,7 @@
 									html +="<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
 									html +="<td><input style='text-align: right;width: 142px;' type='text'  class='form-control monto_formato_decimales price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
 									html +="<td><input type='text' class='form-control' name='gramaje[]' required></td>"
+									html +="<td><input type='text' class='form-control' name='perfil[]' required></td>"
 									html +="<td><input type='text' class='form-control' name='total' required></td>"
 									html +="<td><span onclick='deleteProduct(this, "+'"_edit"'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 								html += "</tr>"
@@ -530,13 +531,6 @@
 					
 				});
 			}
-
-
-			
-
-
-
-
 
 			function nuevo() {
 				$("#alertas").css("display", "none");
@@ -629,6 +623,7 @@
 					html +="<td><input type='date' class='form-control' name='date_expiration[]'  value='"+item.date_expiration+"' required></td>"
 					html +="<td><input style='text-align: right;width: 142px;' type='text'  class='form-control monto_formato_decimales price_product items_calc' onkeyup='calcProduc(this)' name='price[]' value='"+number_format(item.price, 2)+"' required></td>"
 					html +="<td><input type='text' class='form-control' name='gramaje[]'  value='"+item.gramaje+"' required></td>"
+					html +="<td><input type='text' class='form-control' name='perfil[]'  value='"+item.perfil+"' required></td>"
 					html +="<td><input type='text' class='form-control' name='total'  value='"+data.total_invoice+"' required></td>"
 		            //html +="<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='"+number_format(item.total, 2)+"'  name='total[]' readonly required></td>"
 					html +="<td><span onclick='deleteProduct(this, "+'"_edit"'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
