@@ -43,7 +43,6 @@
 
 				@include('layouts.topBar')
 
-
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
 
@@ -190,8 +189,6 @@
 								}else{
 									return "Factura";
 								}
-
-
 							}
 						},
 						{"data":"name_client"},
@@ -215,14 +212,11 @@
 					]
 				});
 
-
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
-
-
 
 				$(".buttons-excel").remove()
 
@@ -242,26 +236,19 @@
 					window.open(url, '_blank');
 				});
 
-
 			}
-
-
-
-
-
-
-
 
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 				AddProductos("#add_product", "#products", "#table_products")
-				ProductsGetExistence("#warehouse", "#products", "#table_products")
+				// ProductsGetExistence("#warehouse", "#products", "#table_products")
 
 				getClients("#clients")
 
-				$("#indicador_edit").val(0)
+				// searchClients("#add_product")
 
+				$("#indicador_edit").val(0)
 
 				cuadros("#cuadro1", "#cuadro2");
 
@@ -274,6 +261,31 @@
 				$('#total_invoice_text').empty(0)	
 
 			}
+
+			function searchClients(select, edit = '') {
+			$(select).click(function(e) {
+				var url = document.getElementById('ruta').value;
+				$.ajax({
+					url: url + '/api/products/get/implante/' + $("#serial").val(),
+					// url: 'https://pdtclientsolutions.com/crm-public/api/client/indentification/' + $("#serial").val(),
+					type: 'GET',
+					dataType: 'JSON',
+					async: false,
+					error: function() {},
+					success: function(data) {
+						console.log({data});
+						// $(`#name${edit}`).val(data ? data.nombres : data.nombre = 'sin nombre')
+						// $(`#lastname${edit}`).val(data ? data.apellidos : data.apellido = 'sin apellido')
+						// $(`#email${edit}`).val(data ? data.email : data.email = 'sin email')
+						// $(`#telefono${edit}`).val(data ? data.telefono : data.telefono = 'sin telefono')
+						// $(`#cedula${edit}`).val(data ? data.identificacion : data.identificacion = 'sin identificacion')
+						// $(`#id_cliente${edit}`).val(data.id_cliente)
+
+					}
+				});
+
+			});
+		}
 
 			/* ------------------------------------------------------------------------------- */
 			/*
@@ -310,17 +322,13 @@
 
 					$("#warehouse_view").val(data.warehouse).trigger("change").attr("disabled", "disabled")
 
-
 					getClients("#clients_view", data.id_client)
-
-
 
 					if(data.discount_total > 0){
 						$("#apply_discount_view").prop("checked", true)
 					}else{
 						$("#apply_discount_view").prop("checked", false)
 					}
-
 
 					$("#subtotal_text_view").text(`$ ${number_format(data.subtotal, 2)}`)
 					$("#subtotal_view").val(data.subtotal)
@@ -339,17 +347,10 @@
 
 					$("#observations_view").val(data.observations)
 
-
-
-
-
-
-
 					ShowProdcuts("#table_products_view", data.products)
 					cuadros('#cuadro1', '#cuadro3');
 				});
 			}
-
 
 
 			/* ------------------------------------------------------------------------------- */
@@ -361,13 +362,11 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-
-
 					$("#indicador_edit").val(1)
 
 					getClients("#clients_edit", data.id_client)
 
-					ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
+					// ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
 
 					$("#warehouse_edit").val(data.warehouse).trigger("change")
 
@@ -399,17 +398,11 @@
 
 					$("#observations_edit").val(data.observations)
 
-
-
-
 					$("#id_edit").val(data.id)
 					InvoiceToremition(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
-
-
-
 
 			$("#print").click(function (e) {
 
@@ -442,8 +435,6 @@
 			}
 		/* ------------------------------------------------------------------------------- */
 
-
-
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
@@ -452,71 +443,68 @@
 			}
 
 
-			function ProductsGetExistence(warehouse, product, table) {
-				$(warehouse).unbind().change(function (e) {
+			// function ProductsGetExistence(warehouse, product, table) {
+			// 	$(warehouse).unbind().change(function (e) {
 
-					$(table+" tbody").html("")
+			// 		$(table+" tbody").html("")	
+			// 		$.ajax({
+			// 			// url: `${document.getElementById('ruta').value}/api/products/get/existence/warehouse/${$(this).val()}`,
+			// 			url: `${document.getElementById('ruta').value}/api/products/get/implante`,
+			// 			type:'GET',
+			// 			data: {
+			// 				"id_user": id_user,
+			// 				"token"  : tokens,
+			// 			},
+			// 			dataType:'JSON',
+			// 			async: false,
+			// 			error: function() {
 
+			// 			},
+			// 			success: function(data){
 
-					$.ajax({
-						url: `${document.getElementById('ruta').value}/api/products/get/existence/warehouse/${$(this).val()}`,
-						type:'GET',
-						data: {
-							"id_user": id_user,
-							"token"  : tokens,
-						},
-						dataType:'JSON',
-						async: false,
-						error: function() {
+			// 				$(product+" option").remove();
+			// 				$(product).append($('<option>',
+			// 				{
+			// 					value: "",
+			// 					text : "-Seleccione"
+			// 				}));
 
-						},
-						success: function(data){
-
-							$(product+" option").remove();
-							$(product).append($('<option>',
-							{
-								value: "",
-								text : "-Seleccione"
-							}));
-
-							$.each(data, function(i, item){
-
-
-								$(product).append($('<option>',
-								{
-									value: `${item.id_product}|${item.total}|${item.price_cop}|${item.price_distributor_x_caja}|${item.price_distributor_x_vial}|${item.price_cliente_x_caja}|${item.price_cliente_x_vial}|${item.presentation}`,
-									text : item.description,
-
-								}));
+			// 				$.each(data, function(i, item){
 
 
-							});
+			// 					$(product).append($('<option>',
+			// 					{
+			// 						value: `${item.id}`,
+			// 						text : item.serial,
+
+			// 					}));
 
 
-							$(product).select2({
-								width : "100%",
-								sorter: function(data) {
-									/* Sort data using lowercase comparison */
-									return data.sort(function (a, b) {
-										a = a.text.toLowerCase();
-										b = b.text.toLowerCase();
-										if (a > b) {
-											return 1;
-										} else if (a < b) {
-											return -1;
-										}
-										return 0;
-									});
-								}
-							});
+			// 				});
 
-						}
+			// 				$(product).select2({
+			// 					width : "100%",
+			// 					sorter: function(data) {
+			// 						/* Sort data using lowercase comparison */
+			// 						return data.sort(function (a, b) {
+			// 							a = a.text.toLowerCase();
+			// 							b = b.text.toLowerCase();
+			// 							if (a > b) {
+			// 								return 1;
+			// 							} else if (a < b) {
+			// 								return -1;
+			// 							}
+			// 							return 0;
+			// 						});
+			// 					}
+			// 				});
 
-					});
+			// 			}
 
-				});
-			}
+			// 		});
 
+			// 	});
+			// }
 
 			function getProducts(select, select_default = false){
 
@@ -551,9 +539,7 @@
 
 							}));
 
-
 						});
-
 
 						$(select).select2({
 							width : "100%",
@@ -577,71 +563,69 @@
 				});
 			}
 
-
-
-
 			function AddProductos(btn, select_product, table){
+
+
+				console.log($("#serial").val());
+
 				$(btn).unbind().click(function (e) {
+				// searchClients()
 
+					// const array_product       = $(select_product).val().split("|")
+					// const id_product          = array_product[0]
+					// const total               = array_product[1]
+					// const price               = array_product[2]
+					// const price_distributor_x_caja   = array_product[3]
+					// const price_distributor_x_vial  = array_product[4]
+					// const price_cliente_x_caja    = array_product[5]
+					// const price_cliente_x_vial    = array_product[6]
+					// const presentation    = array_product[7]
+					// const description   = $(`${select_product} option:selected`).text()
 
+					// var html
 
-					const array_product       = $(select_product).val().split("|")
-					const id_product          = array_product[0]
-					const total               = array_product[1]
-					const price               = array_product[2]
-					const price_distributor_x_caja   = array_product[3]
-					const price_distributor_x_vial  = array_product[4]
-					const price_cliente_x_caja    = array_product[5]
-					const price_cliente_x_vial    = array_product[6]
-					const presentation    = array_product[7]
-					const description   = $(`${select_product} option:selected`).text()
+					// var validaProduct = false
+					// $(table + " tbody tr").each(function() {
+					// 	if (id_product == $(this).find(".id_product").val()) {
+					// 		validaProduct = true;
+					// 	}
+					// });
 
-					var html
+					// if(!validaProduct){
+					// 	html += "<tr>"
+					// 		html +="<td>"+description+" <input type='hidden' class='id_product' name='id_product[]' value='"+id_product+"' > </td>"
+					// 		html +="<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
+					// 		// html +="<td><input type='text' class='form-control items_calc qty_product' name='price[]' value='0' min = '1'  max='2' required></td>"	
+							
+					// 		// html +="<td>"+presentation+" </td>"
 
-					var validaProduct = false
-					$(table + " tbody tr").each(function() {
-						if (id_product == $(this).find(".id_product").val()) {
-							validaProduct = true;
-						}
-					});
-
-					if(!validaProduct){
-						html += "<tr>"
-							html +="<td>"+description+" <input type='hidden' class='id_product' name='id_product[]' value='"+id_product+"' > </td>"
-							html +="<td>"+presentation+" </td>"
-
-							html +="<td>"
-								html += "<select class='form-control items_calc price_product' name='price[]' onchange='calcProduc(this)' required>"
-									html += "<option value=''>Seleccione el precio</option>"
-									html += "<option value='"+price_distributor_x_caja+"'>Precio Distribuidor x Caja - "+number_format(price_distributor_x_caja, 2)+"</option>"
-									html += "<option value='"+price_distributor_x_vial+"'>Precio Distribuidor x Vial - "+number_format(price_distributor_x_vial, 2)+"</option>"
-									html += "<option value='"+price_cliente_x_caja+"'>Precio Cliente Final x Caja - "+number_format(price_cliente_x_caja, 2)+"</option>"
-									html += "<option value='"+price_cliente_x_vial+"'>Precio Cliente Final x Vial  - "+number_format(price_cliente_x_vial, 2)+"</option>"
-								html += "</select>"
-								//html += "<input type='text' class='form-control items_calc price_product' name='price[]' min = '1' value='"+price+"' readonly required style='text-align: right'>"
-							html +="</td>"
-							// html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='"+total+"' required></td>"
-							html +="<td><input type='number' disabled class='form-control items_calc existence' value='"+total+"' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+total+"'></td>"
-							html +="<td><input type='checkbox' class='form-control vat_product items_calc' checked  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
-							html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
-							html +="<td><span onclick='deleteProduct(this, "+'""'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-						html += "</tr>"
-					}else{
-						warning('¡La opción seleccionada ya se encuentra agregada!');
-					}
-					$(table+" tbody").append(html)
+					// 		// html +="<td>"
+					// 		// 	html += "<select class='form-control items_calc price_product' name='price[]' onchange='calcProduc(this)' required>"
+					// 		// 		html += "<option value=''>Seleccione el precio</option>"
+					// 		// 		html += "<option value='"+price_distributor_x_caja+"'>Precio Distribuidor x Caja - "+number_format(price_distributor_x_caja, 2)+"</option>"
+					// 		// 		html += "<option value='"+price_distributor_x_vial+"'>Precio Distribuidor x Vial - "+number_format(price_distributor_x_vial, 2)+"</option>"
+					// 		// 		html += "<option value='"+price_cliente_x_caja+"'>Precio Cliente Final x Caja - "+number_format(price_cliente_x_caja, 2)+"</option>"
+					// 		// 		html += "<option value='"+price_cliente_x_vial+"'>Precio Cliente Final x Vial  - "+number_format(price_cliente_x_vial, 2)+"</option>"
+					// 		// 	html += "</select>"
+					// 		// 	//html += "<input type='text' class='form-control items_calc price_product' name='price[]' min = '1' value='"+price+"' readonly required style='text-align: right'>"
+					// 		// html +="</td>"
+					// 		// html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='"+total+"' required></td>"
+					// 		html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' required></td>"	
+					// 		// html +="<td><input type='number' disabled class='form-control items_calc existence' value='"+total+"' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+total+"'></td>"
+					// 		// 	html +="<td><input type='checkbox' class='form-control vat_product items_calc' checked  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
+					// 		// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
+					// 		html +="<td><span onclick='deleteProduct(this, "+'""'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+					// 	html += "</tr>"
+					// }else{
+					// 	warning('¡La opción seleccionada ya se encuentra agregada!');
+					// }
+					// $(table+" tbody").append(html)
 
 				});
 			}
 
-
-
-
-
-
 			function AddProductosEdit(btn, select_product, table){
 				$(btn).unbind().click(function (e) {
-
 
 
 					const array_product       = $(select_product).val().split("|")
@@ -697,8 +681,6 @@
 			}
 
 
-
-
 			function ShowProdcuts(table, data){
 
 				console.log(data)
@@ -708,7 +690,6 @@
 					html += "<tr>"
 						html +="<td>"+item.description+" <input type='hidden' class='id_product' name='id_product[]' value='"+item.id_product+"' > </td>"
 						html +="<td>"+item.presentation+"</td>"
-
 
 						html +="<td>"
 							html += "<select class='form-control items_calc price_product' id='price_edit_"+item.id+"' name='price[]' onchange='calcProduc(this, "+'"_edit"'+")' required>"
@@ -720,8 +701,6 @@
 							html += "</select>"
 
 						html +="</td>"
-
-
 
 						//html +="<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales price_product items_calc' value='"+number_format(item.price, 2)+"'  onkeyup='calcProduc(this, "+'"_edit"'+")' name='price[]' required></td>"
 
@@ -747,17 +726,7 @@
 
 				});
 
-
-
-
-
-
-
-
 			}
-
-
-
 
 			function deleteProduct(element, edit = ''){
 				var tr = $(element).parent("td").parent("tr").remove()
@@ -766,12 +735,6 @@
 				calcTotalVat(".vat_product", edit)
 				calTotal(".total_product", edit)
 			}
-
-
-
-
-
-
 
 
 			function getClients(select, select_default = false){
@@ -833,14 +796,6 @@
 				});
 			}
 
-
-
-
-
-
-
-
-
 			function calcProduc(element, edit = ''){
 
 				var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
@@ -881,9 +836,6 @@
 
 			}
 
-
-
-
 			function calcSubTotal(fields, edit = ''){
 				let subtotal = 0
 				$.map($(fields), function (item, key) {
@@ -911,8 +863,6 @@
 				}
 
 
-
-
 				var discount_field2  = $(`#apply_discount2${edit}`)
 
 
@@ -928,10 +878,6 @@
 					discount_ammount2 = 0
 					//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 				}
-
-
-
-
 
 
 				$(`#discount_total${edit}`).val((parseFloat(discount_ammount) + parseFloat(discount_ammount2)))
@@ -957,8 +903,6 @@
 
 			}
 
-
-
 			function calcTotalVat(fields,  edit = ''){
 				let totalVat  = 0
 				$.map($(fields), function (item, key) {
@@ -973,8 +917,6 @@
 					}
 
 				});
-
-
 
 				const totalVat2 = (($(`#subtotal_with_discount${edit}`).val()) * 0.19)
 
@@ -1001,8 +943,6 @@
 
 				const discount  = inNum($(`#discount_total${edit}`).val())
 
-
-
 				const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
 				const rte_fuete            = ($(`#subtotal_with_discount${edit}`).val() / 100) * percentage_rte_fuete
 
@@ -1020,8 +960,6 @@
 
 			}
 
-
-
 			$("#apply_discount").change(function (e) {
 				calcSubTotal(".price_product")
 				calcTotalVat(".vat_product")
@@ -1034,10 +972,6 @@
 				calcTotalVat(".vat_product")
 				calTotal(".total_product")
 			});
-
-
-
-
 
 			$("#apply_discount_edit").change(function (e) {
 				calcSubTotal(".price_product", '_edit')
@@ -1066,14 +1000,11 @@
 				calTotal(".total_product", '_edit')
 			});
 
-
-
-
-
-
-
-
-
+		// 	$('input[name="price"]').keyup(function(e) {
+		// 	if (/\D/g.test(this.value)) {
+		// 		this.value = this.value.replace(/\D/g, '');
+		// 	}
+		// });
 
 		</script>
 
