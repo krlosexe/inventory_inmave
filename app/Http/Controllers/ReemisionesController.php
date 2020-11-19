@@ -195,7 +195,7 @@ class ReemisionesController extends Controller
         //
     }
 
-    public function RemisionToInvoice($id)
+    public function RemisionToInvoice($id,$user)
     {
         try {
             $head = Reemisiones::where('id',$id)->first();
@@ -215,6 +215,14 @@ class ReemisionesController extends Controller
             $output->total_invoice          = $head->total_invoice;
             $output->observations           = $head->observations;
             $output->save();
+
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "products_output";
+            $auditoria->cod_reg     = $output->id;
+            $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
+            $auditoria->usr_regins  = $user;
+            $auditoria->save();
 
             foreach($items as $key => $value){
 

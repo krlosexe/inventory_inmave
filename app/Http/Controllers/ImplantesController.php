@@ -10,7 +10,7 @@ class ImplantesController extends Controller
     public function GetExistenceImplante($serial)
     {
         try {
-            $data = TechnicalReceptionProductoImplante::where('serial',$serial)->get();
+            $data = TechnicalReceptionProductoImplante::where('serial',$serial)->first();
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;

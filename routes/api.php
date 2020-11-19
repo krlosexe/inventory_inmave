@@ -104,7 +104,7 @@ Route::get('almacen/existence/{warehouse}', 'AlmacenController@GetAlmacen');
 Route::post('products/movimiento/output', 'TraspasoController@createOuptTraspase');
 Route::get('products/movimiento/list', 'TraspasoController@ListOuptTraspase');
 Route::get('products/movimiento/detail/{id}', 'TraspasoController@ListOuptTraspaseById');
-Route::get('products/remision/invoice/{id}', 'ReemisionesController@RemisionToInvoice');
+Route::get('products/remision/invoice/{id}/{user}', 'ReemisionesController@RemisionToInvoice');
 Route::post('implantes/technical/reception', 'TechnicalReceptionImplantesController@CreateTechnicalReceptionImplante');
 Route::put('implantes/technical/reception/edit/{id}', 'TechnicalReceptionImplantesController@EditarTechnicalReceptionImplante');
 Route::get('technical/reception/implante', 'TechnicalReceptionImplantesController@ListTechnicalReceptionImplante');

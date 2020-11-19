@@ -283,12 +283,12 @@
 			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
-			function InvoiceToremition(id){
+			function InvoiceToremition(data){
 				try {	
 				$("#add_remision_invoice").click(function (e) {
 					// console.log("hola mundo",id);
 						$.ajax({
-							url: `${document.getElementById('ruta').value}/api/products/remision/invoice/${id}`,
+							url: `${document.getElementById('ruta').value}/api/products/remision/invoice/${data.id}/${id_user}`,
 							type:'GET',
 							dataType:'JSON',
 							async: false,
@@ -297,7 +297,8 @@
 							},
 							success: function(data){
 								
-								location.href = "http://inmave.localhost/output";
+								location.href = "http://pdtclientsolutions.com/inventory_inmave/output";
+								// location.href = "http://inmave.localhost/output";
 							}
 					});
 				});
@@ -407,7 +408,7 @@
 
 
 					$("#id_edit").val(data.id)
-					InvoiceToremition(data.id)
+					InvoiceToremition(data)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}

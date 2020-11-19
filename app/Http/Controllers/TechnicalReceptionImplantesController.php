@@ -26,6 +26,7 @@ class TechnicalReceptionImplantesController extends Controller
                 $products["date_expiration"]         = $request["date_expiration"][$key];
                 $products["price"]                   = str_replace(",", "", $request["price"][$key]);
                 $products["gramaje"]                 = $request["gramaje"][$key];
+                $products["perfil"]                 = $request["perfil"][$key];
     
                 TechnicalReceptionProductoImplante::create($products);
             }
@@ -57,6 +58,7 @@ class TechnicalReceptionImplantesController extends Controller
                     $products["date_expiration"]         = $request["date_expiration"][$key];
                     $products["price"]                   = str_replace(",", "", $request["price"][$key]);
                     $products["gramaje"]                 = $request["gramaje"][$key];
+                    $products["perfil"]                  = $request["perfil"][$key];
         
                 TechnicalReceptionProductoImplante::create($products);
             }
