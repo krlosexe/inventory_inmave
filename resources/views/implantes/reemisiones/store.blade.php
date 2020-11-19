@@ -39,8 +39,9 @@
                     <div class="form-group valid-required">
                         <select name="warehouse" class="form-control" id="warehouse" required>
                           <option value="">Seleccione</option>
-                          <option value="Medellin">Medellin</option>
                           <option value="Bogota">Bogota</option>
+                          <option value="Cali">Cali</option>
+                          <option value="Medellin">Medellin</option>
                         </select>
                     </div>
                 </div>
@@ -49,7 +50,8 @@
                 <div class="col-md-4">
                     <label for=""><b>Implantes</b></label>
                       <div class="form-group valid-required">
-                        <select name="products" class="form-control select2" id="products" required></select>
+                        <!-- <select name="products" class="form-control select2" id="products" required></select> -->
+                        <input type="text" maxlength="15" name="number" id="serial" class="form-control form-control-user">
                       </div>
                 </div>
 
@@ -73,13 +75,18 @@
 			                <table class="table table-bordered" id="table_products" width="100%" cellspacing="0">
 			                  <thead>
 			                    <tr>
-                            <th>Nombre</th>
-                            <th>Presentacion</th>
+                            <th>serial</th>
+                            <th>Gramaje</th>
+                            <th>Perfil</th>
+                            <th>Lote</th>
+                            <th>Registro invima</th>
+                            <th>Fecha Expiration</th>
                             <th>Precio (COP)</th>
+                            <th>Cantidad</th>
                             <!-- <th>Salida (Cantidad)</th> -->
-                            <th>Existencia Actual</th>
-                            <th>%IVA</th>
-                            <th>Total</th>
+                            <!-- <th>Presentacion</th> -->
+                            <!-- <th>%IVA</th>
+                            <th>Total</th> -->
                             <th></th>
 			                    </tr>
 			                  </thead>
@@ -89,23 +96,14 @@
 
 
                         <tfoot>
-
-                          
-
-
                           <tr>
                             <th style="text-align: center;" id="descuento_text">
                               <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
                              <!-- <input style="text-align: right;" type="text" class="form-control monto_formato_decimales discount" name="discount" id="discount" value="0">--> 
                               <input type="checkbox" id="apply_discount" class="form-control">
-
-
                               <br><br>
-
-
-
                               <label for="apply_discount2">¿ Quieres Aplicar Descuento (15%)?</label>
-                             <!-- <input style="text-align: right;" type="text" class="form-control monto_formato_decimales discount" name="discount" id="discount" value="0">--> 
+                             <!-- <input style="text-align: right;" type="text" class="form-control monto_formato_decimales discount" name="discount" id="discount" value="0"> -->
                               <input type="checkbox" id="apply_discount2" class="form-control">
 
 
@@ -129,7 +127,6 @@
                             <th style="text-align: right;" id="discount_total_text">$0</th>
                           </tr>
 
-
                           <tr>
                             <th style="text-align: left;">RTE Fuente</th>
                             <th style="text-align: right;"><input type="text" class="form-control discount" name="rte_fuente" id="rte_fuente" value="0"></th>
@@ -143,23 +140,18 @@
                             <th colspan="7" style="text-align: right;">Total factura <input type="hidden" name="total_invoice" id="total_invoice"></th>
                             <th style="text-align: right;" id="total_invoice_text">$0</th>
                           </tr>
-
-
                         </tfoot>
+                        
 			                </table>
 
-
-                      <div class="row">
+                      <!-- <div class="row">
                         <div class="col-md-6">
                           <label for=""><b>Observaciones</b></label>
                             <div class="form-group valid-required">
                               <textarea class="form-control" name="observations" id="observations" cols="30" rows="10"></textarea>
                             </div>
                         </div>
-                      </div>
-
-
-
+                      </div> -->
 			            </div>
              </div>
         </div>

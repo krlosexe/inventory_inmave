@@ -72,6 +72,8 @@
                             <th>Vence</th>
                             <th>Valor</th>
                             <th>Gramaje</th>
+                            <th>Perfil</th>
+                            <th>Total Factura</th>
                             <th></th>
 			                    </tr>
 			                  </thead>

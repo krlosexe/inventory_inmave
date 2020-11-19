@@ -12,7 +12,7 @@ class TechnicalReceptionImplantesController extends Controller
         try {
             $tri = new TechnicalReceptionImplante;
             $tri->id_provider = $request->id_provider;
-            $tri->total_invoice = 100;
+            $tri->total_invoice = $request->total;
             $tri->id_user = $request->id_user;
             $tri->save();
 
@@ -26,6 +26,7 @@ class TechnicalReceptionImplantesController extends Controller
                 $products["date_expiration"]         = $request["date_expiration"][$key];
                 $products["price"]                   = str_replace(",", "", $request["price"][$key]);
                 $products["gramaje"]                 = $request["gramaje"][$key];
+                $products["perfil"]                 = $request["perfil"][$key];
     
                 TechnicalReceptionProductoImplante::create($products);
             }
@@ -39,11 +40,9 @@ class TechnicalReceptionImplantesController extends Controller
     public function EditarTechnicalReceptionImplante(Request $request, $technicalReception)
     {
         try {     
-
-
             $update = TechnicalReceptionImplante::find($technicalReception);
             $update->id_provider = $request->id_provider;
-            $update->total_invoice = 100;
+            $update->total_invoice = $request->total;
             $update->id_user = $request->id_user;
             $update->save();
 
@@ -59,6 +58,7 @@ class TechnicalReceptionImplantesController extends Controller
                     $products["date_expiration"]         = $request["date_expiration"][$key];
                     $products["price"]                   = str_replace(",", "", $request["price"][$key]);
                     $products["gramaje"]                 = $request["gramaje"][$key];
+                    $products["perfil"]                  = $request["perfil"][$key];
         
                 TechnicalReceptionProductoImplante::create($products);
             }
