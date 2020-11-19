@@ -215,9 +215,9 @@ class ReemisionesController extends Controller
             $output->total_invoice          = $head->total_invoice;
             $output->observations           = $head->observations;
             $output->save();
-    
+
             foreach($items as $key => $value){
-            
+
                 $producs_items               = new ProductusOutputItems;
                 $producs_items->id_output   = $output->id;
                 $producs_items->id_product  = $value->id_product;
@@ -227,12 +227,12 @@ class ReemisionesController extends Controller
                 $producs_items->total       = str_replace(",", "", $value->total);
                 $producs_items->save();
 
-            } 
+            }
 
              Reemisiones::where('id',$id)->Delete();
              ReemisionesItems::where('id_reemision',$id)->Delete();
 
-            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");    
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;
