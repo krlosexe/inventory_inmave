@@ -137,7 +137,7 @@
 			}
 
 			function store(){
-				enviarFormulario("#store", 'api/reemisiones', '#cuadro2');
+				enviarFormulario("#store", 'api/reemisiones/implantes/create', '#cuadro2');
 			}
 
 			function list(cuadro) {
@@ -157,7 +157,7 @@
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/reemisiones',
+						 "url":''+url+'/api/reemisiones/implantes/list',
 						 "data": {
 							"id_user": id_user,
 							"token"  : tokens,
@@ -596,12 +596,12 @@
 
 					if(!validaProduct){
 						html += "<tr>"
-							html +="<td>"+data_serial.serial+" <input type='hidden' class='id_product' name='id_product[]' value='"+data_serial.serial+"' > </td>"
-							html +="<td>"+data_serial.gramaje+" <input type='hidden' class='id_product' name='gramaje[]' value='"+data_serial.gramaje+"' > </td>"
-							html +="<td>"+data_serial.perfil+" <input type='hidden' class='id_product' name='perfil[]' value='"+data_serial.perfil+"' > </td>"
-							html +="<td>"+data_serial.lote+" <input type='hidden' class='id_product' name='lote[]' value='"+data_serial.lote+"' > </td>"
-							html +="<td>"+data_serial.register_invima+" <input type='hidden' class='id_product' name='register_invima[]' value='"+data_serial.register_invima+"' > </td>"
-							html +="<td>"+data_serial.date_expiration+" <input type='hidden' class='id_product' name='date_expiration[]' value='"+data_serial.date_expiration+"' > </td>"
+							html +="<td>"+data_serial.serial+" <input type='hidden' class='id_product' name='serial[]' value='"+data_serial.serial+"' > </td>"
+							html +="<td>"+data_serial.gramaje+" <input type='hidden' class='id_product'  value='"+data_serial.gramaje+"' > </td>"
+							html +="<td>"+data_serial.perfil+" <input type='hidden' class='id_product'  value='"+data_serial.perfil+"' > </td>"
+							html +="<td>"+data_serial.lote+" <input type='hidden' class='id_product'  value='"+data_serial.lote+"' > </td>"
+							html +="<td>"+data_serial.register_invima+" <input type='hidden' class='id_product'  value='"+data_serial.register_invima+"' > </td>"
+							html +="<td>"+data_serial.date_expiration+" <input type='hidden' class='id_product'  value='"+data_serial.date_expiration+"' > </td>"
 							html +="<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
 							
 							// html +="<td>"+presentation+" </td>"
@@ -620,7 +620,7 @@
 							html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' required></td>"	
 							// html +="<td><input type='number' disabled class='form-control items_calc existence' value='"+total+"' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+total+"'></td>"
 							// 	html +="<td><input type='checkbox' class='form-control vat_product items_calc' checked  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
-							// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
+							html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 							html +="<td><span onclick='deleteProduct(this, "+'""'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
 					}else{

@@ -110,3 +110,6 @@ Route::put('implantes/technical/reception/edit/{id}', 'TechnicalReceptionImplant
 Route::get('technical/reception/implante', 'TechnicalReceptionImplantesController@ListTechnicalReceptionImplante');
 Route::get('technical/reception/implante/delete/{id}', 'TechnicalReceptionImplantesController@DeleteTechnicalReceptionImplante');
 Route::get('products/get/implante/{id}', 'ImplantesController@GetExistenceImplante');
+
+Route::post('reemisiones/implantes/create', 'ImplantesController@CreateImplanteRemision');
+Route::get('reemisiones/implantes/list', 'ImplantesController@ListImplanteRemision');
