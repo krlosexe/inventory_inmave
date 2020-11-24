@@ -67,12 +67,16 @@ Route::get('stock', function () {
     return view('warehouse.technical_reception.gestion');
 });
 
+
+Route::get('movimientos', function () {
+    return view('warehouse.movimientos.gestion');
+   
+    });
+
+
 Route::get('output', function () {
     return view('warehouse.output.gestion');
 });
-
-
-
 
 Route::get('reemisiones', function () {
     return view('warehouse.reemisiones.gestion');

@@ -137,7 +137,7 @@
 			}
 
 			function store(){
-				enviarFormulario("#store", 'api/reemisiones', '#cuadro2');
+				enviarFormulario("#store", 'api/reemisiones/implantes/create', '#cuadro2');
 			}
 
 			function list(cuadro) {
@@ -157,7 +157,7 @@
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/reemisiones',
+						 "url":''+url+'/api/reemisiones/implantes/list',
 						 "data": {
 							"id_user": id_user,
 							"token"  : tokens,
@@ -368,13 +368,19 @@
 
 					$("#indicador_edit").val(1)
 
+					$.map(data, function (item, key) {
+
+						console.log(item)
+					    // $("#serial").val(1)
+					})
+
 					getClients("#clients_edit", data.id_client)
 
 					// ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
 
 					$("#warehouse_edit").val(data.warehouse).trigger("change")
 
-					ShowProdcuts("#table_products_edit", data.products)
+					ShowProdcuts("#table_products_edit", data)
 					AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
 
 
@@ -596,12 +602,12 @@
 
 					if(!validaProduct){
 						html += "<tr>"
-							html +="<td>"+data_serial.serial+" <input type='hidden' class='id_product' name='id_product[]' value='"+data_serial.serial+"' > </td>"
-							html +="<td>"+data_serial.gramaje+" <input type='hidden' class='id_product' name='gramaje[]' value='"+data_serial.gramaje+"' > </td>"
-							html +="<td>"+data_serial.perfil+" <input type='hidden' class='id_product' name='perfil[]' value='"+data_serial.perfil+"' > </td>"
-							html +="<td>"+data_serial.lote+" <input type='hidden' class='id_product' name='lote[]' value='"+data_serial.lote+"' > </td>"
-							html +="<td>"+data_serial.register_invima+" <input type='hidden' class='id_product' name='register_invima[]' value='"+data_serial.register_invima+"' > </td>"
-							html +="<td>"+data_serial.date_expiration+" <input type='hidden' class='id_product' name='date_expiration[]' value='"+data_serial.date_expiration+"' > </td>"
+							html +="<td>"+data_serial.serial+" <input type='hidden' class='id_product' name='serial[]' value='"+data_serial.serial+"' > </td>"
+							html +="<td>"+data_serial.gramaje+" <input type='hidden' class='id_product'  value='"+data_serial.gramaje+"' > </td>"
+							html +="<td>"+data_serial.perfil+" <input type='hidden' class='id_product'  value='"+data_serial.perfil+"' > </td>"
+							html +="<td>"+data_serial.lote+" <input type='hidden' class='id_product'  value='"+data_serial.lote+"' > </td>"
+							html +="<td>"+data_serial.register_invima+" <input type='hidden' class='id_product'  value='"+data_serial.register_invima+"' > </td>"
+							html +="<td>"+data_serial.date_expiration+" <input type='hidden' class='id_product'  value='"+data_serial.date_expiration+"' > </td>"
 							html +="<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
 							
 							// html +="<td>"+presentation+" </td>"
@@ -620,7 +626,7 @@
 							html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' required></td>"	
 							// html +="<td><input type='number' disabled class='form-control items_calc existence' value='"+total+"' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+total+"'></td>"
 							// 	html +="<td><input type='checkbox' class='form-control vat_product items_calc' checked  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
-							// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
+							html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 							html +="<td><span onclick='deleteProduct(this, "+'""'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
 					}else{
@@ -690,7 +696,8 @@
 
 			function ShowProdcuts(table, data){
 
-				console.log(data)
+				console.log({data});
+
 				$(table+" tbody").html("")
 				$.map(data, function (item, key) {
 					let html = ""
@@ -732,6 +739,49 @@
 					$("#price_edit_"+item.id).val(item.price)
 
 				});
+
+				var html
+
+				var validaProduct = false
+				$(table + " tbody tr").each(function() {
+					if (data_serial.serial == $(this).find(".id_product").val()) {
+						validaProduct = true;
+					}
+				});
+
+				// if(!validaProduct){
+				// 	html += "<tr>"
+				// 		html +="<td>"+data_serial.serial+" <input type='hidden' class='id_product' name='serial[]' value='"+data_serial.serial+"' > </td>"
+				// 		html +="<td>"+data_serial.gramaje+" <input type='hidden' class='id_product'  value='"+data_serial.gramaje+"' > </td>"
+				// 		html +="<td>"+data_serial.perfil+" <input type='hidden' class='id_product'  value='"+data_serial.perfil+"' > </td>"
+				// 		html +="<td>"+data_serial.lote+" <input type='hidden' class='id_product'  value='"+data_serial.lote+"' > </td>"
+				// 		html +="<td>"+data_serial.register_invima+" <input type='hidden' class='id_product'  value='"+data_serial.register_invima+"' > </td>"
+				// 		html +="<td>"+data_serial.date_expiration+" <input type='hidden' class='id_product'  value='"+data_serial.date_expiration+"' > </td>"
+				// 		html +="<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
+						
+				// 		// html +="<td>"+presentation+" </td>"
+
+				// 		// html +="<td>"
+				// 		// 	html += "<select class='form-control items_calc price_product' name='price[]' onchange='calcProduc(this)' required>"
+				// 		// 		html += "<option value=''>Seleccione el precio</option>"
+				// 		// 		html += "<option value='"+price_distributor_x_caja+"'>Precio Distribuidor x Caja - "+number_format(price_distributor_x_caja, 2)+"</option>"
+				// 		// 		html += "<option value='"+price_distributor_x_vial+"'>Precio Distribuidor x Vial - "+number_format(price_distributor_x_vial, 2)+"</option>"
+				// 		// 		html += "<option value='"+price_cliente_x_caja+"'>Precio Cliente Final x Caja - "+number_format(price_cliente_x_caja, 2)+"</option>"
+				// 		// 		html += "<option value='"+price_cliente_x_vial+"'>Precio Cliente Final x Vial  - "+number_format(price_cliente_x_vial, 2)+"</option>"
+				// 		// 	html += "</select>"
+				// 		// 	//html += "<input type='text' class='form-control items_calc price_product' name='price[]' min = '1' value='"+price+"' readonly required style='text-align: right'>"
+				// 		// html +="</td>"
+				// 		// html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='"+total+"' required></td>"
+				// 		html +="<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' required></td>"	
+				// 		// html +="<td><input type='number' disabled class='form-control items_calc existence' value='"+total+"' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+total+"'></td>"
+				// 		// 	html +="<td><input type='checkbox' class='form-control vat_product items_calc' checked  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
+				// 		html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
+				// 		html +="<td><span onclick='deleteProduct(this, "+'""'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+				// 	html += "</tr>"
+				// }else{
+				// 	warning('¡La opción seleccionada ya se encuentra agregada!');
+				// }
+				// $(table+" tbody").append(html)
 
 			}
 

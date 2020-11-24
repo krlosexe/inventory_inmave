@@ -227,10 +227,20 @@
                             <div class="form-group valid-required">
                                 <select onchange="ProductsGetExistence(this)" name="warehouse" class="form-control" id="warehouse" required>
                                     <option value="">Seleccione</option>
-                                    <option value="Medellin">Medellin</option>
+                                    <option value="Cali">Cali</option>
                                     <option value="Bogota">Bogota</option>
+                                    <option value="Medellin">Medellin</option>
                                 </select>
                             </div>
+                            <div class="row">
+                        <div class="col-md-6">
+                            <label for=""><b>Factura</b></label>
+                            <div class="form-group valid-required">
+                                <input type="text" maxlength="15" name="number" id="factura" class="form-control form-control-user">
+                            </div>
+                        </div>
+                        <span class='btn btn-sm btn-info waves-effect mb-auto my-auto' id="search" data-toggle='tooltip' title='Buscar'><i class='fas fa-search'></i></span>
+                    </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -242,17 +252,23 @@
                                     <tr>
                                         <th>Almacen</th>
                                         <th>Descripción</th>
+                                        <th>Factura</th>
                                         <th>Codigo</th>
                                         <th>Total Compras</th>
                                         <th>Precio Compra(Euros)</th>
-                                        <th>Ventas</th>
-                                        <th>Venta Total</th>
+                                        <th>Precio Compra(COP)</th>
+                                        <!-- <th>Ventas</th>
+                                        <th>Venta Total</th> -->
                                         <!-- <th>Cantidad Reemisión</th>
                                         <th>Total Venta Reemisión</th> -->
-                                        <th>precio distribuidor por caja</th>
-                                        <th>precio distributor por vial</th>
-                                        <th>precio cliente por caja</th>
-                                        <th>precio cliente por vial</th>
+                                        <th>Precio distribuidor por caja</th>
+                                        <th>Precio distributor por vial</th>
+                                        <th>Precio cliente por caja</th>
+                                        <th>Precio cliente por vial</th>
+                                        <th>Ganancia distribuidor por caja</th>
+                                        <th>Ganancia distributor por vial</th>
+                                        <th>Ganancia cliente por caja</th>
+                                        <th>Ganancia cliente por vial</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -294,9 +310,16 @@
 
         verifyPersmisos(id_user, tokens, "tasks");
     });
-
-    function ProductsGetExistence(element) {
-        console.log($(element).val());
+    $('input[name="number"]').keyup(function(e) {
+		if (/\D/g.test(this.value)) {
+			this.value = this.value.replace(/\D/g, '');
+		}
+	});
+    
+    // ProductsGetExistence("#search")
+    $("#search").click(function(e){
+       var factura =  $("#factura").val();
+       var alamacen =  $("#warehouse").val();
         var url = document.getElementById('ruta').value;
         var table = $("#table").DataTable({
             "destroy": true,
@@ -304,7 +327,7 @@
             "serverSide": false,
             "ajax": {
                 "method": "GET",
-                "url": '' + url + '/api/almacen/existence/'+$(element).val(),
+                "url": '' + url + '/api/almacen/existence/'+factura+'/'+alamacen,
 
                 "dataSrc": ""
             },
@@ -318,6 +341,9 @@
 
                 },
                 {
+                    "data": "fact",
+                },
+                {
                     "data": "code",
                 },
                 {
@@ -327,17 +353,29 @@
                     "data": "price",
                 },
                 {
-                    "data":"qty_salida",
+                    "data":"price_cop",
                 },
-                {
-                    "data": "qty_total_vendido",
-                },
+                // {
+                //     "data": "qty_total_vendido",
+                // },
                 // {
                 //     "data": "qty_remision",
                 // },
                 // {
                 //     "data": "remision_total",
                 // },
+                {
+                    "data": "price_distributor_x_caja",
+                },
+                {
+                    "data": "price_distributor_x_vial",
+                },
+                {
+                    "data": "price_cliente_x_caja",
+                },
+                {
+                    "data": "price_cliente_x_vial",
+                },
                 {
                     "data": "dx_caja",
                 },
@@ -361,8 +399,16 @@
 
         table
             .search("").draw()
+        
+    });
 
-    }
+    // function ProductsGetExistence(element) {
+
+    //     console.log($(element).val());
+        
+       
+
+    // }
 </script>
 
 @endsection

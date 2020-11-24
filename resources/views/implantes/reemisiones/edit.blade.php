@@ -39,9 +39,10 @@
 
 
                 <div class="col-md-4">
-                    <label for=""><b>Productos</b></label>
+                    <label for=""><b>Implantes</b></label>
                       <div class="form-group valid-required">
-                        <select name="products" class="form-control select2" id="products_edit"></select>
+                        <!-- <select name="products" class="form-control select2" id="products_edit"></select> -->
+                        <input type="text" maxlength="15" name="number" id="serial" class="form-control form-control-user">
                       </div>
                 </div>
 

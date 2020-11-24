@@ -98,7 +98,7 @@ Route::get('reemision/print/{id}', 'InvoiceController@ShowInvoiceReemision');
 
 Route::get('rakin-producto', 'ProductsRankingController@listRankinProducts');
 Route::post('state-stock', 'StateStockController@listStateStock');
-Route::get('almacen/existence/{warehouse}', 'AlmacenController@GetAlmacen');
+Route::get('almacen/existence/{factura}/{warehouse}', 'AlmacenController@GetAlmacen');
 
 
 Route::post('products/movimiento/output', 'TraspasoController@createOuptTraspase');
@@ -110,3 +110,6 @@ Route::put('implantes/technical/reception/edit/{id}', 'TechnicalReceptionImplant
 Route::get('technical/reception/implante', 'TechnicalReceptionImplantesController@ListTechnicalReceptionImplante');
 Route::get('technical/reception/implante/delete/{id}', 'TechnicalReceptionImplantesController@DeleteTechnicalReceptionImplante');
 Route::get('products/get/implante/{id}', 'ImplantesController@GetExistenceImplante');
+
+Route::post('reemisiones/implantes/create', 'ImplantesController@CreateImplanteRemision');
+Route::get('reemisiones/implantes/list', 'ImplantesController@ListImplanteRemision');

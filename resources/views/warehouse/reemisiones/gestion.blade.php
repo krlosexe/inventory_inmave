@@ -296,7 +296,6 @@
 
 							},
 							success: function(data){
-								
 								location.href = "http://pdtclientsolutions.com/inventory_inmave/output";
 								// location.href = "http://inmave.localhost/output";
 							}
