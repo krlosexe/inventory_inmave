@@ -27,7 +27,6 @@ class ImplantesController extends Controller
     {
         try {
 
-            // dd($request->all());
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
 
             $output = new ImplanteReemision;

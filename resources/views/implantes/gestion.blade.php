@@ -464,8 +464,7 @@
 					
 				});
 			}
-			
-			function io(){
+			function socket_serial(){
 				try {	
 				var ws = new WebSocket("ws://localhost:3001/chat");
 				ws.on('serial', function(code){
