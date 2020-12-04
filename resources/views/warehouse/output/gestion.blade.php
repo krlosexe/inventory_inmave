@@ -279,6 +279,9 @@
 				$('#rte_fuente_text_edit').empty(0)	
 				$('#total_invoice_text_edit').empty(0)	
 
+				$('#table_products_edit tbody').html('')	
+
+
 
 
 			}
