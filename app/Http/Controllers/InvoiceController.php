@@ -39,11 +39,6 @@ class InvoiceController extends Controller
 
     }
 
-
-
-
-
-
     public function ShowInvoiceReemision($id){
 
         $data = Reemisiones::select("reemisiones.*",
@@ -80,8 +75,6 @@ class InvoiceController extends Controller
 
     }
 
-
-
     public function ExportExcelReemision(){
 
         $xls = new ClientsExportReemision;
@@ -90,24 +83,10 @@ class InvoiceController extends Controller
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     public function convertirNumeroLetra($numero){
         $numf = $this->milmillon($numero);
         return $numf." PESOS";
     }
-
-
 
     public function milmillon($nummierod){
         if ($nummierod >= 1000000000 && $nummierod <2000000000){
@@ -122,8 +101,6 @@ class InvoiceController extends Controller
         return $num_letrammd;
     }
 
-
-
     public function cienmillon($numcmeros){
         if ($numcmeros == 100000000)
             $num_letracms = "CIEN MILLONES";
@@ -134,8 +111,6 @@ class InvoiceController extends Controller
             $num_letracms = $this->decmillon($numcmeros);
         return $num_letracms;
     }
-
-
 
     public function decmillon($numerodm){
         if ($numerodm == 10000000)
@@ -152,9 +127,6 @@ class InvoiceController extends Controller
         return $num_letradmm;
     }
 
-
-
-
     public function millon($nummiero){
         if ($nummiero >= 1000000 && $nummiero <2000000){
             $num_letramm = "UN MILLON ".($this->cienmiles($nummiero%1000000));
@@ -168,10 +140,6 @@ class InvoiceController extends Controller
         return $num_letramm;
     }
 
-
-
-
-
     public function cienmiles($numcmero){
         if ($numcmero == 100000)
             $num_letracm = "CIEN MIL";
@@ -182,10 +150,6 @@ class InvoiceController extends Controller
             $num_letracm = $this->decmiles($numcmero);
         return $num_letracm;
     }
-
-
-
-
 
     public function decmiles($numdmero){
         if ($numdmero == 10000)
@@ -202,8 +166,6 @@ class InvoiceController extends Controller
         return $numde;
     }
 
-
-
     public function miles($nummero){
         if ($nummero >= 1000 && $nummero < 2000){
             $numm = "MIL ".($this->centena($nummero%1000));
@@ -216,14 +178,6 @@ class InvoiceController extends Controller
 
         return $numm;
     }
-
-
-
-
-
-
-
-
 
     public function centena($numc){
         if ($numc >= 100)
@@ -289,11 +243,6 @@ class InvoiceController extends Controller
 
         return $numce;
     }
-
-
-
-
-
 
     public function decena($numdero){
 

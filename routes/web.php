@@ -124,4 +124,7 @@ Route::get('ventas_implantes', function () {
 Route::get('ventas_reemisiones', function () {
     return view('implantes.reemisiones.gestion');
 });
+Route::get('products_implantes', function () {
+    return view('implantes.implantes_products.gestion');
+});
 
