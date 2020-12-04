@@ -581,6 +581,22 @@
 
 				GetCategories("#category")
 
+				$('#table_products tbody').empty('');
+
+				$('#subtotal_text').empty(0)
+				$('#vat_total_text').empty(0)
+				$('#discount_total_text').empty(0)	
+				$('#rte_fuente_text').empty(0)	
+				$('#total_invoice_text').empty(0)	
+
+
+				$('#table_products_edit tbody').html('')
+				$('#subtotal_text_edit').empty(0)
+				$('#vat_total_text_edit').empty(0)
+				$('#discount_total_text_edit').empty(0)	
+				$('#rte_fuente_text_edit').empty(0)	
+				$('#total_invoice_text_edit').empty(0)	
+
 
 				cuadros("#cuadro1", "#cuadro2");
 			}
@@ -642,6 +658,14 @@
 					GetCategories("#category")
 					
 					cuadros('#cuadro1', '#cuadro4');
+
+					$('#table_products tbody').empty('')
+					$('#subtotal_text').empty(0)
+					$('#vat_total_text').empty(0)
+					$('#discount_total_text').empty(0)	
+					$('#rte_fuente_text').empty(0)	
+					$('#total_invoice_text').empty(0)
+
 					$("#id_edit").val(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
