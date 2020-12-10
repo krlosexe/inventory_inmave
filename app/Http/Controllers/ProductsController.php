@@ -359,6 +359,14 @@ class ProductsController extends Controller
                     ->groupBy("reemisiones_items.id_product")
                     ->get();
 
+        $traspase     = DB::table("product_output_items_trapase")
+                    ->selectRaw("product_output_items_trapase.id_product, products.description, (SUM(product_output_items_trapase.qty))  as total")
+                    ->join("product_output_traspase", "product_output_traspase.id", "product_output_items_trapase.id_output_traspase")
+                    ->join("products", "products.id", "product_output_items_trapase.id_product")
+                    ->where("product_output_traspase.warehouse", $warehouse)
+                    ->groupBy("product_output_items_trapase.id_product")
+                    ->get();
+
 
 
 
@@ -375,6 +383,14 @@ class ProductsController extends Controller
             foreach($output_reemision as $out_reemision){
                 if($value->id_product == $out_reemision->id_product){
                     $value->total = $value->total - $out_reemision->total;
+                }else{
+                    $value->total = (int)$value->total;
+                }
+            }
+
+            foreach($traspase as $out_traspase){
+                if($value->id_product == $out_traspase->id_product){
+                    $value->total = $value->total - $out_traspase->total;
                 }else{
                     $value->total = (int)$value->total;
                 }
