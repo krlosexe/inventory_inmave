@@ -269,6 +269,15 @@
 
 
 		cuadros("#cuadro1", "#cuadro2");
+
+			$('#table_products tbody').empty();
+
+				// $('#destiny').empty(0);
+				// $('#warehouse').empty(0);
+				$('#products').empty(0);
+				
+				
+
 	}
 
 	function getClients(select, select_default = false) {
