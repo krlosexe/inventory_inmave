@@ -789,6 +789,9 @@
 
 					},
 					success: function(data){
+						
+						console.log({data});
+
 						$(select+" option").remove();
 						$(select).append($('<option>',
 						{
@@ -804,7 +807,7 @@
 							$(select).append($('<option>',
 							{
 								value: item.id,
-								text : item.name,
+								text : `${item.name} - ${item.city ? item.city : 'Sin ciudad'}`,
 								selected : select_default == item.id ? true : false
 
 							}));
