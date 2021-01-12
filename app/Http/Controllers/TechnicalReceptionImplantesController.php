@@ -9,18 +9,19 @@ class TechnicalReceptionImplantesController extends Controller
 {
     public function CreateTechnicalReceptionImplante(Request $request)
     {
+        // dd($request->all());
         try {
             $tri = new TechnicalReceptionImplante;
             $tri->id_provider = $request->id_provider;
-            $tri->total_invoice = $request->total;
             $tri->id_user = $request->id_user;
             $tri->save();
 
-            foreach($request["serial"] as $key => $serial){
+            foreach($request["referencia"] as $key => $referencia){
 
                 $products = [];
                 $products["id_technical_reception_implante"]  = $tri->id;
-                $products["serial"]                  = $serial;
+                $products["referencia"]              = $referencia;
+                $products["serial"]                  = $request["serial"][$key];
                 $products["lote"]                    = $request["lotes"][$key];
                 $products["register_invima"]         = $request["register_invima"][$key];
                 $products["date_expiration"]         = $request["date_expiration"][$key];

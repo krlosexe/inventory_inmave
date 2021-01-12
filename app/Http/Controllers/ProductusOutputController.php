@@ -25,14 +25,11 @@ class ProductusOutputController extends Controller
                                 ->where("auditoria.status", "!=", "0")
                                 ->orderBy("product_output.id", "DESC")
                                 ->with("products")
-                               
                                 ->get();
 
         $total = 0;
         foreach($data as $value){
-            
             foreach($value["products"] as $product){
-                
                 $entry_medellin = DB::table("product_entry_items")
                             ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
                             ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
@@ -41,10 +38,6 @@ class ProductusOutputController extends Controller
                             ->where("products.id", $product["id_product"])
                             ->groupBy("product_entry_items.id_product")
                             ->first();
-
-              
-              
-
                 $output_medellin = DB::table("product_output_items")
                                     ->selectRaw("product_output_items.id_product, products.description, (SUM(product_output_items.qty))  as total")
                                     ->join("product_output", "product_output.id", "product_output_items.id_output")
@@ -52,35 +45,22 @@ class ProductusOutputController extends Controller
                                     ->where("product_output.warehouse", "Medellin")
                                     ->where("products.id", $product["id_product"])
                                     ->groupBy("product_output_items.id_product")
-                                    ->first();
-
-
-                                    
-                                    
+                                    ->first();               
                 $total = 0;
                 if($entry_medellin){
                     $total_output_medellin = 0;
                     if($output_medellin){
                         $total_output_medellin = $output_medellin->total;
                     }
-        
                     $total = $entry_medellin->total - $total_output_medellin;
                 }else{
                     $total = 0;
                 }
-
                 $product["existence"] = $total;
             }
-
-            
-
         }
-       
-      
-        
         return response()->json($data)->setStatusCode(200);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -90,7 +70,6 @@ class ProductusOutputController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -99,11 +78,9 @@ class ProductusOutputController extends Controller
      */
     public function store(Request $request)
     {   
-
         isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
 
         $output = ProductusOutput::create($request->all());
-
         $auditoria              = new Auditoria;
         $auditoria->tabla       = "products_output";
         $auditoria->cod_reg     = $output->id;
@@ -111,8 +88,6 @@ class ProductusOutputController extends Controller
         $auditoria->fec_regins  = date("Y-m-d H:i:s");
         $auditoria->usr_regins  = $request["id_user"];
         $auditoria->save();
-
-
         if(isset($request["id_product"])){
             foreach($request["id_product"] as $key => $value){
                 $producs_items = [];
@@ -122,12 +97,9 @@ class ProductusOutputController extends Controller
                 $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                 $producs_items["vat"]         = $request["vat"][$key];
                 $producs_items["total"]       = str_replace(",", "", $request["total"][$key]);
-
                 ProductusOutputItems::create($producs_items);
             }   
         }
-        
-
         if ($output) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");    
             return response()->json($data)->setStatusCode(200);
@@ -135,7 +107,6 @@ class ProductusOutputController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-
     /**
      * Display the specified resource.
      *
@@ -146,7 +117,6 @@ class ProductusOutputController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -157,7 +127,6 @@ class ProductusOutputController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -167,11 +136,8 @@ class ProductusOutputController extends Controller
      */
     public function update(Request $request, $productusOutput)
     {
-
         $update = ProductusOutput::find($productusOutput)->update($request->all());
-
         ProductusOutputItems::where("id_output", $productusOutput)->delete();
-
         if(isset($request["id_product"])){
             foreach($request["id_product"] as $key => $value){
                 $producs_items["id_product"]  = $value;
@@ -180,13 +146,9 @@ class ProductusOutputController extends Controller
                 $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                 $producs_items["vat"]         = $request["vat"][$key];
                 $producs_items["total"]       = str_replace(",", "", $request["total"][$key]);
-
-
                 ProductusOutputItems::create($producs_items);
-
             }   
         }
-
         if ($update) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
@@ -194,7 +156,6 @@ class ProductusOutputController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-
     /**
      * Remove the specified resource from storage.
      *
