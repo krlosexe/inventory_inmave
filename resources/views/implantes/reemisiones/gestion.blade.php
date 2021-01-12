@@ -344,8 +344,8 @@
 
 					},
 					success: function(data) {
-						// location.href = "http://pdtclientsolutions.com/inventory_inmave/ventas_implantes";
-						location.href = "http://inmave.localhost/ventas_implantes";
+						location.href = "http://pdtclientsolutions.com/inventory_inmave/ventas_implantes";
+						// location.href = "http://inmave.localhost/ventas_implantes";
 					}
 				});
 			});
