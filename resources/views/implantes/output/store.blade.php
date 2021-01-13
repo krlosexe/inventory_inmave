@@ -40,12 +40,6 @@
                             <input type="text" maxlength="15" name="number" id="serial" class="form-control form-control-user">
                             </div>
                         </div>
-                        <!-- <div class="col-md-2">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-user" id="add_product">
-                                Agregar
-                            </button>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -70,7 +64,6 @@
                                     <th style="text-align: center;" id="descuento_text">
                                         <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
                                         <input type="checkbox" id="apply_discount" class="form-control">
-                                        
                                     </th>
                                     <th colspan="6" style="text-align: right;">Subtotal
                                         <input type="hidden" name="subtotal" id="subtotal">

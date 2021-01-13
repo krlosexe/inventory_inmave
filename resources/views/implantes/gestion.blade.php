@@ -1,8 +1,5 @@
 @extends('layouts.app')
-
-
 @section('CustomCss')
-
 <style>
 	.kv-avatar .krajee-default.file-preview-frame,
 	.kv-avatar .krajee-default.file-preview-frame:hover {
@@ -12,57 +9,40 @@
 		box-shadow: none;
 		text-align: center;
 	}
-
 	.kv-avatar {
 		display: inline-block;
 	}
-
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
-
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
 		font-weight: normal;
 	}
 </style>
-
-
 @endsection
-
-
 @section('content')
 <!-- Page Wrapper -->
 <div id="wrapper">
-
 	@include('layouts.sidebar')
-
 	<!-- Content Wrapper -->
 	<div id="content-wrapper" class="d-flex flex-column">
-
 		<!-- Main Content -->
 		<div id="content">
-
 			@include('layouts.topBar')
-
-
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
-
 				<!-- Page Heading -->
 				<h1 class="h3 mb-2 text-gray-800">Recepciones Tecnicas</h1>
-
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
 				<input type="hidden" class="token">
-
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">Gestion de Recepciones Tecnicas</h6>
-
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -84,25 +64,18 @@
 									</tr>
 								</thead>
 								<tbody>
-
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-
-
 				@include('implantes.store')
 				@include('implantes.view')
 				@include('implantes.edit')
-
-
 			</div>
 			<!-- /.container-fluid -->
-
 		</div>
 		<!-- End of Main Content -->
-
 		<!-- Footer -->
 		<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
@@ -112,25 +85,16 @@
 			</div>
 		</footer>
 		<!-- End of Footer -->
-
-
-
-
 		<div class="modal fade bd-example-modal-lg" id="modal_product" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Agregar un Producto</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-
 					<div class="modal-body">
-
-
-
 						<div class="row">
 							<div class="col-md-12">
 								<label for=""><b>Categorias</b></label>
@@ -141,9 +105,6 @@
 								</div>
 							</div>
 						</div>
-
-
-
 						<div class="row">
 							<div class="col-md-12">
 								<label for=""><b>Descripcion</b></label>
@@ -152,9 +113,6 @@
 								</div>
 							</div>
 						</div>
-
-
-
 						<div class="row">
 							<div class="col-md-12">
 								<label for=""><b>Laboratorio</b></label>
@@ -163,7 +121,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="row">
 							<div class="col-md-12">
 								<label for=""><b>Presentacion Comercial</b></label>
@@ -172,28 +129,21 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
-
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 						<button type="button" id="save_product" class="btn btn-primary">Guardar</button>
 					</div>
-
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<!-- End of Content Wrapper -->
-
 </div>
 <input type="hidden" id="indicador_edit">
 <input type="hidden" id="ruta" value="<?= url('/') ?>">
 @endsection
-
 @section('CustomJs')
-
 <script src="https://cdn.socket.io/socket.io-2.3.0.js"></script>
 <script>
 	$(document).ready(function() {
@@ -201,20 +151,16 @@
 		list();
 		update();
 		socket_referencia();
-		// socket_serial();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "technical_reception");
 	});
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/implantes/technical/reception/edit', '#cuadro4', false, "#avatar-edit");
 	}
-
 	function store() {
 		enviarFormulario("#store", 'api/implantes/technical/reception', '#cuadro2');
 	}
-
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
@@ -280,7 +226,6 @@
 		desactivar("#table tbody", table)
 		eliminar("#table tbody", table)
 	}
-
 	function getProviders(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/providers',
@@ -292,7 +237,6 @@
 			dataType: 'JSON',
 			async: false,
 			error: function() {
-
 			},
 			success: function(data) {
 				$(select + " option").remove();
@@ -310,7 +254,6 @@
 			}
 		});
 	}
-
 	function ChangeProviders(select, edit = '') {
 		$(select).change(function(e) {
 			$.ajax({
@@ -332,7 +275,6 @@
 			});
 		});
 	}
-
 	function getProducts(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/products',
@@ -344,7 +286,6 @@
 			dataType: 'JSON',
 			async: false,
 			error: function() {
-
 			},
 			success: function(data) {
 				$(select + " option").remove();
@@ -379,7 +320,6 @@
 		});
 	}
 	let contador = 0
-
 	function socket_referencia() {
 		var socket = io.connect("http://31.220.60.218:5026");
 		socket.on('askForUserId', () => {
@@ -443,10 +383,8 @@
 			});
 		});
 	}
-
 	function AddProductosEdit(btn, select_product, table) {
 		let contador = 0
-
 		function socket_referencia_edit() {
 			var socket = io.connect("http://31.220.60.218:5026");
 			socket.on('askForUserId', () => {
@@ -511,7 +449,6 @@
 			});
 		}
 	}
-
 	function nuevo() {
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
@@ -568,7 +505,6 @@
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}
-
 	function ShowProdcuts(table, data) {
 		let html = ""
 		$.map(data.detalle, function(item, key) {
@@ -598,7 +534,6 @@
 		});
 	}
 	/* ------------------------------------------------------------------------------- */
-
 	/* ------------------------------------------------------------------------------- */
 	/*
 		Funcion que capta y envia los datos a desactivar
@@ -612,12 +547,10 @@
 	/* ------------------------------------------------------------------------------- */
 	function eliminar(tbody, table) {
 		$(tbody).on("click", "span.eliminar", function() {
-			// console.log('hola');
 			var data = table.row($(this).parents("tr")).data();
 			statusConfirmacion('api/technical/reception/implante/delete/' + data.id + "", "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
-
 	function calcProduc(element, edit = '') {
 		var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
 		var qty = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product").val())
@@ -635,11 +568,9 @@
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
-
 	function deleteProduct(element) {
 		var tr = $(element).parent("td").parent("tr").children("td").find(".price_product").val()
 	}
-
 	function calcSubTotal(fields, edit = '') {
 		let subtotal = 0
 		$.map($(fields), function(item, key) {
@@ -650,7 +581,6 @@
 		$(`#subtotal_text${edit}`).text(`$ ${number_format(subtotal, 2)}`)
 		$(`#subtotal${edit}`).val(subtotal)
 	}
-
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
@@ -664,7 +594,6 @@
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat)
 	}
-
 	function calTotal(fields, edit = '') {
 		let total_invoice = 0
 		$.map($(fields), function(item, key) {
@@ -684,7 +613,6 @@
 	$(".discount_edit").keyup(function(e) {
 		calTotal(".total_product", '_edit')
 	});
-
 	function deleteProduct(element, edit = '') {
 		var tr = $(element).parent("td").parent("tr").remove()
 		calcSubTotal(".price_product", edit)

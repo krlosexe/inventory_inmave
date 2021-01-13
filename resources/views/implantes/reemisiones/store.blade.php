@@ -71,7 +71,6 @@
                                         <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
                                         <input type="checkbox" id="apply_discount" class="form-control">
                                     </th>
-
                                     <th colspan="6" style="text-align: right;">Subtotal
                                         <input type="hidden" name="subtotal" id="subtotal">
                                         <input type="hidden" name="subtotal_with_discount" id="subtotal_with_discount">
@@ -125,5 +124,4 @@
     <br>
     <br>
     </form>
-
 </div>

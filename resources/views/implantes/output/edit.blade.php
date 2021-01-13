@@ -127,10 +127,6 @@
         <button id="print" type="button" class="btn btn-primary btn-user">
             Imprimir
         </button>
-        <!--
-            <button id="send_usuario" class="btn btn-primary btn-user">
-                Guardar
-            </button>-->
     </center>
     <br>
     <br>

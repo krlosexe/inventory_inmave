@@ -9,16 +9,13 @@
 		box-shadow: none;
 		text-align: center;
 	}
-
 	.kv-avatar {
 		display: inline-block;
 	}
-
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
-
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
@@ -112,15 +109,12 @@
 			$("#add_remision_invoice_implant").css("display", "none");
 		}
 	});
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/output/implantes/update', '#cuadro4', false, "#avatar-edit");
 	}
-
 	function store() {
 		enviarFormulario("#store", 'api/output/implantes/create', '#cuadro2');
 	}
-
 	function socket_referencia() {
 		var socket = io.connect("http://31.220.60.218:5026");
 		socket.on('askForUserId', () => {
@@ -169,7 +163,6 @@
 			});
 		});
 	}
-
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
@@ -260,7 +253,6 @@
 			window.open(url, '_blank');
 		});
 	}
-
 	function nuevo() {
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
@@ -313,7 +305,6 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-			console.log(data);
 			$("#indicador_edit").val(1)
 			getClients("#clients_edit", data.id_client)
 			// ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
@@ -370,7 +361,6 @@
 			statusConfirmacion('api/products/entry/output/status/' + data.id + "/" + 0, "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
-
 	function getProducts(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/products',
@@ -414,53 +404,6 @@
 			}
 		});
 	}
-
-	// function AddProductos(btn, select_product, table) {
-	// 	$(btn).unbind().click(function(e) {
-	// 		const array_product = $(select_product).val().split("|")
-	// 		const id_product = array_product[0]
-	// 		const total = array_product[1]
-	// 		const price = array_product[2]
-	// 		const price_distributor_x_caja = array_product[3]
-	// 		const price_distributor_x_vial = array_product[4]
-	// 		const price_cliente_x_caja = array_product[5]
-	// 		const price_cliente_x_vial = array_product[6]
-	// 		const presentation = array_product[7]
-	// 		const description = $(`${select_product} option:selected`).text()
-	// 		var html
-	// 		var validaProduct = false
-	// 		$(table + " tbody tr").each(function() {
-	// 			if (id_product == $(this).find(".id_product").val()) {
-	// 				validaProduct = false;
-	// 			}
-	// 		});
-	// 		if (!validaProduct) {
-	// 			html += "<tr>"
-	// 			html += "<td>" + description + " <input type='hidden' class='id_product' name='id_product[]' value='" + id_product + "' > </td>"
-	// 			html += "<td>" + presentation + " </td>"
-	// 			html += "<td>"
-	// 			html += "<select class='form-control items_calc price_product' name='price[]' onchange='calcProduc(this)' required>"
-	// 			html += "<option value=''>Seleccione el precio</option>"
-	// 			html += "<option value='" + price_distributor_x_caja + "'>Precio Distribuidor x Caja - " + number_format(price_distributor_x_caja, 2) + "</option>"
-	// 			html += "<option value='" + price_distributor_x_vial + "'>Precio Distribuidor x Vial - " + number_format(price_distributor_x_vial, 2) + "</option>"
-	// 			html += "<option value='" + price_cliente_x_caja + "'>Precio Cliente Final x Caja - " + number_format(price_cliente_x_caja, 2) + "</option>"
-	// 			html += "<option value='" + price_cliente_x_vial + "'>Precio Cliente Final x Vial  - " + number_format(price_cliente_x_vial, 2) + "</option>"
-	// 			html += "</select>"
-	// 			//html += "<input type='text' class='form-control items_calc price_product' name='price[]' min = '1' value='"+price+"' readonly required style='text-align: right'>"
-	// 			html += "</td>"
-	// 			html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='" + total + "' required></td>"
-	// 			html += "<td><input type='number' disabled class='form-control items_calc existence' value='" + total + "' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + total + "'></td>"
-	// 			html += "<td><input type='checkbox' class='form-control vat_product items_calc' checked  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
-	// 			html += "<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
-	// 			html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-	// 			html += "</tr>"
-	// 		} else {
-	// 			warning('¡La opción seleccionada ya se encuentra agregada!');
-	// 		}
-	// 		$(table + " tbody").append(html)
-	// 	});
-	// }
-
 	function AddProductosEdit(btn, select_product, table) {
 		socket_referencia_edit();
 	}
@@ -512,9 +455,7 @@
 			});
 		});
 	}
-
 	function ShowProdcuts(table, data) {
-
 		$(table + " tbody").html("")
 		$.map(data.items, function(item, key) {
 			let html = ""
@@ -535,16 +476,13 @@
 			$("#price_edit_" + item.id).val(item.price)
 
 		});
-	
 	}
-
 	function deleteProduct(element, edit = '') {
 		var tr = $(element).parent("td").parent("tr").remove()
 		calcSubTotal(".price_product", edit)
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
-
 	function getClients(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/clients',
@@ -589,7 +527,6 @@
 			}
 		});
 	}
-
 	function calcProduc(element, edit = '') {
 		var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
 		var qty = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product").val())
@@ -615,7 +552,6 @@
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
-
 	function calcSubTotal(fields, edit = '') {
 		let subtotal = 0
 		$.map($(fields), function(item, key) {
@@ -660,7 +596,6 @@
 		*/
 		$(`#subtotal_with_discount${edit}`).val(sub_total_with_discount)
 	}
-
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
@@ -676,7 +611,6 @@
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat2, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat2)
 	}
-
 	function calTotal(fields, edit = '') {
 		let total_invoice = 0
 		$.map($(fields), function(item, key) {
@@ -699,31 +633,26 @@
 		calcTotalVat(".vat_product")
 		calTotal(".total_product")
 	});
-
 	$("#apply_discount2").change(function(e) {
 		calcSubTotal(".price_product")
 		calcTotalVat(".vat_product")
 		calTotal(".total_product")
 	});
-
 	$("#apply_discount_edit").change(function(e) {
 		calcSubTotal(".price_product", '_edit')
 		calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-
 	$("#apply_discount_edit2").change(function(e) {
 		calcSubTotal(".price_product", '_edit')
 		calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-
 	$(".discount").keyup(function(e) {
 		calcSubTotal(".price_product")
 		calcTotalVat(".vat_product")
 		calTotal(".total_product")
 	});
-
 	$(".discount_edit").keyup(function(e) {
 		calcSubTotal(".price_product", '_edit')
 		calcTotalVat(".vat_product", '_edit')

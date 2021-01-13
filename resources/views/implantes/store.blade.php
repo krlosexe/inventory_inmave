@@ -41,24 +41,6 @@
             </div>
             <hr>
             <div class="row my-2">
-                <!-- <div class="col-md-6">
-                <label for=""><b>Productos</b></label>
-                  <div class="form-group valid-required">
-                    <select name="products" class="form-control select2" id="products" required></select>
-                  </div>
-            </div> -->
-                <!-- <div class="col-md-2">
-              <br>
-              <button type="button" class="btn btn-primary btn-user" id="add_product">
-                  Agregar
-              </button>
-            </div> -->
-                <!-- <div class="col-md-3">
-              <br>
-              <button type="button" class="btn btn-primary btn-user" data-toggle="modal" data-target=".bd-example-modal-lg" id="new_product">
-                  Nuevo Producto
-              </button>
-            </div> -->
             </div>
             <div class="row">
                 <div class="col-md-12">
