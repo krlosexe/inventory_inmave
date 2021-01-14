@@ -94,7 +94,6 @@ class TechnicalReceptionImplantesController extends Controller
             ->with('proveedor')
             ->with('user')
             ->get();
-
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;
@@ -103,10 +102,8 @@ class TechnicalReceptionImplantesController extends Controller
     public function DeleteTechnicalReceptionImplante($id)
     {
         try {
-
             TechnicalReceptionImplante::where('id',$id)->delete();
             TechnicalReceptionProductoImplante::where('id_technical_reception_implante',$id)->delete();
-
             $data = array('mensagge' => "Los datos fueron eliminados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
