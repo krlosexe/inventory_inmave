@@ -10,9 +10,9 @@ use App\{
     Auditoria,
     ImplantOutput,
     ImplantOutputItems,
-    ProductImplantes
+    ProductImplantes,
+    TechnicalReceptionImplante
 };
-use PhpParser\Node\Expr\Cast\Object_;
 
 class ImplantesController extends Controller
 {
@@ -66,6 +66,9 @@ class ImplantesController extends Controller
                     // $producs_items["estatus"]     = "Remitido";
 
                     ImplanteReemisionesItem::create($producs_items);
+
+                    $detail = TechnicalReceptionProductoImplante::where('serial',$request["serial"])->first();
+                    TechnicalReceptionImplante::where("id",$detail->id_technical_reception_implante)->update(["estatus" => "Remitido"]);
                 }
             // }
             if ($output) {
@@ -97,7 +100,7 @@ class ImplantesController extends Controller
             $update->estatus                = "Remitido";
             $update->save();
 
-            ImplanteReemisionesItem::where("id_implante_reemision", $update->id)->delete();
+            ImplanteReemisionesItem::where("id_implante_reemision", $remision)->delete();
             // if (isset($request["referencia"])) {
                 foreach ($request->referencia as $key => $value) {
                     $producs_items = [];
@@ -109,7 +112,7 @@ class ImplantesController extends Controller
                     $producs_items["vat"]         = 1;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
                     // $producs_items["estatus"]     = "Remitido";
-                    ImplanteReemisionesItem::create($producs_items);
+                    ImplanteReemisionesItem::create($producs_items);                
                 }
             // }
             if ($update) {
@@ -177,6 +180,10 @@ class ImplantesController extends Controller
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
                     // $producs_items["estatus"]     = "Vendido";
                     ImplantOutputItems::create($producs_items);
+
+                    $detail = TechnicalReceptionProductoImplante::where('serial',$request["serial"])->first();
+                    TechnicalReceptionImplante::where("id",$detail->id_technical_reception_implante)->update(["estatus" => "Vendido"]);
+                
                 }
             }
             if ($output) {
@@ -205,12 +212,12 @@ class ImplantesController extends Controller
         $output->estatus                = "Vendido";
         $update->save();
 
-        ImplantOutputItems::where("id_implant_output", $update->id)->delete();
+        ImplantOutputItems::where("id_implant_output",$output)->delete();
         if(isset($request->referencia)){
             foreach($request->referencia as $key => $value){
                 $producs_items["id_implant_output"]  = $update->id;
-                $producs_items["referencia"]  = $value;
-                $producs_items["serial"]      = $request["serial"][$key];
+                $producs_items["referencia"]    = $value;
+                $producs_items["serial"]        = $request["serial"][$key];
                 $producs_items["qty"]           = $request["qty"][$key];
                 $producs_items["price"]         = str_replace(",", "", $request["price"][$key]);
                 $producs_items["vat"]           = $request["vat"][$key];
@@ -256,4 +263,5 @@ class ImplantesController extends Controller
             return $th;
         }
     }
+    
 }

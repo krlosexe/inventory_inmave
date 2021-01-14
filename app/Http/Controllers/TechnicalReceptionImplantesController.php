@@ -66,7 +66,7 @@ class TechnicalReceptionImplantesController extends Controller
             foreach($request["serial"] as $key => $serial){
     
                     $products = [];
-                    $products["id_technical_reception_implante"]  = $technicalReception;
+                    $products["id_technical_reception_implante"]  = $update->id;
                     $products["serial"]                  = $serial;
                     $products["lote"]                    = $request["lotes"][$key];
                     $products["register_invima"]         = $request["register_invima"][$key];
@@ -75,10 +75,8 @@ class TechnicalReceptionImplantesController extends Controller
                     $products["gramaje"]                 = $request["gramaje"][$key];
                     $products["perfil"]                  = $request["perfil"][$key];
                     // $products["estatus"]                 = "Disponible";
-        
                 TechnicalReceptionProductoImplante::create($products);
             }
-    
             if ($update) {
                 $data = array('mensagge' => "Los datos fueron editados satisfactoriamente");    
                 return response()->json($data)->setStatusCode(200);

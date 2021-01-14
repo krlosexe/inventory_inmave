@@ -12,7 +12,9 @@ use App\{
     ImplanteReemision,
     ImplanteReemisionesItem,
     ImplantOutput,
-    ImplantOutputItems
+    ImplantOutputItems,
+    TechnicalReceptionImplante,
+    TechnicalReceptionProductoImplante
 };
 
 class ReemisionesController extends Controller
@@ -279,9 +281,9 @@ class ReemisionesController extends Controller
             $auditoria->save();
 
             foreach($items as $key => $value){
-
                 $producs_items               = new ImplantOutputItems;
                 $producs_items->id_implant_output      = $output->id;
+                $producs_items->referencia  = $value->referencia;
                 $producs_items->serial      = $value->serial;
                 $producs_items->qty         = $value->qty;
                 $producs_items->price       = str_replace(",", "", $value->price);
@@ -290,8 +292,12 @@ class ReemisionesController extends Controller
                 // $producs_items->estatus     = "Vendido";
                 $producs_items->save();
 
+                $detail = TechnicalReceptionProductoImplante::where('serial',$value->serial)->first();
+                    TechnicalReceptionImplante::where("id",$detail->id_technical_reception_implante)->update(["estatus" => "Vendido"]);
+                
+
             }
-            
+
             ImplanteReemision::where('id',$id)->update(["estatus" => "Vendido"]);
             // ImplanteReemisionesItem::where('id_implante_reemision',$id)->update(["estatus" => "Vendido"]);
             
