@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{TechnicalReceptionImplante,TechnicalReceptionProductoImplante};
+use App\{TechnicalReceptionImplante,
+        TechnicalReceptionProductoImplante,
+        Auditoria
+    };
 
 class TechnicalReceptionImplantesController extends Controller
 {
@@ -28,8 +31,16 @@ class TechnicalReceptionImplantesController extends Controller
                 $products["price"]                   = str_replace(",", "", $request["price"][$key]);
                 $products["gramaje"]                 = $request["gramaje"][$key];
                 $products["perfil"]                 = $request["perfil"][$key];
-    
-                TechnicalReceptionProductoImplante::create($products);
+
+                $create = TechnicalReceptionProductoImplante::create($products);
+
+                $auditoria              = new Auditoria;
+                $auditoria->tabla       = "technical_reception_implante";
+                $auditoria->cod_reg     = $create->id;
+                $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                $auditoria->usr_regins  = $request["id_user"];
+                $auditoria->save();
             }
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
