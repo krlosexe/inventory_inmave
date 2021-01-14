@@ -267,6 +267,7 @@ class ReemisionesController extends Controller
             $output->rte_fuente             = $head->rte_fuente;
             $output->total_invoice          = $head->total_invoice;
             $output->observations           = $head->observations;
+            $output->estatus                = "Vendido";
             $output->save();
 
             $auditoria              = new Auditoria;
@@ -286,12 +287,16 @@ class ReemisionesController extends Controller
                 $producs_items->price       = str_replace(",", "", $value->price);
                 $producs_items->vat         = $value->vat;
                 $producs_items->total       = str_replace(",", "", $value->total);
+                // $producs_items->estatus     = "Vendido";
                 $producs_items->save();
 
             }
-
-            ImplanteReemision::where('id',$id)->Delete();
-            ImplanteReemisionesItem::where('id_implante_reemision',$id)->Delete();
+            
+            ImplanteReemision::where('id',$id)->update(["estatus" => "Vendido"]);
+            // ImplanteReemisionesItem::where('id_implante_reemision',$id)->update(["estatus" => "Vendido"]);
+            
+            // ImplanteReemision::where('id',$id)->Delete();
+            // ImplanteReemisionesItem::where('id_implante_reemision',$id)->Delete();
 
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");
             return response()->json($data)->setStatusCode(200);
