@@ -25,7 +25,6 @@ class ImplantesController extends Controller
             return $th;
         }
     }
-
     public function CreateImplanteRemision(Request $request)
     {
         // dd($request->all());

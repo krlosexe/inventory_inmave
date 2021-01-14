@@ -107,9 +107,9 @@ class ReemisionesController extends Controller
         $auditoria->save();
 
 
-        if(isset($request["id_product"])){
-            foreach($request["id_product"] as $key => $value){
-
+        if(isset($request->id_product)){
+            foreach($request->id_product as $key => $value){
+                $producs_items = [];
                 $producs_items["id_reemision"]   = $output->id;
                 $producs_items["id_product"]  = $value;
                 $producs_items["qty"]         = $request["qty"][$key];
@@ -171,12 +171,9 @@ class ReemisionesController extends Controller
                 $producs_items["price"]         = str_replace(",", "", $request["price"][$key]);
                 $producs_items["vat"]           = $request["vat"][$key];
                 $producs_items["total"]         = str_replace(",", "", $request["total"][$key]);
-
                 ReemisionesItems::create($producs_items);
-
             }
         }
-
 
         if ($update) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
@@ -202,9 +199,7 @@ class ReemisionesController extends Controller
         try {
             $head = Reemisiones::where('id',$id)->first();
             $items = ReemisionesItems::where('id_reemision',$id)->get();
-
             // dd($head->warehouse);
-
             $output                         = new ProductusOutput;
             $output->warehouse              = $head->warehouse;
             $output->id_client              = $head->id_client;
@@ -257,7 +252,6 @@ class ReemisionesController extends Controller
             $items = ImplanteReemisionesItem::where('id_implante_reemision',$id)->get();
             // dd($items);
             // dd($head->warehouse);
-
             $output                         = new ImplantOutput;
             $output->warehouse              = $head->warehouse;
             $output->id_client              = $head->id_client;
@@ -294,10 +288,8 @@ class ReemisionesController extends Controller
 
                 $detail = TechnicalReceptionProductoImplante::where('serial',$value->serial)->first();
                     TechnicalReceptionImplante::where("id",$detail->id_technical_reception_implante)->update(["estatus" => "Vendido"]);
-                
 
             }
-
             ImplanteReemision::where('id',$id)->update(["estatus" => "Vendido"]);
             // ImplanteReemisionesItem::where('id_implante_reemision',$id)->update(["estatus" => "Vendido"]);
             
