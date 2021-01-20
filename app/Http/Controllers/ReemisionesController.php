@@ -247,9 +247,9 @@ class ReemisionesController extends Controller
     public function ImplantesRemisionToInvoice($id,$user)
     {
         try {
-
             $head = ImplanteReemision::where('id',$id)->first();
-            $items = ImplanteReemisionesItem::where('id_implante_reemision',$id)->get();
+            // dd($head);
+            $items = ImplanteReemisionesItem::where('id_implante_reemision',$head->id)->get();
             // dd($items);
             // dd($head->warehouse);
             $output                         = new ImplantOutput;

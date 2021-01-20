@@ -18,6 +18,8 @@ class ImplantesController extends Controller
 {
     public function GetExistenceImplante($serial)
     {
+        
+
         try {
             $data = TechnicalReceptionProductoImplante::where('serial', $serial)->first();
             return response()->json($data)->setStatusCode(200);
@@ -131,7 +133,7 @@ class ImplantesController extends Controller
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_reemisiones.id")
             ->join("clients", "clients.id", "=", "implantes_reemisiones.id_client")
             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
-            ->where("auditoria.tabla", "implantes_reemisiones")
+            ->where("auditoria.tabla", "implantes_remision")
             ->where("auditoria.status", "!=", "0")
             ->where("implantes_reemisiones.estatus","Remitido")
             ->orderBy("implantes_reemisiones.id", "DESC")
@@ -249,7 +251,7 @@ class ImplantesController extends Controller
             return $data;
 
     }
-    public function searchSerial($serial):Object
+    public function searchSerial($serial)
     {
         try {
             $data = ProductImplantes::where('referencia', $serial)->first();

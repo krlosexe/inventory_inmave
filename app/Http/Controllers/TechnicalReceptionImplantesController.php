@@ -12,6 +12,7 @@ class TechnicalReceptionImplantesController extends Controller
 {
     public function CreateTechnicalReceptionImplante(Request $request)
     {
+        
         // dd($request->all());
         try {
             $tri = new TechnicalReceptionImplante;
@@ -30,6 +31,7 @@ class TechnicalReceptionImplantesController extends Controller
                 $products["register_invima"]         = $request["register_invima"][$key];
                 $products["date_expiration"]         = $request["date_expiration"][$key];
                 $products["price"]                   = str_replace(",", "", $request["price"][$key]);
+                $products["description"]             = $request["description"][$key];
                 $products["gramaje"]                 = $request["gramaje"][$key];
                 $products["perfil"]                  = $request["perfil"][$key];
                 // $products["estatus"]                 = "Disponible";
@@ -72,6 +74,7 @@ class TechnicalReceptionImplantesController extends Controller
                     $products["register_invima"]         = $request["register_invima"][$key];
                     $products["date_expiration"]         = $request["date_expiration"][$key];
                     $products["price"]                   = str_replace(",", "", $request["price"][$key]);
+                    $products["description"]             = $request["description"][$key];
                     $products["gramaje"]                 = $request["gramaje"][$key];
                     $products["perfil"]                  = $request["perfil"][$key];
                     // $products["estatus"]                 = "Disponible";

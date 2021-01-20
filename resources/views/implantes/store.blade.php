@@ -54,6 +54,7 @@
                                     <th>Registro INVIMA</th>
                                     <th>Vence</th>
                                     <th>Valor</th>
+                                    <th>Descripción</th>
                                     <th>Gramaje</th>
                                     <th>Perfil</th>
                                     <th></th>
