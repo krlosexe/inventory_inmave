@@ -129,9 +129,9 @@ class ImplantesController extends Controller
 
     public function ListImplanteRemision()
     {
-        $data = ImplanteReemision::select("implantes_reemisiones.*", "clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+        $data = ImplanteReemision::select("implantes_reemisiones.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_reemisiones.id")
-            ->join("clients", "clients.id", "=", "implantes_reemisiones.id_client")
+            ->join("implantes_clients", "implantes_clients.id", "=", "implantes_reemisiones.id_client")
             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
             ->where("auditoria.tabla", "implantes_remision")
             ->where("auditoria.status", "!=", "0")
@@ -237,9 +237,9 @@ class ImplantesController extends Controller
     }
     public function ListImplanteOutput()
     {
-        $data = ImplantOutput::select("implantes_output.*", "clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+        $data = ImplantOutput::select("implantes_output.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
-            ->join("clients", "clients.id", "=", "implantes_output.id_client")
+            ->join("implantes_clients", "implantes_clients.id", "=", "implantes_output.id_client")
             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
             ->where("auditoria.tabla", "products_output")
             ->where("auditoria.status", "!=", "0")

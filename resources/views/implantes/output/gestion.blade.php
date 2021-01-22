@@ -485,7 +485,7 @@
 	}
 	function getClients(select, select_default = false) {
 		$.ajax({
-			url: '' + document.getElementById('ruta').value + '/api/clients',
+			url: '' + document.getElementById('ruta').value + '/api/implantes-clientes',
 			type: 'GET',
 			data: {
 				"id_user": id_user,

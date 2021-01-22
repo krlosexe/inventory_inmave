@@ -105,3 +105,7 @@ Route::get('products_implantes', function () {
     return view('implantes.implantes_products.gestion');
 });
 
+Route::get('implantes-clientes', function () {
+    return view('implantes.clients.gestion');
+});
+

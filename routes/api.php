@@ -59,7 +59,9 @@ Route::resource('providers', 'ProvidersController');
 Route::get('providers/status/{id}/{status}', 'ProvidersController@status');
 
 Route::resource('clients', 'ClientsController');
+Route::resource('implantes-clientes', 'ImplantesClientesController');
 Route::get('clients/status/{id}/{status}', 'ClientsController@status');
+Route::get('implantes-clientes/status/{id}/{status}', 'ImplantesClientesController@status');
 
 
 Route::resource('categories', 'CategoryController');

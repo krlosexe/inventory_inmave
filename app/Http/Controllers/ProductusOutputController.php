@@ -78,7 +78,6 @@ class ProductusOutputController extends Controller
      */
     public function store(Request $request)
     {   
-        isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
 
         $output = ProductusOutput::create($request->all());
         $auditoria              = new Auditoria;
@@ -89,7 +88,7 @@ class ProductusOutputController extends Controller
         $auditoria->usr_regins  = $request["id_user"];
         $auditoria->save();
         if(isset($request["id_product"])){
-            foreach($request["id_product"] as $key => $value){
+            foreach($request->id_product as $key => $value){
                 $producs_items = [];
                 $producs_items["id_output"]   = $output->id;
                 $producs_items["id_product"]  = $value;
