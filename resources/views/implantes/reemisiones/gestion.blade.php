@@ -210,12 +210,23 @@
 		// searchSerial("#add_product")
 		$("#indicador_edit").val(0)
 		cuadros("#cuadro1", "#cuadro2");
+		
+		// $('#serial').empty();
+		// $('#warehouse').empty()
+		// $('#clients').empty()
+		
 		$('#table_products tbody').empty();
 		$('#subtotal_text').empty(0)
 		$('#vat_total_text').empty(0)
 		$('#discount_total_text').empty(0)
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
+
+		$("#serial").focus();		
+		$("#serial").change(function() {
+			$("#serial").val($("#serial").val().substr(2))
+			serial($("#serial").val());
+		});
 	}
 	function socket_referencia() {
 		var socket = io.connect("http://31.220.60.218:5026");
@@ -231,8 +242,13 @@
 				}
 			});
 		});
-		socket.on('sendReference', (data) => {
-			$.ajax({
+		// socket.on('sendReference', (data) => {
+			
+		// });
+	}
+
+	function serial(data){
+		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
 				type: 'GET',
 				dataType: 'JSON',
@@ -262,9 +278,14 @@
 						warning('¡Recuerde que los campos son obligatorios!');
 					}
 					$("#table_products_rem tbody").append(html)
+					$('#serial').val("");
+					setTimeout(() => {
+						$('#serial').focus();
+					}, 1000);
+					// $('#warehouse').empty()
+					// $('#clients').empty()
 				}
 			});
-		});
 	}
 	/* ------------------------------------------------------------------------------- */
 	/*
@@ -326,6 +347,13 @@
 			var data = table.row($(this).parents("tr")).data();
 			console.log('ed',data);
 			$("#indicador_edit").val(1)
+			
+			$("#serial_edit").focus();		
+			$("#serial_edit").change(function() {
+				$("#serial_edit").val($("#serial_edit").val().substr(2))
+				AddProductosEdit($("#serial_edit").val());
+			});
+			
 			$.map(data, function(item, key) {
 				// console.log(item)
 				// $("#serial").val(1)
@@ -334,7 +362,7 @@
 			// ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			ShowProdcuts("#table_products_edit_rem", data)
-			AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
+			// AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
 			if (data.discount_total > 0) {
 				$("#apply_discount_edit").prop("checked", true)
 			} else {
@@ -431,24 +459,11 @@
 			}
 		});
 	}
-	function AddProductosEdit(btn, select_product, table) {
-		socket_referencia_edit();	
+	function AddProductosEdit(data) {
+		socket_referencia_edit(data);	
 	}
-	function socket_referencia_edit() {
-		var socket = io.connect("http://31.220.60.218:5026");
-		socket.on('askForUserId', () => {
-			console.log(socket);
-		});
-		socket.emit('userIdReceived', 'Pc');
-		// socket.on('sendSerial', (data) => {
-		// 	$('#table_products_edit tbody tr').each(function() {
-		// 		if ($(this).find(".serial").val() == '') {
-		// 			$(this).find(".serial").val(data);
-		// 		}
-		// 	});
-		// });
-		socket.on('sendReference', (data) => {
-			$.ajax({
+	function socket_referencia_edit(data) {
+		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
 				type: 'GET',
 				dataType: 'JSON',
@@ -478,9 +493,12 @@
 						warning('¡La opción seleccionada ya se encuentra agregada!');
 					}
 					$("#table_products_edit_rem tbody").append(html)
+					$('#serial_edit').val("");
+					setTimeout(() => {
+						$('#serial_edit').focus();
+					}, 1000)
 				}
 			});
-		});
 	}	
 	function ShowProdcuts(table, data) {
 		$(table + " tbody").html("")
@@ -553,9 +571,22 @@
 						});
 					}
 				});
+			  enfocar();
 			}
 		});
 	}
+	function enfocar(){
+		try {
+			setTimeout(() => {
+				$("#serial").focus();
+			}, 1000);
+		} catch (e) {
+			console.log(e);
+		}
+	}
+	$("#warehouse").change(function() {
+			$("#serial").focus();
+    });
 	function calcProduc(element, edit = '') {
 		var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
 		var qty = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product").val())

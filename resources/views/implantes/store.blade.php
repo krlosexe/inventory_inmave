@@ -15,27 +15,35 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
+                    <label for=""><b>Referencia</b></label>
+                    <div class="form-group valid-required">
+                        <input type="text" name="referencia" class="form-control form-control-user" id="referencia" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
                     <label for=""><b>NIT</b></label>
                     <div class="form-group valid-required">
-                        <input type="text" class="form-control form-control-user" id="nit_provider" disabled>
+                        <input type="text" class="form-control form-control-user" id="nit_provider" readonly>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label for=""><b>Direccion</b></label>
                     <div class="form-group valid-required">
-                        <input type="text" class="form-control form-control-user" id="address_provider" disabled>
+                        <input type="text" class="form-control form-control-user" id="address_provider" readonly>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label for=""><b>Telefono</b></label>
                     <div class="form-group valid-required">
-                        <input type="text" class="form-control form-control-user" id="phone_provider" disabled>
+                        <input type="text" class="form-control form-control-user" id="phone_provider" readonly>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label for=""><b>Email</b></label>
                     <div class="form-group valid-required">
-                        <input type="text" class="form-control form-control-user" id="email_provider" disabled>
+                        <input type="text" class="form-control form-control-user" id="email_provider" readonly>
                     </div>
                 </div>
             </div>
@@ -77,7 +85,7 @@
         <button type="button" class="btn btn-danger btn-user" onclick="prev('#cuadro2')">
             Cancelar
         </button>
-        <button class="btn btn-primary btn-user">
+        <button type="submit" class="btn btn-primary btn-user">
             Registrar
         </button>
     </center>

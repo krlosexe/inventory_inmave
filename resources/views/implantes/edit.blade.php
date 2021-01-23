@@ -16,6 +16,14 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
+                    <label for=""><b>Referencia</b></label>
+                    <div class="form-group valid-required">
+                        <input type="text" name="referencia" class="form-control form-control-user" id="referencia_edit" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
                     <label for=""><b>NIT</b></label>
                     <div class="form-group valid-required">
                         <input type="text" class="form-control form-control-user" id="nit_provider_edit" disabled>

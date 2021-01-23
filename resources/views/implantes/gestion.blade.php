@@ -9,13 +9,16 @@
 		box-shadow: none;
 		text-align: center;
 	}
+
 	.kv-avatar {
 		display: inline-block;
 	}
+
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
+
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
@@ -155,12 +158,19 @@
 		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "technical_reception");
 	});
+	$(document).on('keyup keypress', 'form input[type="text"]', function(e) {
+
+	});
+
 	function update() {
 		enviarFormularioPut("#form-update", 'api/implantes/technical/reception/edit', '#cuadro4', false, "#avatar-edit");
 	}
+
 	function store() {
+
 		enviarFormulario("#store", 'api/implantes/technical/reception', '#cuadro2');
 	}
+
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
@@ -226,6 +236,7 @@
 		desactivar("#table tbody", table)
 		eliminar("#table tbody", table)
 	}
+
 	function getProviders(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/providers',
@@ -236,8 +247,7 @@
 			},
 			dataType: 'JSON',
 			async: false,
-			error: function() {
-			},
+			error: function() {},
 			success: function(data) {
 				$(select + " option").remove();
 				$(select).append($('<option>', {
@@ -251,9 +261,11 @@
 						selected: select_default == item.id ? true : false
 					}));
 				});
+
 			}
 		});
 	}
+
 	function ChangeProviders(select, edit = '') {
 		$(select).change(function(e) {
 			$.ajax({
@@ -267,14 +279,31 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
-					$(`#nit_provider${edit}`).val(data.name)
-					$(`#address_provider${edit}`).val(data.address)
-					$(`#phone_provider${edit}`).val(data.phone)
-					$(`#email_provider${edit}`).val(data.email)
+
+
+					$(`#nit_provider${edit}`).val(data.name);
+					$(`#address_provider${edit}`).val(data.address);
+					$(`#phone_provider${edit}`).val(data.phone);
+					$(`#email_provider${edit}`).val(data.email);
+
+					enfocar();
+
 				}
 			});
+
 		});
 	}
+
+	function enfocar() {
+		try {
+			setTimeout(() => {
+				$("#referencia").focus();
+			}, 1000);
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
 	function getProducts(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/products',
@@ -285,8 +314,7 @@
 			},
 			dataType: 'JSON',
 			async: false,
-			error: function() {
-			},
+			error: function() {},
 			success: function(data) {
 				$(select + " option").remove();
 				$(select).append($('<option>', {
@@ -320,6 +348,7 @@
 		});
 	}
 	let contador = 0
+
 	function socket_referencia() {
 		var socket = io.connect("http://31.220.60.218:5026");
 		socket.on('askForUserId', () => {
@@ -334,7 +363,13 @@
 				}
 			});
 		});
-		socket.on('sendReference', (data) => {
+		// socket.on('sendReference', (data) => {
+
+		// });
+	}
+
+	function referencia(data) {
+		try {
 			$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/implantes/search/' + data,
 				type: 'GET',
@@ -348,6 +383,10 @@
 							valid = true;
 						}
 					});
+					$("#serial").change(function() {
+						$(".serial").val($(".serial").val().substr(2))
+					});
+
 					// $('#table_products_imp tbody tr').each(function() {
 					// 	if ($(this).find(".serial").val() == data) {
 					// 		valid = true;
@@ -382,76 +421,61 @@
 					});
 				}
 			});
-		});
+		} catch (e) {
+			console.log(e);
+		}
 	}
-	function AddProductosEdit(btn, select_product, table) {
+
+	function AddProductosEdit(data) {
 		let contador = 0
-		function socket_referencia_edit() {
-			var socket = io.connect("http://31.220.60.218:5026");
-			socket.on('askForUserId', () => {
-				console.log(socket);
-			});
-			socket.emit('userIdReceived', 'Pc edit');
-			// socket.on('sendSerial', (data) => {
-			// 	console.log('serial', data);
-			// 	$('#table_products_edit tbody tr').each(function() {
-			// 		if ($(this).find(".serial").val() == '') {
-			// 			$(this).find(".serial").val(data);
-			// 		}
-			// 	});
-			// });
-			socket.on('sendReference', (data) => {
-				$.ajax({
-					url: '' + document.getElementById('ruta').value + '/api/implantes/search/' + data,
-					type: 'GET',
-					dataType: 'JSON',
-					async: false,
-					error: function() {},
-					success: function(data) {
-						var valid = false
-						$('#table_products_edit tbody tr').each(function() {
-							if ($(this).find(".serial").val() == '') {
-								valid = true;
-							}
-						});
-						// $('#table_products_edit tbody tr').each(function() {
-						// 	if ($(this).find(".serial").val() == data) {
-						// 		valid = true;
-						// 		warning('¡El serial ya ha sido agregado !');
-						// 	}
-						// });
-						contador++
-						var html = "";
-						console.log({data});
-						$('#table_products_edit tbody').empty();
-						if (!valid) {
-							html += "<tr>"
-							html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required></td>"
-							html += "<td><input type='text' class='serial form-control' name='serial[]' id='serial_" + contador + "'  required></td>"
-							html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
-							html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
-							html += "<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
-							html += "<td><input style='text-align: right;width: 142px;' type='number'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
-							html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
-							html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
-							html += "<td><input type='text' class='form-control' name='gramaje[]' value='" + data.gramaje + "' required></td>"
-							html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
-							html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-							html += "</tr>"
-						} else {
-							warning('¡El serial no puede estar vacio!');
-						}
-						$("#table_products_edit" + " tbody").append(html)
-						$("#serial_" + contador + "").focus()
-						$(".monto_formato_decimales").change(function() {
-							if ($(this).val() != "") {
-								$(this).val(number_format($(this).val(), 2));
-							}
-						});
+		$.ajax({
+			url: '' + document.getElementById('ruta').value + '/api/implantes/search/' + data,
+			type: 'GET',
+			dataType: 'JSON',
+			async: false,
+			error: function() {},
+			success: function(data) {
+				var valid = false
+				$('#table_products_edit tbody tr').each(function() {
+					if ($(this).find(".serial").val() == '') {
+						valid = true;
 					}
 				});
-			});
-		}
+				// $('#table_products_edit tbody tr').each(function() {
+				// 	if ($(this).find(".serial").val() == data) {
+				// 		valid = true;
+				// 		warning('¡El serial ya ha sido agregado !');
+				// 	}
+				// });
+				contador++
+				var html = "";
+				$('#table_products_edit tbody').empty();
+				if (!valid) {
+					html += "<tr>"
+					html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required></td>"
+					html += "<td><input type='text' class='serial form-control' name='serial[]' id='serial_" + contador + "'  required></td>"
+					html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
+					html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
+					html += "<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
+					html += "<td><input style='text-align: right;width: 142px;' type='number'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
+					html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
+					html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
+					html += "<td><input type='text' class='form-control' name='gramaje[]' value='" + data.gramaje + "' required></td>"
+					html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
+					html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+					html += "</tr>"
+				} else {
+					warning('¡El serial no puede estar vacio!');
+				}
+				$("#table_products_edit" + " tbody").append(html)
+				$("#serial_" + contador + "").focus()
+				$(".monto_formato_decimales").change(function() {
+					if ($(this).val() != "") {
+						$(this).val(number_format($(this).val(), 2));
+					}
+				});
+			}
+		});
 	}
 	function nuevo() {
 		$("#alertas").css("display", "none");
@@ -464,6 +488,13 @@
 		getProducts("#products")
 		GetCategories("#category")
 		cuadros("#cuadro1", "#cuadro2");
+		$("#referencia").focus();
+		$("#referencia").change(function() {
+			var str = $("#referencia").val().substr(2)
+			$("#referencia").val(str.replace("'", "-"));
+			var ref = $("#referencia").val();
+			referencia(ref);
+		});
 	}
 	/* ------------------------------------------------------------------------------- */
 	/* 
@@ -486,6 +517,13 @@
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
 			console.log('data', data);
+			$("#referencia_edit").focus();
+			$("#referencia_edit").change(function() {
+				var str = $("#referencia_edit").val().substr(2)
+				$("#referencia_edit").val(str.replace("'", "-"));
+				var ref = $("#referencia_edit").val();
+				AddProductosEdit(ref);
+			});
 			$("#indicador_edit").val(1)
 			getProviders("#provider_edit", data.id_provider)
 			ChangeProviders("#provider_edit", "_edit")
@@ -509,6 +547,7 @@
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}
+
 	function ShowProdcuts(table, data) {
 		let html = ""
 		$.map(data.detalle, function(item, key) {
@@ -556,6 +595,7 @@
 			statusConfirmacion('api/technical/reception/implante/delete/' + data.id + "", "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
+
 	function calcProduc(element, edit = '') {
 		var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
 		var qty = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product").val())
@@ -573,9 +613,11 @@
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
+
 	function deleteProduct(element) {
 		var tr = $(element).parent("td").parent("tr").children("td").find(".price_product").val()
 	}
+
 	function calcSubTotal(fields, edit = '') {
 		let subtotal = 0
 		$.map($(fields), function(item, key) {
@@ -586,6 +628,7 @@
 		$(`#subtotal_text${edit}`).text(`$ ${number_format(subtotal, 2)}`)
 		$(`#subtotal${edit}`).val(subtotal)
 	}
+
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
@@ -599,6 +642,7 @@
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat)
 	}
+
 	function calTotal(fields, edit = '') {
 		let total_invoice = 0
 		$.map($(fields), function(item, key) {
@@ -618,6 +662,7 @@
 	$(".discount_edit").keyup(function(e) {
 		calTotal(".total_product", '_edit')
 	});
+
 	function deleteProduct(element, edit = '') {
 		var tr = $(element).parent("td").parent("tr").remove()
 		calcSubTotal(".price_product", edit)

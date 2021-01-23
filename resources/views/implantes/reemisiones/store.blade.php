@@ -8,11 +8,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-6">
-                            <label for=""><b>Cliente</b></label>
+                    
+                    <div class="col-md-4">
+                            <label for=""><b>Implante(s)</b></label>
                             <div class="form-group valid-required">
-                                <select name="id_client" class="form-control" id="clients" required>
-                                </select>
+                                <input type="text" maxlength="15" name="number" id="serial" class="form-control form-control-user">
                             </div>
                         </div>
                         <!-- <div class="col-md-4">
@@ -21,6 +21,15 @@
                                 <input type="checkbox" name="reissue" id="reissue" class="form-control" value="1">
                             </div>
                         </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for=""><b>Cliente</b></label>
+                            <div class="form-group valid-required">
+                                <select name="id_client" class="form-control" id="clients" required>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -32,12 +41,6 @@
                                     <option value="Cali">Cali</option>
                                     <option value="Medellin">Medellin</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for=""><b>Implante(s)</b></label>
-                            <div class="form-group valid-required">
-                                <input type="text" maxlength="15" name="number" id="serial" class="form-control form-control-user">
                             </div>
                         </div>
                         <!-- <div class="col-md-2">
