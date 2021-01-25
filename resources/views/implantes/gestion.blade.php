@@ -153,7 +153,6 @@
 		store();
 		list();
 		update();
-		// socket_referencia();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "technical_reception");
@@ -183,10 +182,6 @@
 			"ajax": {
 				"method": "GET",
 				"url": '' + url + '/api/technical/reception/implante',
-				//  "data": {
-				// 	"id_user": id_user,
-				// 	"token"  : tokens,
-				// },
 				"dataSrc": ""
 			},
 			"columns": [{
@@ -209,7 +204,6 @@
 						return row.proveedor.name
 					}
 				},
-				// {"data":"total_invoice"},
 				{
 					"data": "created_at"
 				},
@@ -450,7 +444,6 @@
 		$("#indicador_edit").val(0)
 		getProviders("#provider")
 		ChangeProviders("#provider")
-		// AddProductos("#add_product", "#products", "#table_products")
 		$('#table_products tbody').empty();
 		getProducts("#products")
 		GetCategories("#category")
