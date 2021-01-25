@@ -367,7 +367,7 @@
 						html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
-						
+
 					} else {
 						warning('¡El serial no puede estar vacio!');
 					}
@@ -437,6 +437,10 @@
 						$(this).val(number_format($(this).val(), 2));
 					}
 				});
+				$(".serial").change(function() {
+						var sere = $(".serial").val().substr(2)
+					    $(".serial").val(sere)
+					});
 			}
 		});
 	}
