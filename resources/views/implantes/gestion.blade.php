@@ -153,7 +153,7 @@
 		store();
 		list();
 		update();
-		socket_referencia();
+		// socket_referencia();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "technical_reception");
@@ -161,16 +161,13 @@
 	$(document).on('keyup keypress', 'form input[type="text"]', function(e) {
 
 	});
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/implantes/technical/reception/edit', '#cuadro4', false, "#avatar-edit");
 	}
-
 	function store() {
 
 		enviarFormulario("#store", 'api/implantes/technical/reception', '#cuadro2');
 	}
-
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
@@ -236,7 +233,6 @@
 		desactivar("#table tbody", table)
 		eliminar("#table tbody", table)
 	}
-
 	function getProviders(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/providers',
@@ -261,11 +257,9 @@
 						selected: select_default == item.id ? true : false
 					}));
 				});
-
 			}
 		});
 	}
-
 	function ChangeProviders(select, edit = '') {
 		$(select).change(function(e) {
 			$.ajax({
@@ -279,21 +273,16 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
-
-
 					$(`#nit_provider${edit}`).val(data.name);
 					$(`#address_provider${edit}`).val(data.address);
 					$(`#phone_provider${edit}`).val(data.phone);
 					$(`#email_provider${edit}`).val(data.email);
-
 					enfocar();
-
 				}
 			});
 
 		});
 	}
-
 	function enfocar() {
 		try {
 			setTimeout(() => {
@@ -303,7 +292,6 @@
 			console.log(e);
 		}
 	}
-
 	function getProducts(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/products',
@@ -348,26 +336,6 @@
 		});
 	}
 	let contador = 0
-
-	function socket_referencia() {
-		var socket = io.connect("http://31.220.60.218:5026");
-		socket.on('askForUserId', () => {
-			console.log(socket);
-		});
-		socket.emit('userIdReceived', 'Pc');
-		socket.on('sendSerial', (data) => {
-			console.log('serial', data);
-			$('#table_products_imp tbody tr').each(function() {
-				if ($(this).find(".serial").val() == '') {
-					$(this).find(".serial").val(data);
-				}
-			});
-		});
-		// socket.on('sendReference', (data) => {
-
-		// });
-	}
-
 	function referencia(data) {
 		try {
 			$.ajax({
@@ -383,16 +351,6 @@
 							valid = true;
 						}
 					});
-					$("#serial").change(function() {
-						$(".serial").val($(".serial").val().substr(2))
-					});
-
-					// $('#table_products_imp tbody tr').each(function() {
-					// 	if ($(this).find(".serial").val() == data) {
-					// 		valid = true;
-					// 		warning('¡El serial ya ha sido agregado !');
-					// 	}
-					// });
 					contador++
 					var html = "";
 					$('#table_products_imp tbody').empty();
@@ -409,15 +367,21 @@
 						html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
+						
 					} else {
 						warning('¡El serial no puede estar vacio!');
 					}
 					$("#table_products_imp" + " tbody").append(html)
 					$("#serial_" + contador + "").focus()
+
 					$(".monto_formato_decimales").change(function() {
 						if ($(this).val() != "") {
 							$(this).val(number_format($(this).val(), 2));
 						}
+					});
+					$(".serial").change(function() {
+						var sere = $(".serial").val().substr(2)
+					    $(".serial").val(sere)
 					});
 				}
 			});
@@ -425,7 +389,6 @@
 			console.log(e);
 		}
 	}
-
 	function AddProductosEdit(data) {
 		let contador = 0
 		$.ajax({
@@ -547,7 +510,6 @@
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}
-
 	function ShowProdcuts(table, data) {
 		let html = ""
 		$.map(data.detalle, function(item, key) {
@@ -595,7 +557,6 @@
 			statusConfirmacion('api/technical/reception/implante/delete/' + data.id + "", "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
-
 	function calcProduc(element, edit = '') {
 		var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
 		var qty = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product").val())
@@ -613,11 +574,9 @@
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
-
 	function deleteProduct(element) {
 		var tr = $(element).parent("td").parent("tr").children("td").find(".price_product").val()
 	}
-
 	function calcSubTotal(fields, edit = '') {
 		let subtotal = 0
 		$.map($(fields), function(item, key) {
@@ -628,7 +587,6 @@
 		$(`#subtotal_text${edit}`).text(`$ ${number_format(subtotal, 2)}`)
 		$(`#subtotal${edit}`).val(subtotal)
 	}
-
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
@@ -642,7 +600,6 @@
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat)
 	}
-
 	function calTotal(fields, edit = '') {
 		let total_invoice = 0
 		$.map($(fields), function(item, key) {
@@ -662,7 +619,6 @@
 	$(".discount_edit").keyup(function(e) {
 		calTotal(".total_product", '_edit')
 	});
-
 	function deleteProduct(element, edit = '') {
 		var tr = $(element).parent("td").parent("tr").remove()
 		calcSubTotal(".price_product", edit)
