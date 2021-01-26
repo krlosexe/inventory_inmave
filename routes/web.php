@@ -109,3 +109,15 @@ Route::get('implantes-clientes', function () {
     return view('implantes.clients.gestion');
 });
 
+Route::get('med-gel-technical-reception', function () {
+    return view('med-gel.recepcion_tecnica.gestion');
+});
+
+Route::get('med-gel-reemisiones', function () {
+    return view('med-gel.reemisiones.gestion');
+});
+
+Route::get('med-gel-output', function () {
+    return view('med-gel.output.gestion');
+});
+

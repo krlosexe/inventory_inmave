@@ -12,10 +12,10 @@ class TechnicalReceptionImplantesController extends Controller
 {
     public function CreateTechnicalReceptionImplante(Request $request)
     {
-        
-        // dd($request->all());
+        dd($request->all());
         try {
             $tri = new TechnicalReceptionImplante;
+            $tri->warehouse   = $request->warehouse;
             $tri->id_provider = $request->id_provider;
             $tri->id_user = $request->id_user;
             $tri->estatus = "Disponible";

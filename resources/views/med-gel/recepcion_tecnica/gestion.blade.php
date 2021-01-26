@@ -72,9 +72,8 @@
 						</div>
 					</div>
 				</div>
-				@include('implantes.store')
-				@include('implantes.view')
-				@include('implantes.edit')
+				@include('med-gel.recepcion_tecnica.store')
+				@include('med-gel.recepcion_tecnica.edit')
 			</div>
 			<!-- /.container-fluid -->
 		</div>
@@ -153,8 +152,8 @@
 		store();
 		list();
 		update();
-		$("#collapse_Implantes").addClass("show");
-		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
+		$("#collapse_medgel").addClass("show");
+		$("#nav_technical_reception, #modulo_medgel").addClass("active");
 		verifyPersmisos(id_user, tokens, "technical_reception");
 	});
 	$(document).on('keyup keypress', 'form input[type="text"]', function(e) {
