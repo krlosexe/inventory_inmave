@@ -238,6 +238,12 @@
 			$("#gramaje_edit").val(data.gramaje)
 			$("#edit_perfil").val(data.perfil)
 			$("#id_edit").val(data.id)
+
+			$("#referencia").focus();		
+			$("#referencia_edit" ).change(function() {
+				var str = $("#referencia_edit").val().substr(2)
+				$("#referencia_edit").val(str.replace("'","-"))
+				});
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}

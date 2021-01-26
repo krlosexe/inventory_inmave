@@ -205,13 +205,14 @@
 		$("#store")[0].reset();
 		GetCategories("#category")
 		cuadros("#cuadro1", "#cuadro2");
-		$("#referencia").focus();		
+		$("#referencia").focus();
+
 		$("#referencia" ).change(function() {
 			var str = $("#referencia").val().substr(2)
 		    $("#referencia").val(str.replace("'","-"))
 			});
 
-			$("#lote").change(function() {
+		$("#lote").change(function() {
 			var lt = $("#lote").val().substr(2)
 		    $("#lote").val(lt)
 			});
@@ -248,6 +249,17 @@
 			$("#qty_edit").val(data.qty)
 			$("#date_expire_edit").val(data.date_expire)
 			$("#id_edit").val(data.id)
+
+			$("#referencia_edit").focus();
+			$("#referencia_edit").change(function() {
+			var str = $("#referencia_edit").val()
+		    $("#referencia_edit").val(str.replace("'","-"))
+			});
+
+			$("#lote_edit").change(function() {
+				var lt = $("#lote_edit").val().substr(2)
+				$("#lote_edit").val(lt)
+				});
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}

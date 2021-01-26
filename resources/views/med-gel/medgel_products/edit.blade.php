@@ -18,7 +18,7 @@
                 <div class="col-md-3">
                   <label for=""><b>Lote</b></label>
                     <div class="form-group valid-required">
-                      <input type="text" name="referencia" class="form-control form-control-user" id="lote_edit" required>
+                      <input type="text" name="lote" class="form-control form-control-user" id="lote_edit" required>
                     </div>
                 </div>
               </div>
