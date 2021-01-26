@@ -125,9 +125,8 @@
 				store();
 				list();
 				update();
-
 				$("#collapse_medgel").addClass("show");
-				$("#nav_technical_reception, #modulo_medgel").addClass("active");
+				$("#nav_medgel, #modulo_medgel").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "output");
 
@@ -135,17 +134,13 @@
 				if(url[0] == "output"){
 					$("#add_remision_invoice").css("display", "none");
 				}
-
 			});
-
 			function update(){
 				enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
 			}
-
 			function store(){
 				enviarFormulario("#store", 'api/products/entry/output', '#cuadro2');
 			}
-
 			function list(cuadro) {
 
 				var data = {
@@ -194,8 +189,6 @@
 								}else{
 									return "Factura";
 								}
-
-
 							}
 						},
 						{"data":"name_client"},
@@ -218,8 +211,6 @@
 						'copy', 'csv', 'excel', 'pdf', 'print'
 					]
 				});
-
-
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
@@ -233,20 +224,13 @@
 
 				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
-
-
-
 				$("#xls").click(function (e) {
 					url = $("#view_xls").attr("href");
 
 					console.log(url)
 					window.open(url, '_blank');
 				});
-
-
 			}
-
-
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();

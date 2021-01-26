@@ -128,5 +128,12 @@ Route::get('products/implantes/list', 'ProductImplanteController@ListProductImpl
 Route::put('products/implantes/edit/{id}', 'ProductImplanteController@EditProductImplante');
 Route::get('products/implantes/delete/{id}', 'ProductImplanteController@DeleteProductImplante');
 Route::get('implantes/entry/output', 'ImplantesController@listImplantOutput');
+
 Route::get('implantes/search/{code}', 'ImplantesController@searchSerial');
+
+
+Route::post('products/medgel/create', 'MedgelProductsControler@CreateProductMedgel');
+Route::get('products/medgel/list', 'MedgelProductsControler@ListProductMedgel');
+Route::put('products/medgel/edit/{id}', 'MedgelProductsControler@EditProductMedgel');
+Route::get('products/medgel/delete/{id}', 'MedgelProductsControler@DeleteProductMedgel');
 

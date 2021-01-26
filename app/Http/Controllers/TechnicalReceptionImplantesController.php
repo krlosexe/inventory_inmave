@@ -12,7 +12,6 @@ class TechnicalReceptionImplantesController extends Controller
 {
     public function CreateTechnicalReceptionImplante(Request $request)
     {
-        dd($request->all());
         try {
             $tri = new TechnicalReceptionImplante;
             $tri->warehouse   = $request->warehouse;

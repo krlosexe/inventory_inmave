@@ -109,6 +109,10 @@ Route::get('implantes-clientes', function () {
     return view('implantes.clients.gestion');
 });
 
+Route::get('med-gel-products', function () {
+    return view('med-gel.medgel_products.gestion');
+});
+
 Route::get('med-gel-technical-reception', function () {
     return view('med-gel.recepcion_tecnica.gestion');
 });
