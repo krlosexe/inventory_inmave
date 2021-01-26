@@ -201,6 +201,12 @@
 		$("#store")[0].reset();
 		GetCategories("#category")
 		cuadros("#cuadro1", "#cuadro2");
+		$("#referencia").focus();		
+		$("#referencia" ).change(function() {
+			var str = $("#referencia").val().substr(2)
+		    $("#referencia").val(str.replace("'","-"))
+			});
+		
 	}
 	/* ------------------------------------------------------------------------------- */
 	/* 

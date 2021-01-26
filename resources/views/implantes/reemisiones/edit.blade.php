@@ -8,6 +8,15 @@
             <input type="hidden" name="_method" value="put">
             <div class="row">
                 <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for=""><b>Implante(s)</b></label>
+                        <div class="form-group valid-required">
+                            <!-- <select name="products" class="form-control select2" id="products_edit"></select> -->
+                            <input type="text" maxlength="15" id="serial_edit" class="form-control form-control-user">
+                        </div>
+                    </div>
+                </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label for=""><b>Cliente</b></label>
@@ -35,13 +44,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for=""><b>Implante(s)</b></label>
-                            <div class="form-group valid-required">
-                                <!-- <select name="products" class="form-control select2" id="products_edit"></select> -->
-                                <input type="text" maxlength="15" id="serial" class="form-control form-control-user">
-                            </div>
-                        </div>
+                       
                         <!-- <div class="col-md-2">
                             <br>
                             <button type="button" class="btn btn-primary btn-user" id="add_product_edit">

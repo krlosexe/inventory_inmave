@@ -9,13 +9,16 @@
 		box-shadow: none;
 		text-align: center;
 	}
+
 	.kv-avatar {
 		display: inline-block;
 	}
+
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
+
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
@@ -150,15 +153,18 @@
 		store();
 		list();
 		update();
-		socket_referencia();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "technical_reception");
+	});
+	$(document).on('keyup keypress', 'form input[type="text"]', function(e) {
+
 	});
 	function update() {
 		enviarFormularioPut("#form-update", 'api/implantes/technical/reception/edit', '#cuadro4', false, "#avatar-edit");
 	}
 	function store() {
+
 		enviarFormulario("#store", 'api/implantes/technical/reception', '#cuadro2');
 	}
 	function list(cuadro) {
@@ -176,10 +182,6 @@
 			"ajax": {
 				"method": "GET",
 				"url": '' + url + '/api/technical/reception/implante',
-				//  "data": {
-				// 	"id_user": id_user,
-				// 	"token"  : tokens,
-				// },
 				"dataSrc": ""
 			},
 			"columns": [{
@@ -202,7 +204,6 @@
 						return row.proveedor.name
 					}
 				},
-				// {"data":"total_invoice"},
 				{
 					"data": "created_at"
 				},
@@ -236,8 +237,7 @@
 			},
 			dataType: 'JSON',
 			async: false,
-			error: function() {
-			},
+			error: function() {},
 			success: function(data) {
 				$(select + " option").remove();
 				$(select).append($('<option>', {
@@ -267,13 +267,24 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
-					$(`#nit_provider${edit}`).val(data.name)
-					$(`#address_provider${edit}`).val(data.address)
-					$(`#phone_provider${edit}`).val(data.phone)
-					$(`#email_provider${edit}`).val(data.email)
+					$(`#nit_provider${edit}`).val(data.name);
+					$(`#address_provider${edit}`).val(data.address);
+					$(`#phone_provider${edit}`).val(data.phone);
+					$(`#email_provider${edit}`).val(data.email);
+					enfocar();
 				}
 			});
+
 		});
+	}
+	function enfocar() {
+		try {
+			setTimeout(() => {
+				$("#referencia").focus();
+			}, 1000);
+		} catch (e) {
+			console.log(e);
+		}
 	}
 	function getProducts(select, select_default = false) {
 		$.ajax({
@@ -285,8 +296,7 @@
 			},
 			dataType: 'JSON',
 			async: false,
-			error: function() {
-			},
+			error: function() {},
 			success: function(data) {
 				$(select + " option").remove();
 				$(select).append($('<option>', {
@@ -320,21 +330,8 @@
 		});
 	}
 	let contador = 0
-	function socket_referencia() {
-		var socket = io.connect("http://31.220.60.218:5026");
-		socket.on('askForUserId', () => {
-			console.log(socket);
-		});
-		socket.emit('userIdReceived', 'Pc');
-		socket.on('sendSerial', (data) => {
-			console.log('serial', data);
-			$('#table_products_imp tbody tr').each(function() {
-				if ($(this).find(".serial").val() == '') {
-					$(this).find(".serial").val(data);
-				}
-			});
-		});
-		socket.on('sendReference', (data) => {
+	function referencia(data) {
+		try {
 			$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/implantes/search/' + data,
 				type: 'GET',
@@ -348,12 +345,6 @@
 							valid = true;
 						}
 					});
-					// $('#table_products_imp tbody tr').each(function() {
-					// 	if ($(this).find(".serial").val() == data) {
-					// 		valid = true;
-					// 		warning('¡El serial ya ha sido agregado !');
-					// 	}
-					// });
 					contador++
 					var html = "";
 					$('#table_products_imp tbody').empty();
@@ -370,88 +361,82 @@
 						html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
+
 					} else {
 						warning('¡El serial no puede estar vacio!');
 					}
 					$("#table_products_imp" + " tbody").append(html)
 					$("#serial_" + contador + "").focus()
+
 					$(".monto_formato_decimales").change(function() {
 						if ($(this).val() != "") {
 							$(this).val(number_format($(this).val(), 2));
 						}
 					});
+					$(".serial").change(function() {
+						var sere = $(".serial").val().substr(2)
+					    $(".serial").val(sere)
+					});
 				}
 			});
-		});
+		} catch (e) {
+			console.log(e);
+		}
 	}
-	function AddProductosEdit(btn, select_product, table) {
+	function AddProductosEdit(data) {
 		let contador = 0
-		function socket_referencia_edit() {
-			var socket = io.connect("http://31.220.60.218:5026");
-			socket.on('askForUserId', () => {
-				console.log(socket);
-			});
-			socket.emit('userIdReceived', 'Pc edit');
-			// socket.on('sendSerial', (data) => {
-			// 	console.log('serial', data);
-			// 	$('#table_products_edit tbody tr').each(function() {
-			// 		if ($(this).find(".serial").val() == '') {
-			// 			$(this).find(".serial").val(data);
-			// 		}
-			// 	});
-			// });
-			socket.on('sendReference', (data) => {
-				$.ajax({
-					url: '' + document.getElementById('ruta').value + '/api/implantes/search/' + data,
-					type: 'GET',
-					dataType: 'JSON',
-					async: false,
-					error: function() {},
-					success: function(data) {
-						var valid = false
-						$('#table_products_edit tbody tr').each(function() {
-							if ($(this).find(".serial").val() == '') {
-								valid = true;
-							}
-						});
-						// $('#table_products_edit tbody tr').each(function() {
-						// 	if ($(this).find(".serial").val() == data) {
-						// 		valid = true;
-						// 		warning('¡El serial ya ha sido agregado !');
-						// 	}
-						// });
-						contador++
-						var html = "";
-						console.log({data});
-						$('#table_products_edit tbody').empty();
-						if (!valid) {
-							html += "<tr>"
-							html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required></td>"
-							html += "<td><input type='text' class='serial form-control' name='serial[]' id='serial_" + contador + "'  required></td>"
-							html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
-							html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
-							html += "<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
-							html += "<td><input style='text-align: right;width: 142px;' type='number'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
-							html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
-							html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
-							html += "<td><input type='text' class='form-control' name='gramaje[]' value='" + data.gramaje + "' required></td>"
-							html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
-							html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-							html += "</tr>"
-						} else {
-							warning('¡El serial no puede estar vacio!');
-						}
-						$("#table_products_edit" + " tbody").append(html)
-						$("#serial_" + contador + "").focus()
-						$(".monto_formato_decimales").change(function() {
-							if ($(this).val() != "") {
-								$(this).val(number_format($(this).val(), 2));
-							}
-						});
+		$.ajax({
+			url: '' + document.getElementById('ruta').value + '/api/implantes/search/' + data,
+			type: 'GET',
+			dataType: 'JSON',
+			async: false,
+			error: function() {},
+			success: function(data) {
+				var valid = false
+				$('#table_products_edit tbody tr').each(function() {
+					if ($(this).find(".serial").val() == '') {
+						valid = true;
 					}
 				});
-			});
-		}
+				// $('#table_products_edit tbody tr').each(function() {
+				// 	if ($(this).find(".serial").val() == data) {
+				// 		valid = true;
+				// 		warning('¡El serial ya ha sido agregado !');
+				// 	}
+				// });
+				contador++
+				var html = "";
+				$('#table_products_edit tbody').empty();
+				if (!valid) {
+					html += "<tr>"
+					html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required></td>"
+					html += "<td><input type='text' class='serial form-control' name='serial[]' id='serial_" + contador + "'  required></td>"
+					html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
+					html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
+					html += "<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
+					html += "<td><input style='text-align: right;width: 142px;' type='number'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
+					html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
+					html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
+					html += "<td><input type='text' class='form-control' name='gramaje[]' value='" + data.gramaje + "' required></td>"
+					html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
+					html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+					html += "</tr>"
+				} else {
+					warning('¡El serial no puede estar vacio!');
+				}
+				$("#table_products_edit" + " tbody").append(html)
+				$("#serial_" + contador + "").focus()
+				$(".monto_formato_decimales").change(function() {
+					if ($(this).val() != "") {
+						$(this).val(number_format($(this).val(), 2));
+					}
+				});
+				$(".serial").change(function() {
+						var sere = $(".serial").val().substr(2)
+					    $(".serial").val(sere)
+					});
+			}
+		});
 	}
 	function nuevo() {
 		$("#alertas").css("display", "none");
@@ -459,11 +444,17 @@
 		$("#indicador_edit").val(0)
 		getProviders("#provider")
 		ChangeProviders("#provider")
-		// AddProductos("#add_product", "#products", "#table_products")
 		$('#table_products tbody').empty();
 		getProducts("#products")
 		GetCategories("#category")
 		cuadros("#cuadro1", "#cuadro2");
+		$("#referencia").focus();
+		$("#referencia").change(function() {
+			var str = $("#referencia").val().substr(2)
+			$("#referencia").val(str.replace("'", "-"));
+			var ref = $("#referencia").val();
+			referencia(ref);
+		});
 	}
 	/* ------------------------------------------------------------------------------- */
 	/* 
@@ -486,6 +477,13 @@
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
 			console.log('data', data);
+			$("#referencia_edit").focus();
+			$("#referencia_edit").change(function() {
+				var str = $("#referencia_edit").val().substr(2)
+				$("#referencia_edit").val(str.replace("'", "-"));
+				var ref = $("#referencia_edit").val();
+				AddProductosEdit(ref);
+			});
 			$("#indicador_edit").val(1)
 			getProviders("#provider_edit", data.id_provider)
 			ChangeProviders("#provider_edit", "_edit")
