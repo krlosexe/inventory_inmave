@@ -138,7 +138,9 @@
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
-				error: function() {},
+				error: function(data) {
+					alert(data.responseJSON.mensaje)
+				},
 				success: function(data) {
 					$("#table_products_out tbody").html("")
 					var html = "";

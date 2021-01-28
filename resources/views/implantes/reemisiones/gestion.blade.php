@@ -253,7 +253,9 @@
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
-				error: function() {},
+				error: function(data) {
+					alert(data.responseJSON.mensaje);
+				},
 				success: function(data) {
 					$("#table_products_rem tbody").html("")
 					var html = "";
@@ -345,8 +347,7 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-			console.log('ed',data);
-			$("#indicador_edit").val(1)
+			console.log('ed',data);			$("#indicador_edit").val(1)
 			
 			$("#serial_edit").focus();		
 			$("#serial_edit").change(function() {
