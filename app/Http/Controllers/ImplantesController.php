@@ -20,7 +20,11 @@ class ImplantesController extends Controller
     {
         try {
             $data = TechnicalReceptionProductoImplante::where('serial', $serial)->first();
-            return response()->json($data)->setStatusCode(200);
+            if($data){
+                return response()->json($data)->setStatusCode(200);
+            }else {
+            return ["mensaje" => "No Existe el serial $serial"];
+        }
         } catch (\Throwable $th) {
             return $th;
         }
@@ -235,14 +239,14 @@ class ImplantesController extends Controller
             return $data;
 
     }
-    public function searchSerial($serial)
+    public function searchSerial($ref)
     {
         try {
-            $data = ProductImplantes::where('referencia', $serial)->first();
+            $data = ProductImplantes::where('referencia', $ref)->first();
             if ($data) {
                 return response()->json($data)->setStatusCode(200);
             } else {
-                return ["mensaje" => "No Existe la referencia $serial "];
+                return ["mensaje" => "No Existe la referencia $ref "];
             }
         } catch (\Throwable $th) {
             return $th;
