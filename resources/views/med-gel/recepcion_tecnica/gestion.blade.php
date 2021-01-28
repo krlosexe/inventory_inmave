@@ -160,11 +160,11 @@
 
 	});
 	function update() {
-		enviarFormularioPut("#form-update", 'api/implantes/technical/reception/edit', '#cuadro4', false, "#avatar-edit");
+		enviarFormularioPut("#form-update", 'api/medgel/technical/reception/edit', '#cuadro4', false, "#avatar-edit");
 	}
 	function store() {
 
-		enviarFormulario("#store", 'api/implantes/technical/reception', '#cuadro2');
+		enviarFormulario("#store", 'api/medgel/technical/reception/create', '#cuadro2');
 	}
 	function list(cuadro) {
 		var data = {
@@ -180,7 +180,7 @@
 			"serverSide": false,
 			"ajax": {
 				"method": "GET",
-				"url": '' + url + '/api/technical/reception/implante',
+				"url": '' + url + '/api/medgel/technical/reception/list',
 				"dataSrc": ""
 			},
 			"columns": [{
@@ -328,36 +328,33 @@
 			}
 		});
 	}
-	let contador = 0
 	function referencia(data) {
 		try {
 			$.ajax({
-				url: '' + document.getElementById('ruta').value + '/api/implantes/search/' + data,
+				url: '' + document.getElementById('ruta').value + '/api/medgel/search/' + data,
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
 				error: function() {},
 				success: function(data) {
+					// console.log({data})
 					var valid = false
 					$('#table_products_imp tbody tr').each(function() {
-						if ($(this).find(".serial").val() == '') {
+						if ($(this).find(".referencia").val() == '') {
 							valid = true;
 						}
 					});
-					contador++
 					var html = "";
 					$('#table_products_imp tbody').empty();
 					if (!valid) {
 						html += "<tr>"
-						html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required></td>"
-						html += "<td><input type='text' class='serial form-control' name='serial[]' id='serial_" + contador + "'  required></td>"
-						html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
+						html += "<td><input type='text' class='form-control' class='referencia' name='referencia[]' value='" + data.referencia + "' required><input type='hidden' class='id_product' name='id_product[]' value='" + data.id + "' ></td>"
+						html += "<td><input type='text' class='lote form-control' name='lote[]'  required></td>"
 						html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
-						html += "<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
-						html += "<td><input style='text-align: right;width: 142px;' type='number'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
+						html += "<td><input type='date' class='form-control' name='date_expiration' value='" + data.date_expire + "' required></td>"
+						html += "<td><input style='text-align: right;width: 142px;' type='number' min='1'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
 						html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
-						html += "<td><input type='text' class='form-control' name='gramaje[]' value='" + data.gramaje + "' required></td>"
-						html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
+						html += "<td><input type='number' class='form-control' name='qty[]' value='1' min='1' required></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
 
@@ -365,16 +362,15 @@
 						warning('¡El serial no puede estar vacio!');
 					}
 					$("#table_products_imp" + " tbody").append(html)
-					$("#serial_" + contador + "").focus()
-
+					$(".lote").focus();
 					$(".monto_formato_decimales").change(function() {
 						if ($(this).val() != "") {
 							$(this).val(number_format($(this).val(), 2));
 						}
 					});
-					$(".serial").change(function() {
-						var sere = $(".serial").val().substr(2)
-					    $(".serial").val(sere)
+					$(".lote").change(function() {
+						var sere = $(".lote").val().substr(2)
+					    $(".lote").val(sere)
 					});
 				}
 			});
@@ -385,7 +381,7 @@
 	function AddProductosEdit(data) {
 		let contador = 0
 		$.ajax({
-			url: '' + document.getElementById('ruta').value + '/api/implantes/search/' + data,
+			url: '' + document.getElementById('ruta').value + '/api/medgel/search/' + data,
 			type: 'GET',
 			dataType: 'JSON',
 			async: false,
@@ -475,7 +471,7 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-			console.log('data', data);
+			
 			$("#referencia_edit").focus();
 			$("#referencia_edit").change(function() {
 				var str = $("#referencia_edit").val().substr(2)
@@ -500,7 +496,7 @@
 			$("#observations_edit").val(data.observations)
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			$('#table_products tbody').empty();
-			AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
+			// AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
 			GetCategories("#category")
 			cuadros('#cuadro1', '#cuadro4');
 			$("#id_edit").val(data.id)
@@ -509,21 +505,18 @@
 	}
 	function ShowProdcuts(table, data) {
 		let html = ""
-		$.map(data.detalle, function(item, key) {
+	
 			html += "<tr>"
-			html += "<td><input type='text' class='form-control' name='serial[]'  value='" + item.referencia + "'  required></td>"
-			html += "<td><input type='text' class='form-control' name='serial[]'  value='" + item.serial + "'  required></td>"
-			html += "<td><input type='text' class='form-control' name='lotes[]'  value='" + item.lote + "'  required></td>"
-			html += "<td><input type='text' class='form-control' name='register_invima[]'  value='" + item.register_invima + "' required></td>"
-			html += "<td><input type='date' class='form-control' name='date_expiration[]'  value='" + item.date_expiration + "' required></td>"
-			html += "<td><input style='text-align: right;width: 142px;' type='text'  class='form-control monto_formato_decimales price_product items_calc' onkeyup='calcProduc(this)' name='price[]' value='" + number_format(item.price, 2) + "' required></td>"
-			html += "<td><input type='text' class='form-control' name='description[]'  value='" + item.description + "' readonly></td>"
-			html += "<td><input type='text' class='form-control' name='gramaje[]'  value='" + item.gramaje + "' required></td>"
-			html += "<td><input type='text' class='form-control' name='perfil[]'  value='" + item.perfil + "' required></td>"
-			//html +="<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='"+number_format(item.total, 2)+"'  name='total[]' readonly required></td>"
+			html += "<td><input type='text' class='form-control' class='referencia' name='referencia[]' value='" + data.product.referencia + "' required><input type='hidden' class='id_product' name='id_product[]' value='" + data.product.id + "' ></td>"
+			html += "<td><input type='text' class='lote form-control' name='lote[]' value='"+data.detalle.lote +"'  required></td>"
+			html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.product.register_invima + "' required></td>"
+			html += "<td><input type='date' class='form-control' name='date_expiration' value='" + data.date_expiration + "' required></td>"
+			html += "<td><input style='text-align: right;width: 142px;' type='number' min='1' value='" + data.detalle.price + "'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
+			html += "<td><input type='text' class='form-control' name='description[]' value='" + data.product.description + "' readonly></td>"
+			html += "<td><input type='number' class='form-control' name='qty[]' value='" + data.detalle.qty + "' min='1' required></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
-		});
+
 		$(table + " tbody").html(html)
 	}
 	/* ------------------------------------------------------------------------------- */

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MedgelProduct;
 
-class MedgelProductsControler extends Controller
+class MedgelProductsController extends Controller
 {
     public function ListProductMedgel()
     {

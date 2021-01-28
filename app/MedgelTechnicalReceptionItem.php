@@ -8,5 +8,5 @@ class MedgelTechnicalReceptionItem extends Model
 {
     protected $table="medgel_technical_reception_items";
     protected $guarded = [];
-    public    $timestamps = true;
+    public    $timestamps = false;
 }

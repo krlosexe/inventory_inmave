@@ -132,8 +132,19 @@ Route::get('implantes/entry/output', 'ImplantesController@listImplantOutput');
 Route::get('implantes/search/{code}', 'ImplantesController@searchSerial');
 
 
-Route::post('products/medgel/create', 'MedgelProductsControler@CreateProductMedgel');
-Route::get('products/medgel/list', 'MedgelProductsControler@ListProductMedgel');
-Route::put('products/medgel/edit/{id}', 'MedgelProductsControler@EditProductMedgel');
-Route::get('products/medgel/delete/{id}', 'MedgelProductsControler@DeleteProductMedgel');
+Route::post('products/medgel/create', 'MedgelProductsController@CreateProductMedgel');
+Route::get('products/medgel/list', 'MedgelProductsController@ListProductMedgel');
+Route::put('products/medgel/edit/{id}', 'MedgelProductsController@EditProductMedgel');
+Route::get('products/medgel/delete/{id}', 'MedgelProductsController@DeleteProductMedgel');
+
+Route::post('medgel/technical/reception/create', 'TechnicalReceptionMedgelController@CreateTechnicalReceptionMedgel');
+Route::put('medgel/technical/reception/edit/{id}', 'TechnicalReceptionMedgelController@EditarTechnicalReceptionMedgel');
+Route::get('medgel/technical/reception/list', 'TechnicalReceptionMedgelController@ListTechnicalReceptionMedgel');
+Route::get('medgel/technical/reception/delete/{id}', 'TechnicalReceptionMedgelController@DeleteTechnicalReceptionMedgel');
+Route::get('medgel/search/{code}', 'TechnicalReceptionMedgelController@searchReferencia');
+
+Route::post('medgel/reemisiones/create', 'MedgelRemisionesController@CreateMedgelRemision');
+Route::get('medgel/reemisiones/list', 'MedgelRemisionesController@ListMedgelRemision');
+Route::put('medgel/reemisiones/update/{id}', 'MedgelRemisionesController@UpdateMedgelRemision');
+Route::get('medgel/get/lote/{id}', 'MedgelRemisionesController@GetExistenceMedgel');
 

@@ -12,6 +12,7 @@ class TechnicalReceptionImplante extends Model
 
     public function detalle(){
         return $this->hasMany(TechnicalReceptionProductoImplante::class,'id_technical_reception_implante');
+                                   
     }
 
     public function proveedor(){

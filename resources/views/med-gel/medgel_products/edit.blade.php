@@ -15,12 +15,6 @@
                       <input type="text" name="referencia" class="form-control form-control-user" id="referencia_edit" required>
                     </div>
                 </div>
-                <div class="col-md-3">
-                  <label for=""><b>Lote</b></label>
-                    <div class="form-group valid-required">
-                      <input type="text" name="lote" class="form-control form-control-user" id="lote_edit" required>
-                    </div>
-                </div>
               </div>
                 <div class="row">
                     <div class="col-md-3">
@@ -39,12 +33,6 @@
                             <label for=""><b>Fecha Expiración</b></label>
                             <div class="form-group valid-required">
                                 <input type="date" name="date_expire" class="form-control form-control-user" id="date_expire_edit">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label for=""><b>Cantidad</b></label>
-                            <div class="form-group valid-required">
-                                <input type="number" name="qty" min="1" value="1" class="form-control form-control-user" id="qty_edit">
                             </div>
                         </div>
                 </div>

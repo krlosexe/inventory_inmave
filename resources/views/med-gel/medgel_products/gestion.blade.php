@@ -67,10 +67,8 @@
 									<tr>
 										<th>Acciones</th>
 										<th>Referencia</th>
-										<th>Lote</th>
 										<th>Descripcion</th>
 										<th>Registro Inmave</th>
-										<th>Cantidad</th>
 										<th>Fecha Expiración</th>
 										<th>Registrado por</th>
 										<th>Fecha Registro</th>
@@ -162,16 +160,10 @@
 					"data": "referencia"
 				},
 				{
-					"data": "lote"
-				},
-				{
 					"data": "description"
 				},
 				{
 					"data": "register_invima"
-				},
-				{
-					"data": "qty"
 				},
 				{
 					"data": "date_expire"

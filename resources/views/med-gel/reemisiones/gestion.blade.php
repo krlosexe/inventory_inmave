@@ -100,16 +100,15 @@
 		store();
 		list();
 		update();
-		socket_referencia();
 		$("#collapse_medgel").addClass("show");
 		$("#nav_technical_reception, #modulo_medgel").addClass("active");
 		verifyPersmisos(id_user, tokens, "reemisiones");
 	});
 	function update() {
-		enviarFormularioPut("#form-update", 'api/reemisiones/implantes/update', '#cuadro4', false, "#avatar-edit");
+		enviarFormularioPut("#form-update", 'api/medgel/reemisiones/update', '#cuadro4', false, "#avatar-edit");
 	}
 	function store() {
-		enviarFormulario("#store", 'api/reemisiones/implantes/create', '#cuadro2');
+		enviarFormulario("#store", 'api/medgel/reemisiones/create', '#cuadro2');
 	}
 	function list(cuadro) {
 		var data = {
@@ -125,11 +124,7 @@
 			"serverSide": false,
 			"ajax": {
 				"method": "GET",
-				"url": '' + url + '/api/reemisiones/implantes/list',
-				"data": {
-					"id_user": id_user,
-					"token": tokens,
-				},
+				"url": '' + url + '/api/medgel/reemisiones/list',
 				"dataSrc": ""
 			},
 			"columns": [
@@ -222,34 +217,18 @@
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
 
-		$("#serial").focus();		
-		$("#serial").change(function() {
-			$("#serial").val($("#serial").val().substr(2))
-			serial($("#serial").val());
+		$("#lote").focus();
+		$("#lote").change(function() {
+			var str = $("#lote").val().substr(2)
+			$("#lote").val(str.replace("'", "-"));
+			var ref = $("#lote").val();
+			serial(ref);
 		});
-	}
-	function socket_referencia() {
-		var socket = io.connect("http://31.220.60.218:5026");
-		socket.on('askForUserId', () => {
-			console.log(socket);
-		});
-		socket.emit('userIdReceived', 'Pc');
-		socket.on('sendSerial', (data) => {
-			console.log('crear', data);
-			$('#table_products_rem tbody tr').each(function() {
-				if ($(this).find(".serial").val() == '') {
-					$(this).find(".serial").val(data);
-				}
-			});
-		});
-		// socket.on('sendReference', (data) => {
-			
-		// });
 	}
 
 	function serial(data){
 		$.ajax({
-				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
+				url: '' + document.getElementById('ruta').value + '/api/medgel/get/lote/' + data,
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
@@ -264,8 +243,11 @@
 						}
 					});
 					if (!validaProduct) {
+
+						console.log('llego',data);
+						
 						html += "<tr>"
-						html += "<td>" + data.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.referencia + "' > </td>"
+						html += "<td>" + data.product.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.product.referencia + "' > </td>"
 						html += "<td>" + data.serial + " <input type='hidden'  class='serial' name='serial[]' value='" + data.serial + "' > </td>"
 						// html +="<td>"+1+" <input type='hidden' class='id_product'  value='1' > </td>"
 						html += "<td>" + 1 + " <input type='hidden' class='id_product'  value='1' > </td>"
