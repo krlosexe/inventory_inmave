@@ -234,6 +234,9 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
+					
+					console.log(data);
+
 					$("#table_products_rem tbody").html("")
 					var html = "";
 					var validaProduct = false

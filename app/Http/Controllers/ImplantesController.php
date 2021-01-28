@@ -238,11 +238,11 @@ class ImplantesController extends Controller
     public function searchSerial($serial)
     {
         try {
-            $data = ProductImplantes::where('referencia', $serial)->first();
+            $data = ProductImplantes::where('serial', $serial)->first();
             if ($data) {
                 return response()->json($data)->setStatusCode(200);
             } else {
-                return ["mensaje" => "No Existe la referencia $serial "];
+                return ["mensaje" => "No Existe la serial $serial "];
             }
         } catch (\Throwable $th) {
             return $th;
