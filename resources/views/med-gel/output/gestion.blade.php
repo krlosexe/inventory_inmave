@@ -1,8 +1,5 @@
 @extends('layouts.app')
-
-
 @section('CustomCss')
-
 <style>
 	.kv-avatar .krajee-default.file-preview-frame,
 	.kv-avatar .krajee-default.file-preview-frame:hover {
@@ -28,36 +25,23 @@
 		font-weight: normal;
 	}
 </style>
-
-
 @endsection
-
-
 @section('content')
 <!-- Page Wrapper -->
 <div id="wrapper">
-
 	@include('layouts.sidebar')
-
 	<!-- Content Wrapper -->
 	<div id="content-wrapper" class="d-flex flex-column">
-
 		<!-- Main Content -->
 		<div id="content">
-
 			@include('layouts.topBar')
-
-
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
-
 				<!-- Page Heading -->
 				<h1 class="h3 mb-2 text-gray-800">Salida de Productos MedGel</h1>
-
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
 				<input type="hidden" class="token">
-
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
@@ -97,10 +81,8 @@
 				@include('med-gel.output.edit')
 			</div>
 			<!-- /.container-fluid -->
-
 		</div>
 		<!-- End of Main Content -->
-
 		<!-- Footer -->
 		<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
@@ -110,20 +92,13 @@
 			</div>
 		</footer>
 		<!-- End of Footer -->
-
 	</div>
 	<!-- End of Content Wrapper -->
-
 </div>
 <input type="hidden" id="ruta" value="<?= url('/') ?>">
-
 <input type="hidden" id="indicador_edit">
-
 @endsection
-
-
 @section('CustomJs')
-
 <script>
 	$(document).ready(function() {
 		store();
@@ -139,17 +114,13 @@
 			$("#add_remision_invoice").css("display", "none");
 		}
 	});
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
 	}
-
 	function store() {
 		enviarFormulario("#store", 'api/products/entry/output', '#cuadro2');
 	}
-
 	function list(cuadro) {
-
 		var data = {
 			"id_user": id_user,
 			"token": tokens,
@@ -250,7 +221,6 @@
 			window.open(url, '_blank');
 		});
 	}
-
 	function nuevo() {
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
@@ -260,7 +230,6 @@
 		getClients("#clients")
 
 		$("#indicador_edit").val(0)
-
 
 		cuadros("#cuadro1", "#cuadro2");
 
@@ -272,7 +241,6 @@
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
 
-
 		$('#subtotal_text_edit').empty(0)
 		$('#vat_total_text_edit').empty(0)
 		$('#discount_total_text_edit').empty(0)
@@ -281,15 +249,7 @@
 
 		$('#table_products_edit tbody').html('')
 
-
-
-
 	}
-
-
-
-
-
 	/* ------------------------------------------------------------------------------- */
 	/*
 		Funcion que muestra el cuadro3 para la consulta del banco.
@@ -301,17 +261,13 @@
 
 			$("#warehouse_view").val(data.warehouse).trigger("change").attr("disabled", "disabled")
 
-
 			getClients("#clients_view", data.id_client)
-
-
 
 			if (data.discount_total > 0) {
 				$("#apply_discount_view").prop("checked", true)
 			} else {
 				$("#apply_discount_view").prop("checked", false)
 			}
-
 
 			$("#subtotal_text_view").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_view").val(data.subtotal)
@@ -327,17 +283,12 @@
 			$("#total_invoice_text_view").text(`$ ${number_format(data.total_invoice, 2)}`)
 			$("#total_invoice_view").val(data.total_invoice)
 
-
 			$("#observations_view").val(data.observations)
-
 
 			ShowProdcuts("#table_products_view", data.products)
 			cuadros('#cuadro1', '#cuadro3');
 		});
 	}
-
-
-
 	/* ------------------------------------------------------------------------------- */
 	/*
 		Funcion que muestra el cuadro3 para la consulta del banco.
@@ -346,8 +297,6 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-
-
 
 			$("#indicador_edit").val(1)
 
@@ -360,18 +309,15 @@
 			ShowProdcuts("#table_products_edit", data.products)
 			AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
 
-
 			if (data.discount_total > 0) {
 				$("#apply_discount_edit").prop("checked", true)
 			} else {
 				$("#apply_discount_edit").prop("checked", false)
 			}
 
-
 			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.subtotal)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
-
 
 			$("#vat_total_text_edit").text(`$ ${number_format(data.vat_total, 2)}`)
 			$("#vat_total_edit").val(data.vat_total)
@@ -382,10 +328,7 @@
 			$("#total_invoice_text_edit").text(`$ ${number_format(data.total_invoice, 2)}`)
 			$("#total_invoice_edit").val(data.total_invoice)
 
-
 			$("#observations_edit").val(data.observations)
-
-
 			$('#table_products tbody').empty();
 
 			$('#subtotal_text').empty(0)
@@ -398,17 +341,11 @@
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}
-
-
-
-
 	$("#print").click(function(e) {
 
 		window.open(`api/invoice/print/${$("#id_edit").val()}`, "_blank");
 
 	});
-
-
 	/* ------------------------------------------------------------------------------- */
 	/*
 		Funcion que capta y envia los datos a desactivar
@@ -432,17 +369,12 @@
 		});
 	}
 	/* ------------------------------------------------------------------------------- */
-
-
-
 	function eliminar(tbody, table) {
 		$(tbody).on("click", "span.eliminar", function() {
 			var data = table.row($(this).parents("tr")).data();
 			statusConfirmacion('api/products/entry/output/status/' + data.id + "/" + 0, "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
-
-
 	function ProductsGetExistence(warehouse, product, table) {
 		$(warehouse).unbind().change(function(e) {
 
@@ -470,18 +402,11 @@
 					}));
 
 					$.each(data, function(i, item) {
-
-
 						$(product).append($('<option>', {
 							value: `${item.id_product}|${item.total}|${item.price_cop}|${item.price_distributor_x_caja}|${item.price_distributor_x_vial}|${item.price_cliente_x_caja}|${item.price_cliente_x_vial}|${item.presentation}`,
 							text: item.description,
-
 						}));
-
-
 					});
-
-
 					$(product).select2({
 						width: "100%",
 						sorter: function(data) {
@@ -505,14 +430,6 @@
 
 		});
 	}
-
-
-
-
-
-
-
-
 	function getProducts(select, select_default = false) {
 
 		$.ajax({
@@ -533,21 +450,13 @@
 					value: "",
 					text: "- Seleccione"
 				}));
-
 				$.each(data, function(i, item) {
-
-
 					$(select).append($('<option>', {
 						value: item.id,
 						text: item.description,
 						selected: select_default == item.id ? true : false
-
 					}));
-
-
 				});
-
-
 				$(select).select2({
 					width: "100%",
 					sorter: function(data) {
@@ -564,20 +473,11 @@
 						});
 					}
 				});
-
 			}
-
 		});
 	}
-
-
-
-
 	function AddProductos(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
-
-
-
 			const array_product = $(select_product).val().split("|")
 			const id_product = array_product[0]
 			const total = array_product[1]
@@ -588,16 +488,13 @@
 			const price_cliente_x_vial = array_product[6]
 			const presentation = array_product[7]
 			const description = $(`${select_product} option:selected`).text()
-
 			var html
-
 			var validaProduct = false
 			$(table + " tbody tr").each(function() {
 				if (id_product == $(this).find(".id_product").val()) {
 					validaProduct = false;
 				}
 			});
-
 			if (!validaProduct) {
 				html += "<tr>"
 				html += "<td>" + description + " <input type='hidden' class='id_product' name='id_product[]' value='" + id_product + "' > </td>"
@@ -622,24 +519,12 @@
 			} else {
 				warning('¡La opción seleccionada ya se encuentra agregada!');
 			}
-
-
-
 			$(table + " tbody").append(html)
 
 		});
 	}
-
-
-
-
-
-
 	function AddProductosEdit(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
-
-
-
 			const array_product = $(select_product).val().split("|")
 			const id_product = array_product[0]
 			const total = array_product[1]
@@ -684,17 +569,10 @@
 			} else {
 				warning('¡La opción seleccionada ya se encuentra agregada!');
 			}
-
-
-
 			$(table + " tbody").append(html)
 
 		});
 	}
-
-
-
-
 	function ShowProdcuts(table, data) {
 
 		console.log(data)
@@ -704,8 +582,6 @@
 			html += "<tr>"
 			html += "<td>" + item.description + " <input type='hidden' class='id_product' name='id_product[]' value='" + item.id_product + "' > </td>"
 			html += "<td>" + item.presentation + "</td>"
-
-
 			html += "<td>"
 			html += "<select class='form-control items_calc price_product' id='price_edit_" + item.id + "' name='price[]' onchange='calcProduc(this, " + '"_edit"' + ")' required>"
 			html += "<option value=''>Seleccione el precio</option>"
@@ -714,19 +590,12 @@
 			html += "<option value='" + item.price_cliente_x_caja + "'>Precio Cliente Final x Caja - " + number_format(item.price_cliente_x_caja, 2) + "</option>"
 			html += "<option value='" + item.price_cliente_x_vial + "'>Precio Cliente Final x Vial  - " + number_format(item.price_cliente_x_vial, 2) + "</option>"
 			html += "</select>"
-
 			html += "</td>"
 
-
-
 			//html +="<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales price_product items_calc' value='"+number_format(item.price, 2)+"'  onkeyup='calcProduc(this, "+'"_edit"'+")' name='price[]' required></td>"
-
-
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' onchange='calcProduc(this, " + '"_edit"' + ")' required><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
 
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.existence + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.existence + "' disabled></td>"
-
-
 			if (item.vat == 1) {
 				html += "<td><input type='checkbox' class='form-control vat_product items_calc'checked onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='" + item.vat + "'></td>"
 			} else {
@@ -736,25 +605,11 @@
 			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.total, 2) + "'  name='total[]' readonly required></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
-
-
 			$(table + " tbody").append(html)
 			$("#price_edit_" + item.id).val(item.price)
 
 		});
-
-
-
-
-
-
-
-
 	}
-
-
-
-
 	function deleteProduct(element, edit = '') {
 		var tr = $(element).parent("td").parent("tr").remove()
 
@@ -762,14 +617,6 @@
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
-
-
-
-
-
-
-
-
 	function getClients(select, select_default = false) {
 
 		$.ajax({
@@ -809,7 +656,6 @@
 					}));
 				});
 
-
 				$(select).select2({
 					width: "100%",
 					sorter: function(data) {
@@ -826,20 +672,9 @@
 						});
 					}
 				});
-
 			}
-
 		});
 	}
-
-
-
-
-
-
-
-
-
 	function calcProduc(element, edit = '') {
 
 		var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
@@ -849,7 +684,6 @@
 		var existence = $(element).parent("td").parent("tr").children("td").find(".existence")
 		var existence_hidden = $(element).parent("td").parent("tr").children("td").find(".existence_hidden")
 
-
 		if (edit != '') {
 			var qty_hidden = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product_hidden").val())
 			existence.val((existence_hidden.val() - qty) + qty_hidden)
@@ -858,8 +692,6 @@
 			existence.val(existence_hidden.val() - qty)
 
 		}
-
-
 		let total
 		if (vat.is(':checked')) {
 			total = ((price * qty) * 1.19)
@@ -876,13 +708,7 @@
 		calcSubTotal(".price_product", edit)
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
-
-
 	}
-
-
-
-
 	function calcSubTotal(fields, edit = '') {
 		let subtotal = 0
 		$.map($(fields), function(item, key) {
@@ -894,8 +720,6 @@
 		});
 
 		var discount_field = $(`#apply_discount${edit}`)
-
-
 		let discount_ammount
 		if (discount_field.is(':checked')) {
 
@@ -908,13 +732,7 @@
 			discount_ammount = 0
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 		}
-
-
-
-
 		var discount_field2 = $(`#apply_discount${edit}2`)
-
-
 		let discount_ammount2
 		if (discount_field2.is(':checked')) {
 
@@ -927,20 +745,11 @@
 			discount_ammount2 = 0
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 		}
-
-
-
-
-
-
 		$(`#discount_total${edit}`).val((parseFloat(discount_ammount) + parseFloat(discount_ammount2)))
 		$(`#discount_total_text${edit}`).text(`$ ${number_format((parseFloat(discount_ammount)  + parseFloat(discount_ammount2)), 2)}`)
 
 		$(`#subtotal_text${edit}`).text(`$ ${number_format(subtotal, 2)}`)
 		$(`#subtotal${edit}`).val(subtotal)
-
-
-
 		let sub_total_with_discount = subtotal - (parseFloat(discount_ammount) + parseFloat(discount_ammount2))
 
 		/*
@@ -955,9 +764,6 @@
 		$(`#subtotal_with_discount${edit}`).val(sub_total_with_discount)
 
 	}
-
-
-
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
@@ -972,23 +778,13 @@
 			}
 
 		});
-
-
-
 		const totalVat2 = (($(`#subtotal_with_discount${edit}`).val()) * 0.19)
-
-
 		console.log(($(`#subtotal_with_discount${edit}`).val()) * 0.19, "IVA")
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat2, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat2)
 	}
-
-
 	function calTotal(fields, edit = '') {
-
 		let total_invoice = 0
-
-
 		$.map($(fields), function(item, key) {
 
 			if ($(item).val() != "") {
@@ -996,30 +792,17 @@
 			}
 
 		});
-
-
 		const discount = inNum($(`#discount_total${edit}`).val())
-
-
-
 		const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
 		const rte_fuete = ($(`#subtotal_with_discount${edit}`).val() / 100) * percentage_rte_fuete
-
-
 		total_invoice = (($(`#subtotal_with_discount${edit}`).val()) * 1.19)
-
 		total_invoice = total_invoice - rte_fuete
-
-
 		$(`#rte_fuente_text${edit}`).text(`$ ${number_format(rte_fuete, 2)}`)
 		$(`#rte_fuente_total${edit}`).val(rte_fuete)
 
 		$(`#total_invoice_text${edit}`).text(`$ ${number_format(total_invoice, 2)}`)
 		$(`#total_invoice${edit}`).val(total_invoice)
-
 	}
-
-
 
 	$("#apply_discount").change(function(e) {
 		calcSubTotal(".price_product")
@@ -1027,16 +810,11 @@
 		calTotal(".total_product")
 	});
 
-
 	$("#apply_discount2").change(function(e) {
 		calcSubTotal(".price_product")
 		calcTotalVat(".vat_product")
 		calTotal(".total_product")
 	});
-
-
-
-
 
 	$("#apply_discount_edit").change(function(e) {
 		calcSubTotal(".price_product", '_edit')
@@ -1044,13 +822,11 @@
 		calTotal(".total_product", '_edit')
 	});
 
-
 	$("#apply_discount_edit2").change(function(e) {
 		calcSubTotal(".price_product", '_edit')
 		calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-
 
 	$(".discount").keyup(function(e) {
 		calcSubTotal(".price_product")
@@ -1058,15 +834,10 @@
 		calTotal(".total_product")
 	});
 
-
 	$(".discount_edit").keyup(function(e) {
 		calcSubTotal(".price_product", '_edit')
 		calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
 </script>
-
-
-
-
 @endsection

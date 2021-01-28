@@ -18,7 +18,6 @@ class MedgelOutputController extends Controller
             ->orderBy("medgel_output.id", "DESC")
             ->with("items")
             ->get();
-        
             return $data;
 
     }
@@ -96,7 +95,6 @@ class MedgelOutputController extends Controller
                 $producs_items["vat"]           = $request["vat"][$key];
                 $producs_items["total"]         = str_replace(",", "", $request["total"][$key]);
                 MedgelOutputItems::create($producs_items);
-
             }
         }
         if ($update) {
