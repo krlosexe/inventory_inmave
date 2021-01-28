@@ -501,7 +501,7 @@
 			$("#observations_edit").val(data.observations)
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			$('#table_products tbody').empty();
-			AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
+			// AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
 			GetCategories("#category")
 			cuadros('#cuadro1', '#cuadro4');
 			$("#id_edit").val(data.id)
