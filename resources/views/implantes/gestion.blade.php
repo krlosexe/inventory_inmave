@@ -337,7 +337,9 @@
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
-				error: function() {},
+				error: function(data) {
+					alert(data.responseJSON.mensaje)
+				},
 				success: function(data) {
 					var valid = false
 					$('#table_products_imp tbody tr').each(function() {

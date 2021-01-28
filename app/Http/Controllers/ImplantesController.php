@@ -23,7 +23,9 @@ class ImplantesController extends Controller
             if($data){
                 return response()->json($data)->setStatusCode(200);
             }else {
-            return ["mensaje" => "No Existe el serial $serial"];
+            return response()->json(["mensaje" => "No Existe el serial $serial"])->setStatusCode(401); 
+            
+            
         }
         } catch (\Throwable $th) {
             return $th;
@@ -246,7 +248,7 @@ class ImplantesController extends Controller
             if ($data) {
                 return response()->json($data)->setStatusCode(200);
             } else {
-                return ["mensaje" => "No Existe la referencia $ref "];
+                return response()->json(["mensaje" => "No Existe la referencia $ref"])->setStatusCode(401); 
             }
         } catch (\Throwable $th) {
             return $th;
