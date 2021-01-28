@@ -10,7 +10,7 @@
                 <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for=""><b>Implante(s)</b></label>
+                        <label for=""><b>Serial</b></label>
                         <div class="form-group valid-required">
                             <!-- <select name="products" class="form-control select2" id="products_edit"></select> -->
                             <input type="text" maxlength="15" id="serial_edit" class="form-control form-control-user">
