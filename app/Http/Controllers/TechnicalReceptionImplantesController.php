@@ -60,9 +60,7 @@ class TechnicalReceptionImplantesController extends Controller
             $update->id_user = $request->id_user;
             $update->estatus = "Disponible";
             $update->save();
-
             TechnicalReceptionProductoImplante::where("id_technical_reception_implante", $technicalReception)->delete();
-    
             foreach($request["serial"] as $key => $serial){
     
                     $products = [];
@@ -88,16 +86,18 @@ class TechnicalReceptionImplantesController extends Controller
             return  $th;
         }
     }
-
     public function ListTechnicalReceptionImplante()
     {
         try {
-            $data = TechnicalReceptionImplante::with('detalle',function($query){
-                    $query->where('estatus','Disponible');
-            })
-            ->with('proveedor')
+            $data = TechnicalReceptionImplante::
+             with('proveedor')
             ->with('user')
             ->get();
+            $data->map(function($item){
+                $item->detalle = TechnicalReceptionProductoImplante::where(['estatus'=>'Disponible','id_technical_reception_implante' => $item->id])->get();
+              return $item;
+            });
+
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;

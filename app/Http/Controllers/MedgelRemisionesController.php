@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{MedgelTechnicalReceptionItem,MedgelTechnicalReception,MedgelReemision,MedgelProduct};
+use App\{MedgelTechnicalReception,MedgelReemision,MedgelProduct};
 
 class MedgelRemisionesController extends Controller
 {
@@ -15,14 +15,12 @@ class MedgelRemisionesController extends Controller
     public function GetExistenceMedgel($lote)
     {
         try {
-            $data =  MedgelTechnicalReception::orderBy('created_at','ASC')->get();
-            $data->map(function($item)use($lote){
-                $item->head = MedgelTechnicalReceptionItem::where('lote', $lote) ->where('id',$item->id_medgel_technical_reception)
-                
-                ->first();
-                $item->product = MedgelProduct::where('id',$item->id_product)->first();
-                return $item;
-            });
+            $data =  MedgelTechnicalReception::with('detalle.product')
+            ->orderBy('created_at','ASC')
+            ->with('proveedor')
+            ->with('user')
+            ->first();
+           
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;
