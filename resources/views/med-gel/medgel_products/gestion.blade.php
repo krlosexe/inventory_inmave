@@ -45,14 +45,14 @@
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
 				<!-- Page Heading -->
-				<h1 class="h3 mb-2 text-gray-800">Productos Implantes</h1>
+				<h1 class="h3 mb-2 text-gray-800">Productos Medgel</h1>
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
 				<input type="hidden" class="token">
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Gestion de Productos Implantes</h6>
+						<h6 class="m-0 font-weight-bold text-primary">Gestion de Productos Medgel</h6>
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -68,9 +68,8 @@
 										<th>Acciones</th>
 										<th>Referencia</th>
 										<th>Descripcion</th>
-										<th>Gramaje</th>
 										<th>Registro Inmave</th>
-										<th>Perfil</th>
+										<th>Fecha Expiración</th>
 										<th>Registrado por</th>
 										<th>Fecha Registro</th>
 									</tr>
@@ -82,9 +81,9 @@
 						</div>
 					</div>
 				</div>
-				@include('implantes.implantes_products.store')
-				@include('implantes.implantes_products.view')
-				@include('implantes.implantes_products.edit')
+				@include('med-gel.medgel_products.store')
+				<!-- @include('med-gel.medgel_products.view') -->
+				@include('med-gel.medgel_products.edit')
 			</div>
 			<!-- /.container-fluid -->
 		</div>
@@ -109,17 +108,17 @@
 		store();
 		list();
 		update();
-		$("#collapse_Implantes").addClass("show");
-		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
+		$("#collapse_medgel").addClass("show");
+		$("#nav_medgel, #modulo_medgel").addClass("active");
 		verifyPersmisos(id_user, tokens, "products");
 	});
 
 	function update() {
-		enviarFormularioPut("#form-update", 'api/products/implantes/edit', '#cuadro4', false, "#avatar-edit");
+		enviarFormularioPut("#form-update", 'api/products/medgel/edit', '#cuadro4', false, "#avatar-edit");
 	}
 
 	function store() {
-		enviarFormulario("#store", 'api/products/implantes/create', '#cuadro2');
+		enviarFormulario("#store", 'api/products/medgel/create', '#cuadro2');
 	}
 
 	function list(cuadro) {
@@ -136,7 +135,7 @@
 			"serverSide": false,
 			"ajax": {
 				"method": "GET",
-				"url": '' + url + '/api/products/implantes/list',
+				"url": '' + url + '/api/products/medgel/list',
 				"dataSrc": ""
 			},
 			"columns": [{
@@ -164,13 +163,10 @@
 					"data": "description"
 				},
 				{
-					"data": "gramaje"
-				},
-				{
 					"data": "register_invima"
 				},
 				{
-					"data": "perfil"
+					"data": "date_expire"
 				},
 				{
 					"data": "user",
@@ -201,10 +197,16 @@
 		$("#store")[0].reset();
 		GetCategories("#category")
 		cuadros("#cuadro1", "#cuadro2");
-		$("#referencia").focus();		
+		$("#referencia").focus();
+
 		$("#referencia" ).change(function() {
 			var str = $("#referencia").val().substr(2)
 		    $("#referencia").val(str.replace("'","-"))
+			});
+
+		$("#lote").change(function() {
+			var lt = $("#lote").val().substr(2)
+		    $("#lote").val(lt)
 			});
 		
 	}
@@ -233,16 +235,22 @@
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
 			$("#referencia_edit").val(data.referencia)
+			$("#lote_edit").val(data.lote)
 			$("#description_edit").val(data.description)
 			$("#register_invima_edit").val(data.register_invima)
-			$("#gramaje_edit").val(data.gramaje)
-			$("#edit_perfil").val(data.perfil)
+			$("#qty_edit").val(data.qty)
+			$("#date_expire_edit").val(data.date_expire)
 			$("#id_edit").val(data.id)
 
-			$("#referencia").focus();		
-			$("#referencia_edit" ).change(function() {
-				var str = $("#referencia_edit").val().substr(2)
-				$("#referencia_edit").val(str.replace("'","-"))
+			$("#referencia_edit").focus();
+			$("#referencia_edit").change(function() {
+			var str = $("#referencia_edit").val()
+		    $("#referencia_edit").val(str.replace("'","-"))
+			});
+
+			$("#lote_edit").change(function() {
+				var lt = $("#lote_edit").val().substr(2)
+				$("#lote_edit").val(lt)
 				});
 			cuadros('#cuadro1', '#cuadro4');
 		});
@@ -273,7 +281,7 @@
 	function eliminar(tbody, table) {
 		$(tbody).on("click", "span.eliminar", function() {
 			var data = table.row($(this).parents("tr")).data();
-			statusConfirmacion('api/products/implantes/delete/' + data.id + "", "¿Esta seguro de eliminar el registro?", 'Eliminar');
+			statusConfirmacion('api/products/medgel/delete/' + data.id + "", "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
 </script>

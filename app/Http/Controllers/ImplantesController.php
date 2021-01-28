@@ -18,8 +18,6 @@ class ImplantesController extends Controller
 {
     public function GetExistenceImplante($serial)
     {
-        
-
         try {
             $data = TechnicalReceptionProductoImplante::where('serial', $serial)->first();
             return response()->json($data)->setStatusCode(200);
@@ -43,7 +41,6 @@ class ImplantesController extends Controller
             $output->rte_fuente             = $request->rte_fuente;
             $output->rte_fuente_total       = $request->rte_fuente_total;
             $output->total_invoice          = $request->total_invoice;
-            $output->estatus                = "Remitido";
             $output->save();
 
             $auditoria              = new Auditoria;
@@ -54,7 +51,6 @@ class ImplantesController extends Controller
             $auditoria->usr_regins  = $request["id_user"];
             $auditoria->save();
 
-            // if (isset($request["referencia"])) {
                 foreach ($request->referencia as $key => $value) {
                     $producs_items = [];
                     $producs_items["id_implante_reemision"] = $output->id;
@@ -64,14 +60,11 @@ class ImplantesController extends Controller
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 1;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
-                    // $producs_items["estatus"]     = "Remitido";
 
                     ImplanteReemisionesItem::create($producs_items);
 
-                    $detail = TechnicalReceptionProductoImplante::where('serial',$request["serial"])->first();
-                    TechnicalReceptionImplante::where("id",$detail->id_technical_reception_implante)->update(["estatus" => "Remitido"]);
+                    TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Remitido"]);
                 }
-            // }
             if ($output) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");
                 return response()->json($data)->setStatusCode(200);
@@ -98,7 +91,6 @@ class ImplantesController extends Controller
             $update->rte_fuente             = $request->rte_fuente;
             $update->rte_fuente_total       = $request->rte_fuente_total;
             $update->total_invoice          = $request->total_invoice;
-            $update->estatus                = "Remitido";
             $update->save();
 
             ImplanteReemisionesItem::where("id_implante_reemision", $remision)->delete();
@@ -112,7 +104,6 @@ class ImplantesController extends Controller
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 1;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
-                    // $producs_items["estatus"]     = "Remitido";
                     ImplanteReemisionesItem::create($producs_items);                
                 }
             // }
@@ -135,7 +126,6 @@ class ImplantesController extends Controller
             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
             ->where("auditoria.tabla", "implantes_remision")
             ->where("auditoria.status", "!=", "0")
-            ->where("implantes_reemisiones.estatus","Remitido")
             ->orderBy("implantes_reemisiones.id", "DESC")
             ->with("items")
             ->get();
@@ -158,7 +148,6 @@ class ImplantesController extends Controller
             $output->rte_fuente             = $request->rte_fuente;
             $output->rte_fuente_total       = $request->rte_fuente_total;
             $output->total_invoice          = $request->total_invoice;
-            $output->estatus                = "Vendido";
             $output->save();
 
             $auditoria              = new Auditoria;
@@ -179,11 +168,9 @@ class ImplantesController extends Controller
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 1;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
-                    // $producs_items["estatus"]     = "Vendido";
                     ImplantOutputItems::create($producs_items);
 
-                    $detail = TechnicalReceptionProductoImplante::where('serial',$request["serial"])->first();
-                    TechnicalReceptionImplante::where("id",$detail->id_technical_reception_implante)->update(["estatus" => "Vendido"]);
+                    TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Vendido"]);
                 
                 }
             }
@@ -210,7 +197,6 @@ class ImplantesController extends Controller
         $update->rte_fuente             = $request->rte_fuente;
         $update->rte_fuente_total       = $request->rte_fuente_total;
         $update->total_invoice          = $request->total_invoice;
-        $output->estatus                = "Vendido";
         $update->save();
 
         ImplantOutputItems::where("id_implant_output",$output)->delete();
@@ -223,7 +209,6 @@ class ImplantesController extends Controller
                 $producs_items["price"]         = str_replace(",", "", $request["price"][$key]);
                 $producs_items["vat"]           = $request["vat"][$key];
                 $producs_items["total"]         = str_replace(",", "", $request["total"][$key]);
-                // $producs_items["estatus"]     = "Vendido";
                 ImplantOutputItems::create($producs_items);
 
             }
@@ -243,7 +228,6 @@ class ImplantesController extends Controller
             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
             ->where("auditoria.tabla", "products_output")
             ->where("auditoria.status", "!=", "0")
-            ->where("implantes_output.estatus","Vendido")
             ->orderBy("implantes_output.id", "DESC")
             ->with("items")
             ->get();

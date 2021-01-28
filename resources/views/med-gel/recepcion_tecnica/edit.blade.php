@@ -10,7 +10,7 @@
                 <div class="col-md-3">
                     <label for=""><b>Referencia</b></label>
                     <div class="form-group valid-required">
-                        <input type="text" name="referencia" class="form-control form-control-user" id="referencia_edit" required>
+                        <input type="text" name="referencia" class="form-control form-control-user" id="referencia_edit">
                     </div>
                 </div>
             </div>
@@ -71,14 +71,12 @@
                             <thead>
                                 <tr>
                                     <th>Referencia</th>
-                                    <th>Serial</th>
                                     <th>Lote</th>
                                     <th>Registro INVIMA</th>
                                     <th>Vence</th>
                                     <th>Valor</th>
                                     <th>Descripción</th>
-                                    <th>Gramaje</th>
-                                    <th>perfil</th>
+                                    <th>Cantidad</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -117,7 +115,7 @@
               </div>
           </div>
         </div> -->
-            <input type="hidden" name="inicial" id="inicial">
+            <!-- <input type="hidden" name="inicial" id="inicial"> -->
             <input type="hidden" name="id_user" class="id_user">
             <input type="hidden" name="token" class="token">
             <input type="hidden" name="id_user_edit" id="id_edit">

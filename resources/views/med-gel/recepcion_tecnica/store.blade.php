@@ -70,14 +70,12 @@
                             <thead>
                                 <tr>
                                     <th>Referencia</th>
-                                    <th>Serial</th>
                                     <th>Lote</th>
                                     <th>Registro INVIMA</th>
                                     <th>Vence</th>
                                     <th>Valor</th>
                                     <th>Descripción</th>
-                                    <th>Gramaje</th>
-                                    <th>Perfil</th>
+                                    <th>Cantidad</th>
                                     <th></th>
                                 </tr>
                             </thead>
