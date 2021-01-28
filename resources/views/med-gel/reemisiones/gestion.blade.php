@@ -62,7 +62,7 @@
 										<th>Bodega</th>
 										<th>Valor de Factura</th>
 										<th>Fecha de registro</th>
-										<th>Registrado por</th>
+										<!-- <th>Registrado por</th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -155,7 +155,11 @@
 					}
 				},
 				{
-					"data": "name_client"
+					"data": "name",
+					render: function(data, type, row) {
+						var botones = "";
+						return row.client.name;
+					}
 				},
 				{
 					"data": "warehouse"
@@ -168,11 +172,11 @@
 					}
 				},
 				{
-					"data": "fec_regins"
+					"data": "created_at"
 				},
-				{
-					"data": "email_regis"
-				}
+				// {
+				// 	"data": "email_regis"
+				// }
 			],
 			"language": idioma_espanol,
 			"dom": 'Bfrtip',
@@ -232,11 +236,10 @@
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
-				error: function() {},
+				error: function(data) {
+					alert(data.responseJSON.mensaje)
+				},
 				success: function(data) {
-					
-					console.log(data);
-
 					$("#table_products_rem tbody").html("")
 					var html = "";
 					var validaProduct = false
@@ -246,16 +249,15 @@
 						}
 					});
 					if (!validaProduct) {
+						console.log(data);
 
-						console.log('llego',data);
-						
 						html += "<tr>"
-						html += "<td>" + data.product.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.product.referencia + "' > </td>"
-						html += "<td>" + data.serial + " <input type='hidden'  class='serial' name='serial[]' value='" + data.serial + "' > </td>"
+						html += "<td>" + data.referencia + "<input type='hidden' class='id_product' name='referencia[]' value='" +data.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id_product + "' ></td>"
+						html += "<td>" + data.lote + " <input type='hidden'  class='serial' name='lote[]' value='" + data.lote + "' > </td>"
 						// html +="<td>"+1+" <input type='hidden' class='id_product'  value='1' > </td>"
-						html += "<td>" + 1 + " <input type='hidden' class='id_product'  value='1' > </td>"
+						html += "<td>" + data.qty + " <input type='hidden' class='id_product'  value='"+data.qty+"'> </td>"
 						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
-						html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' readonly></td>"
+						html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='"+data.qty+"' required></td>"
 						// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
@@ -278,17 +280,16 @@
 	*/
 	function InvoiceToremition(data) {
 		try {
-			$("#add_remision_invoice_implant").click(function(e) {
-				// console.log("hola mundo",id);
+			$("#add_remision_invoice_medgel").click(function(e) {
 				$.ajax({
-					url: `${document.getElementById('ruta').value}/api/implantes/remision/invoice/${data.id}/${id_user}`,
+					url: `${document.getElementById('ruta').value}/api/medgel/remision/invoice/${data.id}/${id_user}`,
 					type: 'GET',
 					dataType: 'JSON',
 					async: false,
 					error: function() {
 					},
 					success: function(data) {
-						location.href = "http://pdtclientsolutions.com/inventory_inmave/ventas_implantes";
+						location.href = "http://pdtclientsolutions.com/inventory_inmave/med-gel-output";
 						// location.href = "http://inmave.localhost/ventas_implantes";
 					}
 				});
@@ -487,13 +488,13 @@
 	}	
 	function ShowProdcuts(table, data) {
 		$(table + " tbody").html("")
-		console.log(data);
 		$.map(data.items, function(item, key) {
+		console.log('tabla',data);
 			let html = ""
 			html += "<tr>"
-			html += "<td>" + item.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + item.referencia + "' > </td>"
-			html += "<td>" + item.serial + " <input type='hidden' class='id_product' name='serial[]' value='" + item.serial + "' > </td>"
-			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' max=" + item.qty + " onchange='calcProduc(this, " + '"_edit"' + ")'readonly><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
+			html += "<td>" + item.product.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + item.product.referencia + "' > </td>"
+			html += "<td>" + item.lote + " <input type='hidden' class='id_product' name='serial[]' value='" + item.lote + "' > </td>"
+			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' min='1'   max=" + item.qty + " onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "'></td>"
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.qty + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.qty + "' disabled></td>"
 			if (item.vat == 1) {
 				html += "<td><input type='checkbox' class='form-control vat_product items_calc'checked onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='" + item.vat + "'></td>"

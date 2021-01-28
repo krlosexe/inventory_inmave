@@ -10,7 +10,7 @@
                 <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for=""><b>Implante(s)</b></label>
+                        <label for=""><b>Lote</b></label>
                         <div class="form-group valid-required">
                             <!-- <select name="products" class="form-control select2" id="products_edit"></select> -->
                             <input type="text" maxlength="15" id="serial_edit" class="form-control form-control-user">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-md-2">
                             <br>
-                            <button type="button" class="btn btn-primary btn-user" id="add_remision_invoice_implant">
+                            <button type="button" class="btn btn-primary btn-user" id="add_remision_invoice_medgel">
                                 Facturar
                             </button>
                         </div>
@@ -61,7 +61,7 @@
                             <thead>
                                 <tr>
                                     <th>Referencia</th>
-                                    <th>Serial</th>
+                                    <th>Lote</th>
                                     <th>Salida (Cantidad)</th>
                                     <th>Existencia Actual</th>
                                     <th>%IVA</th>
