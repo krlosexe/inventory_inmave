@@ -115,23 +115,7 @@
 	function store() {
 		enviarFormulario("#store", 'api/output/implantes/create', '#cuadro2');
 	}
-	// function socket_referencia() {
-	// 	var socket = io.connect("http://31.220.60.218:5026");
-	// 	socket.on('askForUserId', () => {
-	// 		console.log(socket);
-	// 	});
-	// 	socket.emit('userIdReceived', 'Pc');
-	// 	socket.on('sendSerial', (data) => {
-	// 		$('#table_products_out tbody tr').each(function() {
-	// 			if ($(this).find(".serial").val() == '') {
-	// 				$(this).find(".serial").val(data);
-	// 			}
-	// 		});
-	// 	});
-	// 	// socket.on('sendReference', (data) => {
-			
-	// 	// });
-	// }
+
 	function serial(data){
 		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
