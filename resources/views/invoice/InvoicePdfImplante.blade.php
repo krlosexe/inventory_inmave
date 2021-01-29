@@ -176,11 +176,37 @@
 
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>IVA</b></td>
+                @if($warehouse  == "Medellin" || $warehouse  == "Cali")
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($vat_total, 2, ',', '.')}} </b></td>
+                @elseif($warehouse  == "Bogota" )
+                <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format(0, 2, ',', '.')}} </b></td>
+                @else
+                @endif
             </tr>
 
             <tr>
-                <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (10%)</b></td>
+            @if($warehouse  == "Medellin" || $warehouse  == "Cali")
+            @if($discount_type  == 5)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (5%)</b></td>
+            @endif
+            @if($discount_type  == 10)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (10%)</b></td>
+            @endif
+            @if($discount_type  == 15)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (15%)</b></td>
+            @endif
+                @elseif($warehouse  == "Bogota" )
+                @if($discount_type  == 5)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (5%)</b></td>
+            @endif
+            @if($discount_type  == 10)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (10%)</b></td>
+            @endif
+            @if($discount_type  == 15)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (15%)</b></td>
+            @endif
+                @else
+                @endif
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($discount_total, 2, ',', '.')}}</b></td>
             </tr>
 
@@ -247,9 +273,10 @@
             <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
             
             @elseif($warehouse  == "Bogota" )
-            <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
+            <p style="font-size: 11px"><b>SILIMED COLOMBIA SAS -  NIT 901130935, CUENTA CORRIENTE BANCOLOMBIA N° 67400012942</b></p>
 
-                <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
+                <!-- <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p> -->
+
             @else
             @endif
         
