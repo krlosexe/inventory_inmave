@@ -10,9 +10,9 @@ class MedgelTechnicalReception extends Model
     protected $guarded=['token'];
     public    $timestamps    = true;
 
-    public function detalle(){
-        return $this->hasMany(MedgelTechnicalReceptionItem::class,'id_medgel_technical_reception');
-    }
+    // public function detalle(){
+    //     return $this->hasMany(MedgelTechnicalReceptionItem::class,'id_medgel_technical_reception');
+    // }
 
     public function proveedor(){
         return $this->belongsTo(Providers::class,'id_provider');

@@ -13,18 +13,10 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-
 Route::post('auth', 'Login@Auth');
-
-
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
-
 Route::post('verify-token', 'Login@VerifyToken');
 
 Route::resource('user', 'UsuariosController');
@@ -109,6 +101,7 @@ Route::get('products/movimiento/list', 'TraspasoController@ListOuptTraspase');
 Route::get('products/movimiento/detail/{id}', 'TraspasoController@ListOuptTraspaseById');
 Route::get('products/remision/invoice/{id}/{user}', 'ReemisionesController@RemisionToInvoice');
 Route::get('implantes/remision/invoice/{id}/{user}', 'ReemisionesController@ImplantesRemisionToInvoice');
+
 Route::post('implantes/technical/reception', 'TechnicalReceptionImplantesController@CreateTechnicalReceptionImplante');
 Route::put('implantes/technical/reception/edit/{id}', 'TechnicalReceptionImplantesController@EditarTechnicalReceptionImplante');
 Route::get('technical/reception/implante', 'TechnicalReceptionImplantesController@ListTechnicalReceptionImplante');
@@ -147,4 +140,9 @@ Route::post('medgel/reemisiones/create', 'MedgelRemisionesController@CreateMedge
 Route::get('medgel/reemisiones/list', 'MedgelRemisionesController@ListMedgelRemision');
 Route::put('medgel/reemisiones/update/{id}', 'MedgelRemisionesController@UpdateMedgelRemision');
 Route::get('medgel/get/lote/{id}', 'MedgelRemisionesController@GetExistenceMedgel');
+Route::get('medgel/remision/invoice/{id}/{user}','MedgelRemisionesController@MedgelRemisionToInvoice');
+
+Route::post('medgel/output/create', 'MedgelOutputController@CreateMedgelOutput');
+Route::get('medgel/output/list', 'MedgelOutputController@ListMedgelOutput');
+Route::put('medgel/output/update/{id}', 'MedgelOutputController@UpdateMedgelOutput');
 

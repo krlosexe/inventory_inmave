@@ -13,4 +13,8 @@ class MedgelProduct extends Model
         return $this->belongsTo(User::class,'id_user');
     }
 
+    public function ReceptionItem(){
+        return $this->hasMany(MedgelTechnicalReceptionItem::class,'id_product');
+    }
+
 }
