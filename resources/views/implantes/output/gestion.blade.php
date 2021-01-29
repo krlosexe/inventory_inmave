@@ -204,7 +204,7 @@
 						if (actualizar == 1)
 							botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 						if (actualizar == 1)
-							botones += "<a href='api/invoice/print/" + row.id + "' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
+							botones += "<a href='api/invoice/implante/print/" + row.id + "' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
 						return botones;
 					}
 				},
@@ -331,7 +331,6 @@
 			});
 
 			getClients("#clients_edit", data.id_client)
-			// ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			ShowProdcuts("#table_products_edit_out", data)
 			if (data.discount_type === 5) {
@@ -358,7 +357,7 @@
 		});
 	}
 	$("#print").click(function(e) {
-		window.open(`api/invoice/print/${$("#id_edit").val()}`, "_blank");
+		window.open(`api/invoice/implante/print/${$("#id_edit").val()}`, "_blank");
 	});
 	/* ------------------------------------------------------------------------------- */
 	/*

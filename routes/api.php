@@ -146,6 +146,6 @@ Route::post('medgel/output/create', 'MedgelOutputController@CreateMedgelOutput')
 Route::get('medgel/output/list', 'MedgelOutputController@ListMedgelOutput');
 Route::put('medgel/output/update/{id}', 'MedgelOutputController@UpdateMedgelOutput');
 
-Route::get('invoice/print/{id}', 'InvoiceController@ShowInvoiceImplantes');
-Route::get('reemision/print/{id}', 'InvoiceController@ShowInvoiceReemisionImplantes');
+Route::get('invoice/implante/print/{id}', 'InvoiceController@ShowInvoiceImplantes');
+Route::get('reemision/implante/print/{id}', 'InvoiceController@ShowInvoiceReemisionImplantes');
 

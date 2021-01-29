@@ -61,7 +61,7 @@ class ImplantesController extends Controller
                 foreach ($request->referencia as $key => $value) {
                     $producs_items = [];
                     $producs_items["id_implante_reemision"] = $output->id;
-                    $producs_items["id_product"]       = $request["id_product"][$key];
+                    $producs_items["id_product"]  = $request["id_product"][$key];
                     $producs_items["referencia"]  = $value;
                     $producs_items["serial"]      = $request["serial"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
@@ -93,7 +93,7 @@ class ImplantesController extends Controller
             $update->reissue                = $request->reissue;
             $update->subtotal               = $request->subtotal;
             $update->subtotal_with_discount = $request->subtotal_with_discount;
-            $update->vat_total                = $request->vat_total;
+            $update->vat_total              = $request->vat_total;
             $update->discount_type          = $request->discount_type;
             $update->discount_total         = $request->discount_total;
             $update->rte_fuente             = $request->rte_fuente;
@@ -106,7 +106,7 @@ class ImplantesController extends Controller
                 foreach ($request->referencia as $key => $value) {
                     $producs_items = [];
                     $producs_items["id_implante_reemision"] = $update->id;
-                    $producs_items["id_product"]       = $request["id_product"][$key];
+                    $producs_items["id_product"]  = $request["id_product"][$key];
                     $producs_items["referencia"]  = $value;
                     $producs_items["serial"]      = $request["serial"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
@@ -152,7 +152,7 @@ class ImplantesController extends Controller
             $output->reissue                = $request->reissue;
             $output->subtotal               = $request->subtotal;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
-            $output->vat_total                = $request->vat_total;
+            $output->vat_total              = $request->vat_total;
             $output->discount_type          = $request->discount_type;
             $output->discount_total         = $request->discount_total;
             $output->rte_fuente             = $request->rte_fuente;
@@ -172,7 +172,7 @@ class ImplantesController extends Controller
                 foreach ($request->referencia as $key => $value) {
                     $producs_items = [];
                     $producs_items["id_implant_output"] = $output->id;
-                    $producs_items["id_product"]       = $request["id_product"][$key];
+                    $producs_items["id_product"]  = $request["id_product"][$key];
                     $producs_items["referencia"]  = $value;
                     $producs_items["serial"]      = $request["serial"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
@@ -203,7 +203,7 @@ class ImplantesController extends Controller
         $update->reissue                = $request->reissue;
         $update->subtotal               = $request->subtotal;
         $update->subtotal_with_discount = $request->subtotal_with_discount;
-        $update->vat_total                = $request->vat_total;
+        $update->vat_total              = $request->vat_total;
         $output->discount_type          = $request->discount_type;
         $update->discount_total         = $request->discount_total;
         $update->rte_fuente             = $request->rte_fuente;
@@ -215,7 +215,7 @@ class ImplantesController extends Controller
         if(isset($request->referencia)){
             foreach($request->referencia as $key => $value){
                 $producs_items["id_implant_output"]  = $update->id;
-                $producs_items["id_product"]       = $request["id_product"][$key];
+                $producs_items["id_product"]    = $request["id_product"][$key];
                 $producs_items["referencia"]    = $value;
                 $producs_items["serial"]        = $request["serial"][$key];
                 $producs_items["qty"]           = $request["qty"][$key];
