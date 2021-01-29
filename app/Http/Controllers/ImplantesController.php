@@ -19,13 +19,16 @@ class ImplantesController extends Controller
     public function GetExistenceImplante($serial)
     {
         try {
-            $data = TechnicalReceptionProductoImplante::with('products')->where(['estatus'=>'Disponible','serial'=>$serial])->first();
+            $data = TechnicalReceptionProductoImplante::where(['estatus'=>'Disponible','serial'=>$serial])->get();
+          
+            $data->map(function($item){
+                    $item->products = ProductImplantes::where('referencia',$item->referencia)->first();
+                return $item;
+            });
             if($data){
-                return response()->json($data)->setStatusCode(200);
+                return response()->json($data[0])->setStatusCode(200);
             }else {
             return response()->json(["mensaje" => "No Existe el serial $serial"])->setStatusCode(400); 
-            
-            
         }
         } catch (\Throwable $th) {
             return $th;
