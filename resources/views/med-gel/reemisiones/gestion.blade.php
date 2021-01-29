@@ -224,7 +224,7 @@
 		$("#lote").focus();
 		$("#lote").change(function() {
 			var str = $("#lote").val().substr(2)
-			$("#lote").val(str.replace("'", "-"));
+			$("#lote").val(str);
 			var ref = $("#lote").val();
 			serial(ref);
 		});
@@ -249,7 +249,6 @@
 						}
 					});
 					if (!validaProduct) {
-						console.log(data);
 
 						html += "<tr>"
 						html += "<td>" + data.referencia + "<input type='hidden' class='id_product' name='referencia[]' value='" +data.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id_product + "' ></td>"

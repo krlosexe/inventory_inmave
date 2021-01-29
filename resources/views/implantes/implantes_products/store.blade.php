@@ -14,6 +14,12 @@
                                 <input type="text" name="referencia" class="form-control form-control-user" id="referencia" required>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <label for=""><b>Precio</b></label>
+                            <div class="form-group valid-required">
+                                <input type="text" name="precio" class="form-control form-control-user" id="precio" required>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
@@ -25,19 +31,19 @@
                         <div class="col-md-3">
                             <label for=""><b>Registro Invima</b></label>
                             <div class="form-group valid-required">
-                                <input type="text" name="register_invima" class="form-control form-control-user" id="register_invima">
+                                <input type="text" name="register_invima" class="form-control form-control-user" id="register_invima" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for=""><b>Gramaje</b></label>
                             <div class="form-group valid-required">
-                                <input type="text" name="gramaje" class="form-control form-control-user" id="gramaje" required>
+                                <input type="text" name="gramaje" class="form-control form-control-user" id="gramaje" >
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for=""><b>Perfil</b></label>
                             <div class="form-group valid-required">
-                                <select name="perfil" class="form-control" id="perfil" required>
+                                <select name="perfil" class="form-control" id="perfil" >
                                     <option value="">Seleccione</option>
                                     <option value="Bajo">Bajo</option>
                                     <option value="Medio">Medio</option>

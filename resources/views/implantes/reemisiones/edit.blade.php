@@ -6,6 +6,7 @@
         <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="discount_type" id="type_discount_edit">
             <div class="row">
                 <div class="col-md-12">
                 <div class="row">
@@ -64,7 +65,7 @@
                                     <th>Serial</th>
                                     <th>Salida (Cantidad)</th>
                                     <th>Existencia Actual</th>
-                                    <th>%IVA</th>
+                                    <!-- <th>%IVA</th> -->
                                     <th>Total</th>
                                     <th></th>
                                 </tr>
@@ -74,8 +75,19 @@
                             <tfoot>
                                 <tr>
                                     <th style="text-align: center;" id="descuento_text">
-                                        <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
+                                        <!-- <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
+                                        <input type="checkbox" id="apply_discount_edit" class="form-control"> -->
+
+                                        <label for="apply_discount3">¿ Quieres Aplicar Descuento (5%)?</label>
+                                        <input type="checkbox" id="apply_discount_edit3" class="form-control">
+                                        <br><br>
+
+                                        <label for="apply_discount_edit">¿ Quieres Aplicar Descuento (10%)?</label>
                                         <input type="checkbox" id="apply_discount_edit" class="form-control">
+                                        <br><br>
+                                        <label for="apply_discount2">¿ Quieres Aplicar Descuento (15%)?</label>
+                                        <!-- <input style="text-align: right;" type="text" class="form-control monto_formato_decimales discount" name="discount" id="discount" value="0">--> 
+                                        <input type="checkbox" id="apply_discount_edit2" class="form-control">
                                     </th>
                                     <th colspan="6" style="text-align: right;">Subtotal
                                         <input type="hidden" name="subtotal" id="subtotal_edit">

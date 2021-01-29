@@ -10,10 +10,10 @@ class TechnicalReceptionImplante extends Model
     protected $guarded = [];
     public    $timestamps    = true;
 
-    // public function detalle(){
-    //     return $this->hasMany(TechnicalReceptionProductoImplante::class,'id_technical_reception_implante');
-                                   
-    // }
+    public function detalle(){
+        return $this->hasMany(TechnicalReceptionProductoImplante::class,'id_technical_reception_implante')
+                ->where('estatus','Disponible');                 
+    }
 
     public function proveedor(){
         return $this->belongsTo(Providers::class,'id_provider');

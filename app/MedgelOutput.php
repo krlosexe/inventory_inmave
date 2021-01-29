@@ -11,6 +11,6 @@ class MedgelOutput extends Model
     public    $timestamps    = false;
     
     public function items(){
-        return $this->hasMany(MedgelOutputItems::class, 'medgel_output_items');
+        return $this->hasMany(MedgelOutputItems::class, 'id_medgel_output');
     }
 }

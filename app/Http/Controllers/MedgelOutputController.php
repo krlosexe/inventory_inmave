@@ -24,11 +24,14 @@ class MedgelOutputController extends Controller
     public function CreateMedgelOutput(Request $request)
     {
         try {
+            
+            // dd($request->all());
+
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $output = new MedgelOutput;
             $output->warehouse              = $request->warehouse;
             $output->id_client              = $request->id_client;
-            $output->reissue                = $request->reissue;
+            // $output->reissue                = $request->reissue;
             $output->subtotal               = $request->subtotal;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
             $output->vat_total                = $request->vat_total;
@@ -46,11 +49,11 @@ class MedgelOutputController extends Controller
             $auditoria->usr_regins  = $request["id_user"];
             $auditoria->save();
 
-                foreach ($request->referencia as $key => $value) {
+                foreach ($request->id_product as $key => $value) {
                     $producs_items = [];
-                    $producs_items["id_implante_reemision"] = $output->id;
-                    $producs_items["referencia"]  = $value;
-                    $producs_items["serial"]      = $request["serial"][$key];
+                    $producs_items["id_medgel_output"] = $output->id;
+                    $producs_items["id_product"]  = $value;
+                    $producs_items["lote"]        = $request["lote"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 1;
@@ -73,7 +76,7 @@ class MedgelOutputController extends Controller
         $update = MedgelOutput::find($output);
         $update->warehouse              = $request->warehouse;
         $update->id_client              = $request->id_client;
-        $update->reissue                = $request->reissue;
+        $update->reissue                = 0;
         $update->subtotal               = $request->subtotal;
         $update->subtotal_with_discount = $request->subtotal_with_discount;
         $update->vat_total                = $request->vat_total;
@@ -84,8 +87,8 @@ class MedgelOutputController extends Controller
         $update->save();
 
         MedgelOutputItems::where("id_medgel_output",$output)->delete();
-        if(isset($request->referencia)){
-            foreach($request->referencia as $key => $value){
+        if(isset($request->id_product)){
+            foreach($request->id_product as $key => $value){
                 $producs_items=[];
                 $producs_items["id_medgel_output"]  = $update->id;
                 $producs_items["id_product"]    = $value;

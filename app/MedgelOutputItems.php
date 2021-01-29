@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MedgelOutputItems extends Model
 {
-    protected $table ="implantes_output_items";
+    protected $table ="medgel_output_items";
     protected $guarded = [];
     public    $timestamps    = false;
 }

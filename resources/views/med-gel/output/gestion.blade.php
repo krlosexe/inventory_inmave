@@ -46,7 +46,6 @@
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">Gestion de Salida de Productos MedGel</h6>
-
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -115,10 +114,10 @@
 		}
 	});
 	function update() {
-		enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
+		enviarFormularioPut("#form-update", 'api/medgel/output/update', '#cuadro4', false, "#avatar-edit");
 	}
 	function store() {
-		enviarFormulario("#store", 'api/products/entry/output', '#cuadro2');
+		enviarFormulario("#store", 'api/medgel/output/create', '#cuadro2');
 	}
 	function list(cuadro) {
 		var data = {
@@ -225,7 +224,7 @@
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
 		AddProductos("#add_product", "#products", "#table_products")
-		ProductsGetExistence("#warehouse", "#products", "#table_products")
+		// ProductsGetExistence("#warehouse", "#products", "#table_products")
 
 		getClients("#clients")
 
@@ -248,7 +247,55 @@
 		$('#total_invoice_text_edit').empty(0)
 
 		$('#table_products_edit tbody').html('')
+		$("#lote").focus();
+		$("#lote").change(function() {
+			var str = $("#lote").val().substr(2)
+			$("#lote").val(str);
+			var ref = $("#lote").val();
+			serial(ref);
+		});
 
+	}
+	function serial(data){
+		$.ajax({
+				url: '' + document.getElementById('ruta').value + '/api/medgel/get/lote/' + data,
+				type: 'GET',
+				dataType: 'JSON',
+				async: false,
+				error: function(data) {
+					alert(data.responseJSON.mensaje)
+				},
+				success: function(data) {
+					console.log('llego',data)
+					$("#table_products tbody").html("")
+					var html = "";
+					var validaProduct = false
+					$("#table_products tbody tr").each(function() {
+						if (data.serial == $(this).find(".serial").val()) {
+							validaProduct = true;
+						}
+					});
+					if (!validaProduct) {
+						html += "<tr>"
+						html += "<td>" + data.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id_product + "' ></td>"
+						html += "<td>" + data.lote + " <input type='hidden'  class='serial' name='lote[]' value='" + data.lote + "' > </td>"
+						// html +="<td>"+1+" <input type='hidden' class='id_product'  value='1' > </td>"
+						html += "<td>"  + data.qty + " <input type='hidden' class='id_product'   value='"+data.qty+"'> </td>"
+						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
+						html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1' max='"+data.qty+"' required></td>"
+						// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
+						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+						html += "</tr>"
+					} else {
+						warning('¡Recuerde que los campos son obligatorios!');
+					}
+					$("#table_products tbody").append(html)
+					$('#serial').val("");
+					// setTimeout(() => {
+					// 	$('#serial').focus();
+					// }, 1000);
+				}
+			});
 	}
 	/* ------------------------------------------------------------------------------- */
 	/*
@@ -302,7 +349,7 @@
 
 			getClients("#clients_edit", data.id_client)
 
-			ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
+			// ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
 
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 
@@ -620,7 +667,7 @@
 	function getClients(select, select_default = false) {
 
 		$.ajax({
-			url: '' + document.getElementById('ruta').value + '/api/clients',
+			url: '' + document.getElementById('ruta').value + '/api/implantes-clientes',
 			type: 'GET',
 			data: {
 				"id_user": id_user,
@@ -650,7 +697,7 @@
 					}
 					$(select).append($('<option>', {
 						value: item.id,
-						text: `${item.name} - ${item.city ? item.city : 'Sin ciudad'}`,
+						text: item.name,
 						selected: select_default == item.id ? true : false
 
 					}));

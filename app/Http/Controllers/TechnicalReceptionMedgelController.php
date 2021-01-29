@@ -87,7 +87,8 @@ class TechnicalReceptionMedgelController extends Controller
             ->get();
             $data->map(function($item){
                 $item->detalle = MedgelTechnicalReceptionItem::where('id_medgel_technical_reception',$item->id)->first();
-                $item->product = MedgelProduct::where('id', $item->detalle->id_product)->first();
+                // dd($item->detalle->id_product);
+                $item->product = MedgelProduct::where('id', $item->detalleid_product)->first();
                 return $item;
             });
             return response()->json($data)->setStatusCode(200);

@@ -9,6 +9,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
+                        <div class="col-md-4">
+                            <label for=""><b>Lote</b></label>
+                            <div class="form-group valid-required">
+                                <input type="text" maxlength="15" name="number" id="lote_edit" class="form-control form-control-user">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <label for=""><b>Cliente</b></label>
                             <div class="form-group valid-required">
@@ -16,12 +24,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
                             <br>
                             <button type="button" class="btn btn-primary btn-user" id="add_remision_invoice">
                                 Facturar
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-4">
