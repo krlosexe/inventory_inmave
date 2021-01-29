@@ -8,6 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
+                    <input type="hidden" name="discount_type" id="type_discount">
                     <div class="col-md-4">
                             <label for=""><b>Serial</b></label>
                             <div class="form-group valid-required">
@@ -64,8 +65,16 @@
                             <tfoot>
                                 <tr>
                                     <th style="text-align: center;" id="descuento_text">
+                                    <label for="apply_discount3">¿ Quieres Aplicar Descuento (5%)?</label>
+                                        <input type="checkbox" id="apply_discount3" class="form-control">
+                                        <br><br>
+
                                         <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
                                         <input type="checkbox" id="apply_discount" class="form-control">
+                                        <br><br>
+                                        <label for="apply_discount2">¿ Quieres Aplicar Descuento (15%)?</label>
+                                        <!-- <input style="text-align: right;" type="text" class="form-control monto_formato_decimales discount" name="discount" id="discount" value="0">--> 
+                                        <input type="checkbox" id="apply_discount2" class="form-control">
                                     </th>
                                     <th colspan="6" style="text-align: right;">Subtotal
                                         <input type="hidden" name="subtotal" id="subtotal">

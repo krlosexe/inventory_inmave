@@ -233,6 +233,7 @@
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
 			$("#referencia_edit").val(data.referencia)
+			$("#precio_edit").val(data.precio)
 			$("#description_edit").val(data.description)
 			$("#register_invima_edit").val(data.register_invima)
 			$("#gramaje_edit").val(data.gramaje)

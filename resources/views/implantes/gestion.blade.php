@@ -341,6 +341,7 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
+					console.log('recep',data);
 					var valid = false
 					$('#table_products_imp tbody tr').each(function() {
 						if ($(this).find(".serial").val() == '') {
@@ -352,7 +353,7 @@
 					$('#table_products_imp tbody').empty();
 					if (!valid) {
 						html += "<tr>"
-						html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required></td>"
+						html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ></td>"
 						html += "<td><input type='text' class='serial form-control' name='serial[]' id='serial_" + contador + "'  required></td>"
 						html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
 						html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
@@ -411,7 +412,7 @@
 				$('#table_products_edit tbody').empty();
 				if (!valid) {
 					html += "<tr>"
-					html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required></td>"
+					html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ></td>"
 					html += "<td><input type='text' class='serial form-control' name='serial[]' id='serial_" + contador + "'  required></td>"
 					html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
 					html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
@@ -514,7 +515,7 @@
 		let html = ""
 		$.map(data.detalle, function(item, key) {
 			html += "<tr>"
-			html += "<td><input type='text' class='form-control' name='serial[]'  value='" + item.referencia + "'  required></td>"
+			html += "<td><input type='text' class='form-control' name='serial[]'  value='" + item.referencia + "'  required><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ></td>"
 			html += "<td><input type='text' class='form-control' name='serial[]'  value='" + item.serial + "'  required></td>"
 			html += "<td><input type='text' class='form-control' name='lotes[]'  value='" + item.lote + "'  required></td>"
 			html += "<td><input type='text' class='form-control' name='register_invima[]'  value='" + item.register_invima + "' required></td>"

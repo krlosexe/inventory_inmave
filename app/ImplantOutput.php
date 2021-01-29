@@ -12,8 +12,8 @@ class ImplantOutput extends Model
       public    $timestamps    = true;
 
       public function items(){
-        return $this->hasMany(ImplantOutputItems::class, 'id_implant_output');
-                    // ->join('products_implantes','implantes_output_items.serial', 'products_implantes.referencia')  
-                    // ->select(array('implantes_output_items.*','products_implantes.*'));
+        return $this->hasMany(ImplantOutputItems::class,'id_implant_output')
+                    ->join('products_implantes','implantes_output_items.id_product', 'products_implantes.id')  
+                    ->select(array('implantes_output_items.*','products_implantes.id as id_product', 'products_implantes.description'));
       }
 }

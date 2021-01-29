@@ -100,7 +100,7 @@
 		store();
 		list();
 		update();
-		socket_referencia();
+		// socket_referencia();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "reemisiones");
@@ -228,24 +228,24 @@
 			serial($("#serial").val());
 		});
 	}
-	function socket_referencia() {
-		var socket = io.connect("http://31.220.60.218:5026");
-		socket.on('askForUserId', () => {
-			console.log(socket);
-		});
-		socket.emit('userIdReceived', 'Pc');
-		socket.on('sendSerial', (data) => {
-			console.log('crear', data);
-			$('#table_products_rem tbody tr').each(function() {
-				if ($(this).find(".serial").val() == '') {
-					$(this).find(".serial").val(data);
-				}
-			});
-		});
-		// socket.on('sendReference', (data) => {
+	// function socket_referencia() {
+	// 	var socket = io.connect("http://31.220.60.218:5026");
+	// 	socket.on('askForUserId', () => {
+	// 		console.log(socket);
+	// 	});
+	// 	socket.emit('userIdReceived', 'Pc');
+	// 	socket.on('sendSerial', (data) => {
+	// 		console.log('crear', data);
+	// 		$('#table_products_rem tbody tr').each(function() {
+	// 			if ($(this).find(".serial").val() == '') {
+	// 				$(this).find(".serial").val(data);
+	// 			}
+	// 		});
+	// 	});
+	// 	// socket.on('sendReference', (data) => {
 			
-		// });
-	}
+	// 	// });
+	// }
 
 	function serial(data){
 		$.ajax({
@@ -265,13 +265,13 @@
 							validaProduct = true;
 						}
 					});
-					if (!validaProduct) {
+					if (!validaProduct) {						
 						html += "<tr>"
-						html += "<td>" + data.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.referencia + "' > </td>"
+						html += "<td>" + data.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' > </td>"
 						html += "<td>" + data.serial + " <input type='hidden'  class='serial' name='serial[]' value='" + data.serial + "' > </td>"
 						// html +="<td>"+1+" <input type='hidden' class='id_product'  value='1' > </td>"
 						html += "<td>" + 1 + " <input type='hidden' class='id_product'  value='1' > </td>"
-						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='0' onchange='calcProduc(this)'  required></td>"
+						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='" + data.products.precio + "' onchange='calcProduc(this)'  readonly></td>"
 						html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' readonly></td>"
 						// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
@@ -283,6 +283,7 @@
 					$('#serial').val("");
 					setTimeout(() => {
 						$('#serial').focus();
+						calcProduc();
 					}, 1000);
 					// $('#warehouse').empty()
 					// $('#clients').empty()
@@ -363,16 +364,21 @@
 			// ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			ShowProdcuts("#table_products_edit_rem", data)
-			// AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
-			if (data.discount_total > 0) {
+			
+			if (data.discount_type === 5) {
+				$("#apply_discount_edit3").prop("checked", true)
+			} 
+			if (data.discount_type === 15) {
+				$("#apply_discount_edit2").prop("checked", true)
+			} 
+			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
-			} else {
-				$("#apply_discount_edit").prop("checked", false)
-			}
+			} 
+
 			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.subtotal)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
-			$("#vat_total_text_edit").text(`$ ${number_format(data.vat_total, 2)}`)
+			$("#vat_total_text_edit").text(`$ ${number_format(0, 2)}`)
 			$("#vat_total_edit").val(data.vat_total)
 			$("#discount_total_edit").val(data.discount_total)
 			$("#discount_total_text_edit").text(number_format(data.discount_total, 2))
@@ -507,16 +513,11 @@
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
-			html += "<td>" + item.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + item.referencia + "' > </td>"
+			html += "<td>" + item.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + item.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' > </td>"
 			html += "<td>" + item.serial + " <input type='hidden' class='id_product' name='serial[]' value='" + item.serial + "' > </td>"
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' max=" + item.qty + " onchange='calcProduc(this, " + '"_edit"' + ")'readonly><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.qty + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.qty + "' disabled></td>"
-			if (item.vat == 1) {
-				html += "<td><input type='checkbox' class='form-control vat_product items_calc'checked onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='" + item.vat + "'></td>"
-			} else {
-				html += "<td><input type='checkbox' class='form-control vat_product items_calc' onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='" + item.vat + "'></td>"
-			}
-			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.total, 2) + "'  name='total[]' readonly required></td>"
+			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.total, 2) + "'  name='total[]' readonly required><input type='hidden'  class='price_product'  value='" + number_format(item.total, 2) + "' ></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 			$(table + " tbody").append(html)
@@ -602,7 +603,8 @@
 		}
 		let total
 		if (vat.is(':checked')) {
-			total = ((price * qty) * 1.19)
+			// total = ((price * qty) * 1.19)
+			total = ((price * qty))
 			$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
 		} else {
 			total = (price * qty)
@@ -635,6 +637,7 @@
 		var discount_field2 = $(`#apply_discount2${edit}`)
 		let discount_ammount2
 		if (discount_field2.is(':checked')) {
+			
 			//console.log("SI Descuento")
 			discount_ammount2 = subtotal * 0.15
 			//subtotal = subtotal - discount_ammount2
@@ -644,11 +647,24 @@
 			discount_ammount2 = 0
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 		}
-		$(`#discount_total${edit}`).val((parseFloat(discount_ammount) + parseFloat(discount_ammount2)))
-		$(`#discount_total_text${edit}`).text(`$ ${number_format((parseFloat(discount_ammount)  + parseFloat(discount_ammount2)), 2)}`)
+
+		var discount_field3 = $(`#apply_discount3${edit}`)
+		let discount_ammount3
+		if (discount_field3.is(':checked')) {
+			//console.log("SI Descuento")
+			discount_ammount3 = subtotal * 0.5
+			//subtotal = subtotal - discount_ammount2
+			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
+		} else {
+			//	console.log("NO Descuento")
+			discount_ammount3 = 0
+			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
+		}
+		$(`#discount_total${edit}`).val((parseFloat(discount_ammount) + parseFloat(discount_ammount2) + parseFloat(discount_ammount3)))
+		$(`#discount_total_text${edit}`).text(`$ ${number_format((parseFloat(discount_ammount)  + parseFloat(discount_ammount2) + parseFloat(discount_ammount3)), 2)}`)
 		$(`#subtotal_text${edit}`).text(`$ ${number_format(subtotal, 2)}`)
 		$(`#subtotal${edit}`).val(subtotal)
-		let sub_total_with_discount = subtotal - (parseFloat(discount_ammount) + parseFloat(discount_ammount2))
+		let sub_total_with_discount = subtotal - (parseFloat(discount_ammount) + parseFloat(discount_ammount2) + parseFloat(discount_ammount3))
 		/*
 			const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
 			const rte_fuete            = (sub_total_with_discount / 100) * percentage_rte_fuete
@@ -664,11 +680,13 @@
 			if ($(item).is(':checked')) {
 				const price = inNum($(item).parent("td").parent("tr").children("td").find(".price_product").val())
 				const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
-				const vat = ((price * qty) * 0.19)
+				// const vat = ((price * qty) * 0.19)
+				const vat = ((price * qty))
 				totalVat = totalVat + vat
 			}
 		});
-		const totalVat2 = (($(`#subtotal_with_discount${edit}`).val()) * 0.19)
+		// const totalVat2 = (($(`#subtotal_with_discount${edit}`).val()) * 0.19)
+		const totalVat2 = (($(`#subtotal_with_discount${edit}`).val()))
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat2, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat2)
 	}
@@ -682,7 +700,8 @@
 		const discount = inNum($(`#discount_total${edit}`).val())
 		const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
 		const rte_fuete = ($(`#subtotal_with_discount${edit}`).val() / 100) * percentage_rte_fuete
-		total_invoice = (($(`#subtotal_with_discount${edit}`).val()) * 1.19)
+		total_invoice = (($(`#subtotal_with_discount${edit}`).val()))
+		// total_invoice = (($(`#subtotal_with_discount${edit}`).val()) * 1.19)
 		total_invoice = total_invoice - rte_fuete
 		$(`#rte_fuente_text${edit}`).text(`$ ${number_format(rte_fuete, 2)}`)
 		$(`#rte_fuente_total${edit}`).val(rte_fuete)
@@ -690,33 +709,73 @@
 		$(`#total_invoice${edit}`).val(total_invoice)
 	}
 	$("#apply_discount").change(function(e) {
+		if ($("#apply_discount").is(':checked')) {
+			$("#type_discount").val(10)
+		}else{
+			$("#type_discount").val(0)
+		}
 		calcSubTotal(".price_product")
-		calcTotalVat(".vat_product")
+		// calcTotalVat(".vat_product")
 		calTotal(".total_product")
 	});
 	$("#apply_discount2").change(function(e) {
+		if ($("#apply_discount2").is(':checked')) {
+			$("#type_discount").val(15)
+		}else{
+			$("#type_discount").val(0)
+		}
+		calcSubTotal(".price_product")
+		// calcTotalVat(".vat_product")
+		calTotal(".total_product")
+	});
+	$("#apply_discount3").change(function(e) {
+		if ($("#apply_discount3").is(':checked')) {
+			$("#type_discount").val(5)
+		}else{
+			$("#type_discount").val(0)
+		}
 		calcSubTotal(".price_product")
 		calcTotalVat(".vat_product")
 		calTotal(".total_product")
 	});
 	$("#apply_discount_edit").change(function(e) {
+		if ($("#apply_discount_edit").is(':checked')) {
+			$("#type_discount_edit").val(10)
+		}else{
+			$("#type_discount_edit").val(0)
+		}
 		calcSubTotal(".price_product", '_edit')
 		calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
 	$("#apply_discount_edit2").change(function(e) {
+		if ($("#apply_discount_edit2").is(':checked')) {
+			$("#type_discount_edit").val(15)
+		}else{
+			$("#type_discount_edit").val(0)
+		}
 		calcSubTotal(".price_product", '_edit')
-		calcTotalVat(".vat_product", '_edit')
+		// calcTotalVat(".vat_product", '_edit')
+		calTotal(".total_product", '_edit')
+	});
+	$("#apply_discount_edit3").change(function(e) {
+		if ($("#apply_discount_edit3").is(':checked')) {
+			$("#type_discount_edit").val(5)
+		}else{
+			$("#type_discount_edit").val(0)
+		}
+		calcSubTotal(".price_product", '_edit')
+		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
 	$(".discount").keyup(function(e) {
 		calcSubTotal(".price_product")
-		calcTotalVat(".vat_product")
+		// calcTotalVat(".vat_product")
 		calTotal(".total_product")
 	});
 	$(".discount_edit").keyup(function(e) {
 		calcSubTotal(".price_product", '_edit')
-		calcTotalVat(".vat_product", '_edit')
+		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
 	// 	$('input[name="price"]').keyup(function(e) {

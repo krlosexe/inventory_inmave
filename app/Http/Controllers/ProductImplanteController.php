@@ -40,6 +40,7 @@ class ProductImplanteController extends Controller
         try {
             $update = ProductImplantes::find($id);
             $update->referencia = $request->referencia;
+            $update->precio = $request->precio;
             $update->register_invima = $request->register_invima;
             $update->description = $request->description;
             $update->gramaje = $request->gramaje;

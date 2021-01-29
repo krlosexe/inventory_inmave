@@ -13,6 +13,7 @@ class TechnicalReceptionImplantesController extends Controller
     public function CreateTechnicalReceptionImplante(Request $request)
     {
         try {
+            // dd($request->all());
             $tri = new TechnicalReceptionImplante;
             $tri->warehouse   = $request->warehouse;
             $tri->id_provider = $request->id_provider;
@@ -25,6 +26,7 @@ class TechnicalReceptionImplantesController extends Controller
                 $products["id_technical_reception_implante"]  = $tri->id;
                 $products["referencia"]              = $referencia;
                 $products["serial"]                  = $request["serial"][$key];
+                $products["id_product"]              = $request["id_product"][$key];
                 $products["lote"]                    = $request["lotes"][$key];
                 $products["register_invima"]         = $request["register_invima"][$key];
                 $products["date_expiration"]         = $request["date_expiration"][$key];
@@ -92,6 +94,7 @@ class TechnicalReceptionImplantesController extends Controller
             $data = TechnicalReceptionImplante::
              with('proveedor')
             ->with('user')
+            // ->with('detalle')
             ->get();
             $data->map(function($item){
                 $item->detalle = TechnicalReceptionProductoImplante::where(['estatus'=>'Disponible','id_technical_reception_implante' => $item->id])->get();
