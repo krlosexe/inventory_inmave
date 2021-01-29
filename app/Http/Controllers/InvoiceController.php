@@ -392,10 +392,12 @@ class InvoiceController extends Controller
         $pdf = app('dompdf.wrapper');
         $pdf->loadHTML('<h1>Styde.net</h1>');
 
-        $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
+        if($data){
+            $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
+            return $pdf->loadView('invoice.InvoicePdfImplante', $data)
+                ->stream('archivo.pdf');
+        }
 
-        return $pdf->loadView('invoice.InvoicePdfImplante', $data)
-            ->stream('archivo.pdf');
     }
 
     public function ShowInvoiceReemisionImplantes($id)
@@ -417,10 +419,11 @@ class InvoiceController extends Controller
 
         $pdf = app('dompdf.wrapper');
         $pdf->loadHTML('<h1>Styde.net</h1>');
+        if($data){
+            $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
+            return $pdf->loadView('invoice.InvoicePdfImplante', $data)
+                ->stream('archivo.pdf');
+        }
 
-        $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
-
-        return $pdf->loadView('invoice.InvoicePdfImplante', $data)
-            ->stream('archivo.pdf');
     }
 }

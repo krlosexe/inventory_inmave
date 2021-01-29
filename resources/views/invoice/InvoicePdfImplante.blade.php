@@ -43,9 +43,25 @@
 
 
     <div class="resolucion">
-        <h3>NIT: 900 887 221-2</h3>
+    @if($warehouse  == "Medellin" || $warehouse  == "Cali")
+    <h3>NIT: 900 887 221-2</h3>
+    @elseif($warehouse  == "Bogota" )
+    <h3>NIT: 901 428 514-0</h3>
+    @else
+    @endif
+    @if($warehouse  == "Medellin" || $warehouse  == "Cali")
         <p>Resolucion Autorizada por la DIAN No. 18763006154625</p>
+    @elseif($warehouse  == "Bogota")
+    <p>Resolucion Autorizada por la DIAN No. 18764010079751</p>
+    @else
+    @endif
+    
+    @if($warehouse  == "Medellin" || $warehouse  == "Cali")
         <p>De Junio 02 de 2020 Numeracion 0041 a 0140</p>
+        @elseif($warehouse  == "Bogota")
+        <p>De Mayo 05 de 2020 Numeracion 1 a 300</p>
+        @else
+    @endif
         <p>Facturacion por Computador</p>
         <p>No somos Autorretenedores</p>
         <p>No somos Grandes Contribuyentes</p>

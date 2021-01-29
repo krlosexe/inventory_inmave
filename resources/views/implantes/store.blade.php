@@ -73,8 +73,8 @@
                                     <th>Serial</th>
                                     <th>Lote</th>
                                     <th>Registro INVIMA</th>
-                                    <th>Vence</th>
-                                    <th>Valor</th>
+                                    <th>F. Vencimiento</th>
+                                    <!-- <th>Valor</th> -->
                                     <th>Descripción</th>
                                     <th>Gramaje</th>
                                     <th>Perfil</th>

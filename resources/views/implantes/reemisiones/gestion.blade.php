@@ -142,7 +142,7 @@
 						if (actualizar == 1)
 							botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 						if (actualizar == 1)
-							botones += "<a href='api/reemision/print/" + row.id + "' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
+							botones += "<a href='api/reemision/implante/print/" + row.id + "' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
 						return botones;
 					}
 				},
@@ -391,7 +391,7 @@
 		});
 	}
 	$("#print").click(function(e) {
-		window.open(`api/reemision/print/${$("#id_edit").val()}`, "_blank");
+		window.open(`api/reemision/implante/print/${$("#id_edit").val()}`, "_blank");
 	});
 	/* ------------------------------------------------------------------------------- */
 	/*
