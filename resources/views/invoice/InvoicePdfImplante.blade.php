@@ -55,7 +55,7 @@
     <p>Resolucion Autorizada por la DIAN No. 18764010079751</p>
     @else
     @endif
-    
+
     @if($warehouse  == "Medellin" || $warehouse  == "Cali")
         <p>De Junio 02 de 2020 Numeracion 0041 a 0140</p>
         @elseif($warehouse  == "Bogota")
@@ -228,17 +228,31 @@
             </tr>
 
             <tr>
-                <th style="border-top: 1px solid black;">INMAVE COLOMBIA SAS</th>
+            @if($warehouse  == "Medellin" || $warehouse  == "Cali")
+            <th style="border-top: 1px solid black;">INMAVE COLOMBIA SAS</th>
+            @elseif($warehouse  == "Bogota" )
+            <th style="border-top: 1px solid black;">S&S MEDICAL DISPOSITVES SAS</th>
+            @else
+            @endif
+               
                 <th style="border-top: 1px solid black;">  Firma y sello de Recibido</th>
             </tr>
         </table>
 
 
         <br><br>
-
+        @if($warehouse  == "Medellin" || $warehouse  == "Cali")
         <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
 
             <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
+            
+            @elseif($warehouse  == "Bogota" )
+            <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
+
+                <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
+            @else
+            @endif
+        
 
     </div>
 
