@@ -5,32 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
 
-
     <style>
         .resolucion p{
             font-size : 12px;
             line-height: .5em;
             font-family: Arial, Helvetica, sans-serif;
         }
-
         body{
             font-family: Arial, Helvetica, sans-serif;
         }
-
         td{
             font-size : 12px;
         }
         #fechas td{
             padding-bottom: 2%;
         }
-
-
         #client td{
             padding-bottom: 1%;
         }
-
-
-
         #fechas{
             position: absolute;
             top: -10px;
@@ -47,7 +39,6 @@
     <img src="http://pdtclientsolutions.com/inventory_inmave/img/silimed.jpeg"  width="300">
     @else
     @endif
-
 
     <div class="resolucion">
     @if($warehouse  == "Medellin" || $warehouse  == "Cali")
@@ -74,8 +65,6 @@
         <p>No somos Grandes Contribuyentes</p>
         <p>Actividad Economica 4645</p>
     </div>
-
-
     <div id="fechas">
 
         @if($reissue == 0)
@@ -167,16 +156,12 @@
 
         <br>
         <table  width="100%" border="1" cellspacing="0" cellpadding="0">
-
-
-
             <tr>
                 <td rowspan="5" style="border: 1px solid black; text-align: center;  width: 50px;"><b>SON:</b></td>
                 <td rowspan="5" style="border: 1px solid black; text-align: center;  width: 100px;"><b style="font-size:10px">  {{$ammount_text}} </b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>SUBTOTAL</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($subtotal, 2, ',', '.')}}</b></td>
             </tr>
-
 
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>IVA</b></td>
@@ -214,13 +199,10 @@
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($discount_total, 2, ',', '.')}}</b></td>
             </tr>
 
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>RTE FUENTE ({{$rte_fuente}} %)</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($rte_fuente_total, 2, ',', '.')}}</b></td>
             </tr>
-
-
 
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>TOTAL</b></td>
@@ -274,10 +256,7 @@
             @else
             @endif
         
-
     </div>
-
-
 
 </body>
 </html>
