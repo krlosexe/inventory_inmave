@@ -39,7 +39,14 @@
     </style>
 </head>
 <body>
+    @if($warehouse == "Medellin" || $warehouse =="Cali")
+    
     <img src="http://pdtclientsolutions.com/inventory_inmave/img/inmave.png"  width="300">
+    
+    @elseif($warehouse  == "Bogota" )
+    <img src="http://pdtclientsolutions.com/inventory_inmave/img/silimed.jpeg"  width="300">
+    @else
+    @endif
 
 
     <div class="resolucion">
@@ -145,6 +152,7 @@
             </tr>
 
             @foreach($items as $value)
+            echo $value;
                 <tr>
                     <td style="text-align: center">{{$value["description"]}}</td>
                     <td style="text-align: center">{{$value["qty"]}}</td>
@@ -154,11 +162,7 @@
             @endforeach
 
         </table>
-
-
         <br>   <br>   <br>
-
-
         <p style="font-size: 11px;" >Obervaciones: {{ $observations}}</p>
 
         <br>
@@ -222,18 +226,10 @@
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>TOTAL</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($total_invoice, 2, ',', '.')}}</b></td>
             </tr>
-
-
         </table>
 
         <br>
-
-
         <p style="font-size: 11px;" >Al efectuar su pago gire cheque a favor de  INMAVE COLOMBIA SAS NIT: 900 887 221-2,  Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
-
-
-
-
 
         <table width="100%" style="font-size: 11px" >
             <tr>
@@ -264,8 +260,6 @@
                 <th style="border-top: 1px solid black;">  Firma y sello de Recibido</th>
             </tr>
         </table>
-
-
         <br><br>
         @if($warehouse  == "Medellin" || $warehouse  == "Cali")
         <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
