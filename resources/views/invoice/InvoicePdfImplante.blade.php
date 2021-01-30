@@ -87,15 +87,11 @@
           @endif
 
         @endif
-
-
         <table>
-
             <tr>
                 <td><b>Fecha de Factura:</b></td></td>
                 <td>{{$created_at}}</td>
             </tr>
-
             <tr>
                 <td><b>Fecha de Vencimiento:</b></td>
                 <td>{{$created_at}}</td>
@@ -109,7 +105,6 @@
     <div id="client">
 
         <table>
-
             <tr>
                 <td><b>Señores:</b></td></td>
                 <td>{{$name_client}}</td>
@@ -119,7 +114,6 @@
                 <td>{{$phone}}</td>
                 <td><b>Ciudad:</b></td>
                 <td>{{$city}}</td>
-        
             </tr>
             <tr>
                 <td><b>Correo:</b></td>
@@ -139,7 +133,6 @@
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 150px;"><b>VLR UNITARIO</b></td>
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 100px;"><b>VLR TOTAL</b></td>
             </tr>
-
             @foreach($items as $value)
             echo $value;
                 <tr>
@@ -149,7 +142,6 @@
                     <td style="text-align: center">{{number_format(($value["price"] * $value["qty"]), 2, ',', '.')}}</td>
                 </tr>
             @endforeach
-
         </table>
         <br>   <br>   <br>
         <p style="font-size: 11px;" >Obervaciones: {{ $observations}}</p>
@@ -238,21 +230,16 @@
             <th style="border-top: 1px solid black;">S&S MEDICAL DISPOSITVES SAS</th>
             @else
             @endif
-               
                 <th style="border-top: 1px solid black;">  Firma y sello de Recibido</th>
             </tr>
         </table>
         <br><br>
         @if($warehouse  == "Medellin" || $warehouse  == "Cali")
         <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
-
             <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
-            
             @elseif($warehouse  == "Bogota" )
             <p style="font-size: 11px"><b>SILIMED COLOMBIA SAS -  NIT 901130935, CUENTA CORRIENTE BANCOLOMBIA N° 67400012942</b></p>
-
                 <!-- <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p> -->
-
             @else
             @endif
         
