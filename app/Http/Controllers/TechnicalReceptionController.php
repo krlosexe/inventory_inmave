@@ -31,7 +31,6 @@ class TechnicalReceptionController extends Controller
         return response()->json($data)->setStatusCode(200);
        
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +40,6 @@ class TechnicalReceptionController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -50,11 +48,9 @@ class TechnicalReceptionController extends Controller
      */
     public function store(Request $request)
     {
-
         $request["discount"]   =  str_replace(",", "", $request["discount"]);
         $request["rte_fuente"] =  str_replace(",", "", $request["rte_fuente"]);
         $technical_reception   = TechnicalReception::create($request->all());
-
         $auditoria              = new Auditoria;
         $auditoria->tabla       = "technical_reception";
         $auditoria->cod_reg     = $technical_reception->id;
@@ -63,11 +59,8 @@ class TechnicalReceptionController extends Controller
         $auditoria->usr_regins  = $request["id_user"];
         $auditoria->save();
 
-
         foreach($request["id_product"] as $key => $product){
-
             $products = [];
-
             $products["id_technical_reception"]  = $technical_reception->id;
             $products["id_product"]              = $product;
             $products["laboratory"]              = $request["laboratory"][$key];
@@ -81,18 +74,13 @@ class TechnicalReceptionController extends Controller
 
             TechnicalReceptionProducts::create($products);
         }
-
-
         if ($technical_reception) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
-
-
     }
-
     /**
      * Display the specified resource.
      *
@@ -103,7 +91,6 @@ class TechnicalReceptionController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -114,7 +101,6 @@ class TechnicalReceptionController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -124,18 +110,13 @@ class TechnicalReceptionController extends Controller
      */
     public function update(Request $request, $technicalReception)
     {
-
         $request["discount"]   =  str_replace(",", "", $request["discount"]);
         $request["rte_fuente"] =  str_replace(",", "", $request["rte_fuente"]);
-        
         $update = TechnicalReception::find($technicalReception)->update($request->all());
-
         TechnicalReceptionProducts::where("id_technical_reception", $technicalReception)->delete();
 
         foreach($request["id_product"] as $key => $product){
-
             $products = [];
-
             $products["id_technical_reception"]  = $technicalReception;
             $products["id_product"]              = $product;
             $products["laboratory"]              = $request["laboratory"][$key];
@@ -149,8 +130,6 @@ class TechnicalReceptionController extends Controller
 
             TechnicalReceptionProducts::create($products);
         }
-
-
         if ($update) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
@@ -158,33 +137,18 @@ class TechnicalReceptionController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-
-
-
-
     public function status($id, $status, Request $request)
     {
-      
-        $auditoria =  Auditoria::where("cod_reg", $id)
-                                    ->where("tabla", "technical_reception")->first();
-
+        $auditoria =  Auditoria::where("cod_reg", $id)->where("tabla", "technical_reception")->first();
         $auditoria->status = $status;
-
         if($status == 0){
             $auditoria->usr_regmod = $request["id_user"];
             $auditoria->fec_regmod = date("Y-m-d");
         }
         $auditoria->save();
-
         $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
         return response()->json($data)->setStatusCode(200);
-    
     }
-
-
-
-
-
     /**
      * Remove the specified resource from storage.
      *

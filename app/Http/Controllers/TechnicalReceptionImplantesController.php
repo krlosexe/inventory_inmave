@@ -100,7 +100,6 @@ class TechnicalReceptionImplantesController extends Controller
                 $item->detalle = TechnicalReceptionProductoImplante::where(['estatus'=>'Disponible','id_technical_reception_implante' => $item->id])->get();
               return $item;
             });
-
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;
