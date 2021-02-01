@@ -210,18 +210,15 @@
 		// searchSerial("#add_product")
 		$("#indicador_edit").val(0)
 		cuadros("#cuadro1", "#cuadro2");
-		
 		// $('#serial').empty();
 		// $('#warehouse').empty()
 		// $('#clients').empty()
-		
 		$('#table_products tbody').empty();
 		$('#subtotal_text').empty(0)
 		$('#vat_total_text').empty(0)
 		$('#discount_total_text').empty(0)
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
-
 		$("#serial").focus();		
 		$("#serial").change(function() {
 			$("#serial").val($("#serial").val().substr(2))
@@ -246,7 +243,6 @@
 			
 	// 	// });
 	// }
-
 	function serial(data){
 		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
@@ -780,8 +776,4 @@
 	// 	}
 	// });
 </script>
-
-
-
-
 @endsection

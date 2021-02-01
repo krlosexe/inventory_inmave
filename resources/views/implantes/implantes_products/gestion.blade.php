@@ -1,8 +1,5 @@
 @extends('layouts.app')
-
-
 @section('CustomCss')
-
 <style>
 	.kv-avatar .krajee-default.file-preview-frame,
 	.kv-avatar .krajee-default.file-preview-frame:hover {
@@ -28,11 +25,7 @@
 		font-weight: normal;
 	}
 </style>
-
-
 @endsection
-
-
 @section('content')
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -121,7 +114,6 @@
 	function store() {
 		enviarFormulario("#store", 'api/products/implantes/create', '#cuadro2');
 	}
-
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
@@ -194,7 +186,6 @@
 		activar("#table tbody", table)
 		desactivar("#table tbody", table)
 		eliminar("#table tbody", table)
-
 	}
 	function nuevo() {
 		$("#alertas").css("display", "none");
@@ -206,7 +197,6 @@
 			var str = $("#referencia").val().substr(2)
 		    $("#referencia").val(str.replace("'","-"))
 			});
-		
 	}
 	/* ------------------------------------------------------------------------------- */
 	/* 

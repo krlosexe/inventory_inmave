@@ -70,12 +70,10 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th style="text-align: center;" id="descuento_text">
-                                       
+                                    <th style="text-align: center;" id="descuento_text">     
                                     <label for="apply_discount3">¿ Quieres Aplicar Descuento (5%)?</label>
                                         <input type="checkbox" name="discount" id="apply_discount3" class="form-control">
                                         <br><br>
-
                                         <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
                                         <input type="checkbox"  name="discount" id="apply_discount" class="form-control">
                                         <br><br>
