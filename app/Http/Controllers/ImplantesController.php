@@ -128,7 +128,6 @@ class ImplantesController extends Controller
             return $th;
         }
     }
-
     public function ListImplanteRemision()
     {
         $data = ImplanteReemision::select("implantes_reemisiones.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
@@ -260,5 +259,4 @@ class ImplantesController extends Controller
             return $th;
         }
     }
-    
 }
