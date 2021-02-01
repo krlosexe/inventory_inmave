@@ -47,9 +47,9 @@
                       <select name="perfil" class="form-control" id="edit_perfil">
                           <option value="">Seleccione</option>
                           <option value="Bajo">Bajo</option>
-                          <option value="Medio">Moderado</option>
-                          <option value="Alto">Alta</option>
-                          <option value="Alto">Extra Alta</option>
+                          <option value="Moderado">Moderado</option>
+                          <option value="Alta">Alta</option>
+                          <option value="Extra Alta">Extra Alta</option>
                         </select>
                       </div>
                   </div>

@@ -22,6 +22,9 @@ class ProductImplanteController extends Controller
     public function CreateProductImplante(Request $request)
     {
         try {
+            
+            dd($request->all());
+
             $create = ProductImplantes::create($request->all());
             if($create){
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
