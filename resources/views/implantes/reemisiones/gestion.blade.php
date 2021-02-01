@@ -348,14 +348,12 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-			console.log('ed',data);			$("#indicador_edit").val(1)
-			
+			$("#indicador_edit").val(1)
 			$("#serial_edit").focus();		
 			$("#serial_edit").change(function() {
 				$("#serial_edit").val($("#serial_edit").val().substr(2))
 				AddProductosEdit($("#serial_edit").val());
 			});
-			
 			$.map(data, function(item, key) {
 				// console.log(item)
 				// $("#serial").val(1)
@@ -374,7 +372,6 @@
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
 			} 
-
 			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.subtotal)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
@@ -676,7 +673,6 @@
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
-
 			if ($(item).is(':checked')) {
 				const price = inNum($(item).parent("td").parent("tr").children("td").find(".price_product").val())
 				const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
