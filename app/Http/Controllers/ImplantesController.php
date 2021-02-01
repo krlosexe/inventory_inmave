@@ -20,7 +20,6 @@ class ImplantesController extends Controller
     {
         try {
             $data = TechnicalReceptionProductoImplante::where(['estatus'=>'Disponible','serial'=>$serial])->get();
-          
             $data->map(function($item){
                     $item->products = ProductImplantes::where('referencia',$item->referencia)->first();
                 return $item;
@@ -185,7 +184,6 @@ class ImplantesController extends Controller
                     ImplantOutputItems::create($producs_items);
 
                     TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Vendido"]);
-                
                 }
             }
             if ($output) {
@@ -247,9 +245,7 @@ class ImplantesController extends Controller
             ->orderBy("implantes_output.id", "DESC")
             ->with("items")
             ->get();
-        
             return $data;
-
     }
     public function searchSerial($ref)
     {

@@ -5,32 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
 
-
     <style>
         .resolucion p{
             font-size : 12px;
             line-height: .5em;
             font-family: Arial, Helvetica, sans-serif;
         }
-
         body{
             font-family: Arial, Helvetica, sans-serif;
         }
-
         td{
             font-size : 12px;
         }
         #fechas td{
             padding-bottom: 2%;
         }
-
-
         #client td{
             padding-bottom: 1%;
         }
-
-
-
         #fechas{
             position: absolute;
             top: -10px;
@@ -39,8 +31,14 @@
     </style>
 </head>
 <body>
+    @if($warehouse == "Medellin" || $warehouse =="Cali")
+    
     <img src="http://pdtclientsolutions.com/inventory_inmave/img/inmave.png"  width="300">
-
+    
+    @elseif($warehouse  == "Bogota" )
+    <img src="http://pdtclientsolutions.com/inventory_inmave/img/silimed.jpeg"  width="300">
+    @else
+    @endif
 
     <div class="resolucion">
     @if($warehouse  == "Medellin" || $warehouse  == "Cali")
@@ -67,8 +65,6 @@
         <p>No somos Grandes Contribuyentes</p>
         <p>Actividad Economica 4645</p>
     </div>
-
-
     <div id="fechas">
 
         @if($reissue == 0)
@@ -91,15 +87,11 @@
           @endif
 
         @endif
-
-
         <table>
-
             <tr>
                 <td><b>Fecha de Factura:</b></td></td>
                 <td>{{$created_at}}</td>
             </tr>
-
             <tr>
                 <td><b>Fecha de Vencimiento:</b></td>
                 <td>{{$created_at}}</td>
@@ -113,7 +105,6 @@
     <div id="client">
 
         <table>
-
             <tr>
                 <td><b>Señores:</b></td></td>
                 <td>{{$name_client}}</td>
@@ -123,7 +114,6 @@
                 <td>{{$phone}}</td>
                 <td><b>Ciudad:</b></td>
                 <td>{{$city}}</td>
-        
             </tr>
             <tr>
                 <td><b>Correo:</b></td>
@@ -143,8 +133,8 @@
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 150px;"><b>VLR UNITARIO</b></td>
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 100px;"><b>VLR TOTAL</b></td>
             </tr>
-
             @foreach($items as $value)
+            echo $value;
                 <tr>
                     <td style="text-align: center">{{$value["description"]}}</td>
                     <td style="text-align: center">{{$value["qty"]}}</td>
@@ -152,20 +142,12 @@
                     <td style="text-align: center">{{number_format(($value["price"] * $value["qty"]), 2, ',', '.')}}</td>
                 </tr>
             @endforeach
-
         </table>
-
-
         <br>   <br>   <br>
-
-
         <p style="font-size: 11px;" >Obervaciones: {{ $observations}}</p>
 
         <br>
         <table  width="100%" border="1" cellspacing="0" cellpadding="0">
-
-
-
             <tr>
                 <td rowspan="5" style="border: 1px solid black; text-align: center;  width: 50px;"><b>SON:</b></td>
                 <td rowspan="5" style="border: 1px solid black; text-align: center;  width: 100px;"><b style="font-size:10px">  {{$ammount_text}} </b></td>
@@ -173,41 +155,55 @@
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($subtotal, 2, ',', '.')}}</b></td>
             </tr>
 
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>IVA</b></td>
+                @if($warehouse  == "Medellin" || $warehouse  == "Cali")
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($vat_total, 2, ',', '.')}} </b></td>
+                @elseif($warehouse  == "Bogota" )
+                <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format(0, 2, ',', '.')}} </b></td>
+                @else
+                @endif
             </tr>
 
             <tr>
-                <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (10%)</b></td>
+            @if($warehouse  == "Medellin" || $warehouse  == "Cali")
+            @if($discount_type  == 5)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (5%)</b></td>
+            @endif
+            @if($discount_type  == 10)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (10%)</b></td>
+            @endif
+            @if($discount_type  == 15)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (15%)</b></td>
+            @endif
+                @elseif($warehouse  == "Bogota" )
+                @if($discount_type  == 5)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (5%)</b></td>
+            @endif
+            @if($discount_type  == 10)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (10%)</b></td>
+            @endif
+            @if($discount_type  == 15)
+            <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (15%)</b></td>
+            @endif
+                @else
+                @endif
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($discount_total, 2, ',', '.')}}</b></td>
             </tr>
-
 
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>RTE FUENTE ({{$rte_fuente}} %)</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($rte_fuente_total, 2, ',', '.')}}</b></td>
             </tr>
 
-
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>TOTAL</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($total_invoice, 2, ',', '.')}}</b></td>
             </tr>
-
-
         </table>
 
         <br>
-
-
         <p style="font-size: 11px;" >Al efectuar su pago gire cheque a favor de  INMAVE COLOMBIA SAS NIT: 900 887 221-2,  Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
-
-
-
-
 
         <table width="100%" style="font-size: 11px" >
             <tr>
@@ -234,29 +230,20 @@
             <th style="border-top: 1px solid black;">S&S MEDICAL DISPOSITVES SAS</th>
             @else
             @endif
-               
                 <th style="border-top: 1px solid black;">  Firma y sello de Recibido</th>
             </tr>
         </table>
-
-
         <br><br>
         @if($warehouse  == "Medellin" || $warehouse  == "Cali")
         <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
-
             <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
-            
             @elseif($warehouse  == "Bogota" )
-            <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
-
-                <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
+            <p style="font-size: 11px"><b>SILIMED COLOMBIA SAS -  NIT 901130935, CUENTA CORRIENTE BANCOLOMBIA N° 67400012942</b></p>
+                <!-- <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p> -->
             @else
             @endif
         
-
     </div>
-
-
 
 </body>
 </html>

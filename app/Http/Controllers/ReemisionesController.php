@@ -40,7 +40,6 @@ class ReemisionesController extends Controller
         foreach($data as $value){
 
             foreach($value["products"] as $product){
-
                 $entry_medellin = DB::table("product_entry_items")
                             ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
                             ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
@@ -66,7 +65,6 @@ class ReemisionesController extends Controller
                     if($output_medellin){
                         $total_output_medellin = $output_medellin->total;
                     }
-
                     $total = $entry_medellin->total - $total_output_medellin;
                 }else{
                     $total = 0;
@@ -77,7 +75,6 @@ class ReemisionesController extends Controller
         }
         return response()->json($data)->setStatusCode(200);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -105,8 +102,6 @@ class ReemisionesController extends Controller
         $auditoria->fec_regins  = date("Y-m-d H:i:s");
         $auditoria->usr_regins  = $request["id_user"];
         $auditoria->save();
-
-
         if(isset($request->id_product)){
             foreach($request->id_product as $key => $value){
                 $producs_items = [];
@@ -120,8 +115,6 @@ class ReemisionesController extends Controller
                 ReemisionesItems::create($producs_items);
             }
         }
-
-
         if ($output) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");
             return response()->json($data)->setStatusCode(200);
@@ -129,7 +122,6 @@ class ReemisionesController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-
     /**
      * Display the specified resource.
      *
@@ -140,7 +132,6 @@ class ReemisionesController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -151,7 +142,6 @@ class ReemisionesController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
