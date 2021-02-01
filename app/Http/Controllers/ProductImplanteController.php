@@ -23,7 +23,7 @@ class ProductImplanteController extends Controller
     {
         try {
             
-            dd($request->all());
+            // dd($request->all());
 
             $create = ProductImplantes::create($request->all());
             if($create){
