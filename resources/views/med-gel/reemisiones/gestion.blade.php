@@ -644,7 +644,6 @@
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
-
 			if ($(item).is(':checked')) {
 				const price = inNum($(item).parent("td").parent("tr").children("td").find(".price_product").val())
 				const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
