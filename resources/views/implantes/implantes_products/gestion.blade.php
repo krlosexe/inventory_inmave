@@ -63,7 +63,7 @@
 										<th>Descripcion</th>
 										<th>Gramaje</th>
 										<th>Registro Inmave</th>
-										<th>Perfil</th>
+										<th>Precio</th>
 										<th>Registrado por</th>
 										<th>Fecha Registro</th>
 									</tr>
@@ -162,7 +162,7 @@
 					"data": "register_invima"
 				},
 				{
-					"data": "perfil"
+					"data": "precio"
 				},
 				{
 					"data": "user",
