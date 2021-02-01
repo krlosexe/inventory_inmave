@@ -210,18 +210,15 @@
 		// searchSerial("#add_product")
 		$("#indicador_edit").val(0)
 		cuadros("#cuadro1", "#cuadro2");
-		
 		// $('#serial').empty();
 		// $('#warehouse').empty()
 		// $('#clients').empty()
-		
 		$('#table_products tbody').empty();
 		$('#subtotal_text').empty(0)
 		$('#vat_total_text').empty(0)
 		$('#discount_total_text').empty(0)
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
-
 		$("#serial").focus();		
 		$("#serial").change(function() {
 			$("#serial").val($("#serial").val().substr(2))
@@ -246,7 +243,6 @@
 			
 	// 	// });
 	// }
-
 	function serial(data){
 		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
@@ -348,14 +344,12 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-			console.log('ed',data);			$("#indicador_edit").val(1)
-			
+			$("#indicador_edit").val(1)
 			$("#serial_edit").focus();		
 			$("#serial_edit").change(function() {
 				$("#serial_edit").val($("#serial_edit").val().substr(2))
 				AddProductosEdit($("#serial_edit").val());
 			});
-			
 			$.map(data, function(item, key) {
 				// console.log(item)
 				// $("#serial").val(1)
@@ -374,7 +368,6 @@
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
 			} 
-
 			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.subtotal)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
@@ -676,7 +669,6 @@
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
-
 			if ($(item).is(':checked')) {
 				const price = inNum($(item).parent("td").parent("tr").children("td").find(".price_product").val())
 				const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
@@ -784,8 +776,4 @@
 	// 	}
 	// });
 </script>
-
-
-
-
 @endsection

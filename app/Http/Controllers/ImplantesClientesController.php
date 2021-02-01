@@ -42,7 +42,6 @@ class ImplantesClientesController extends Controller
     public function store(Request $request)
     {
         $clients = ImplantesClientes::create($request->all());
-
         $auditoria              = new Auditoria;
         $auditoria->tabla       = "implantes_clients";
         $auditoria->cod_reg     = $clients->id;
@@ -97,7 +96,6 @@ class ImplantesClientesController extends Controller
     public function update(Request $request, $clients)
     {
         $update_clients = ImplantesClientes::find($clients)->update($request->all());
-
         if ($update_clients) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
@@ -107,21 +105,15 @@ class ImplantesClientesController extends Controller
     }
     public function status($id, $status, Request $request)
     {
-      
-        $auditoria =  Auditoria::where("cod_reg", $id)
-                                    ->where("tabla", "implantes_clients")->first();
-
+        $auditoria =  Auditoria::where("cod_reg", $id)->where("tabla", "implantes_clients")->first();
         $auditoria->status = $status;
-
         if($status == 0){
             $auditoria->usr_regmod = $request["id_user"];
             $auditoria->fec_regmod = date("Y-m-d");
         }
         $auditoria->save();
-
         $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
         return response()->json($data)->setStatusCode(200);
-    
     }
     /**
      * Remove the specified resource from storage.

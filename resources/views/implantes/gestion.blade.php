@@ -274,7 +274,6 @@
 					enfocar();
 				}
 			});
-
 		});
 	}
 	function enfocar() {
@@ -341,7 +340,6 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-					console.log('recep',data);
 					var valid = false
 					$('#table_products_imp tbody tr').each(function() {
 						if ($(this).find(".serial").val() == '') {
@@ -364,7 +362,6 @@
 						html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' readonly></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
-
 					} else {
 						warning('¡El serial no puede estar vacio!');
 					}
@@ -419,7 +416,6 @@
 					html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
 					html += "<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
 					html += "<td><input style='text-align: right;width: 142px;' type='number'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
-					html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
 					html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
 					html += "<td><input type='text' class='form-control' name='gramaje[]' value='" + data.gramaje + "' required></td>"
 					html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
@@ -505,7 +501,6 @@
 			$("#observations_edit").val(data.observations)
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			$('#table_products tbody').empty();
-			// AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
 			GetCategories("#category")
 			cuadros('#cuadro1', '#cuadro4');
 			$("#id_edit").val(data.id)

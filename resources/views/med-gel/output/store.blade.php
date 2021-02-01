@@ -70,20 +70,16 @@
                   <th colspan="7" style="text-align: right;">IVA <input type="hidden" name="vat_total" id="vat_total"></th>
                   <th style="text-align: right;" id="vat_total_text">$0</th>
                 </tr>
-
                 <tr>
                   <th colspan="7" style="text-align: right;">Descuento <input type="hidden" name="discount_total" id="discount_total"></th>
                   <th style="text-align: right;" id="discount_total_text">$0</th>
                 </tr>
-
-
                 <tr>
                   <th style="text-align: left;">RTE Fuente</th>
                   <th style="text-align: right;"><input type="text" class="form-control discount" name="rte_fuente" id="rte_fuente" value="0"></th>
                   <th colspan="5" style="text-align: right;">RTE Fuente <input type="hidden" name="rte_fuente_total" id="rte_fuente_total"></th>
                   <th style="text-align: right;" id="rte_fuente_text">$0</th>
                 </tr>
-
                 <tr>
                   <th colspan="7" style="text-align: right;">Total factura <input type="hidden" name="total_invoice" id="total_invoice"></th>
                   <th style="text-align: right;" id="total_invoice_text">$0</th>
@@ -107,17 +103,14 @@
       <br>
   </div>
   <center>
-
     <button type="button" class="btn btn-danger btn-user" onclick="prev('#cuadro2')">
       Cancelar
     </button>
     <button class="btn btn-primary btn-user">
       Registrar
     </button>
-
   </center>
   <br>
   <br>
   </form>
-
 </div>

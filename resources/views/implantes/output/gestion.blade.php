@@ -115,7 +115,6 @@
 	function store() {
 		enviarFormulario("#store", 'api/output/implantes/create', '#cuadro2');
 	}
-
 	function serial(data){
 		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
@@ -313,7 +312,6 @@
 				$("#serial_edit").val($("#serial_edit").val().substr(2))
 				AddProductosEdit($("#serial_edit").val());
 			});
-
 			getClients("#clients_edit", data.id_client)
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			ShowProdcuts("#table_products_edit_out", data)
@@ -715,5 +713,4 @@
 		calTotal(".total_product", '_edit')
 	});
 </script>
-
 @endsection

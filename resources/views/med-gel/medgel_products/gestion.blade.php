@@ -1,8 +1,5 @@
 @extends('layouts.app')
-
-
 @section('CustomCss')
-
 <style>
 	.kv-avatar .krajee-default.file-preview-frame,
 	.kv-avatar .krajee-default.file-preview-frame:hover {
@@ -12,27 +9,20 @@
 		box-shadow: none;
 		text-align: center;
 	}
-
 	.kv-avatar {
 		display: inline-block;
 	}
-
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
-
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
 		font-weight: normal;
 	}
 </style>
-
-
 @endsection
-
-
 @section('content')
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -112,15 +102,12 @@
 		$("#nav_medgel, #modulo_medgel").addClass("active");
 		verifyPersmisos(id_user, tokens, "products");
 	});
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/products/medgel/edit', '#cuadro4', false, "#avatar-edit");
 	}
-
 	function store() {
 		enviarFormulario("#store", 'api/products/medgel/create', '#cuadro2');
 	}
-
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
@@ -190,7 +177,6 @@
 		activar("#table tbody", table)
 		desactivar("#table tbody", table)
 		eliminar("#table tbody", table)
-
 	}
 	function nuevo() {
 		$("#alertas").css("display", "none");
@@ -207,8 +193,7 @@
 		$("#lote").change(function() {
 			var lt = $("#lote").val().substr(2)
 		    $("#lote").val(lt)
-			});
-		
+			});	
 	}
 	/* ------------------------------------------------------------------------------- */
 	/* 
@@ -241,13 +226,11 @@
 			$("#qty_edit").val(data.qty)
 			$("#date_expire_edit").val(data.date_expire)
 			$("#id_edit").val(data.id)
-
 			$("#referencia_edit").focus();
 			$("#referencia_edit").change(function() {
 			var str = $("#referencia_edit").val()
 		    $("#referencia_edit").val(str.replace("'","-"))
 			});
-
 			$("#lote_edit").change(function() {
 				var lt = $("#lote_edit").val().substr(2)
 				$("#lote_edit").val(lt)

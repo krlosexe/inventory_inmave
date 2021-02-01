@@ -21,7 +21,6 @@ class TechnicalReceptionImplantesController extends Controller
             $tri->save();
 
             foreach($request["referencia"] as $key => $referencia){
-
                 $products = [];
                 $products["id_technical_reception_implante"]  = $tri->id;
                 $products["referencia"]              = $referencia;

@@ -45,7 +45,6 @@
                                 </select>
                             </div>
                         </div>
-                       
                         <!-- <div class="col-md-2">
                             <br>
                             <button type="button" class="btn btn-primary btn-user" id="add_product_edit">
@@ -147,5 +146,4 @@
     <br>
     <br>
     </form>
-
 </div>

@@ -22,14 +22,10 @@ class TechnicalReceptionController extends Controller
                             ->join("providers", "providers.id", "=", "technical_reception.id_provider")
                             ->where("auditoria.tabla", "technical_reception")
                             ->where("auditoria.status", "!=", "0")
-
                             ->with("products")
-
                             ->orderBy("technical_reception.id", "DESC")
                             ->get();
-        
         return response()->json($data)->setStatusCode(200);
-       
     }
     /**
      * Show the form for creating a new resource.

@@ -1,8 +1,5 @@
 @extends('layouts.app')
-	
-
 	@section('CustomCss')
-
 		<style>
 			.kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
 			    margin: 0;
@@ -24,36 +21,23 @@
 			    font-weight: normal;
 			}
 		</style>
-
-
 	@endsection
-
-
 	@section('content')
 	     <!-- Page Wrapper -->
 		  <div id="wrapper">
-
 		    @include('layouts.sidebar')
-
 		    <!-- Content Wrapper -->
 		    <div id="content-wrapper" class="d-flex flex-column">
-
 		      <!-- Main Content -->
 		      <div id="content">
-
 				@include('layouts.topBar') 
-		       
-
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
-
 			          <!-- Page Heading -->
 			          <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
-
 			          <div id="alertas"></div>
 			          <input type="hidden" class="id_user">
 			          <input type="hidden" class="token">
-
 			          <!-- DataTales Example -->
 			          <div class="card shadow mb-4" id="cuadro1">
 			            <div class="card-header py-3">
@@ -81,25 +65,18 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody>
-			                    
 			                  </tbody>
 			                </table>
 			              </div>
 			            </div>
 			          </div>
-
-
 			          @include('implantes.clients.store')
 					  @include('implantes.clients.view')
 					  @include('implantes.clients.edit')
-
-
 			        </div>
 			        <!-- /.container-fluid -->
-
 		      </div>
 		      <!-- End of Main Content -->
-
 		      <!-- Footer -->
 		      <footer class="sticky-footer bg-white">
 		        <div class="container my-auto">
@@ -112,43 +89,26 @@
 
 		    </div>
 		    <!-- End of Content Wrapper -->
-
 		  </div>
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
 	@endsection
-
-
-
-
-
 	@section('CustomJs')
-
 		<script>
 			$(document).ready(function(){
 				store();
 				list();
 				update();
-
 				$("#collapse_Implantes").addClass("show");
 		        $("#nav_technical_reception, #modulo_Implantes").addClass("active");
 				verifyPersmisos(id_user, tokens, "clients");
 			});
-
-
-
 			function update(){
 				enviarFormularioPut("#form-update", 'api/implantes-clientes', '#cuadro4', false, "#avatar-edit");
 			}
-
-
 			function store(){
 				enviarFormulario("#store", 'api/implantes-clientes', '#cuadro2');
 			}
-
-
-
 			function list(cuadro) {
-				
 				var data = {
 					"id_user": id_user,
 					"token"  : tokens,
@@ -156,7 +116,6 @@
 				$('#table tbody').off('click');
 				var url=document.getElementById('ruta').value; 
 				cuadros(cuadro, "#cuadro1");
-
 				var table=$("#table").DataTable({
 					"destroy":true,
 					
@@ -203,25 +162,18 @@
 						'copy', 'csv', 'excel', 'pdf', 'print'
 					]
 				});
-
-
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
 
-
 			}
-
-
-
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 				cuadros("#cuadro1", "#cuadro2");
 			}
-
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -241,9 +193,6 @@
 					cuadros('#cuadro1', '#cuadro3');
 				});
 			}
-
-
-
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -258,19 +207,11 @@
 					$("#phone_edit").val(data.phone)
 					$("#email_edit").val(data.email)
 					$("#address_edit").val(data.address)
-
 					$("#city_edit").val(data.city)
-
-
-					
 					$("#id_edit").val(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
-			}
-
-
-
-					
+			}			
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -294,22 +235,13 @@
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
-
-
-
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
 					statusConfirmacion('api/implantes-clientes/status/'+data.id+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}
-
-
 		</script>
-		
-
-
-
 	@endsection
 
 
