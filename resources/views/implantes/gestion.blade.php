@@ -356,12 +356,12 @@
 						html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ></td>"
 						html += "<td><input type='text' class='serial form-control' name='serial[]' id='serial_" + contador + "'  required></td>"
 						html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
-						html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
+						html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' readonly></td>"
 						html += "<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
-						html += "<td><input style='text-align: right;width: 142px;' type='number'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
+						html += "<td><input style='text-align: right;width: 142px;' type='number'  class='form-control price_product items_calc' name='price[]' value='" +  data.precio + "' readonly></td>"
 						html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
-						html += "<td><input type='text' class='form-control' name='gramaje[]' value='" + data.gramaje + "' required></td>"
-						html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
+						html += "<td><input type='text' class='form-control' name='gramaje[]' value='" + data.gramaje + "' readonly></td>"
+						html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' readonly></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
 
@@ -376,6 +376,7 @@
 							$(this).val(number_format($(this).val(), 2));
 						}
 					});
+					// $(".serial").focus();
 					$(".serial").change(function() {
 						var sere = $(".serial").val().substr(2)
 					    $(".serial").val(sere)

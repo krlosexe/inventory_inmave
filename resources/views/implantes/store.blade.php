@@ -74,7 +74,7 @@
                                     <th>Lote</th>
                                     <th>Registro INVIMA</th>
                                     <th>F. Vencimiento</th>
-                                    <!-- <th>Valor</th> -->
+                                    <th>Valor</th>
                                     <th>Descripción</th>
                                     <th>Gramaje</th>
                                     <th>Perfil</th>
