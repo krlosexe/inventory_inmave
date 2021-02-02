@@ -59,7 +59,9 @@
         <p>Resolucion Autorizada por la DIAN No. 18763006154625</p>
         @endif
         @elseif($warehouse == "Bogota")
+        @if($reissue == 0)
         <p>Resolucion Autorizada por la DIAN No. 18764010079751</p>
+        @endif
         @else
         @endif
         @if($warehouse == "Medellin" || $warehouse == "Cali")
@@ -67,7 +69,9 @@
         <p>De Junio 02 de 2020 Numeracion 0041 a 0140</p>
         @endif
         @elseif($warehouse == "Bogota")
+        @if($reissue == 0)
         <p>De Mayo 05 de 2020 Numeracion 1 a 300</p>
+        @endif
         @else
         @endif
        
@@ -80,7 +84,7 @@
         @endif
     </div>
     <div id="fechas">
-        
+
         @if($reissue == 0)
         @if($warehouse == "Medellin" )
         <h4>FACTURA PROFORMA {{"MED-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
