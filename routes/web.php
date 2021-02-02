@@ -125,3 +125,7 @@ Route::get('med-gel-output', function () {
     return view('med-gel.output.gestion');
 });
 
+Route::get('traslados', function () {
+    return view('implantes.movimientos.gestion');
+});
+

@@ -149,3 +149,8 @@ Route::put('medgel/output/update/{id}', 'MedgelOutputController@UpdateMedgelOutp
 Route::get('invoice/implante/print/{id}', 'InvoiceController@ShowInvoiceImplantes');
 Route::get('reemision/implante/print/{id}', 'InvoiceController@ShowInvoiceReemisionImplantes');
 
+Route::post('implantes/products/movimiento/output', 'TraspasoController@createImplanteOuptTraspase');
+Route::get('implantes/products/movimiento/list', 'TraspasoController@ListImplanteOuptTraspase');
+Route::get('implantes/products/movimiento/detail/{id}', 'TraspasoController@ListImplanteOuptTraspaseById');
+Route::get('implantes/products/get/existence/warehouse/{warehouse}', 'ProductImplanteController@GetExistenceWarehouse');
+
