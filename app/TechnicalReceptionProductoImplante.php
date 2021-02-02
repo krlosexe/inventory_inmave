@@ -13,4 +13,7 @@ class TechnicalReceptionProductoImplante extends Model
     public function products(){
       return $this->belongsTo(ProductImplantes::class, 'id_product');
     }
+    public function head(){
+      return $this->belongsTo(TechnicalReceptionImplante::class, 'id_technical_reception_implante');
+    }
 }

@@ -110,7 +110,7 @@ class ProductImplanteController extends Controller
                     $output_medellin = DB::table("implantes_output_items")
                     ->selectRaw("(count(implantes_output_items.referencia))  as total")
                     ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
-                    // ->join("products_implantes", "products_implantes.id", "implantes_output_items.id_product")
+                    // ->join("produ1cts_implantes", "products_implantes.id", "implantes_output_items.id_product")
                     ->where("implantes_output.warehouse", "Medellin")
                     ->where("implantes_output_items.referencia",$id_product)
                     ->groupBy("implantes_output_items.referencia")
