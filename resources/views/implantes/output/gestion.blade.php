@@ -125,10 +125,8 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-					console.log('asdasdasdas',data.head.warehouse);
 					
 					$('#warehouse').val(data.head.warehouse)
-					$("#table_products_out tbody").html("")
 					var html = "";
 					var validaProduct = false
 					$("#table_products_out tbody tr").each(function() {
@@ -264,6 +262,7 @@
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
 
+		$("#table_products_out tbody").html("")
 		$("#serial").focus();		
 		$("#serial").change(function() {
 			$("#serial").val($("#serial").val().substr(2))
@@ -459,7 +458,7 @@
 			});
 	}
 	function ShowProdcuts(table, data) {
-		$(table + " tbody").html("")
+		// $(table + " tbody").html("")
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
