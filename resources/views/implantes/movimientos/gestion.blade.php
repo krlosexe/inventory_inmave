@@ -138,8 +138,8 @@
 		list();
 		update();
 
-		$("#collapse_Almacen").addClass("show");
-		$("#nav_movimientos, #modulo_Almacen").addClass("active");
+		$("#collapse_Implantes").addClass("show");
+		$("#nav_traslados, #collapse_Implantes").addClass("active");
 
 		verifyPersmisos(id_user, tokens, "output");
 	});
@@ -222,34 +222,23 @@
 			]
 		});
 
-
 		ver("#table tbody", table)
 		// edit("#table tbody", table)
 		// activar("#table tbody", table)
 		// desactivar("#table tbody", table)
 		// eliminar("#table tbody", table)
-
-
-
 		$(".buttons-excel").remove()
-
-
 		var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 		$(".dt-buttons").append(a)
 
 		var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
 		$('.dt-buttons').append(b);
-
-
-
 		$("#xls").click(function(e) {
 			url = $("#view_xls").attr("href");
 
 			console.log(url)
 			window.open(url, '_blank');
 		});
-
-
 	}
 
 	function nuevo() {
@@ -258,12 +247,8 @@
 		$("#store")[0].reset();
 		AddProductos("#add_product", "#products", "#table_products")
 		ProductsGetExistence("#warehouse", "#products", "#table_products")
-
 		getClients("#clients")
-
 		$("#indicador_edit").val(0)
-
-
 		cuadros("#cuadro1", "#cuadro2");
 
 			$('#table_products tbody').empty();
@@ -271,13 +256,9 @@
 				// $('#destiny').empty(0);
 				// $('#warehouse').empty(0);
 				$('#products').empty(0);
-				
-				
-
 	}
 
 	function getClients(select, select_default = false) {
-
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/clients',
 			type: 'GET',
@@ -309,8 +290,6 @@
 
 					}));
 				});
-
-
 				$(select).select2({
 					width: "100%",
 					sorter: function(data) {
@@ -327,30 +306,20 @@
 						});
 					}
 				});
-
 			}
-
 		});
 	}
-
 	function AddProductos(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
-
-
-
 			const array_product = $(select_product).val().split("|")
+
+			console.log('array_product',array_product);
+
 			const id_product = array_product[0]
-			const total = array_product[1]
-			const price = array_product[2]
-			const lote = array_product[3]
-			const price_e = array_product[4]
-			const presentation = array_product[5]
-			const date_expiration = array_product[6]
-			const register_invima = array_product[7]
-			const description = $(`${select_product} option:selected`).text()
-
+			const serial = array_product[1]
+			const total = array_product[2]
+			const referencia = $(`${select_product} option:selected`).text()
 			var html
-
 			var validaProduct = false
 			$(table + " tbody tr").each(function() {
 				if (id_product == $(this).find(".id_product").val()) {
@@ -359,8 +328,8 @@
 			});
 			if (!validaProduct) {
 				html += "<tr>"
-				html += "<td>" + description + " <input type='hidden' class='id_product' name='id_product[]' value='" + id_product + "' ><input type='hidden' class='id_product' name='ext_total[]' value='" + total + "' ><input type='hidden' class='id_product' name='lote[]' value='" + lote + "' ><input type='hidden' class='id_product' name='price_euro[]' value='" + price_e + "' ><input type='hidden' class='id_product' name='date_expiration[]' value='" + date_expiration + "' ><input type='hidden' class='id_product' name='register_invima[]' value='" + register_invima + "' >  </td>"
-				html += "<td>" + presentation + " </td>"
+				html += "<td>" + referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + referencia + "' ><input type='hidden' class='id_product' name='serial[]' value='" + serial + "' >  </td>"
+				html += "<td>" + serial + " </td>"
 				html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='" + total + "' required></td>"
 				html += "<td><input type='number' disabled class='form-control items_calc existence' value='" + total + "' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + total + "'></td>"
 				html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
@@ -369,17 +338,11 @@
 				warning('¡La opción seleccionada ya se encuentra agregada!');
 			}
 			$(table + " tbody").append(html)
-			
-
 		});
 	}
-
 	function ProductsGetExistence(warehouse, product, table) {
 		$(warehouse).unbind().change(function(e) {
-
 			$(table + " tbody").html("")
-
-
 			$.ajax({
 				url: `${document.getElementById('ruta').value}/api/implantes/products/get/existence/warehouse/${$(this).val()}`,
 				type: 'GET',
@@ -389,59 +352,48 @@
 				},
 				dataType: 'JSON',
 				async: false,
-				error: function() {
-
-				},
+				error: function() {},
 				success: function(data) {
+
+					console.log(data);
 					var html
-
 					if ($("#warehouse").val() == 'Medellin') {
-
 						html += '<option value="Bogota">Bogota</option>'
 						html += '<option value="Cali">Cali</option>'
-
 						// $(product + " option").remove();
 						// 	$(product).append($('<option>', {
 						// 		value: "",
 						// 		text: "-Seleccione"
 						// 	}));
 					}
-
 					if ($("#warehouse").val() == 'Bogota') {
-
 						html += '<option value="Medellin">Medellin</option>'
 						html += '<option value="Cali">Cali</option>'
-
 						// $(product + " option").remove();
 						// 	$(product).append($('<option>', {
 						// 		value: "",
 						// 		text: "-Seleccione"
 						// 	}));
 					}
-
 					if ($("#warehouse").val() == 'Cali') {
 
 						html += '<option value="Bogota">Bogota</option>'
 						html += '<option value="Medellin">Medellin</option>'
-
 					}
 
 					$("#destiny").html(html)
-
-
 					$(product + " option").remove();
 					$(product).append($('<option>', {
 						value: "",
 						text: "-Seleccione"
 					}));
-
 					$.each(data, function(i, item) {
 
 						console.log('este item',item);
 
 						$(product).append($('<option>', {
-							value: `${item.id_product}|${item.total}|${item.price_cop}|${item.lote}|${item.price_euro}|${item.presentation}|${item.date_expiration}|${item.register_invima}`,
-							text: item.description,
+							value: `${item.referencia}|${item.serial}|${item.total}`,
+							text: item.referencia,
 
 						}));
 
@@ -462,8 +414,6 @@
 							});
 						}
 					});
-
-
 				}
 
 			});
