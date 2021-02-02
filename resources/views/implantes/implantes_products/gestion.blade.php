@@ -62,6 +62,9 @@
 										<th>Referencia</th>
 										<th>Descripcion</th>
 										<th>Gramaje</th>
+										<th>Existencia Medellin</th>
+										<th>Existencia Bogota</th>
+										<th>Existencia Cali</th>
 										<th>Registro Inmave</th>
 										<th>Precio</th>
 										<th>Registrado por</th>
@@ -131,7 +134,8 @@
 				"url": '' + url + '/api/products/implantes/list',
 				"dataSrc": ""
 			},
-			"columns": [{
+			"columns": [
+				{
 					"data": null,
 					render: function(data, type, row) {
 						var botones = "";
@@ -157,6 +161,24 @@
 				},
 				{
 					"data": "gramaje"
+				},
+				{
+					"data": null,
+					render : (data, type, row) => {
+						return row.existence.medellin.total
+					}
+				},
+				{
+					"data": null,
+					render : (data, type, row) => {
+						return row.existence.bogota.total
+					}
+			    },
+				{
+					"data": null,
+					render : (data, type, row) => {
+						return row.existence.cali.total
+					}
 				},
 				{
 					"data": "register_invima"
