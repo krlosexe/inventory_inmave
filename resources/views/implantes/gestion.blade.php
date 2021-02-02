@@ -348,7 +348,7 @@
 					});
 					contador++
 					var html = "";
-					$('#table_products_imp tbody').empty();
+					// $('#table_products_imp tbody').empty();
 					if (!valid) {
 						html += "<tr>"
 						html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ></td>"
@@ -445,6 +445,7 @@
 		getProviders("#provider")
 		ChangeProviders("#provider")
 		$('#table_products tbody').empty();
+	   $('#table_products_imp tbody').empty();
 		getProducts("#products")
 		GetCategories("#category")
 		cuadros("#cuadro1", "#cuadro2");
@@ -528,7 +529,7 @@
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 		});
-		$(table + " tbody").html(html)
+		$(table + " tbody").append(html)
 	}
 	/* ------------------------------------------------------------------------------- */
 	/*
