@@ -476,7 +476,6 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-			console.log('data', data);
 			$("#referencia_edit").focus();
 			$("#referencia_edit").change(function() {
 				var str = $("#referencia_edit").val().substr(2)

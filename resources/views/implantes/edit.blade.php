@@ -10,7 +10,7 @@
                 <div class="col-md-3">
                     <label for=""><b>Referencia</b></label>
                     <div class="form-group valid-required">
-                        <input type="text" name="referencia" class="form-control form-control-user" id="referencia_edit" required>
+                        <input type="text" name="referencia" class="form-control form-control-user" id="referencia_edit">
                     </div>
                 </div>
                 <div class="col-md-3">
