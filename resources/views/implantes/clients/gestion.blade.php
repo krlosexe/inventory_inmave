@@ -99,7 +99,7 @@
 				list();
 				update();
 				$("#collapse_Implantes").addClass("show");
-		        $("#nav_technical_reception, #modulo_Implantes").addClass("active");
+		        $("#nav_implantes-clientes, #modulo_Implantes").addClass("active");
 				verifyPersmisos(id_user, tokens, "clients");
 			});
 			function update(){

@@ -102,7 +102,7 @@
 		update();
 		// socket_referencia();
 		$("#collapse_Implantes").addClass("show");
-		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
+		$("#nav_reemisiones_implantes, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "reemisiones");
 	});
 	function update() {
@@ -254,7 +254,7 @@
 					alert(data.responseJSON.mensaje);
 				},
 				success: function(data) {
-					
+					$('#warehouse').val(data.head.warehouse)
 					var html = "";
 					var validaProduct = false
 					$("#table_products_rem tbody tr").each(function() {

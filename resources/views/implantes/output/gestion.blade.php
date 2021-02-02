@@ -102,7 +102,7 @@
 		update();
 		// socket_referencia();
 		$("#collapse_Implantes").addClass("show");
-		$("#nav_technical_reception, #modulo_Implantes").addClass("active");
+		$("#nav_ventas_implantes, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "output");
 		var url = $(location).attr('href').split("/").splice(-1);
 		if (url[0] == "ventas_implantes") {
