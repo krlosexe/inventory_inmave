@@ -12,7 +12,26 @@
                         <input type="text" name="referencia" class="form-control form-control-user" id="referencia" required>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <label for=""><b>Fecha de Ingreso</b></label>
+                    <div class="form-group valid-required">
+                        <input type="date" name="fecha_ingreso" class="form-control form-control-user" id="fecha_ingreso" required>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for=""><b>Bodega Origen</b></label>
+                    <div class="form-group valid-required">
+                        <input type="text" name="bodega_origen" class="form-control form-control-user" id="bodega_origen" required>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for=""><b>Nro. Traslado</b></label>
+                    <div class="form-group valid-required">
+                        <input type="text" name="nro_traslado" class="form-control form-control-user" id="nro_traslado" required>
+                    </div>
+                </div>
             </div>
+            
             <div class="row">
                 <div class="col-md-4">
                     <label for=""><b>Bodega</b></label>

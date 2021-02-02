@@ -485,6 +485,11 @@
 				AddProductosEdit(ref);
 			});
 			$("#indicador_edit").val(1)
+			
+			$("#fecha_ingreso_edit").val(data.fecha_ingreso)
+			$("#bodega_origen_edit").val(data.bodega_origen)
+			$("#nro_traslado_edit").val(data.nro_traslado)
+
 			getProviders("#provider_edit", data.id_provider)
 			ChangeProviders("#provider_edit", "_edit")
 			$("#provider_edit").trigger("change");

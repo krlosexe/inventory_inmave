@@ -17,6 +17,9 @@ class TechnicalReceptionImplantesController extends Controller
             $tri = new TechnicalReceptionImplante;
             $tri->warehouse   = $request->warehouse;
             $tri->id_provider = $request->id_provider;
+            $tri->fecha_ingreso = $request->fecha_ingreso;
+            $tri->bodega_origen = $request->bodega_origen;
+            $tri->nro_traslado = $request->nro_traslado;
             $tri->id_user = $request->id_user;
             $tri->save();
 
@@ -29,7 +32,7 @@ class TechnicalReceptionImplantesController extends Controller
                 $products["lote"]                    = $request["lotes"][$key];
                 $products["register_invima"]         = $request["register_invima"][$key];
                 $products["date_expiration"]         = $request["date_expiration"][$key];
-                $products["price"]                   = str_replace(",", "", $request["price"][$key]);
+                // $products["price"]                   = str_replace(",", "", $request["price"][$key]);
                 $products["description"]             = $request["description"][$key];
                 $products["gramaje"]                 = $request["gramaje"][$key];
                 $products["perfil"]                  = $request["perfil"][$key];
@@ -54,23 +57,29 @@ class TechnicalReceptionImplantesController extends Controller
     }
     public function EditarTechnicalReceptionImplante(Request $request, $technicalReception)
     {
-        try {     
+        try {   
+            //   dd($request->all());
+
             $update = TechnicalReceptionImplante::find($technicalReception);
             $update->id_provider = $request->id_provider;
             $update->total_invoice = $request->total;
+            $update->fecha_ingreso = $request->fecha_ingreso;
+            $update->bodega_origen = $request->bodega_origen;
+            $update->nro_traslado = $request->nro_traslado;
             $update->id_user = $request->id_user;
-            $update->estatus = "Disponible";
             $update->save();
             TechnicalReceptionProductoImplante::where("id_technical_reception_implante", $technicalReception)->delete();
             foreach($request["serial"] as $key => $serial){
     
                     $products = [];
                     $products["id_technical_reception_implante"]  = $update->id;
+                    $products["referencia"]              = $request["referencia"][$key];
                     $products["serial"]                  = $serial;
-                    $products["lote"]                    = $request["lotes"][$key];
+                    $products["id_product"]              = $request["id_product"][$key];
+                    $products["lote"]                    = $request["lote"][$key];
                     $products["register_invima"]         = $request["register_invima"][$key];
                     $products["date_expiration"]         = $request["date_expiration"][$key];
-                    $products["price"]                   = str_replace(",", "", $request["price"][$key]);
+                    // $products["price"]                   = str_replace(",", "", $request["price"][$key]);
                     $products["description"]             = $request["description"][$key];
                     $products["gramaje"]                 = $request["gramaje"][$key];
                     $products["perfil"]                  = $request["perfil"][$key];

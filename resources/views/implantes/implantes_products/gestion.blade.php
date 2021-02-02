@@ -65,7 +65,7 @@
 										<th>Existencia Medellin</th>
 										<th>Existencia Bogota</th>
 										<th>Existencia Cali</th>
-										<th>Registro Inmave</th>
+										<th>Registro INVIMA</th>
 										<th>Precio</th>
 										<th>Registrado por</th>
 										<th>Fecha Registro</th>
@@ -145,9 +145,9 @@
 						if (actualizar == 1)
 							botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 						if (data.status == 1 && actualizar == 1)
-							botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
-						else if (data.status == 2 && actualizar == 1)
-							botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+							// botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+						// else if (data.status == 2 && actualizar == 1)
+						// 	botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 						if (borrar == 1)
 							botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 						return botones;
@@ -187,10 +187,8 @@
 					"data": "precio"
 				},
 				{
-					"data": "user",
-					render: (data, type, row) => {
-						return row.user.email
-					}
+					"data": "email_regis",
+					
 				},
 				{
 					"data": "created_at"
