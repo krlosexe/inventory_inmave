@@ -213,6 +213,7 @@
 		// $('#serial').empty();
 		// $('#warehouse').empty()
 		// $('#clients').empty()
+		$("#table_products_rem tbody").html("")
 		$('#table_products tbody').empty();
 		$('#subtotal_text').empty(0)
 		$('#vat_total_text').empty(0)
@@ -253,7 +254,7 @@
 					alert(data.responseJSON.mensaje);
 				},
 				success: function(data) {
-					$("#table_products_rem tbody").html("")
+					
 					var html = "";
 					var validaProduct = false
 					$("#table_products_rem tbody tr").each(function() {
@@ -470,7 +471,7 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
-					$("#table_products_edit_rem tbody").html("")
+					// $("#table_products_edit_rem tbody").html("")
 					var html = "";
 					var validaProduct = false
 					$("#table_products_edit_rem tbody tr").each(function() {
