@@ -12,7 +12,7 @@ class ProductImplanteController extends Controller
     public function ListProductImplante()
     {
         try {
-            
+
 
             $products = ProductImplantes::select("products_implantes.*", "auditoria.*", "user_registro.email as email_regis")
             ->join("auditoria", "auditoria.cod_reg", "=", "products_implantes.id")
@@ -35,7 +35,7 @@ class ProductImplanteController extends Controller
     public function CreateProductImplante(Request $request)
     {
         try {
-            
+
             // dd($request->all());
 
             $create = ProductImplantes::create($request->all());
@@ -49,7 +49,7 @@ class ProductImplanteController extends Controller
             $auditoria->save();
 
             if($create){
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -74,7 +74,7 @@ class ProductImplanteController extends Controller
             $update->save();
 
             if ($update) {
-                $data = array('mensagge' => "Los datos fueron editados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron editados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -89,7 +89,7 @@ class ProductImplanteController extends Controller
     {
         try {
             ProductImplantes::where('id',$id)->delete();
-            $data = array('mensagge' => "Los datos fueron eliminados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron eliminados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;
