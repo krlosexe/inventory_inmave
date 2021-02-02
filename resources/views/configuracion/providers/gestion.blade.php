@@ -129,8 +129,8 @@
 				list();
 				update();
 
-				$("#collapse_Contactos").addClass("show");
-				$("#nav_providers, #modulo_Contactos").addClass("active");
+				$("#collapse_Implantes").addClass("show");
+				$("#nav_providers, #modulo_Implantes").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "providers");
 			});

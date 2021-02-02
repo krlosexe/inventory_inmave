@@ -100,17 +100,19 @@ class TraspasoController extends Controller
         try {
                 $producs_output = [];
                 $producs_output['warehouse'] = $request->warehouse;
-                $producs_output['destiny'] = $request->destiny;
-                $producs_output['id_user'] = $request->id_user;  
-                $producs_output['type'] = "Traspaso";     
+                $producs_output['destiny']   = $request->destiny;
+                $producs_output['id_user']   = $request->id_user;  
+                $producs_output['type']      = "Traspaso";     
                 $salida =  ImplanteProductOutputTraspase::create($producs_output);
               
             
             foreach($request["id_product"] as $key => $value){
                 $producs_item_out = [];
                 $producs_item_out["id_output_traspase"]   = $salida->id;
-                $producs_item_out["id_product"]  = $value;
-                $producs_item_out["qty"]         = $request["qty"][$key];
+                $producs_item_out["id_product"]           = $value;
+                $producs_item_out["referencia"]           = $value['referencia'];
+                $producs_item_out["serial"]               = $value['serial'];
+                $producs_item_out["qty"]                  = $request["qty"][$key];
                 
                 ImplanteProductOutputItemTraspase::create($producs_item_out);
                 

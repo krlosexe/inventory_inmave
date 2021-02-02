@@ -101,7 +101,6 @@ class ProductImplanteController extends Controller
                     $entry_medellin = DB::table("technical_reception_products_implante")
                     ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
-                    // ->join("products_implantes", "products_implantes.id", "technical_reception_products_implante.id_product")
                     ->where("technical_reception_implante.warehouse", "Medellin")
                     ->where("technical_reception_products_implante.referencia", $id_product)
                     ->groupBy("technical_reception_products_implante.referencia")
@@ -110,26 +109,24 @@ class ProductImplanteController extends Controller
                     $output_medellin = DB::table("implantes_output_items")
                     ->selectRaw("(count(implantes_output_items.referencia))  as total")
                     ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
-                    // ->join("produ1cts_implantes", "products_implantes.id", "implantes_output_items.id_product")
                     ->where("implantes_output.warehouse", "Medellin")
                     ->where("implantes_output_items.referencia",$id_product)
                     ->groupBy("implantes_output_items.referencia")
                     ->first();
 
                     // $traspase_medellin = DB::table("implante_product_output_items_trapase")
-                    // ->selectRaw("implante_product_output_items_trapase.id_product, products_implantes.description, (SUM(implante_product_output_items_trapase.qty))  as total")
+                    // ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
                     // ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
-                    // ->join("products_implantes", "products_implantes.id", "implante_product_output_items_trapase.id_product")
                     // ->where("implante_product_output_traspase.warehouse", "Medellin")
+                    // ->where("implante_product_output_traspase.warehouse", $id_product)
                     // ->where("implante_product_output_items_trapase.referencia", $id_product)
-                    // ->groupBy("implante_product_output_items_trapase.id_product")
+                    // ->groupBy("implante_product_output_items_trapase.referencia")
                     // ->first();
 
 
                     $output_medellin_reemision = DB::table("implantes_reemisiones_items")
                     ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
                     ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
-                    // ->join("products_implantes", "products_implantes.id", "implantes_reemisiones_items.id_product")
                     ->where("implantes_reemisiones.warehouse", "Medellin")
                     ->where("implantes_reemisiones_items.referencia", $id_product)
                     ->groupBy("implantes_reemisiones_items.referencia")
@@ -139,7 +136,6 @@ class ProductImplanteController extends Controller
                         $entry_bogota = DB::table("technical_reception_products_implante")
                         ->selectRaw(" (count(technical_reception_products_implante.referencia))  as total")
                         ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
-                        // ->join("products_implantes", "products_implantes.id", "technical_reception_products_implante.id_product")
                         ->where("technical_reception_implante.warehouse", "Bogota")
                         ->where("technical_reception_products_implante.referencia", $id_product)
                         ->groupBy("technical_reception_products_implante.referencia")
@@ -148,25 +144,23 @@ class ProductImplanteController extends Controller
                         $output_bogota = DB::table("implantes_output_items")
                         ->selectRaw("(count(implantes_output_items.referencia))  as total")
                         ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
-                        // ->join("products_implantes", "products_implantes.id", "implantes_output_items.id_product")
                         ->where("implantes_output.warehouse", "Bogota")
                         ->where("implantes_output_items.referencia", $id_product)
                         ->groupBy("implantes_output_items.referencia")
                         ->first();
 
                         // $traspase_bogota = DB::table("implante_product_output_items_trapase")
-                        // ->selectRaw("implante_product_output_items_trapase.id_product, products_implantes.description, (SUM(implante_product_output_items_trapase.qty))  as total")
+                        // ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
                         // ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
-                        // ->join("products_implantes", "products_implantes.id", "implante_product_output_items_trapase.id_product")
                         // ->where("implante_product_output_traspase.warehouse", "Bogota")
+                        // ->where("implante_product_output_items_trapase.referencia", "Bogota")
                         // ->where("implante_product_output_items_trapase.referencia", $id_product)
-                        // ->groupBy("implante_product_output_items_trapase.id_product")
+                        // ->groupBy("implante_product_output_items_trapase.referencia")
                         // ->first();
 
                         $output_bogota_reemision = DB::table("implantes_reemisiones_items")
                         ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
                         ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
-                        // ->join("products_implantes", "products_implantes.id", "implantes_reemisiones_items.id_product")
                         ->where("implantes_reemisiones.warehouse", "Bogota")
                         ->where("implantes_reemisiones_items.referencia", $id_product)
                         ->groupBy("implantes_reemisiones_items.referencia")
@@ -175,7 +169,6 @@ class ProductImplanteController extends Controller
                         $entry_cali = DB::table("technical_reception_products_implante")
                         ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
                         ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
-                        // ->join("products_implantes", "products_implantes.id", "technical_reception_products_implante.id_product")
                         ->where("technical_reception_implante.warehouse", "Cali")
                         ->where("technical_reception_products_implante.referencia", $id_product)
                         ->groupBy("technical_reception_products_implante.referencia")
@@ -184,25 +177,22 @@ class ProductImplanteController extends Controller
                         $output_cali = DB::table("implantes_output_items")
                         ->selectRaw(" (count(implantes_output_items.referencia))  as total")
                         ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
-                        // ->join("products_implantes", "products_implantes.id", "implantes_output_items.id_product")
                         ->where("implantes_output.warehouse", "Cali")
                         ->where("implantes_output_items.referencia", $id_product)
                         ->groupBy("implantes_output_items.referencia")
                         ->first();
 
                         // $traspase_cali = DB::table("implante_product_output_items_trapase")
-                        // ->selectRaw("implante_product_output_items_trapase.id_product, products_implantes.description, (SUM(implante_product_output_items_trapase.qty))  as total")
+                        // ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
                         // ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
-                        // ->join("products_implantes", "products_implantes.id", "implante_product_output_items_trapase.id_product")
                         // ->where("implante_product_output_traspase.warehouse", "Cali")
-                        // ->where("implante_product_output_items_trapase.referencia", $id_product)
-                        // ->groupBy("implante_product_output_items_trapase.id_product")
+                        // ->where("implante_product_output_items_trapase.referencia",$id_product)
+                        // ->groupBy("implante_product_output_items_trapase.referencia")
                         // ->first();
 
                         $output_cali_reemision = DB::table("implantes_reemisiones_items")
                         ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
                         ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
-                        // ->join("products_implantes", "products_implantes.id", "implantes_reemisiones_items.id_product")
                         ->where("implantes_reemisiones.warehouse", "Cali")
                         ->where("implantes_reemisiones_items.referencia", $id_product)
                         ->groupBy("implantes_reemisiones_items.referencia")
@@ -272,49 +262,46 @@ class ProductImplanteController extends Controller
     public function GetExistenceWarehouse($warehouse){
 
         $entry = DB::table("technical_reception_products_implante")
-                    ->selectRaw("technical_reception_products_implante.id_product,technical_reception_products_implante.lote,technical_reception_products_implante.register_invima, technical_reception_products_implante.date_expiration, (SUM(technical_reception_products_implante.referencia))  as total, products_implantes.description, products_implantes.precio, products_implantes.perfil, products_implantes.gramaje")
+                    ->selectRaw("technical_reception_products_implante.referencia,technical_reception_products_implante.serial,(count(technical_reception_products_implante.referencia))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
-                    ->join("products_implantes", "products_implantes.id", "technical_reception_products_implante.id_product")
                     ->where("technical_reception_implante.warehouse", $warehouse)
-                    ->groupBy("technical_reception_products_implante.id_product")
+                    ->where("technical_reception_products_implante.estatus","Disponible")
+                    ->groupBy("technical_reception_products_implante.referencia")
                     ->get();
 
         
         $output = DB::table("implantes_output_items")
-                    ->selectRaw("implantes_output_items.id_product, (SUM(implantes_output_items.referencia))  as total, products_implantes.description, products_implantes.precio, products_implantes.perfil, products_implantes.gramaje")
+                    ->selectRaw("implantes_output_items.referencia,implantes_output_items.serial, (count(implantes_output_items.referencia))  as total")
                     ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
-                    ->join("products_implantes", "products_implantes.id", "implantes_output_items.id_product")
                     ->where("implantes_output.warehouse", $warehouse)
-                    ->groupBy("implantes_output_items.id_product")
+                    ->groupBy("implantes_output_items.referencia")
                     ->get();
 
         $output_reemision = DB::table("implantes_reemisiones_items")
-                    ->selectRaw("implantes_reemisiones_items.id_product,(SUM(implantes_reemisiones_items.referencia))  as total, products_implantes.description, products_implantes.precio, products_implantes.perfil, products_implantes.gramaje")
+                    ->selectRaw("implantes_reemisiones_items.referencia,implantes_reemisiones_items.serial,(count(implantes_reemisiones_items.referencia))  as total")
                     ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
-                    ->join("products_implantes", "products_implantes.id", "implantes_reemisiones_items.id_product")
                     ->where("implantes_reemisiones.warehouse", $warehouse)
-                    ->groupBy("implantes_reemisiones_items.id_product")
+                    ->groupBy("implantes_reemisiones_items.referencia")
                     ->get();
 
 
         $traspase     = DB::table("implante_product_output_items_trapase")
-                    ->selectRaw("implante_product_output_items_trapase.id_product, products.description, (SUM(implante_product_output_items_trapase.qty))  as total")
+                    ->selectRaw("implante_product_output_items_trapase.referencia,implante_product_output_items_trapase.serial,(SUM(implante_product_output_items_trapase.qty))  as total")
                     ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
-                    ->join("products", "products.id", "implante_product_output_items_trapase.id_product")
                     ->where("implante_product_output_traspase.warehouse", $warehouse)
-                    ->groupBy("implante_product_output_items_trapase.id_product")
+                    ->groupBy("implante_product_output_items_trapase.serial")
                     ->get();
 
         foreach($entry as $value){
             foreach($output as $out){
-                if($value->id_product == $out->id_product){
+                if($value->referencia == $out->referencia){
                     $value->total = $value->total - $out->total;
                 }else{
                     $value->total = (int)$value->total;
                 }
             }
             foreach($output_reemision as $out_reemision){
-                if($value->id_product == $out_reemision->id_product){
+                if($value->referencia == $out_reemision->referencia){
                     $value->total = $value->total - $out_reemision->total;
                 }else{
                     $value->total = (int)$value->total;
@@ -322,7 +309,7 @@ class ProductImplanteController extends Controller
             }
 
             foreach($traspase as $out_traspase){
-                if($value->id_product == $out_traspase->id_product){
+                if($value->referencia == $out_traspase->referencia){
                     $value->total = $value->total - $out_traspase->total;
                 }else{
                     $value->total = (int)$value->total;
@@ -330,6 +317,7 @@ class ProductImplanteController extends Controller
             }
 
         }
+        // dd($entry);
         return response()->json($entry)->setStatusCode(200);
     }
 

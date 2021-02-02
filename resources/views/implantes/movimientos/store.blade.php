@@ -33,9 +33,9 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for=""><b>Referencia</b></label>
+                            <label for=""><b>Serial</b></label>
                             <div class="form-group valid-required">
-                            <input type="text" maxlength="15" name="number" id="products" class="form-control form-control-user">
+                                <select name="products" class="form-control select2" id="products" required></select>
                             </div>
                         </div>
 
@@ -55,8 +55,8 @@
                         <table class="table table-bordered" id="table_products" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Presentacion</th>
+                                    <th>Referencia</th>
+                                    <th>Serial</th>
                                     <th>Salida (Cantidad)</th>
                                     <th>Existencia Actual</th>
                                     <th></th>
