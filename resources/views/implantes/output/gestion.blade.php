@@ -125,7 +125,9 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-					console.log('products',data)
+					console.log('asdasdasdas',data.head.warehouse);
+					
+					$('#warehouse').val(data.head.warehouse)
 					$("#table_products_out tbody").html("")
 					var html = "";
 					var validaProduct = false
@@ -423,6 +425,8 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
+
+					
 					$("#table_products_edit_out tbody").html("")
 					var html = "";
 					var validaProduct = false

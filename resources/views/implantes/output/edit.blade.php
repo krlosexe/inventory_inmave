@@ -36,12 +36,7 @@
                         <div class="col-md-4">
                             <label for=""><b>Bodega</b></label>
                             <div class="form-group valid-required">
-                                <select name="warehouse" class="form-control" id="warehouse_edit" required>
-                                    <option value="">Seleccione</option>
-                                    <option value="Medellin">Medellin</option>
-                                    <option value="Bogota">Bogota</option>
-                                    <option value="Cali">Cali</option>
-                                </select>
+                            <input type="text" maxlength="15" name="warehouse" id="warehouse_edit" class="form-control form-control-user" readonly>
                             </div>
                         </div>
                         <!-- <div class="col-md-2">
