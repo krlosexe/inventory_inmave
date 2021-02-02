@@ -46,7 +46,7 @@ class ImplantesController extends Controller
             $output->subtotal               = $request->subtotal;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
             $output->vat_total              = $request->vat_total;
-            $output->discount_type          = $request->discount_type? $request->discount_type :0 ;
+            $output->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
             $output->discount_total         = $request->discount_total;
             $output->rte_fuente             = $request->rte_fuente;
             $output->rte_fuente_total       = $request->rte_fuente_total;
@@ -97,7 +97,7 @@ class ImplantesController extends Controller
             $update->subtotal               = $request->subtotal;
             $update->subtotal_with_discount = $request->subtotal_with_discount;
             $update->vat_total              = $request->vat_total;
-            $update->discount_type          = $request->discount_type? $request->discount_type :0 ;
+            $update->discount_type          = $request->discount_type? $request->discount_type : $request->discount_type = 0 ;
             $update->discount_total         = $request->discount_total;
             $update->rte_fuente             = $request->rte_fuente;
             $update->rte_fuente_total       = $request->rte_fuente_total;
@@ -155,8 +155,8 @@ class ImplantesController extends Controller
             $output->subtotal               = $request->subtotal;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
             $output->vat_total              = $request->vat_total;
-            $output->discount_type          = $request->discount_type;
-            $output->discount_total         = $request->discount_type? $request->discount_type :0 ;
+            $output->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
+            $output->discount_total         = $request->discount_total ;
             $output->rte_fuente             = $request->rte_fuente;
             $output->rte_fuente_total       = $request->rte_fuente_total;
             $output->total_invoice          = $request->total_invoice;
@@ -206,7 +206,7 @@ class ImplantesController extends Controller
         $update->subtotal               = $request->subtotal;
         $update->subtotal_with_discount = $request->subtotal_with_discount;
         $update->vat_total              = $request->vat_total;
-        $update->discount_type          = $request->discount_type? $request->discount_type :0 ;
+        $update->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
         $update->discount_total         = $request->discount_total;
         $update->rte_fuente             = $request->rte_fuente;
         $update->rte_fuente_total       = $request->rte_fuente_total;
