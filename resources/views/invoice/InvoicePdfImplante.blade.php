@@ -39,11 +39,11 @@
 
 <body>
     @if($warehouse == "Medellin" || $warehouse =="Cali")
-
     <img src="http://pdtclientsolutions.com/inventory_inmave/img/inmave.png" width="300">
 
     @elseif($warehouse == "Bogota" )
     <img src="http://pdtclientsolutions.com/inventory_inmave/img/silimed.jpeg" width="300">
+
     @else
     @endif
 
@@ -55,25 +55,32 @@
         @else
         @endif
         @if($warehouse == "Medellin" || $warehouse == "Cali")
+        @if($reissue == 0)
         <p>Resolucion Autorizada por la DIAN No. 18763006154625</p>
+        @endif
         @elseif($warehouse == "Bogota")
         <p>Resolucion Autorizada por la DIAN No. 18764010079751</p>
         @else
         @endif
-
         @if($warehouse == "Medellin" || $warehouse == "Cali")
+        @if($reissue == 0)
         <p>De Junio 02 de 2020 Numeracion 0041 a 0140</p>
+        @endif
         @elseif($warehouse == "Bogota")
         <p>De Mayo 05 de 2020 Numeracion 1 a 300</p>
         @else
         @endif
+       
+        @if($reissue == 1)
+        @else
         <p>Facturacion por Computador</p>
         <p>No somos Autorretenedores</p>
         <p>No somos Grandes Contribuyentes</p>
         <p>Actividad Economica 4645</p>
+        @endif
     </div>
     <div id="fechas">
-
+        
         @if($reissue == 0)
         @if($warehouse == "Medellin" )
         <h4>FACTURA PROFORMA {{"MED-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
@@ -96,7 +103,11 @@
         @endif
         <table>
             <tr>
+            @if($reissue == 0)
                 <td><b>Fecha de Factura:</b></td>
+                @else
+                <td><b>Fecha de Reemisión:</b></td>
+                @endif
                 </td>
                 <td>{{$created_at}}</td>
             </tr>
@@ -107,11 +118,7 @@
 
         </table>
     </div>
-
-
-
     <div id="client">
-
         <table>
             <tr>
                 <td><b>Señores:</b></td>
@@ -123,10 +130,7 @@
                 <td>{{$phone}}</td>
                 <td><b>Ciudad:</b></td>
                 <td>{{$city}}</td>
-            </tr>
-            <tr>
-                <td><b>Correo:</b></td>
-                <td>{{$email}}</td>
+            </tr>DEL</td>
 
             </tr>
         </table>
@@ -137,14 +141,18 @@
         <br><br>
         <table>
             <tr>
-                <td style="border-bottom: 1px solid black; text-align: center;  width: 300px;"><b>NOMBRE DEL ARTICULO</b></td>
+                <td style="border-bottom: 1px solid black; text-align: center;  width: 90px;"><b>REFERENCIA</b></td>
+                <td style="border-bottom: 1px solid black; text-align: center;  width: 100px;"><b>SERIAL</b></td>
+                <td style="border-bottom: 1px solid black; text-align: center;  width: 90px;"><b>NOMBRE DEL ARTICULO</b></td>
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 100px;"><b>CANTIDAD</b></td>
-                <td style="border-bottom: 1px solid black; text-align: center;  width: 150px;"><b>VLR UNITARIO</b></td>
-                <td style="border-bottom: 1px solid black; text-align: center;  width: 100px;"><b>VLR TOTAL</b></td>
+                <td style="border-bottom: 1px solid black; text-align: center;  width: 110px;"><b>VLR UNITARIO</b></td>
+                <td style="border-bottom: 1px solid black; text-align: center;  width: 120px;"><b>VLR TOTAL</b></td>
             </tr>
             @foreach($items as $value)
             echo $value;
             <tr>
+                <td style="text-align: center">{{$value["referencia"]}}</td>
+                <td style="text-align: center">{{$value["serial"]}}</td>
                 <td style="text-align: center">{{$value["description"]}}</td>
                 <td style="text-align: center">{{$value["qty"]}}</td>
                 <td style="text-align: center">{{number_format($value["price"], 2, ',', '.')}}</td>
@@ -163,7 +171,6 @@
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>SUBTOTAL</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($subtotal, 2, ',', '.')}}</b></td>
             </tr>
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>IVA</b></td>
                 @if($warehouse == "Medellin" || $warehouse == "Cali")
@@ -253,10 +260,10 @@
         <br><br>
         @if($warehouse == "Medellin" || $warehouse == "Cali")
         <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS - NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
-        <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
+        <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com</p>
         @elseif($warehouse == "Bogota" )
         <p style="font-size: 11px"><b>SILIMED COLOMBIA SAS - NIT 901130935, CUENTA CORRIENTE BANCOLOMBIA N° 67400012942</b></p>
-        <!-- <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p> -->
+        <p style="font-size: 11px">Se deben efectuar en Bancolombia "convenio de recaudo 87622", se debe indicar en la referencia el número de factura a pagar</p>
         @else
         @endif
 

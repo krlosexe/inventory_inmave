@@ -9,6 +9,7 @@
                 <div class="col-md-12">
                     <div class="row">
                     <input type="hidden" name="discount_type" id="type_discount">
+                    <input type="hidden" name="reissue" id="reissue">
                     <div class="col-md-4">
                             <label for=""><b>Serial</b></label>
                             <div class="form-group valid-required">
