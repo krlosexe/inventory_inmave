@@ -105,7 +105,7 @@ class ImplantesController extends Controller
 
             ImplanteReemisionesItem::where("id_implante_reemision", $remision)->delete();
             // if (isset($request["referencia"])) {
-                foreach ($request->referencia as $key => $value) {
+                foreach ($request["referencia"] as $key => $value) {
                     $producs_items = [];
                     $producs_items["id_implante_reemision"] = $update->id;
                     $producs_items["id_product"]  = $request["id_product"][$key];
@@ -197,6 +197,7 @@ class ImplantesController extends Controller
     }
     public function UpdateImplanteOutput(Request $request, $output)
     {
+        // dd($request->all());
         $update = ImplantOutput::find($output);
         $update->warehouse              = $request->warehouse;
         $update->id_client              = $request->id_client;
@@ -204,7 +205,7 @@ class ImplantesController extends Controller
         $update->subtotal               = $request->subtotal;
         $update->subtotal_with_discount = $request->subtotal_with_discount;
         $update->vat_total              = $request->vat_total;
-        $output->discount_type          = $request->discount_type;
+        $update->discount_type          = $request->discount_type;
         $update->discount_total         = $request->discount_total;
         $update->rte_fuente             = $request->rte_fuente;
         $update->rte_fuente_total       = $request->rte_fuente_total;
@@ -213,7 +214,8 @@ class ImplantesController extends Controller
 
         ImplantOutputItems::where("id_implant_output",$output)->delete();
         if(isset($request->referencia)){
-            foreach($request->referencia as $key => $value){
+            foreach($request['referencia'] as $key => $value){
+                $producs_items= [];
                 $producs_items["id_implant_output"]  = $update->id;
                 $producs_items["id_product"]    = $request["id_product"][$key];
                 $producs_items["referencia"]    = $value;
