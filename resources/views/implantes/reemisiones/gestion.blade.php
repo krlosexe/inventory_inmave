@@ -269,7 +269,7 @@
 						html += "<td>" + data.serial + " <input type='hidden'  class='serial' name='serial[]' value='" + data.serial + "' > </td>"
 						// html +="<td>"+1+" <input type='hidden' class='id_product'  value='1' > </td>"
 						html += "<td>" + 1 + " <input type='hidden' class='id_product'  value='1' > </td>"
-						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='" + data.products.precio + "' onchange='calcProduc(this)'  readonly></td>"
+						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='" + number_format(data.products.precio, 2) + "' onchange='calcProduc(this)' required></td>"
 						html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' readonly></td>"
 						// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
@@ -334,7 +334,7 @@
 			$("#total_invoice_text_view").text(`$ ${number_format(data.total_invoice, 2)}`)
 			$("#total_invoice_view").val(data.total_invoice)
 			$("#observations_view").val(data.observations)
-			ShowProdcuts("#table_products_view", data)
+			ShowProducts("#table_products_view", data)
 			cuadros('#cuadro1', '#cuadro3');
 		});
 	}
@@ -342,6 +342,7 @@
 	/*
 		Funcion que muestra el cuadro3 para la consulta del banco.
 	*/
+	let resete = ""
 	function edit(tbody, table) {
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
@@ -352,20 +353,14 @@
 				$("#serial_edit").val($("#serial_edit").val().substr(2))
 				AddProductosEdit($("#serial_edit").val());
 			});
-			$.map(data, function(item, key) {
-				// console.log(item)
-				// $("#serial").val(1)
-			})
 			getClients("#clients_edit", data.id_client)
-			// ProductsGetExistence("#warehouse_edit", "#products_edit", "#add_product_edit")
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
-			ShowProdcuts("#table_products_edit_rem", data)
-			
+			ShowProducts("#table_products_edit_rem", data)
 			if (data.discount_type === 5) {
-				$("#apply_discount_edit3").prop("checked", true)
-			} 
+				$("#apply_discount3_edit").prop("checked", true)
+			}
 			if (data.discount_type === 15) {
-				$("#apply_discount_edit2").prop("checked", true)
+				$("#apply_discount2_edit").prop("checked", true)
 			} 
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
@@ -503,9 +498,9 @@
 				}
 			});
 	}	
-	function ShowProdcuts(table, data) {
-		$(table + " tbody").html("")
-		console.log(data);
+	function ShowProducts(table, data) {
+		// $(table + " tbody").html("")
+		let facturado = data.total_invoice +  data.discount_total 
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
@@ -513,7 +508,7 @@
 			html += "<td>" + item.serial + " <input type='hidden' class='id_product' name='serial[]' value='" + item.serial + "' > </td>"
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' max=" + item.qty + " onchange='calcProduc(this, " + '"_edit"' + ")'readonly><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.qty + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.qty + "' disabled></td>"
-			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.total, 2) + "'  name='total[]' readonly required><input type='hidden'  class='price_product'  value='" + number_format(item.total, 2) + "' ></td>"
+			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(facturado, 2) + "'  name='total[]' required><input type='hidden'  class='price_product'  value='" + number_format(facturado, 2) + "' ></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 			$(table + " tbody").append(html)
@@ -633,7 +628,6 @@
 		var discount_field2 = $(`#apply_discount2${edit}`)
 		let discount_ammount2
 		if (discount_field2.is(':checked')) {
-			
 			//console.log("SI Descuento")
 			discount_ammount2 = subtotal * 0.15
 			//subtotal = subtotal - discount_ammount2
@@ -643,7 +637,6 @@
 			discount_ammount2 = 0
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 		}
-
 		var discount_field3 = $(`#apply_discount3${edit}`)
 		let discount_ammount3
 		if (discount_field3.is(':checked')) {
@@ -652,21 +645,15 @@
 			//subtotal = subtotal - discount_ammount2
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
 		} else {
-			//	console.log("NO Descuento")
 			discount_ammount3 = 0
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 		}
 		$(`#discount_total${edit}`).val((parseFloat(discount_ammount) + parseFloat(discount_ammount2) + parseFloat(discount_ammount3)))
 		$(`#discount_total_text${edit}`).text(`$ ${number_format((parseFloat(discount_ammount)  + parseFloat(discount_ammount2) + parseFloat(discount_ammount3)), 2)}`)
-		$(`#subtotal_text${edit}`).text(`$ ${number_format(subtotal, 2)}`)
+		$(`#subtotal_text${edit}`).text(`$ ${number_format({subtotal}, 2)}`)
 		$(`#subtotal${edit}`).val(subtotal)
 		let sub_total_with_discount = subtotal - (parseFloat(discount_ammount) + parseFloat(discount_ammount2) + parseFloat(discount_ammount3))
-		/*
-			const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
-			const rte_fuete            = (sub_total_with_discount / 100) * percentage_rte_fuete
-			console.log(rte_fuete)
-			sub_total_with_discount    = ((sub_total_with_discount - rte_fuete))
-		*/
+	
 		$(`#subtotal_with_discount${edit}`).val(sub_total_with_discount)
 	}
 	function calcTotalVat(fields, edit = '') {
@@ -675,15 +662,14 @@
 			if ($(item).is(':checked')) {
 				const price = inNum($(item).parent("td").parent("tr").children("td").find(".price_product").val())
 				const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
-				// const vat = ((price * qty) * 0.19)
 				const vat = ((price * qty))
 				totalVat = totalVat + vat
 			}
 		});
 		// const totalVat2 = (($(`#subtotal_with_discount${edit}`).val()) * 0.19)
 		const totalVat2 = (($(`#subtotal_with_discount${edit}`).val()))
-		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat2, 2)}`)
-		$(`#vat_total${edit}`).val(totalVat2)
+		$(`#vat_total_text${edit}`).text(`$ ${number_format(0, 2)}`)
+		$(`#vat_total${edit}`).val(0)
 	}
 	function calTotal(fields, edit = '') {
 		let total_invoice = 0
@@ -743,8 +729,8 @@
 		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-	$("#apply_discount_edit2").change(function(e) {
-		if ($("#apply_discount_edit2").is(':checked')) {
+	$("#apply_discount2_edit").change(function(e) {
+		if ($("#apply_discount2_edit").is(':checked')) {
 			$("#type_discount_edit").val(15)
 		}else{
 			$("#type_discount_edit").val(0)
@@ -753,8 +739,8 @@
 		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-	$("#apply_discount_edit3").change(function(e) {
-		if ($("#apply_discount_edit3").is(':checked')) {
+	$("#apply_discount3_edit").change(function(e) {
+		if ($("#apply_discount3_edit").is(':checked')) {
 			$("#type_discount_edit").val(5)
 		}else{
 			$("#type_discount_edit").val(0)
@@ -773,10 +759,6 @@
 		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-	// 	$('input[name="price"]').keyup(function(e) {
-	// 	if (/\D/g.test(this.value)) {
-	// 		this.value = this.value.replace(/\D/g, '');
-	// 	}
-	// });
+
 </script>
 @endsection
