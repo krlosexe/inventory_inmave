@@ -140,7 +140,7 @@
 						html += "<td>" + data.serial + " <input type='hidden'  class='serial' name='serial[]' value='" + data.serial + "' > </td>"
 						// html +="<td>"+1+" <input type='hidden' class='id_product'  value='1' > </td>"
 						html += "<td>" + 1 + " <input type='hidden' class='id_product'  value='1' > </td>"
-						html += "<td><input type='text' class='price form-control items_calc price_product' name='price[]'  value='" + data.products.precio + "' onchange='calcProduc(this)'  readonly></td>"
+						html += "<td><input type='text' class='price form-control items_calc price_product' name='price[]' value='" + number_format(data.products.precio, 2) + "' onchange='calcProduc(this)'  readonly></td>"
 						html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' readonly></td>"
 						// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
@@ -317,15 +317,14 @@
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			ShowProdcuts("#table_products_edit_out", data)
 			if (data.discount_type === 5) {
-				$("#apply_discount_edit3").prop("checked", true)
+				$("#apply_discount3_edit").prop("checked", true)
 			} 
 			if (data.discount_type === 15) {
-				$("#apply_discount_edit2").prop("checked", true)
+				$("#apply_discount2_edit").prop("checked", true)
 			} 
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
 			} 
-			
 			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.subtotal)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
@@ -425,8 +424,6 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
-
-					
 					$("#table_products_edit_out tbody").html("")
 					var html = "";
 					var validaProduct = false
@@ -472,7 +469,7 @@
 			// } else {
 			// 	html += "<td><input type='checkbox' class='form-control vat_product items_calc' onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='" + item.vat + "'></td>"
 			// }
-			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.total, 2) + "'  name='total[]' readonly required></td>"
+			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.price, 2) + "'  name='total[]' readonly required><input type='hidden'  class='price_product'  value='" + number_format(item.price, 2) + "' ></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 			$(table + " tbody").append(html)
@@ -574,10 +571,9 @@
 			discount_ammount = 0
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 		}
-		var discount_field2 = $(`#apply_discount${edit}2`)
+		var discount_field2 = $(`#apply_discount2${edit}`)
 		let discount_ammount2
 		if (discount_field2.is(':checked')) {
-			
 			//console.log("SI Descuento")
 			discount_ammount2 = subtotal * 0.15
 			//subtotal = subtotal - discount_ammount2
@@ -687,8 +683,8 @@
 		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-	$("#apply_discount_edit2").change(function(e) {
-		if ($("#apply_discount_edit2").is(':checked')) {
+	$("#apply_discount2_edit").change(function(e) {
+		if ($("#apply_discount2_edit").is(':checked')) {
 			$("#type_discount_edit").val(15)
 		}else{
 			$("#type_discount_edit").val(0)
@@ -697,8 +693,8 @@
 		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-	$("#apply_discount_edit3").change(function(e) {
-		if ($("#apply_discount_edit3").is(':checked')) {
+	$("#apply_discount3_edit").change(function(e) {
+		if ($("#apply_discount3_edit").is(':checked')) {
 			$("#type_discount_edit").val(5)
 		}else{
 			$("#type_discount_edit").val(0)
