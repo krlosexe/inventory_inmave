@@ -55,32 +55,34 @@
         @else
         @endif
         @if($warehouse == "Medellin" || $warehouse == "Cali")
-        @if($reissue == 0)
+        @if($reissue == 1)
         <p>Resolucion Autorizada por la DIAN No. 18763006154625</p>
         @endif
         @elseif($warehouse == "Bogota")
-        @if($reissue == 0)
+        @if($reissue == 1)
         <p>Resolucion Autorizada por la DIAN No. 18764010079751</p>
         @endif
         @else
         @endif
         @if($warehouse == "Medellin" || $warehouse == "Cali")
-        @if($reissue == 0)
+        @if($reissue == 1)
         <p>De Junio 02 de 2020 Numeracion 0041 a 0140</p>
         @endif
         @elseif($warehouse == "Bogota")
-        @if($reissue == 0)
+        @if($reissue == 1)
         <p>De Mayo 05 de 2020 Numeracion 1 a 300</p>
         @endif
         @else
         @endif
-       
+        @if($warehouse  == "Medellin" )
         @if($reissue == 1)
         @else
         <p>Facturacion por Computador</p>
         <p>No somos Autorretenedores</p>
         <p>No somos Grandes Contribuyentes</p>
         <p>Actividad Economica 4645</p>
+        @endif
+        @else
         @endif
     </div>
     <div id="fechas">

@@ -63,9 +63,10 @@
         @endif
         <table>
             <tr>
-            @if($reissue ==1)
+            @if($reissue ==0)
+            <td><b>Fecha de Factura:</b></td></td>
             @else
-                <td><b>Fecha de Ree:</b></td></td>
+            <td><b>Fecha de Reemsión:</b></td></td>
             @endif
                 <td>{{$created_at}}</td>
             </tr>
@@ -86,7 +87,6 @@
                 <td>{{$phone}}</td>
                 <td><b>Ciudad:</b></td>
                 <td>{{$city}}</td>
-        
             </tr>
             <tr>
                 <td><b>Correo:</b></td>
@@ -107,7 +107,6 @@
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 110px;"><b>VLR UNITARIO</b></td>
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 120px;"><b>VLR TOTAL</b></td>
             </tr>
-
             @foreach($items as $value)
                 <tr>
                     <td style="text-align: center">{{$value["referencia"]}}</td>
@@ -134,7 +133,18 @@
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($vat_total, 2, ',', '.')}} </b></td>
             </tr>
             <tr>
+                @if($discount_type == 0)
+                <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (0%)</b></td>
+                @endif
+                @if($discount_type == 5)
+                <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (5%)</b></td>
+                @endif
+                @if($discount_type == 10)
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (10%)</b></td>
+                @endif
+                @if($discount_type == 15)
+                <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (15%)</b></td>
+                @endif
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($discount_total, 2, ',', '.')}}</b></td>
             </tr>
             <tr>
@@ -154,7 +164,7 @@
                 <th>Recibio: </th>
             </tr>
             <tr>
-                <th> </th>
+                <th></th>
                 <th></th>
             </tr>
             <tr>
@@ -172,7 +182,6 @@
         </table>
         <br><br>
         <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
-
             <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com</p>
 
     </div>
