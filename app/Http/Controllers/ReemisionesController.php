@@ -237,6 +237,7 @@ class ReemisionesController extends Controller
     public function ImplantesRemisionToInvoice($id,$user)
     {
         try {
+            // dd('adss');
             $head = ImplanteReemision::where('id',$id)->first();
             // dd($head);
             $items = ImplanteReemisionesItem::where('id_implante_reemision',$head->id)->get();
@@ -253,7 +254,7 @@ class ReemisionesController extends Controller
             $output->rte_fuente             = $head->rte_fuente;
             $output->total_invoice          = $head->total_invoice;
             $output->observations           = $head->observations;
-            $output->estatus                = "Vendido";
+            // $output->estatus                = "Vendido";
             $output->save();
 
             $auditoria              = new Auditoria;
@@ -276,17 +277,14 @@ class ReemisionesController extends Controller
                 // $producs_items->estatus     = "Vendido";
                 $producs_items->save();
 
-                $detail = TechnicalReceptionProductoImplante::where('serial',$value->serial)->first();
-                    TechnicalReceptionImplante::where("id",$detail->id_technical_reception_implante)->update(["estatus" => "Vendido"]);
+                $detail = TechnicalReceptionProductoImplante::where('serial',$value->serial)->update(["estatus" => "Vendido"]);
 
             }
-            ImplanteReemision::where('id',$id)->update(["estatus" => "Vendido"]);
-            // ImplanteReemisionesItem::where('id_implante_reemision',$id)->update(["estatus" => "Vendido"]);
             
-            // ImplanteReemision::where('id',$id)->Delete();
-            // ImplanteReemisionesItem::where('id_implante_reemision',$id)->Delete();
+            ImplanteReemision::where('id',$id)->Delete();
+            ImplanteReemisionesItem::where('id_implante_reemision',$id)->Delete();
 
-            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/implante/$output->id' target='_blank'>Imprimir Factura</a>");
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;
