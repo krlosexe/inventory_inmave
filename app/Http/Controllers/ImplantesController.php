@@ -43,7 +43,7 @@ class ImplantesController extends Controller
             $output->warehouse              = $request->warehouse;
             $output->id_client              = $request->id_client;
             $output->reissue                = $request->reissue;
-            $output->subtotal               = $request->subtotal;
+            $output->subtotal               = $request->total_invoice;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
             $output->vat_total              = $request->vat_total;
             $output->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
@@ -94,7 +94,7 @@ class ImplantesController extends Controller
             $update->warehouse              = $request->warehouse;
             $update->id_client              = $request->id_client;
             $update->reissue                = $request->reissue;
-            $update->subtotal               = $request->subtotal;
+            $update->subtotal               = $request->total_invoice;
             $update->subtotal_with_discount = $request->subtotal_with_discount;
             $update->vat_total              = $request->vat_total;
             $update->discount_type          = $request->discount_type? $request->discount_type : $request->discount_type = 0 ;
@@ -152,7 +152,7 @@ class ImplantesController extends Controller
             $output->warehouse              = $request->warehouse;
             $output->id_client              = $request->id_client;
             $output->reissue                = $request->reissue;
-            $output->subtotal               = $request->subtotal;
+            $output->subtotal               = $request->total_invoice;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
             $output->vat_total              = $request->vat_total;
             $output->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
@@ -203,7 +203,7 @@ class ImplantesController extends Controller
         $update->warehouse              = $request->warehouse;
         $update->id_client              = $request->id_client;
         $update->reissue                = $request->reissue;
-        $update->subtotal               = $request->subtotal;
+        $update->subtotal               = $request->total_invoice;
         $update->subtotal_with_discount = $request->subtotal_with_discount;
         $update->vat_total              = $request->vat_total;
         $update->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
