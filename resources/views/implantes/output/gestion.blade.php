@@ -577,6 +577,7 @@
 		var discount_field2 = $(`#apply_discount${edit}2`)
 		let discount_ammount2
 		if (discount_field2.is(':checked')) {
+			
 			//console.log("SI Descuento")
 			discount_ammount2 = subtotal * 0.15
 			//subtotal = subtotal - discount_ammount2
@@ -590,7 +591,7 @@
 		let discount_ammount3
 		if (discount_field3.is(':checked')) {
 			//console.log("SI Descuento")
-			discount_ammount3 = subtotal * 0.5
+			discount_ammount3 = subtotal / 100 * 5
 			//subtotal = subtotal - discount_ammount2
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
 		} else {
