@@ -647,7 +647,6 @@
 			//subtotal = subtotal - discount_ammount2
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
 		} else {
-				console.log("NO Descuento")
 			discount_ammount3 = 0
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 		}
