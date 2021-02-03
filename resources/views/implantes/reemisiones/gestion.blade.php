@@ -356,11 +356,9 @@
 			getClients("#clients_edit", data.id_client)
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			ShowProdcuts("#table_products_edit_rem", data)
-			
 			if (data.discount_type === 5) {
 				$("#apply_discount3_edit").prop("checked", true)
 			}
-
 			if (data.discount_type === 15) {
 				$("#apply_discount2_edit").prop("checked", true)
 			} 
