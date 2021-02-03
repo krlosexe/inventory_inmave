@@ -269,7 +269,7 @@
 						html += "<td>" + data.serial + " <input type='hidden'  class='serial' name='serial[]' value='" + data.serial + "' > </td>"
 						// html +="<td>"+1+" <input type='hidden' class='id_product'  value='1' > </td>"
 						html += "<td>" + 1 + " <input type='hidden' class='id_product'  value='1' > </td>"
-						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='" + number_format(data.products.precio, 2) + "' onchange='calcProduc(this)' readonly></td>"
+						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='" + number_format(data.products.precio, 2) + "' onchange='calcProduc(this)' required></td>"
 						html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='2' readonly></td>"
 						// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
@@ -334,7 +334,7 @@
 			$("#total_invoice_text_view").text(`$ ${number_format(data.total_invoice, 2)}`)
 			$("#total_invoice_view").val(data.total_invoice)
 			$("#observations_view").val(data.observations)
-			ShowProdcuts("#table_products_view", data)
+			ShowProducts("#table_products_view", data)
 			cuadros('#cuadro1', '#cuadro3');
 		});
 	}
@@ -355,7 +355,7 @@
 			});
 			getClients("#clients_edit", data.id_client)
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
-			ShowProdcuts("#table_products_edit_rem", data)
+			ShowProducts("#table_products_edit_rem", data)
 			if (data.discount_type === 5) {
 				$("#apply_discount3_edit").prop("checked", true)
 			}
@@ -498,9 +498,9 @@
 				}
 			});
 	}	
-	function ShowProdcuts(table, data) {
-		$(table + " tbody").html("")
-		// console.log(data);
+	function ShowProducts(table, data) {
+		// $(table + " tbody").html("")
+		let facturado = data.total_invoice +  data.discount_total 
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
@@ -508,7 +508,7 @@
 			html += "<td>" + item.serial + " <input type='hidden' class='id_product' name='serial[]' value='" + item.serial + "' > </td>"
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' max=" + item.qty + " onchange='calcProduc(this, " + '"_edit"' + ")'readonly><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.qty + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.qty + "' disabled></td>"
-			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.price, 2) + "'  name='total[]' readonly required><input type='hidden'  class='price_product'  value='" + number_format(item.price, 2) + "' ></td>"
+			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(facturado, 2) + "'  name='total[]' required><input type='hidden'  class='price_product'  value='" + number_format(facturado, 2) + "' ></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 			$(table + " tbody").append(html)
