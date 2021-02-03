@@ -45,7 +45,7 @@ class ImplantesController extends Controller
             $output->reissue                = $request->reissue;
             $output->subtotal               = $request->total_invoice;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
-            $output->vat_total              = $request->vat_total;
+            $output->vat_total              = $request->vat_total? $request->vat_total : $request->vat_total= 0;
             $output->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
             $output->discount_total         = $request->discount_total;
             $output->rte_fuente             = $request->rte_fuente;
@@ -69,7 +69,7 @@ class ImplantesController extends Controller
                     $producs_items["serial"]      = $request["serial"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
-                    $producs_items["vat"]         = 1;
+                    $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
 
                     ImplanteReemisionesItem::create($producs_items);
@@ -96,7 +96,7 @@ class ImplantesController extends Controller
             $update->reissue                = $request->reissue;
             $update->subtotal               = $request->total_invoice;
             $update->subtotal_with_discount = $request->subtotal_with_discount;
-            $update->vat_total              = $request->vat_total;
+            $update->vat_total              = $request->vat_total? $request->vat_total : $request->vat_total= 0;
             $update->discount_type          = $request->discount_type? $request->discount_type : $request->discount_type = 0 ;
             $update->discount_total         = $request->discount_total;
             $update->rte_fuente             = $request->rte_fuente;
@@ -113,8 +113,8 @@ class ImplantesController extends Controller
                     $producs_items["referencia"]  = $value;
                     $producs_items["serial"]      = $request["serial"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
-                    $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
-                    $producs_items["vat"]         = 1;
+                    $producs_items["price"]       = str_replace(",", "", $request["total"][$key]);
+                    $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
                     ImplanteReemisionesItem::create($producs_items);                
                 }
@@ -154,7 +154,7 @@ class ImplantesController extends Controller
             $output->reissue                = $request->reissue;
             $output->subtotal               = $request->total_invoice;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
-            $output->vat_total              = $request->vat_total;
+            $output->vat_total              = $request->vat_total? $request->vat_total : $request->vat_total= 0;
             $output->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
             $output->discount_total         = $request->discount_total ;
             $output->rte_fuente             = $request->rte_fuente;
@@ -179,7 +179,7 @@ class ImplantesController extends Controller
                     $producs_items["serial"]      = $request["serial"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
-                    $producs_items["vat"]         = 1;
+                    $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
                     ImplantOutputItems::create($producs_items);
 
@@ -205,7 +205,7 @@ class ImplantesController extends Controller
         $update->reissue                = $request->reissue;
         $update->subtotal               = $request->total_invoice;
         $update->subtotal_with_discount = $request->subtotal_with_discount;
-        $update->vat_total              = $request->vat_total;
+        $update->vat_total              = $request->vat_total? $request->vat_total : $request->vat_total= 0;
         $update->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
         $update->discount_total         = $request->discount_total;
         $update->rte_fuente             = $request->rte_fuente;
@@ -222,9 +222,9 @@ class ImplantesController extends Controller
                 $producs_items["referencia"]    = $value;
                 $producs_items["serial"]        = $request["serial"][$key];
                 $producs_items["qty"]           = $request["qty"][$key];
-                $producs_items["price"]         = str_replace(",", "", $request["price"][$key]);
-                $producs_items["vat"]           = $request["vat"][$key];
-                $producs_items["total"]         = str_replace(",", "", $request["total"][$key]);
+                $producs_items["price"]         = str_replace(",", "", $request["total"][$key]);
+                $producs_items["vat"]           = 0;
+                $producs_items["total"]         = str_replace(",", "", $request->total_invoice);
                 ImplantOutputItems::create($producs_items);
 
             }
@@ -242,7 +242,7 @@ class ImplantesController extends Controller
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
             ->join("implantes_clients", "implantes_clients.id", "=", "implantes_output.id_client")
             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
-            ->where("auditoria.tabla", "products_output")
+            ->where("auditoria.tabla", "implantes_output")
             ->where("auditoria.status", "!=", "0")
             ->orderBy("implantes_output.id", "DESC")
             ->with("items")
