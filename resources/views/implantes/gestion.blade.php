@@ -494,7 +494,7 @@
 			ChangeProviders("#provider_edit", "_edit")
 			$("#provider_edit").trigger("change");
 			getProducts("#products_edit")
-			ShowProdcuts("#table_products_edit", data)
+			ShowProducts("#table_products_edit", data)
 			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.subtotal)
 			$("#vat_total_text_edit").text(`$ ${number_format(data.vat_total, 2)}`)
@@ -512,7 +512,7 @@
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}
-	function ShowProdcuts(table, data) {
+	function ShowProducts(table, data) {
 		let html = ""
 		$.map(data.detalle, function(item, key) {
 			html += "<tr>"
