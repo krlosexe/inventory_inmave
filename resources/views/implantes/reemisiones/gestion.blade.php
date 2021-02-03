@@ -209,6 +209,7 @@
 		getClients("#clients")
 		// searchSerial("#add_product")
 		$("#indicador_edit").val(0)
+		$("#reissue").val(1)
 		cuadros("#cuadro1", "#cuadro2");
 		// $('#serial').empty();
 		// $('#warehouse').empty()
@@ -371,6 +372,7 @@
 			} 
 			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.subtotal)
+			$("#reissue_edit").val(1)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
 			$("#vat_total_text_edit").text(`$ ${number_format(0, 2)}`)
 			$("#vat_total_edit").val(data.vat_total)

@@ -325,6 +325,7 @@
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
 			} 
+			
 			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.subtotal)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
