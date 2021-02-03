@@ -130,7 +130,7 @@
             </tr>
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>IVA</b></td>
-                <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($vat_total, 2, ',', '.')}} </b></td>
+                <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format(0, 2, ',', '.')}} </b></td>
             </tr>
             <tr>
                 @if($discount_type == 0)
