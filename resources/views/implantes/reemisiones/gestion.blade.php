@@ -648,7 +648,7 @@
 		let discount_ammount3
 		if (discount_field3.is(':checked')) {
 			//console.log("SI Descuento")
-			discount_ammount3 = subtotal * 0.5
+			discount_ammount3 = subtotal / 100 * 5
 			//subtotal = subtotal - discount_ammount2
 			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
 		} else {
@@ -730,7 +730,7 @@
 			$("#type_discount").val(0)
 		}
 		calcSubTotal(".price_product")
-		calcTotalVat(".vat_product")
+		// calcTotalVat(".vat_product")
 		calTotal(".total_product")
 	});
 	$("#apply_discount_edit").change(function(e) {
@@ -740,7 +740,7 @@
 			$("#type_discount_edit").val(0)
 		}
 		calcSubTotal(".price_product", '_edit')
-		calcTotalVat(".vat_product", '_edit')
+		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
 	$("#apply_discount_edit2").change(function(e) {

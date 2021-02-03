@@ -42,7 +42,7 @@
     <img src="http://pdtclientsolutions.com/inventory_inmave/img/inmave.png" width="300">
 
     @elseif($warehouse == "Bogota" )
-    <img src="http://pdtclientsolutions.com/inventory_inmave/img/silimed.jpeg" width="300">
+    <img src="http://pdtclientsolutions.com/inventory_inmave/img/silimed.jpeg" width="250">
 
     @else
     @endif
@@ -55,21 +55,21 @@
         @else
         @endif
         @if($warehouse == "Medellin" || $warehouse == "Cali")
-        @if($reissue == 1)
+        @if($reissue == 0)
         <p>Resolucion Autorizada por la DIAN No. 18763006154625</p>
         @endif
         @elseif($warehouse == "Bogota")
-        @if($reissue == 1)
+        @if($reissue == 0)
         <p>Resolucion Autorizada por la DIAN No. 18764010079751</p>
         @endif
         @else
         @endif
         @if($warehouse == "Medellin" || $warehouse == "Cali")
-        @if($reissue == 1)
+        @if($reissue == 0)
         <p>De Junio 02 de 2020 Numeracion 0041 a 0140</p>
         @endif
         @elseif($warehouse == "Bogota")
-        @if($reissue == 1)
+        @if($reissue == 0)
         <p>De Mayo 05 de 2020 Numeracion 1 a 300</p>
         @endif
         @else
