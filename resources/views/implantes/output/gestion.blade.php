@@ -457,6 +457,7 @@
 	}
 	function ShowProdcuts(table, data) {
 		// $(table + " tbody").html("")
+		let facturado = data.total_invoice +  data.discount_total 
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
@@ -469,7 +470,7 @@
 			// } else {
 			// 	html += "<td><input type='checkbox' class='form-control vat_product items_calc' onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='" + item.vat + "'></td>"
 			// }
-			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.price, 2) + "'  name='total[]' readonly required><input type='hidden'  class='price_product'  value='" + number_format(item.price, 2) + "' ></td>"
+			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(facturado, 2) + "'  name='total[]' readonly required><input type='hidden'  class='price_product'  value='" + number_format(facturado, 2) + "' ></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 			$(table + " tbody").append(html)
