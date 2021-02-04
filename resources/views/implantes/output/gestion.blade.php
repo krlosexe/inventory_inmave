@@ -255,7 +255,8 @@
 		getClients("#clients")
 		$("#indicador_edit").val(0)
 		cuadros("#cuadro1", "#cuadro2");
-		$('#table_products tbody').empty();
+		$('#table_products_out tbody').empty();
+		$('#table_products_edit_out tbody').empty();
 		$('#subtotal_text').empty(0)
 		$('#vat_total_text').empty(0)
 		$('#discount_total_text').empty(0)
@@ -306,8 +307,11 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
+			$("#table_products_out tbody").html("")
 			$("#indicador_edit").val(1)
 			
+			$("#table_products_out").focus();		
+
 			$("#serial_edit").focus();		
 			$("#serial_edit").change(function() {
 				$("#serial_edit").val($("#serial_edit").val().substr(2))
@@ -324,9 +328,10 @@
 			} 
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
-			} 
-			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
-			$("#subtotal_edit").val(data.subtotal)
+			}
+
+			$("#subtotal_text_edit").text(`$ ${number_format(data.discount_total + data.subtotal, 2)}`)
+			$("#subtotal_edit").val(data.discount_total + data.subtotal)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
 			$("#vat_total_text_edit").text(`$ ${number_format(0, 2)}`)
 			$("#vat_total_edit").val(data.vat_total)
@@ -456,8 +461,7 @@
 			});
 	}
 	function ShowProducts(table, data) {
-		// $(table + " tbody").html("")
-		let facturado = data.total_invoice +  data.discount_total 
+		$(table + " tbody").html("")
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
@@ -470,7 +474,7 @@
 			// } else {
 			// 	html += "<td><input type='checkbox' class='form-control vat_product items_calc' onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='" + item.vat + "'></td>"
 			// }
-			html += "<td><input style='text-align: right;width: 142px;' type='text' class='price_product form-control monto_formato_decimales total_product' value='" + number_format(facturado, 2) + "'onchange='calcProduc(this, " + '"_edit"' + ")'  name='total[]' required><input type='hidden'  class='price_product'  value='" + number_format(facturado, 2) + "' ></td>"
+			html += "<td><input style='text-align: right;width: 142px;' type='text' class='price_product form-control monto_formato_decimales total_product' value='" + number_format(item.price, 2) + "'onchange='calcProduc(this, " + '"_edit"' + ")'  name='total[]' required></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 			$(table + " tbody").append(html)
@@ -556,7 +560,7 @@
 		$(element).parent("td").parent("tr").children("td").find(".price_product").val(number_format(total, 2))
 		calcSubTotal(".price_product", edit)
 		// calcTotalVat(".vat_product", edit)
-		calTotal(".total_product", edit)
+		calTotal(".price_product", edit)
 	}
 	function calcSubTotal(fields, edit = '') {
 		let subtotal = 0
@@ -564,7 +568,7 @@
 			// const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
 			// const total = inNum($(item).val()) * Number(qty)
 			const total = inNum($(item).val()) 
-			subtotal =  parseFloat(total)
+			subtotal =  parseFloat(subtotal) + parseFloat(total)
 		});
 		var discount_field = $(`#apply_discount${edit}`)
 		let discount_ammount
@@ -658,7 +662,7 @@
 		}
 		calcSubTotal(".price_product")
 		// calcTotalVat(".vat_product")
-		calTotal(".total_product")
+		calTotal(".price_product")
 	});
 	$("#apply_discount2").change(function(e) {
 		if ($("#apply_discount2").is(':checked')) {
@@ -668,7 +672,7 @@
 		}
 		calcSubTotal(".price_product")
 		// calcTotalVat(".vat_product")
-		calTotal(".total_product")
+		calTotal(".price_product")
 	});
 	$("#apply_discount3").change(function(e) {
 		if ($("#apply_discount3").is(':checked')) {
@@ -678,7 +682,7 @@
 		}
 		calcSubTotal(".price_product")
 		// calcTotalVat(".vat_product")
-		calTotal(".total_product")
+		calTotal(".price_product")
 	});
 	$("#apply_discount_edit").change(function(e) {
 		if ($("#apply_discount_edit").is(':checked')) {
@@ -713,7 +717,7 @@
 	$(".discount").keyup(function(e) {
 		calcSubTotal(".price_product")
 		// calcTotalVat(".vat_product")
-		calTotal(".total_product")
+		calTotal(".price_product")
 	});
 	$(".discount_edit").keyup(function(e) {
 		calcSubTotal(".price_product", '_edit')

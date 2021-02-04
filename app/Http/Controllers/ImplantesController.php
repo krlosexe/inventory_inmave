@@ -104,6 +104,7 @@ class ImplantesController extends Controller
             $update->total_invoice          = $request->total_invoice;
             $update->save();
 
+            TechnicalReceptionProductoImplante::where('serial','!=',$request["serial"])->update(["estatus" => "Disponible"]);
             ImplanteReemisionesItem::where("id_implante_reemision", $remision)->delete();
             // if (isset($request["referencia"])) {
                 foreach ($request["referencia"] as $key => $value) {
@@ -213,7 +214,9 @@ class ImplantesController extends Controller
         $update->total_invoice          = $request->total_invoice;
         $update->save();
 
+        TechnicalReceptionProductoImplante::where('serial','!=',$request["serial"])->update(["estatus" => "Disponible"]);
         ImplantOutputItems::where("id_implant_output",$output)->delete();
+      
         if(isset($request->referencia)){
             foreach($request['referencia'] as $key => $value){
                 $producs_items= [];
