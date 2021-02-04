@@ -30,7 +30,7 @@
 		    <div id="content-wrapper" class="d-flex flex-column">
 		      <!-- Main Content -->
 		      <div id="content">
-				@include('layouts.topBar') 
+				@include('layouts.topBar')
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
 			          <!-- Page Heading -->
@@ -100,7 +100,7 @@
 				update();
 				$("#collapse_Implantes").addClass("show");
 		        $("#nav_implantes-clientes, #modulo_Implantes").addClass("active");
-				verifyPersmisos(id_user, tokens, "clients");
+				verifyPersmisos(id_user, tokens, "implantes-clientes");
 			});
 			function update(){
 				enviarFormularioPut("#form-update", 'api/implantes-clientes', '#cuadro4', false, "#avatar-edit");
@@ -114,11 +114,11 @@
 					"token"  : tokens,
 				};
 				$('#table tbody').off('click');
-				var url=document.getElementById('ruta').value; 
+				var url=document.getElementById('ruta').value;
 				cuadros(cuadro, "#cuadro1");
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
+
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
@@ -153,7 +153,7 @@
 						{"data":"city"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
-						
+
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
@@ -175,7 +175,7 @@
 				cuadros("#cuadro1", "#cuadro2");
 			}
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
@@ -189,12 +189,12 @@
 					$("#email_view").val(data.email).attr("disabled", "disabled")
 					$("#address_view").val(data.address).attr("disabled", "disabled")
 					$("#city_view").val(data.city).attr("disabled", "disabled")
-					
+
 					cuadros('#cuadro1', '#cuadro3');
 				});
 			}
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function edit(tbody, table){
@@ -211,7 +211,7 @@
 					$("#id_edit").val(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
-			}			
+			}
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar

@@ -103,7 +103,7 @@
 		// socket_referencia();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_reemisiones_implantes, #modulo_Implantes").addClass("active");
-		verifyPersmisos(id_user, tokens, "reemisiones");
+		verifyPersmisos(id_user, tokens, "reemisiones_implantes");
 	});
 	function update() {
 		enviarFormularioPut("#form-update", 'api/reemisiones/implantes/update', '#cuadro4', false, "#avatar-edit");
@@ -221,7 +221,7 @@
 		$('#discount_total_text').empty(0)
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
-		$("#serial").focus();		
+		$("#serial").focus();
 		$("#serial").change(function() {
 			$("#serial").val($("#serial").val().substr(2))
 			serial($("#serial").val());
@@ -242,7 +242,7 @@
 	// 		});
 	// 	});
 	// 	// socket.on('sendReference', (data) => {
-			
+
 	// 	// });
 	// }
 	function serial(data){
@@ -263,7 +263,7 @@
 							validaProduct = true;
 						}
 					});
-					if (!validaProduct) {						
+					if (!validaProduct) {
 						html += "<tr>"
 						html += "<td>" + data.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' > </td>"
 						html += "<td>" + data.serial + " <input type='hidden'  class='serial' name='serial[]' value='" + data.serial + "' > </td>"
@@ -349,7 +349,7 @@
 			var data = table.row($(this).parents("tr")).data();
 			$("#table_products_rem tbody").html("")
 			$("#indicador_edit").val(1)
-			$("#serial_edit").focus();		
+			$("#serial_edit").focus();
 			$("#serial_edit").change(function() {
 				$("#serial_edit").val($("#serial_edit").val().substr(2))
 				AddProductosEdit($("#serial_edit").val());
@@ -362,10 +362,10 @@
 			}
 			if (data.discount_type === 15) {
 				$("#apply_discount2_edit").prop("checked", true)
-			} 
+			}
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
-			} 
+			}
 			$("#subtotal_text_edit").text(`$ ${number_format(data.discount_total + data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.discount_total + data.subtotal)
 			$("#reissue_edit").val(1)
@@ -459,7 +459,7 @@
 		});
 	}
 	function AddProductosEdit(data) {
-		socket_referencia_edit(data);	
+		socket_referencia_edit(data);
 	}
 	function socket_referencia_edit(data) {
 		$.ajax({
@@ -499,7 +499,7 @@
 					}, 1000)
 				}
 			});
-	}	
+	}
 	function ShowProducts(table, data) {
 		$(table + " tbody").html("")
 		// console.log(data);
@@ -611,7 +611,7 @@
 		$(element).parent("td").parent("tr").children("td").find(".price_product").val(number_format(total, 2))
 		calcSubTotal(".price_product", edit)
 		// calcTotalVat(".vat_product", edit)
-		
+
 		calTotal(".price_product", edit)
 	}
 	function calcSubTotal(fields, edit = '') {
@@ -662,7 +662,7 @@
 		$(`#subtotal_text${edit}`).text(`$ ${number_format(subtotal, 2)}`)
 		$(`#subtotal${edit}`).val(subtotal)
 		let sub_total_with_discount = subtotal - (parseFloat(discount_ammount) + parseFloat(discount_ammount2) + parseFloat(discount_ammount3))
-	
+
 		$(`#subtotal_with_discount${edit}`).val(sub_total_with_discount)
 	}
 	function calcTotalVat(fields, edit = '') {
@@ -691,10 +691,10 @@
 		const discount = inNum($(`#discount_total${edit}`).val())
 		const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
 		const rte_fuete = ($(`#subtotal_with_discount${edit}`).val() / 100) * percentage_rte_fuete
-		
+
 		total_invoice = (($(`#subtotal_with_discount${edit}`).val()))
 		// total_invoice = (($(`#subtotal_with_discount${edit}`).val()) * 1.19)
-		
+
 		total_invoice = total_invoice - rte_fuete
 
 		$(`#rte_fuente_text${edit}`).text(`$ ${number_format(rte_fuete, 2)}`)

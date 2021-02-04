@@ -107,7 +107,7 @@
 		update();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_products_implantes, #modulo_Implantes").addClass("active");
-		verifyPersmisos(id_user, tokens, "products");
+		verifyPersmisos(id_user, tokens, "products_implantes");
 	});
 
 	function update() {
@@ -188,7 +188,7 @@
 				},
 				{
 					"data": "email_regis",
-					
+
 				},
 				{
 					"data": "created_at"
@@ -212,14 +212,14 @@
 		$("#store")[0].reset();
 		GetCategories("#category")
 		cuadros("#cuadro1", "#cuadro2");
-		$("#referencia").focus();		
+		$("#referencia").focus();
 		$("#referencia" ).change(function() {
 			var str = $("#referencia").val().substr(2)
 		    $("#referencia").val(str.replace("'","-"))
 			});
 	}
 	/* ------------------------------------------------------------------------------- */
-	/* 
+	/*
 		Funcion que muestra el cuadro3 para la consulta del banco.
 	*/
 	function ver(tbody, table) {
@@ -235,7 +235,7 @@
 		});
 	}
 	/* ------------------------------------------------------------------------------- */
-	/* 
+	/*
 		Funcion que muestra el cuadro3 para la consulta del banco.
 	*/
 	function edit(tbody, table) {
@@ -250,7 +250,7 @@
 			$("#edit_perfil").val(data.perfil)
 			$("#id_edit").val(data.id)
 
-			$("#referencia").focus();		
+			$("#referencia").focus();
 			$("#referencia_edit" ).change(function() {
 				var str = $("#referencia_edit").val().substr(2)
 				$("#referencia_edit").val(str.replace("'","-"))
