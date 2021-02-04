@@ -444,8 +444,8 @@
 		$("#indicador_edit").val(0)
 		getProviders("#provider")
 		ChangeProviders("#provider")
-		$('#table_products tbody').empty();
-	   $('#table_products_imp tbody').empty();
+		$('#table_products_edit tbody').html("");
+	   $('#table_products_imp tbody').html("");
 		getProducts("#products")
 		GetCategories("#category")
 		cuadros("#cuadro1", "#cuadro2");
@@ -477,6 +477,8 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
+			$('#table_products_imp tbody').html("");
+			$('#table_products_edit tbody').html("");
 			$("#referencia_edit").focus();
 			$("#referencia_edit").change(function() {
 				var str = $("#referencia_edit").val().substr(2)
