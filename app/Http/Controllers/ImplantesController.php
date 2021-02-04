@@ -199,7 +199,6 @@ class ImplantesController extends Controller
     }
     public function UpdateImplanteOutput(Request $request, $output)
     {
-        dd($request->all());
         $update = ImplantOutput::find($output);
         $update->warehouse              = $request->warehouse;
         $update->id_client              = $request->id_client;
