@@ -92,8 +92,6 @@
           </div>
 
 
-
-
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
 	@endsection
 	@section('CustomJs')
@@ -106,6 +104,8 @@
 		        $("#nav_implantes-clientes, #modulo_Implantes").addClass("active");
 				verifyPersmisos(id_user, tokens, "implantes-clientes");
 			});
+
+
 			function update(){
 				enviarFormularioPut("#form-update", 'api/implantes-clientes', '#cuadro4', false, "#avatar-edit");
 			}
