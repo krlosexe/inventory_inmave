@@ -102,9 +102,8 @@
 				update();
 				$("#collapse_Implantes").addClass("show");
 		        $("#nav_implantes-clientes, #modulo_Implantes").addClass("active");
-				verifyPersmisos(id_user, tokens, "clients");
+				verifyPersmisos(id_user, tokens, "implantes-clientes");
 			});
-
 
 			function update(){
 				enviarFormularioPut("#form-update", 'api/implantes-clientes', '#cuadro4', false, "#avatar-edit");
