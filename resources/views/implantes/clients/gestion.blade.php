@@ -89,7 +89,11 @@
 
 		    </div>
 		    <!-- End of Content Wrapper -->
-		  </div>
+          </div>
+
+
+
+
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
 	@endsection
 	@section('CustomJs')
