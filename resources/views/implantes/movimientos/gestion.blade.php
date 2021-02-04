@@ -123,12 +123,7 @@
 
 <input type="hidden" id="indicador_edit">
 
-
 @endsection
-
-
-
-
 
 @section('CustomJs')
 
