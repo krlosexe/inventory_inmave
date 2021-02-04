@@ -13,10 +13,10 @@
 								<thead>
 									<tr>
 										<!-- <th>Acciones</th> -->
-										<th>Codigo Producto</th>
-										<th>Descripcion</th>
+										<th>Feferencia</th>
 										<!-- <th>Movimiento</th>
 										<th>Precio Compra (Euro)</th> -->
+										<th>Serial</th>
 										<th>Cantidad</th>
 										<!-- <th>Lote</th>  -->
 										<!-- <th>Origen</th>

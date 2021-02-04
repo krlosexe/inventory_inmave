@@ -97,6 +97,7 @@ class TraspasoController extends Controller
 
     public function createImplanteOuptTraspase(Request $request)
     {
+        // dd($request->all());
         try {
                 $producs_output = [];
                 $producs_output['warehouse'] = $request->warehouse;
@@ -106,12 +107,12 @@ class TraspasoController extends Controller
                 $salida =  ImplanteProductOutputTraspase::create($producs_output);
               
             
-            foreach($request["id_product"] as $key => $value){
+            foreach($request["referencia"] as $key => $value){
                 $producs_item_out = [];
-                $producs_item_out["id_output_traspase"]   = $salida->id;
-                $producs_item_out["id_product"]           = $value;
-                $producs_item_out["referencia"]           = $value['referencia'];
-                $producs_item_out["serial"]               = $value['serial'];
+                $producs_item_out["id_implante_output_traspase"]   = $salida->id;
+                $producs_item_out["id_product"]           = $request["id_product"][$key];
+                $producs_item_out["referencia"]           = $value;
+                $producs_item_out["serial"]               = $request["serial"][$key];
                 $producs_item_out["qty"]                  = $request["qty"][$key];
                 
                 ImplanteProductOutputItemTraspase::create($producs_item_out);
@@ -121,22 +122,24 @@ class TraspasoController extends Controller
             foreach($request["referencia"] as $key => $value){
              
                 $producs_entry['warehouse']     = $request->destiny;
-                $producs_entry['id_provider']   = 0;
-                $producs_entry['fecha_ingreso'] = $request->date("Y-m-d");
+                $producs_entry['id_provider']   = $request->id_provider;
+                $producs_entry['fecha_ingreso'] = date("Y-m-d");
                 $producs_entry['bodega_origen'] = $request->warehouse;
-                $producs_entry['nro_traslado']  = $request->$salida->id;
+                $producs_entry['nro_traslado']  = 'NT';
                 $producs_entry['id_user']       = $request->id_user;
                
                 $entrada =  TechnicalReceptionImplante::create($producs_entry);
               
-            }   
+            }
+            TechnicalReceptionProductoImplante::where('serial',$request["serial"])->update(["estatus" => "Traslado"]);   
+           
             foreach($request["referencia"] as $key => $referencia){
                 $products = [];
                 $products["id_technical_reception_implante"]  = $entrada->id;
                 $products["referencia"]              = $referencia;
                 $products["serial"]                  = $request["serial"][$key];
                 $products["id_product"]              = $request["id_product"][$key];
-                $products["lote"]                    = $request["lotes"][$key];
+                $products["lote"]                    = $request["lote"][$key];
                 $products["register_invima"]         = $request["register_invima"][$key];
                 $products["date_expiration"]         = $request["date_expiration"][$key];
                 $products["description"]             = $request["description"][$key];
