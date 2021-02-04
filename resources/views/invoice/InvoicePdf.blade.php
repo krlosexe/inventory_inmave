@@ -63,7 +63,7 @@
          @else
          <h4>FACTURA PROFORMA {{"CALI-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
           @endif
-         
+
           @else
 
          @if($warehouse  == "Medellin" )
@@ -107,7 +107,7 @@
                 <td>{{$phone}}</td>
                 <td><b>Ciudad:</b></td>
                 <td>{{$city}}</td>
-        
+
             </tr>
             <tr>
                 <td><b>Correo:</b></td>
@@ -117,7 +117,7 @@
         </table>
         <br>
         <b>Dirección:</b>
-      <span style="font-size:8"> {{ $address_client }}</span> 
+      <span style="font-size:8"> {{ $address_client }}</span>
         <br><br>
         <br><br>
         <table>
@@ -139,25 +139,18 @@
 
         </table>
 
-
         <br>   <br>   <br>
-
 
         <p style="font-size: 11px;" >Obervaciones: {{ $observations}}</p>
 
         <br>
         <table  width="100%" border="1" cellspacing="0" cellpadding="0">
-
-
-
             <tr>
                 <td rowspan="5" style="border: 1px solid black; text-align: center;  width: 50px;"><b>SON:</b></td>
                 <td rowspan="5" style="border: 1px solid black; text-align: center;  width: 100px;"><b style="font-size:10px">  {{$ammount_text}} </b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>SUBTOTAL</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($subtotal, 2, ',', '.')}}</b></td>
             </tr>
-
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>IVA</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($vat_total, 2, ',', '.')}} </b></td>
@@ -168,32 +161,22 @@
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($discount_total, 2, ',', '.')}}</b></td>
             </tr>
 
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>RTE FUENTE ({{$rte_fuente}} %)</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($rte_fuente_total, 2, ',', '.')}}</b></td>
             </tr>
 
-
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>TOTAL</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($total_invoice, 2, ',', '.')}}</b></td>
             </tr>
-
-
         </table>
 
         <br>
 
-
         <p style="font-size: 11px;" >Al efectuar su pago gire cheque a favor de  INMAVE COLOMBIA SAS NIT: 900 887 221-2,  Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
 
-
-
-
-
-        <table width="100%" style="font-size: 11px" >
+        <table width="100%" style="font-size: 11px">
             <tr>
                 <th>Ventas: </th>
                 <th>Recibio: </th>
@@ -217,12 +200,10 @@
             </tr>
         </table>
 
-
         <br><br>
 
         <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
-
-            <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com</p>
+        <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
 
     </div>
 
