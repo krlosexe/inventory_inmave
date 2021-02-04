@@ -141,7 +141,7 @@
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_traslados, #collapse_Implantes").addClass("active");
 
-		verifyPersmisos(id_user, tokens, "traslados");
+		verifyPersmisos(id_user, tokens, "output");
 	});
 
 

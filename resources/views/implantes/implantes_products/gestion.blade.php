@@ -107,7 +107,7 @@
 		update();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_products_implantes, #modulo_Implantes").addClass("active");
-		verifyPersmisos(id_user, tokens, "products_implantes");
+		verifyPersmisos(id_user, tokens, "products");
 	});
 
 	function update() {
