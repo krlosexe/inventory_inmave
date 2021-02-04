@@ -45,7 +45,7 @@
     </div>
     <div id="fechas">
         @if($reissue == 0)
-        @if($warehouse  == "Medellin" )
+        @if($warehouse  == "Medellin")
          <h4>FACTURA PROFORMA {{"MED-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
          @elseif($warehouse  == "Bogota" )
          <h4>FACTURA PROFORMA {{"BOG-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
@@ -157,7 +157,7 @@
             </tr>
         </table>
         <br>
-        <p style="font-size: 11px;" >Al efectuar su pago gire cheque a favor de  INMAVE COLOMBIA SAS NIT: 900 887 221-2,  Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
+        <p style="font-size: 11px;">Se deben efectuar el pago en Bancolombia "convenio de recaudo 87622", se debe indicar en la referencia el número de factura a pagar, Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
         <table width="100%" style="font-size: 11px" >
             <tr>
                 <th>Ventas: </th>
@@ -181,8 +181,8 @@
             </tr>
         </table>
         <br><br>
-        <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
-            <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com</p>
+        <p style="font-size: 11px"><b>SILIMED COLOMBIA SAS - NIT 901130935, CUENTA CORRIENTE BANCOLOMBIA N° 67400012942</b></p>
+        <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: contabilidad@inmavecolombia.com www.inmavecolombia.com</p>
 
     </div>
 

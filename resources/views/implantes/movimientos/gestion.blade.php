@@ -315,9 +315,17 @@
 
 			console.log('array_product',array_product);
 
-			const id_product = array_product[0]
 			const serial = array_product[1]
-			const total = array_product[2]
+			const gramaje = array_product[2]
+			const total = array_product[3]
+			const precio = array_product[4]
+			const id_product = parseInt(array_product[5]);
+			const lote = array_product[6]
+			const date_expiration = array_product[7]
+			const register_invima = array_product[8]
+			const perfil = array_product[9]
+			const description = array_product[10]
+			const id_provider = array_product[11]
 			const referencia = $(`${select_product} option:selected`).text()
 			var html
 			var validaProduct = false
@@ -328,10 +336,10 @@
 			});
 			if (!validaProduct) {
 				html += "<tr>"
-				html += "<td>" + referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + referencia + "' ><input type='hidden' class='id_product' name='serial[]' value='" + serial + "' >  </td>"
+				html += "<td>" + referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + referencia + "' ><input type='hidden' class='id_product' name='serial[]' value='" + serial + "' ><input type='hidden' class='id_product' name='gramaje[]' value='" + gramaje + "' ><input type='hidden' class='id_product' name='precio[]' value='" + precio + "' ><input type='hidden' class='id_product' name='id_product[]' value='" + id_product + "' ><input type='hidden' class='id_product' name='lote[]' value='" + lote + "' ><input type='hidden' class='id_product' name='date_expiration[]' value='" + date_expiration + "' ><input type='hidden' class='id_product' name='register_invima[]' value='" + register_invima + "' ><input type='hidden' class='id_product' name='perfil[]' value='" + perfil + "' ><input type='hidden' class='id_product' name='description[]' value='" + description + "' ><input type='hidden' class='id_product' name='id_provider' value='" + id_provider + "' ></td>"
 				html += "<td>" + serial + " </td>"
 				html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='" + total + "' required></td>"
-				html += "<td><input type='number' disabled class='form-control items_calc existence' value='" + total + "' min = '1' required><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + total + "'></td>"
+				html += "<td><input type='number' disabled class='form-control items_calc existence' value='" + total + "' min = '1' required></td>"
 				html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 				html += "</tr>"
 			} else {
@@ -392,7 +400,7 @@
 						console.log('este item',item);
 
 						$(product).append($('<option>', {
-							value: `${item.referencia}|${item.serial}|${item.total}`,
+							value: `${item.referencia}|${item.serial}|${item.gramaje}|${item.total}|${item.precio}|${item.id_product}|${item.lote}|${item.date_expiration}|${item.register_invima}|${item.perfil}|${item.description}|${item.id_provider}`,
 							text: item.referencia,
 
 						}));
@@ -456,18 +464,10 @@
 				"columns": [
 
 					{
-						"data": "code",
-						render: function(data, type, row) {
-							return row.product.code;
-
-						}
+					   "data": "referencia",
 					},
 					{
-						"data": "description",
-						render: function(data, type, row) {
-							return row.product.description;
-
-						}
+						"data": "serial",
 					},
 					{
 						"data": "qty"

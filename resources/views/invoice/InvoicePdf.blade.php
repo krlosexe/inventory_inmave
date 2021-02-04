@@ -203,7 +203,12 @@
         <br><br>
 
         <p style="font-size: 11px"><b>INMAVE COLOMBIA SAS -  NIT 900 887 221-2, CUENTA CORRIENTE BANCOLOMBIA N° 63451049234</b></p>
+<<<<<<< HEAD
         <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com></p>
+=======
+
+            <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: info@inmavecolombia.com www.inmavecolombia.com</p>
+>>>>>>> 8cfc23812fe0ecc832e10b3803a7180c95110ac0
 
     </div>
 
