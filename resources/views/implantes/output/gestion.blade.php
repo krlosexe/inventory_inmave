@@ -103,7 +103,7 @@
 		// socket_referencia();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_ventas_implantes, #modulo_Implantes").addClass("active");
-		verifyPersmisos(id_user, tokens, "output");
+		verifyPersmisos(id_user, tokens, "ventas_implantes");
 		var url = $(location).attr('href').split("/").splice(-1);
 		if (url[0] == "ventas_implantes") {
 			$("#add_remision_invoice_implant").css("display", "none");
@@ -125,7 +125,7 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-					
+
 					$('#warehouse').val(data.head.warehouse)
 					var html = "";
 					var validaProduct = false
@@ -264,7 +264,7 @@
 		$('#total_invoice_text').empty(0)
 
 		$("#table_products_out tbody").html("")
-		$("#serial").focus();		
+		$("#serial").focus();
 		$("#serial").change(function() {
 			$("#serial").val($("#serial").val().substr(2))
 			serial($("#serial").val());
@@ -309,10 +309,10 @@
 			var data = table.row($(this).parents("tr")).data();
 			$("#table_products_out tbody").html("")
 			$("#indicador_edit").val(1)
-			
-			$("#table_products_out").focus();		
 
-			$("#serial_edit").focus();		
+			$("#table_products_out").focus();
+
+			$("#serial_edit").focus();
 			$("#serial_edit").change(function() {
 				$("#serial_edit").val($("#serial_edit").val().substr(2))
 				AddProductosEdit($("#serial_edit").val());
@@ -322,10 +322,10 @@
 			ShowProducts("#table_products_edit_out", data)
 			if (data.discount_type === 5) {
 				$("#apply_discount3_edit").prop("checked", true)
-			} 
+			}
 			if (data.discount_type === 15) {
 				$("#apply_discount2_edit").prop("checked", true)
-			} 
+			}
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
 			}
@@ -561,7 +561,7 @@
 		$.map($(fields), function(item, key) {
 			// const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
 			// const total = inNum($(item).val()) * Number(qty)
-			const total = inNum($(item).val()) 
+			const total = inNum($(item).val())
 			subtotal =  parseFloat(subtotal) + parseFloat(total)
 		});
 		var discount_field = $(`#apply_discount${edit}`)
@@ -621,7 +621,7 @@
 				const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
 				// const vat = ((price * qty) * 0.19)
 				// const vat = ((price * qty))
-				const vat = price 
+				const vat = price
 				totalVat = totalVat + vat
 			}
 		});
