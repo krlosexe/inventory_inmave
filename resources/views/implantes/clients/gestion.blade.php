@@ -91,9 +91,12 @@
 		    <!-- End of Content Wrapper -->
           </div>
 
-
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
-	@endsection
+    @endsection
+
+
+
+
 	@section('CustomJs')
 		<script>
 			$(document).ready(function(){
