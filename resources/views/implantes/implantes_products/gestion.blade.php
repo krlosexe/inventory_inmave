@@ -63,8 +63,8 @@
 										<th>Descripcion</th>
 										<th>Gramaje</th>
 										<th id="medellin">Existencia Medellin</th>
-										<th>Existencia Bogota</th>
-										<th>Existencia Cali</th>
+										<th id="bogota">Existencia Bogota</th>
+										<th id="cali">Existencia Cali</th>
 										<th>Registro INVIMA</th>
 										<th>Precio</th>
 										<th>Registrado por</th>
