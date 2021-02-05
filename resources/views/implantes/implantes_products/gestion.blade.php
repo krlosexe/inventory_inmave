@@ -62,7 +62,7 @@
 										<th>Referencia</th>
 										<th>Descripcion</th>
 										<th>Gramaje</th>
-										<th>Existencia Medellin</th>
+										<th id="medellin">Existencia Medellin</th>
 										<th>Existencia Bogota</th>
 										<th>Existencia Cali</th>
 										<th>Registro INVIMA</th>
@@ -122,6 +122,17 @@
 			"id_user": id_user,
 			"token": tokens,
 		};
+		// if(name_rol == "Administrador"){
+		// 	$("#medellin").css("display","none");
+		// }
+		if(name_rol == "Silimed Bog"){
+			$("#medellin").css("display","none");
+			$("#cali").css("display","none");
+		}
+		if(name_rol == "Silimed Cali"){
+			$("#medellin").css("display","none");
+			$("#bogota").css("display","none");
+		}
 		$('#table tbody').off('click');
 		var url = document.getElementById('ruta').value;
 		cuadros(cuadro, "#cuadro1");
@@ -164,18 +175,21 @@
 				},
 				{
 					"data": null,
+					"visible": name_rol == "Silimed Bog" ? false : (name_rol == "Administrador" ? true : false),
 					render : (data, type, row) => {
 						return row.existence.medellin.total
 					}
 				},
 				{
 					"data": null,
+					"visible": name_rol == "Silimed Bog" ? true : (name_rol == "Administrador" ? true : false),
 					render : (data, type, row) => {
 						return row.existence.bogota.total
 					}
 			    },
 				{
 					"data": null,
+					"visible": name_rol == "Silimed Cali" ? true : (name_rol == "Administrador" ? true : false),
 					render : (data, type, row) => {
 						return row.existence.cali.total
 					}
