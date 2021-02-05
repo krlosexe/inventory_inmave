@@ -95,7 +95,15 @@ class ImplantesClientesController extends Controller
      */
     public function update(Request $request, $clients)
     {
-        $update_clients = ImplantesClientes::find($clients)->update($request->all());
+        $update_clients = ImplantesClientes::find($clients);
+        $update_clients->name      = $request->name;
+        $update_clients->nit       = $request->nit;
+        $update_clients->phone     = $request->phone;
+        $update_clients->email     = $request->email;
+        $update_clients->address   = $request->address;
+        $update_clients->city      = $request->city;
+        $update_clients->save();
+
         if ($update_clients) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
