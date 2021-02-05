@@ -58,7 +58,7 @@ class TechnicalReceptionImplantesController extends Controller
     public function EditarTechnicalReceptionImplante(Request $request, $technicalReception)
     {
         try {   
-            //   dd($request->all());
+            // dd($request->all());
 
             $update = TechnicalReceptionImplante::find($technicalReception);
             $update->id_provider = $request->id_provider;
@@ -66,7 +66,6 @@ class TechnicalReceptionImplantesController extends Controller
             $update->fecha_ingreso = $request->fecha_ingreso;
             $update->bodega_origen = $request->bodega_origen;
             $update->nro_traslado = $request->nro_traslado;
-            $update->id_user = $request->id_user;
             $update->save();
             TechnicalReceptionProductoImplante::where("id_technical_reception_implante", $technicalReception)->delete();
             foreach($request["serial"] as $key => $serial){
