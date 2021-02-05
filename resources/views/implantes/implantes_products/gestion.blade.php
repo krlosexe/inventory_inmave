@@ -175,21 +175,21 @@
 				},
 				{
 					"data": null,
-					"visible": name_rol == "Silimed Bog" ? false : (name_rol == "Administrador" ? true : false),
+					"visible": name_rol == "Silimed Cali" ? false : (name_rol == "Administrador" ? true : false) || name_rol == "Silimed Bog" ? true : (name_rol == "Administrador" ? true : false),
 					render : (data, type, row) => {
 						return row.existence.medellin.total
 					}
 				},
 				{
 					"data": null,
-					"visible": name_rol == "Silimed Bog" ? true : (name_rol == "Administrador" ? true : false),
+					"visible":name_rol == "Silimed Cali" ? false : (name_rol == "Administrador" ? true : false) || name_rol == "Silimed Bog" ? true : (name_rol == "Administrador" ? true : false),
 					render : (data, type, row) => {
 						return row.existence.bogota.total
 					}
 			    },
 				{
 					"data": null,
-					"visible": name_rol == "Silimed Cali" ? true : (name_rol == "Administrador" ? true : false),
+					"visible": name_rol == "Silimed Cali" ? true : (name_rol == "Administrador" ? true : false) || name_rol == "Silimed Bog" ? true : (name_rol == "Administrador" ? true : false),
 					render : (data, type, row) => {
 						return row.existence.cali.total
 					}
