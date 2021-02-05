@@ -122,11 +122,6 @@
 			"id_user": id_user,
 			"token": tokens,
 		};
-		// if(name_rol == "Administrador"){
-	    // $("#medellin").css("display","block");
-		// $("#bogota").css("display","block");
-		// $("#cali").css("display","block");
-		// }
 		if(name_rol == "Silimed_Bog"){
 			$("#medellin").css("display","none");
 			$("#cali").css("display","none");
@@ -254,9 +249,7 @@
 						render : (data, type, row) => {
 							if(name_rol = "Silimed_Bog"){
 								return row.existence.bogota.total
-							}
-							
-							
+							}							
 						}
 					},
 					{
@@ -326,9 +319,7 @@
 						render : (data, type, row) => {
 							if(name_rol = "Administrador"){
 								return row.existence.medellin.total
-							}
-							
-							
+							}	
 						}
 					},
 					{
@@ -338,8 +329,6 @@
 							if(name_rol = "Administrador"){
 								return row.existence.bogota.total
 							}
-							
-							
 						}
 					},
 					{
@@ -349,8 +338,6 @@
 							if(name_rol = "Administrador"){
 								return row.existence.cali.total
 							}
-							
-							
 						}
 					},
 					{
