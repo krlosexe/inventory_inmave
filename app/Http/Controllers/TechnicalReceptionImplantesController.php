@@ -28,7 +28,7 @@ class TechnicalReceptionImplantesController extends Controller
                 $products["id_technical_reception_implante"]  = $tri->id;
                 $products["referencia"]              = $referencia;
                 $products["serial"]                  = $request["serial"][$key];
-                $products["id_product"]              = $request["id_product"][$key];
+                // $products["id_product"]              = $request["id_product"][$key];
                 $products["lote"]                    = $request["lotes"][$key];
                 $products["register_invima"]         = $request["register_invima"][$key];
                 $products["date_expiration"]         = $request["date_expiration"][$key];
@@ -75,7 +75,7 @@ class TechnicalReceptionImplantesController extends Controller
                     $products["id_technical_reception_implante"]  = $update->id;
                     $products["referencia"]              = $request["referencia"][$key];
                     $products["serial"]                  = $serial;
-                    $products["id_product"]              = $request["id_product"][$key];
+                    // $products["id_product"]              = $request["id_product"][$key];
                     $products["lote"]                    = $request["lote"][$key];
                     $products["register_invima"]         = $request["register_invima"][$key];
                     $products["date_expiration"]         = $request["date_expiration"][$key];
