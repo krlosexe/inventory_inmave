@@ -105,7 +105,7 @@ class ImplantesClientesController extends Controller
         $update_clients->save();
 
         if ($update_clients) {
-            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron Editados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("A ocurrido un error")->setStatusCode(400);
