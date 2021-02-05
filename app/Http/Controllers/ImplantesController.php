@@ -142,6 +142,7 @@ class ImplantesController extends Controller
                 ->orderBy("implantes_reemisiones.id", "DESC")
                 ->with("items")
                 ->get();
+                return response()->json($data)->setStatusCode(200);
         }
 
         if($id == "Silimed_Cali"){
@@ -155,22 +156,24 @@ class ImplantesController extends Controller
             ->orderBy("implantes_reemisiones.id", "DESC")
             ->with("items")
             ->get();
-    }
+            return response()->json($data)->setStatusCode(200);
+        }
 
-    if($id == "Silimed_Bog"){
-        $data = ImplanteReemision::select("implantes_reemisiones.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
-        ->join("auditoria", "auditoria.cod_reg", "=", "implantes_reemisiones.id")
-        ->join("implantes_clients", "implantes_clients.id", "=", "implantes_reemisiones.id_client")
-        ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
-        ->where("auditoria.tabla", "implantes_remision")
-        ->where("implantes_reemisiones.warehouse", "Bogota")
-        ->where("auditoria.status", "!=", "0")
-        ->orderBy("implantes_reemisiones.id", "DESC")
-        ->with("items")
-        ->get();
-}
+        if($id == "Silimed_Bog"){
+            $data = ImplanteReemision::select("implantes_reemisiones.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+            ->join("auditoria", "auditoria.cod_reg", "=", "implantes_reemisiones.id")
+            ->join("implantes_clients", "implantes_clients.id", "=", "implantes_reemisiones.id_client")
+            ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+            ->where("auditoria.tabla", "implantes_remision")
+            ->where("implantes_reemisiones.warehouse", "Bogota")
+            ->where("auditoria.status", "!=", "0")
+            ->orderBy("implantes_reemisiones.id", "DESC")
+            ->with("items")
+            ->get();
+            return response()->json($data)->setStatusCode(200);
+        }
 
-        return response()->json($data)->setStatusCode(200);
+        
     }
     public function CreateImplanteOutput(Request $request)
     {
