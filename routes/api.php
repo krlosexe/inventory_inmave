@@ -117,7 +117,7 @@ Route::get('output/implantes/list', 'ImplantesController@ListImplanteOutput');
 Route::put('output/implantes/update/{id}', 'ImplantesController@UpdateImplanteOutput');
 
 Route::post('products/implantes/create', 'ProductImplanteController@CreateProductImplante');
-Route::get('products/implantes/list', 'ProductImplanteController@ListProductImplante');
+Route::get('products/implantes/list/{id}', 'ProductImplanteController@ListProductImplante');
 Route::put('products/implantes/edit/{id}', 'ProductImplanteController@EditProductImplante');
 Route::get('products/implantes/delete/{id}', 'ProductImplanteController@DeleteProductImplante');
 Route::get('implantes/entry/output', 'ImplantesController@listImplantOutput');
