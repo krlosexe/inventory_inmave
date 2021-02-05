@@ -130,17 +130,45 @@ class ImplantesController extends Controller
             return $th;
         }
     }
-    public function ListImplanteRemision()
+    public function ListImplanteRemision($id)
     {
-        $data = ImplanteReemision::select("implantes_reemisiones.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+        if($id == "Administrador"){
+                $data = ImplanteReemision::select("implantes_reemisiones.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+                ->join("auditoria", "auditoria.cod_reg", "=", "implantes_reemisiones.id")
+                ->join("implantes_clients", "implantes_clients.id", "=", "implantes_reemisiones.id_client")
+                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                ->where("auditoria.tabla", "implantes_remision")
+                ->where("auditoria.status", "!=", "0")
+                ->orderBy("implantes_reemisiones.id", "DESC")
+                ->with("items")
+                ->get();
+        }
+
+        if($id == "Silimed_Cali"){
+            $data = ImplanteReemision::select("implantes_reemisiones.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_reemisiones.id")
             ->join("implantes_clients", "implantes_clients.id", "=", "implantes_reemisiones.id_client")
             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
             ->where("auditoria.tabla", "implantes_remision")
+            ->where("implantes_reemisiones.warehouse", "Cali")
             ->where("auditoria.status", "!=", "0")
             ->orderBy("implantes_reemisiones.id", "DESC")
             ->with("items")
             ->get();
+    }
+
+    if($id == "Silimed_Bog"){
+        $data = ImplanteReemision::select("implantes_reemisiones.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+        ->join("auditoria", "auditoria.cod_reg", "=", "implantes_reemisiones.id")
+        ->join("implantes_clients", "implantes_clients.id", "=", "implantes_reemisiones.id_client")
+        ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+        ->where("auditoria.tabla", "implantes_remision")
+        ->where("implantes_reemisiones.warehouse", "Bogota")
+        ->where("auditoria.status", "!=", "0")
+        ->orderBy("implantes_reemisiones.id", "DESC")
+        ->with("items")
+        ->get();
+}
 
         return response()->json($data)->setStatusCode(200);
     }
@@ -238,17 +266,44 @@ class ImplantesController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-    public function ListImplanteOutput()
+    public function ListImplanteOutput($id)
     {
-        $data = ImplantOutput::select("implantes_output.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+        // dd($id);
+        if($id == "Administrador"){
+            $data = ImplantOutput::select("implantes_output.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+                ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
+                ->join("implantes_clients", "implantes_clients.id", "=", "implantes_output.id_client")
+                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                ->where("auditoria.tabla", "implantes_output")
+                ->where("auditoria.status", "!=", "0")
+                ->orderBy("implantes_output.id", "DESC")
+                ->with("items")
+                ->get();
+        }
+        if($id == "Silimed_Cali"){
+            $data = ImplantOutput::select("implantes_output.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+                ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
+                ->join("implantes_clients", "implantes_clients.id", "=", "implantes_output.id_client")
+                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                ->where("auditoria.tabla", "implantes_output")
+                ->where("implantes_output.warehouse", "Cali")
+                ->where("auditoria.status", "!=", "0")
+                ->orderBy("implantes_output.id", "DESC")
+                ->with("items")
+                ->get();
+        }
+        if($id == "Silimed_Bog"){
+            $data = ImplantOutput::select("implantes_output.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
             ->join("implantes_clients", "implantes_clients.id", "=", "implantes_output.id_client")
             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
             ->where("auditoria.tabla", "implantes_output")
+            ->where("implantes_output.warehouse", "Bogota")
             ->where("auditoria.status", "!=", "0")
             ->orderBy("implantes_output.id", "DESC")
             ->with("items")
             ->get();
+        }
             return $data;
     }
     public function searchSerial($ref)

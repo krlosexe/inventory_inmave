@@ -109,11 +109,11 @@ Route::get('technical/reception/implante/delete/{id}', 'TechnicalReceptionImplan
 Route::get('products/get/implante/{id}', 'ImplantesController@GetExistenceImplante');
 
 Route::post('reemisiones/implantes/create', 'ImplantesController@CreateImplanteRemision');
-Route::get('reemisiones/implantes/list', 'ImplantesController@ListImplanteRemision');
+Route::get('reemisiones/implantes/list/{id}', 'ImplantesController@ListImplanteRemision');
 Route::put('reemisiones/implantes/update/{id}', 'ImplantesController@UpdateImplanteRemision');
 
 Route::post('output/implantes/create', 'ImplantesController@CreateImplanteOutput');
-Route::get('output/implantes/list', 'ImplantesController@ListImplanteOutput');
+Route::get('output/implantes/list/{id}', 'ImplantesController@ListImplanteOutput');
 Route::put('output/implantes/update/{id}', 'ImplantesController@UpdateImplanteOutput');
 
 Route::post('products/implantes/create', 'ProductImplanteController@CreateProductImplante');

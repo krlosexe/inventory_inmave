@@ -125,7 +125,7 @@
 			"serverSide": false,
 			"ajax": {
 				"method": "GET",
-				"url": '' + url + '/api/reemisiones/implantes/list',
+				"url": '' + url + '/api/reemisiones/implantes/list/' + name_rol,
 				"data": {
 					"id_user": id_user,
 					"token": tokens,

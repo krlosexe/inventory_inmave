@@ -171,7 +171,7 @@
 			"serverSide": false,
 			"ajax": {
 				"method": "GET",
-				"url": '' + url + '/api/output/implantes/list',
+				"url": '' + url + '/api/output/implantes/list/' + name_rol,
 				//  "data": {
 				// 	"id_user": id_user,
 				// 	"token"  : tokens,
