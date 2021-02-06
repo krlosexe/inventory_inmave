@@ -62,9 +62,9 @@
 										<th>Referencia</th>
 										<th>Descripcion</th>
 										<th>Gramaje</th>
-										<th>Existencia Medellin</th>
-										<th>Existencia Bogota</th>
-										<th>Existencia Cali</th>
+										<th id="medellin">Existencia Medellin</th>
+										<th id="bogota">Existencia Bogota</th>
+										<th id="cali">Existencia Cali</th>
 										<th>Registro INVIMA</th>
 										<th>Precio</th>
 										<th>Registrado por</th>
@@ -117,90 +117,251 @@
 	function store() {
 		enviarFormulario("#store", 'api/products/implantes/create', '#cuadro2');
 	}
-	function list(cuadro) {
+	function list(cuadro) {		
 		var data = {
 			"id_user": id_user,
 			"token": tokens,
 		};
+		if(name_rol == "Silimed_Bog"){
+			$("#medellin").css("display","none");
+			$("#cali").css("display","none");
+		}
+
+		if(name_rol == "Silimed_Cali"){
+			$("#medellin").css("display","none");
+			$("#bogota").css("display","none");
+		}
 		$('#table tbody').off('click');
 		var url = document.getElementById('ruta').value;
 		cuadros(cuadro, "#cuadro1");
-		var table = $("#table").DataTable({
-			"destroy": true,
-			"stateSave": true,
-			"serverSide": false,
-			"ajax": {
-				"method": "GET",
-				"url": '' + url + '/api/products/implantes/list',
-				"dataSrc": ""
-			},
-			"columns": [
-				{
-					"data": null,
-					render: function(data, type, row) {
-						var botones = "";
-						// if(consultar == 1)
-						// 	botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
-
-						if (actualizar == 1)
-							botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-						if (data.status == 1 && actualizar == 1)
-							// botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
-						// else if (data.status == 2 && actualizar == 1)
-						// 	botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
-						if (borrar == 1)
-							botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
-						return botones;
-					}
+		if(name_rol == "Silimed_Cali"){
+			var table = $("#table").DataTable({
+				"destroy": true,
+				"stateSave": true,
+				"serverSide": false,
+				"ajax": {
+					"method": "GET",
+					"url": '' + url + '/api/products/implantes/list/' + name_rol,
+					"dataSrc": ""
 				},
-				{
-					"data": "referencia"
+				"columns": [
+					{
+						"data": null,
+						render: function(data, type, row) {
+							var botones = "";
+							// if(consultar == 1)
+							// 	botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+	
+							if (actualizar == 1)
+								botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+							if (data.status == 1 && actualizar == 1)
+								// botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+							// else if (data.status == 2 && actualizar == 1)
+							// 	botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+							if (borrar == 1)
+								botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+							return botones;
+						}
+					},
+					{
+						"data": "referencia"
+					},
+					{
+						"data": "description"
+					},
+					{
+						"data": "gramaje"
+					},
+					{
+						"data": null,
+						"visible":true,
+						render : (data, type, row) => {
+							if(name_rol = "Silimed_Cali"){
+								return row.existence.cali.total
+							}
+							
+							
+						}
+					},
+					{
+						"data": "register_invima"
+					},
+					{
+						"data": "precio"
+					},
+					{
+						"data": "email_regis",
+	
+					},
+					{
+						"data": "created_at"
+					},
+				],
+				"language": idioma_espanol,
+				"dom": 'Bfrtip',
+				"responsive": true,
+				"buttons": [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+		}
+		if(name_rol == "Silimed_Bog"){
+			var table = $("#table").DataTable({
+				"destroy": true,
+				"stateSave": true,
+				"serverSide": false,
+				"ajax": {
+					"method": "GET",
+					"url": '' + url + '/api/products/implantes/list/' + name_rol,
+					"dataSrc": ""
 				},
-				{
-					"data": "description"
+				"columns": [
+					{
+						"data": null,
+						render: function(data, type, row) {
+							var botones = "";
+							// if(consultar == 1)
+							// 	botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+	
+							if (actualizar == 1)
+								botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+							if (data.status == 1 && actualizar == 1)
+								// botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+							// else if (data.status == 2 && actualizar == 1)
+							// 	botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+							if (borrar == 1)
+								botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+							return botones;
+						}
+					},
+					{
+						"data": "referencia"
+					},
+					{
+						"data": "description"
+					},
+					{
+						"data": "gramaje"
+					},
+					{
+						"data": null,
+						"visible":true,
+						render : (data, type, row) => {
+							if(name_rol = "Silimed_Bog"){
+								return row.existence.bogota.total
+							}							
+						}
+					},
+					{
+						"data": "register_invima"
+					},
+					{
+						"data": "precio"
+					},
+					{
+						"data": "email_regis",
+	
+					},
+					{
+						"data": "created_at"
+					},
+				],
+				"language": idioma_espanol,
+				"dom": 'Bfrtip',
+				"responsive": true,
+				"buttons": [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+		}
+		
+		if(name_rol == "Administrador"){
+			var table = $("#table").DataTable({
+				"destroy": true,
+				"stateSave": true,
+				"serverSide": false,
+				"ajax": {
+					"method": "GET",
+					"url": '' + url + '/api/products/implantes/list/' + name_rol,
+					"dataSrc": ""
 				},
-				{
-					"data": "gramaje"
-				},
-				{
-					"data": null,
-					render : (data, type, row) => {
-						return row.existence.medellin.total
-					}
-				},
-				{
-					"data": null,
-					render : (data, type, row) => {
-						return row.existence.bogota.total
-					}
-			    },
-				{
-					"data": null,
-					render : (data, type, row) => {
-						return row.existence.cali.total
-					}
-				},
-				{
-					"data": "register_invima"
-				},
-				{
-					"data": "precio"
-				},
-				{
-					"data": "email_regis",
-
-				},
-				{
-					"data": "created_at"
-				},
-			],
-			"language": idioma_espanol,
-			"dom": 'Bfrtip',
-			"responsive": true,
-			"buttons": [
-				'copy', 'csv', 'excel', 'pdf', 'print'
-			]
-		});
+				"columns": [
+					{
+						"data": null,
+						render: function(data, type, row) {
+							var botones = "";
+							// if(consultar == 1)
+							// 	botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+	
+							if (actualizar == 1)
+								botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+							if (data.status == 1 && actualizar == 1)
+								// botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+							// else if (data.status == 2 && actualizar == 1)
+							// 	botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+							if (borrar == 1)
+								botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+							return botones;
+						}
+					},
+					{
+						"data": "referencia"
+					},
+					{
+						"data": "description"
+					},
+					{
+						"data": "gramaje"
+					},
+					{
+						"data": null,
+						"visible":true,
+						render : (data, type, row) => {
+							if(name_rol = "Administrador"){
+								return row.existence.medellin.total
+							}	
+						}
+					},
+					{
+						"data": null,
+						"visible":true,
+						render : (data, type, row) => {
+							if(name_rol = "Administrador"){
+								return row.existence.bogota.total
+							}
+						}
+					},
+					{
+						"data": null,
+						"visible":true,
+						render : (data, type, row) => {
+							if(name_rol = "Administrador"){
+								return row.existence.cali.total
+							}
+						}
+					},
+					{
+						"data": "register_invima"
+					},
+					{
+						"data": "precio"
+					},
+					{
+						"data": "email_regis",
+	
+					},
+					{
+						"data": "created_at"
+					},
+				],
+				"language": idioma_espanol,
+				"dom": 'Bfrtip',
+				"responsive": true,
+				"buttons": [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+		}
 		ver("#table tbody", table)
 		edit("#table tbody", table)
 		activar("#table tbody", table)

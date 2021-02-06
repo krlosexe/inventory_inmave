@@ -9,8 +9,9 @@ use DB;
 class ProductImplanteController extends Controller
 {
 
-    public function ListProductImplante()
+    public function ListProductImplante($das)
     {
+        // dd($das);
         try {
 
 
@@ -23,7 +24,7 @@ class ProductImplanteController extends Controller
             ->get();
 
             foreach($products as $value){
-                $existence = $this->GetExistence($value["referencia"]);
+                $existence = $this->GetExistence($value["referencia"],$das);
                 $value["existence"] = $existence;
             }
             return response()->json($products)->setStatusCode(200);
@@ -96,7 +97,7 @@ class ProductImplanteController extends Controller
         }
     }
 
-    public function GetExistence($id_product){
+    public function GetExistence($id_product,$rol){
         try {
                     $entry_medellin = DB::table("technical_reception_products_implante")
                     ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
@@ -196,63 +197,102 @@ class ProductImplanteController extends Controller
                         ->groupBy("implantes_reemisiones_items.referencia")
                         ->first();
 
-
             $data_medellin = [];
-            if($entry_medellin){
-                $total_output_medellin           = 0;
-                $total_output_medellin_reemision = 0;
-                $total_traspaso_medellin = 0;
-                if($output_medellin){
-                    $total_output_medellin = $output_medellin->total;
-                }
-                if($output_medellin_reemision){
-                    $total_output_medellin_reemision = $output_medellin_reemision->total;
-                }
-                if($traspase_medellin){
-                    $total_traspaso_medellin = $traspase_medellin->total;
-                }
-                $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
-            }else{
-                $data_medellin["medellin"]["total"] = 0;
-            }
 
-            if($entry_bogota){
-                $total_output_bogota           = 0;
-                $total_output_bogota_reemision = 0;
-                $total_traspaso_bogota = 0;
-                if($output_bogota){
-                    $total_output_bogota = $output_bogota->total;
+            if($rol == "Administrador"){
+                if($entry_medellin){
+                    $total_output_medellin           = 0;
+                    $total_output_medellin_reemision = 0;
+                    $total_traspaso_medellin = 0;
+                    if($output_medellin){
+                        $total_output_medellin = $output_medellin->total;
+                    }
+                    if($output_medellin_reemision){
+                        $total_output_medellin_reemision = $output_medellin_reemision->total;
+                    }
+                    if($traspase_medellin){
+                        $total_traspaso_medellin = $traspase_medellin->total;
+                    }
+                    $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
+                }else{
+                    $data_medellin["medellin"]["total"] = 0;
                 }
-                if($output_bogota_reemision){
-                    $total_output_bogota_reemision = $output_bogota_reemision->total;
-                }
-                if($traspase_bogota){
-                    $total_traspaso_bogota = $traspase_bogota->total;
-                }
-                $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
-            }else{
-                $data_medellin["bogota"]["total"] = 0;
-            }
 
-            if($entry_cali){
-                $total_output_cali           = 0;
-                $total_output_cali_reemision = 0;
-                $total_traspaso_cali = 0;
-                if($output_cali){
-                    $total_output_cali = $output_cali->total;
+                if($entry_cali){
+                    $total_output_cali           = 0;
+                    $total_output_cali_reemision = 0;
+                    $total_traspaso_cali = 0;
+                    if($output_cali){
+                        $total_output_cali = $output_cali->total;
+                    }
+                    if($output_cali_reemision){
+                        $total_output_cali_reemision = $output_cali_reemision->total;
+                    }
+                    if($traspase_cali){
+                        $total_traspaso_cali = $traspase_cali->total;
+                    }
+                    $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
+                }else{
+                    $data_medellin["cali"]["total"] = 0;
                 }
-                if($output_cali_reemision){
-                    $total_output_cali_reemision = $output_cali_reemision->total;
+
+                if($entry_bogota){
+                    $total_output_bogota           = 0;
+                    $total_output_bogota_reemision = 0;
+                    $total_traspaso_bogota = 0;
+                    if($output_bogota){
+                        $total_output_bogota = $output_bogota->total;
+                    }
+                    if($output_bogota_reemision){
+                        $total_output_bogota_reemision = $output_bogota_reemision->total;
+                    }
+                    if($traspase_bogota){
+                        $total_traspaso_bogota = $traspase_bogota->total;
+                    }
+                    $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
+                }else{
+                    $data_medellin["bogota"]["total"] = 0;
                 }
-                if($traspase_cali){
-                    $total_traspaso_cali = $traspase_cali->total;
+            }
+            if($rol == "Silimed_Cali"){
+                if($entry_cali){
+                    $total_output_cali           = 0;
+                    $total_output_cali_reemision = 0;
+                    $total_traspaso_cali = 0;
+                    if($output_cali){
+                        $total_output_cali = $output_cali->total;
+                    }
+                    if($output_cali_reemision){
+                        $total_output_cali_reemision = $output_cali_reemision->total;
+                    }
+                    if($traspase_cali){
+                        $total_traspaso_cali = $traspase_cali->total;
+                    }
+                    $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
+                }else{
+                    $data_medellin["cali"]["total"] = 0;
                 }
-                $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
-            }else{
-                $data_medellin["cali"]["total"] = 0;
+            }
+            if($rol == "Silimed_Bog"){
+                if($entry_bogota){
+                    $total_output_bogota           = 0;
+                    $total_output_bogota_reemision = 0;
+                    $total_traspaso_bogota = 0;
+                    if($output_bogota){
+                        $total_output_bogota = $output_bogota->total;
+                    }
+                    if($output_bogota_reemision){
+                        $total_output_bogota_reemision = $output_bogota_reemision->total;
+                    }
+                    if($traspase_bogota){
+                        $total_traspaso_bogota = $traspase_bogota->total;
+                    }
+                    $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
+                }else{
+                    $data_medellin["bogota"]["total"] = 0;
+                }
             }
             return $data_medellin;
-
         } catch (\Throwable $th) {
             return $th;
         }

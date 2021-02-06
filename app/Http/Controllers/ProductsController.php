@@ -138,6 +138,8 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Medellin")
                             ->where("products.id", $id_product)
+                            // ->orderBy('products_entry.created_at','ASC')
+                            // ->groupBy('product_entry_items.lote')
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -184,6 +186,8 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Bogota")
                             ->where("products.id", $id_product)
+                            // ->orderBy('products_entry.created_at','ASC')
+                            // ->groupBy('product_entry_items.lote')
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -217,11 +221,13 @@ class ProductsController extends Controller
                             ->first();
 
         $entry_cali = DB::table("product_entry_items")
-                            ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
+                            ->selectRaw("product_entry_items.id_product, products.description,(SUM(product_entry_items.qty))  as total")
                             ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Cali")
                             ->where("products.id", $id_product)
+                            // ->orderBy('products_entry.created_at','ASC')
+                            // ->groupBy('product_entry_items.lote')
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -231,7 +237,7 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_output_items.id_product")
                             ->where("product_output.warehouse", "Cali")
                             ->where("products.id", $id_product)
-                            ->groupBy("product_output_items.id_product")
+                            ->groupBy("product_output_items.id_product")products_entry
                             ->first();
 
         $traspase_cali = DB::table("product_output_items_trapase")
@@ -334,10 +340,12 @@ class ProductsController extends Controller
     public function GetExistenceWarehouse($warehouse){
 
         $entry = DB::table("product_entry_items")
-                    ->selectRaw("product_entry_items.id_product, products.description,products.price_euro,product_entry_items.lote,product_entry_items.register_invima, product_entry_items.date_expiration, (SUM(product_entry_items.qty))  as total, products.presentation, products.price_cop, products.price_distributor_x_caja, products.price_distributor_x_vial, products.price_cliente_x_caja, products.price_cliente_x_vial")
+                    ->selectRaw("product_entry_items.id_product,products_entry.created_at, products.description,products.price_euro,product_entry_items.lote,product_entry_items.register_invima, product_entry_items.date_expiration, (SUM(product_entry_items.qty))  as total, products.presentation, products.price_cop, products.price_distributor_x_caja, products.price_distributor_x_vial, products.price_cliente_x_caja, products.price_cliente_x_vial")
                     ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
                     ->join("products", "products.id", "product_entry_items.id_product")
                     ->where("products_entry.warehouse", $warehouse)
+                    ->orderBy('products_entry.created_at','ASC')
+                    ->groupBy('product_entry_items.lote')
                     ->groupBy("product_entry_items.id_product")
                     ->get();
 

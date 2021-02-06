@@ -373,10 +373,10 @@
 							$(this).val(number_format($(this).val(), 2));
 						}
 					});
-					// $(".serial").focus();
-					$(".serial").change(function() {
-						var sere = $(".serial").val().substr(2)
-					    $(".serial").val(sere)
+					// $("#serial_" + contador + "").focus();
+					$("#serial_" + contador + "").change(function() {
+						var sere = $("#serial_" + contador + "").val().substr(2)
+					    $("#serial_" + contador + "").val(sere)
 					});
 				}
 			});
@@ -431,9 +431,9 @@
 						$(this).val(number_format($(this).val(), 2));
 					}
 				});
-				$(".serial").change(function() {
-						var sere = $(".serial").val().substr(2)
-					    $(".serial").val(sere)
+				$("#serial_" + contador + "").change(function() {
+						var sere = $("#serial_" + contador + "").val().substr(2)
+					    $("#serial_" + contador + "").val(sere)
 					});
 			}
 		});
@@ -446,6 +446,22 @@
 		ChangeProviders("#provider")
 		$('#table_products_edit tbody').html("");
 	   $('#table_products_imp tbody').html("");
+	  console.log(name_rol);
+	    if(name_rol == "Silimed_Cali"){
+					$("#warehouse option").remove();
+						$("#warehouse").append($('<option>', {
+							value: "Cali",
+							text: "Cali"
+						}));
+		}
+		if(name_rol == "Silimed_Bog"){
+					$("#warehouse option").remove();
+						$("#warehouse").append($('<option>', {
+							value: "Bogota",
+							text: "Bogota"
+						}));
+		}
+	
 		getProducts("#products")
 		GetCategories("#category")
 		cuadros("#cuadro1", "#cuadro2");
@@ -475,6 +491,21 @@
 	*/
 	function edit(tbody, table) {
 		$(tbody).on("click", "span.editar", function() {
+		
+			if(name_rol == "Silimed_Cali"){
+					$("#warehouse_edit option").remove();
+						$("#warehouse").append($('<option>', {
+							value: "Cali",
+							text: "Cali"
+						}));
+		}
+		if(name_rol == "Silimed_Bog"){
+					$("#warehouse_edit option").remove();
+						$("#warehouse").append($('<option>', {
+							value: "Bogota",
+							text: "Bogota"
+						}));
+		}
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
 			$('#table_products_imp tbody').html("");

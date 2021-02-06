@@ -28,7 +28,7 @@ class TechnicalReceptionImplantesController extends Controller
                 $products["id_technical_reception_implante"]  = $tri->id;
                 $products["referencia"]              = $referencia;
                 $products["serial"]                  = $request["serial"][$key];
-                $products["id_product"]              = $request["id_product"][$key];
+                // $products["id_product"]              = $request["id_product"][$key];
                 $products["lote"]                    = $request["lotes"][$key];
                 $products["register_invima"]         = $request["register_invima"][$key];
                 $products["date_expiration"]         = $request["date_expiration"][$key];
@@ -58,7 +58,7 @@ class TechnicalReceptionImplantesController extends Controller
     public function EditarTechnicalReceptionImplante(Request $request, $technicalReception)
     {
         try {   
-            //   dd($request->all());
+            // dd($request->all());
 
             $update = TechnicalReceptionImplante::find($technicalReception);
             $update->id_provider = $request->id_provider;
@@ -66,7 +66,6 @@ class TechnicalReceptionImplantesController extends Controller
             $update->fecha_ingreso = $request->fecha_ingreso;
             $update->bodega_origen = $request->bodega_origen;
             $update->nro_traslado = $request->nro_traslado;
-            $update->id_user = $request->id_user;
             $update->save();
             TechnicalReceptionProductoImplante::where("id_technical_reception_implante", $technicalReception)->delete();
             foreach($request["serial"] as $key => $serial){
@@ -75,7 +74,7 @@ class TechnicalReceptionImplantesController extends Controller
                     $products["id_technical_reception_implante"]  = $update->id;
                     $products["referencia"]              = $request["referencia"][$key];
                     $products["serial"]                  = $serial;
-                    $products["id_product"]              = $request["id_product"][$key];
+                    // $products["id_product"]              = $request["id_product"][$key];
                     $products["lote"]                    = $request["lote"][$key];
                     $products["register_invima"]         = $request["register_invima"][$key];
                     $products["date_expiration"]         = $request["date_expiration"][$key];
