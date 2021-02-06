@@ -373,10 +373,10 @@
 							$(this).val(number_format($(this).val(), 2));
 						}
 					});
-					// $(".serial").focus();
-					$(".serial").change(function() {
-						var sere = $(".serial").val().substr(2)
-					    $(".serial").val(sere)
+					// $("#serial_" + contador + "").focus();
+					$("#serial_" + contador + "").change(function() {
+						var sere = $("#serial_" + contador + "").val().substr(2)
+					    $("#serial_" + contador + "").val(sere)
 					});
 				}
 			});
