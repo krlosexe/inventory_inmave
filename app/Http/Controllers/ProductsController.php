@@ -237,7 +237,7 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_output_items.id_product")
                             ->where("product_output.warehouse", "Cali")
                             ->where("products.id", $id_product)
-                            ->groupBy("product_output_items.id_product")products_entry
+                            ->groupBy("product_output_items.id_product")
                             ->first();
 
         $traspase_cali = DB::table("product_output_items_trapase")

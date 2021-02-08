@@ -45,6 +45,12 @@
         <hr>
 
         <div class="row">
+        <div class="col-md-3">
+              <label for=""><b>Transporte + Importación</b></label>
+                <div class="form-group valid-required">
+                <input type="text" class="form-control" name="otros" id="otros" required>
+                </div>
+          </div>
           <div class="col-md-6">
               <label for=""><b>Productos</b></label>
                 <div class="form-group valid-required">

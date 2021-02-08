@@ -13,8 +13,6 @@ class ProductImplanteController extends Controller
     {
         // dd($das);
         try {
-
-
             $products = ProductImplantes::select("products_implantes.*", "user_registro.email as email_regis")
             // ->join("auditoria", "auditoria.cod_reg", "=", "products_implantes.id")
             ->join("users as user_registro", "user_registro.id", "=", "products_implantes.id_user")
@@ -32,13 +30,10 @@ class ProductImplanteController extends Controller
             return $th;
         }
     }
-
     public function CreateProductImplante(Request $request)
     {
         try {
-
             // dd($request->all());
-
             $create = ProductImplantes::create($request->all());
 
             $auditoria              = new Auditoria;
@@ -48,7 +43,6 @@ class ProductImplanteController extends Controller
             $auditoria->fec_regins  = date("Y-m-d H:i:s");
             $auditoria->usr_regins  = $request["id_user"];
             $auditoria->save();
-
             if($create){
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
@@ -349,7 +343,6 @@ class ProductImplanteController extends Controller
                     $value->total = (int)$value->total;
                 }
             }
-
             foreach($traspase as $out_traspase){
                 if($value->referencia == $out_traspase->referencia){
                     $value->total = $value->total - $out_traspase->total;
@@ -357,7 +350,6 @@ class ProductImplanteController extends Controller
                     $value->total = (int)$value->total;
                 }
             }
-
         }
         // dd($entry);
         return response()->json($entry)->setStatusCode(200);
