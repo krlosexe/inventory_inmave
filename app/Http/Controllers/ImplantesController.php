@@ -90,6 +90,7 @@ class ImplantesController extends Controller
     {
         // dd($request->all());
         try {
+            isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $update =  ImplanteReemision::find($remision);
             $update->warehouse              = $request->warehouse;
             $update->id_client              = $request->id_client;
@@ -107,7 +108,7 @@ class ImplantesController extends Controller
             // TechnicalReceptionProductoImplante::where('serial','!=',$request["serial"])->where('estatus','Remitido')->update(["estatus" => "Disponible"]);
             ImplanteReemisionesItem::where("id_implante_reemision", $remision)->delete();
             // if (isset($request["referencia"])) {
-                foreach ($request["referencia"] as $key => $value) {
+                foreach ($request->referencia as $key => $value) {
                     $producs_items = [];
                     $producs_items["id_implante_reemision"] = $update->id;
                     // $producs_items["id_product"]  = $request["id_product"][$key];
