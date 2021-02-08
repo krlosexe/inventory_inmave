@@ -138,8 +138,6 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Medellin")
                             ->where("products.id", $id_product)
-                            // ->orderBy('products_entry.created_at','ASC')
-                            // ->groupBy('product_entry_items.lote')
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -186,8 +184,7 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Bogota")
                             ->where("products.id", $id_product)
-                            // ->orderBy('products_entry.created_at','ASC')
-                            // ->groupBy('product_entry_items.lote')
+
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -226,8 +223,6 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Cali")
                             ->where("products.id", $id_product)
-                            // ->orderBy('products_entry.created_at','ASC')
-                            // ->groupBy('product_entry_items.lote')
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -249,8 +244,6 @@ class ProductsController extends Controller
                             ->groupBy("product_output_items_trapase.id_product")
                             ->first();
 
-
-
         $output_cali_reemision = DB::table("reemisiones_items")
                             ->selectRaw("reemisiones_items.id_product, products.description, (SUM(reemisiones_items.qty))  as total")
                             ->join("reemisiones", "reemisiones.id", "reemisiones_items.id_reemision")
@@ -259,8 +252,6 @@ class ProductsController extends Controller
                             ->where("products.id", $id_product)
                             ->groupBy("reemisiones_items.id_product")
                             ->first();
-
-
 
         $data_medellin = [];
         if($entry_medellin){
@@ -303,13 +294,10 @@ class ProductsController extends Controller
                 $total_traspaso_bogota = $traspase_bogota->total;
             }
 
-
-
             $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
         }else{
             $data_medellin["bogota"]["total"] = 0;
         }
-
         if($entry_cali){
 
             $total_output_cali           = 0;
@@ -335,8 +323,6 @@ class ProductsController extends Controller
 
     }
 
-
-
     public function GetExistenceWarehouse($warehouse){
 
         $entry = DB::table("product_entry_items")
@@ -344,11 +330,10 @@ class ProductsController extends Controller
                     ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
                     ->join("products", "products.id", "product_entry_items.id_product")
                     ->where("products_entry.warehouse", $warehouse)
-                    ->orderBy('products_entry.created_at','ASC')
-                    ->groupBy('product_entry_items.lote')
+                    // ->orderBy('products_entry.created_at','ASC')
+                    // ->groupBy('product_entry_items.lote')
                     ->groupBy("product_entry_items.id_product")
                     ->get();
-
 
         $output = DB::table("product_output_items")
                     ->selectRaw("product_output_items.id_product, products.description, (SUM(product_output_items.qty))  as total, products.presentation, products.price_cop, products.price_distributor_x_caja, products.price_distributor_x_vial, products.price_cliente_x_caja, products.price_cliente_x_vial")
@@ -357,7 +342,6 @@ class ProductsController extends Controller
                     ->where("product_output.warehouse", $warehouse)
                     ->groupBy("product_output_items.id_product")
                     ->get();
-
 
         $output_reemision = DB::table("reemisiones_items")
                     ->selectRaw("reemisiones_items.id_product, products.description, (SUM(reemisiones_items.qty))  as total, products.presentation, products.price_cop, products.price_distributor_x_caja, products.price_distributor_x_vial, products.price_cliente_x_caja, products.price_cliente_x_vial")
