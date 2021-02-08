@@ -138,8 +138,6 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Medellin")
                             ->where("products.id", $id_product)
-                            // ->orderBy('products_entry.created_at','ASC')
-                            // ->groupBy('product_entry_items.lote')
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -186,8 +184,7 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Bogota")
                             ->where("products.id", $id_product)
-                            // ->orderBy('products_entry.created_at','ASC')
-                            // ->groupBy('product_entry_items.lote')
+
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -226,8 +223,6 @@ class ProductsController extends Controller
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Cali")
                             ->where("products.id", $id_product)
-                            // ->orderBy('products_entry.created_at','ASC')
-                            // ->groupBy('product_entry_items.lote')
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -344,8 +339,8 @@ class ProductsController extends Controller
                     ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
                     ->join("products", "products.id", "product_entry_items.id_product")
                     ->where("products_entry.warehouse", $warehouse)
-                    ->orderBy('products_entry.created_at','ASC')
-                    ->groupBy('product_entry_items.lote')
+                    // ->orderBy('products_entry.created_at','ASC')
+                    // ->groupBy('product_entry_items.lote')
                     ->groupBy("product_entry_items.id_product")
                     ->get();
 
