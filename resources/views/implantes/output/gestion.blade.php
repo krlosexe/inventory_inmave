@@ -310,8 +310,8 @@
 			$("#table_products_out tbody").html("")
 			$("#indicador_edit").val(1)
 
+			$("#items_id").val(data.items.length)
 			$("#table_products_out").focus();
-
 			$("#serial_edit").focus();
 			$("#serial_edit").change(function() {
 				$("#serial_edit").val($("#serial_edit").val().substr(2))

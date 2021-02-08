@@ -393,14 +393,19 @@ class InvoiceController extends Controller
         $pdf->loadHTML('<h1>Styde.net</h1>');
 
         if($data){
-            if($data->warehouse =="Medellin"){
+            if($data->warehouse == "Bogota"){
+                $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
+                return $pdf->loadView('invoice.InvoicePdfImplanteBogota', $data)->stream('archivo.pdf');
+            }
 
+            if($data->warehouse == "Medellin"){
                 $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
                 return $pdf->loadView('invoice.InvoicePdfImplante', $data)->stream('archivo.pdf');
-            }else{
+            }
+
+            if($data->warehouse == "Cali"){
                 $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
-                return $pdf->loadView('invoice.InvoicePdfImplanteBogota', $data)
-                    ->stream('archivo.pdf');
+                return $pdf->loadView('invoice.InvoicePdfImplante', $data)->stream('archivo.pdf');
             }
         }
 
@@ -429,10 +434,22 @@ class InvoiceController extends Controller
             if($data->warehouse == "Bogota"){
                 $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
                 return $pdf->loadView('invoice.InvoicePdfImplanteBogota', $data)->stream('archivo.pdf');
-            }else{
+            }
+
+            if($data->warehouse == "Medellin"){
                 $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
                 return $pdf->loadView('invoice.InvoicePdfImplante', $data)->stream('archivo.pdf');
             }
+
+            if($data->warehouse == "Cali"){
+                $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
+                return $pdf->loadView('invoice.InvoicePdfImplante', $data)->stream('archivo.pdf');
+            }
+            
+            // else{
+            //     $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
+            //     return $pdf->loadView('invoice.InvoicePdfImplante', $data)->stream('archivo.pdf');
+            // }
         }
 
     }

@@ -39,6 +39,13 @@
                             <input type="text" maxlength="15" name="warehouse" id="warehouse_edit" class="form-control form-control-user" readonly>
                             </div>
                         </div>
+
+                        <div class="col-2">
+                            <label for=""><b>Items</b></label>
+                            <div class="form-group valid-required">
+                            <input type="text" maxlength="15" name="items" id="items_id" class="form-control form-control-user" readonly>
+                            </div>
+                        </div>
                         <!-- <div class="col-md-2">
                             <br>
                             <button type="button" class="btn btn-primary btn-user" id="add_product_edit">
