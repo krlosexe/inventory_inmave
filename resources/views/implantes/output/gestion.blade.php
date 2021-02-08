@@ -427,7 +427,9 @@
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
-				error: function() {},
+				error: function(data) {
+					alert(data.responseJSON.mensaje)
+				},
 				success: function(data) {
 					// $("#table_products_edit_out tbody").html("")
 					var html = "";
@@ -444,7 +446,7 @@
 						// html +="<td>"+1+" <input type='hidden' class='id_product'  value='1' > </td>"
 						html += "<td><input type='text' class='form-control items_calc qty_product' name='salida[]' value='1'readonly></td>"
 						html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='1' readonly></td>"
-						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='" + number_format(data.products.precio, 2) + "' onchange='calcProduc(this)' required></td>"
+						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='" + number_format(0, 2) + "' onchange='calcProduc(this," + '"_edit"' + ")' required></td>"
 						// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
@@ -464,7 +466,7 @@
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
-			html += "<td>" + item.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + item.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ></td>"
+			html += "<td>" + item.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + item.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ><input type='hidden' class='id_product' name='price[]' value='" + item.price + "' ></td>"
 			html += "<td>" + item.serial + " <input type='hidden' class='id_product' name='serial[]' value='" + item.serial + "' > </td>"
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' max='" + item.qty + "' readonly><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.qty + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.qty + "' disabled></td>"
