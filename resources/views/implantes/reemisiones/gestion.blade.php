@@ -347,6 +347,8 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
+
+			$("#items_id").val(data.items.length)
 			$("#table_products_rem tbody").html("")
 			$("#indicador_edit").val(1)
 			$("#serial_edit").focus();
@@ -471,7 +473,6 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-					// console.log(data)
 					// $("#table_products_edit_rem tbody").html("")
 					var html = "";
 					var validaProduct = false
