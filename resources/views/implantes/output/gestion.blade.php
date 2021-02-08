@@ -115,6 +115,7 @@
 	function store() {
 		enviarFormulario("#store", 'api/output/implantes/create', '#cuadro2');
 	}
+	let contador = 0
 	function serial(data){
 		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
@@ -134,6 +135,7 @@
 							validaProduct = true;
 						}
 					});
+					contador++
 					if (!validaProduct) {
 						html += "<tr>"
 						html += "<td>" + data.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' > </td>"
@@ -148,6 +150,7 @@
 					} else {
 						warning('¡Recuerde que los campos son obligatorios!');
 					}
+					$("#items").val(contador);
 					$("#table_products_out tbody").append(html)
 					$('#serial').val("");
 					setTimeout(() => {
