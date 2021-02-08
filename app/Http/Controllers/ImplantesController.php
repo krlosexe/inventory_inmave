@@ -71,6 +71,7 @@ class ImplantesController extends Controller
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
+                    // $producs_items["estatus"]     = "Remitido";
 
                     ImplanteReemisionesItem::create($producs_items);
 
@@ -118,6 +119,7 @@ class ImplantesController extends Controller
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
+                    // $producs_items["estatus"]     = "Remitido";
                     TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Remitido"]);
                     ImplanteReemisionesItem::create($producs_items);                
                 }
@@ -215,6 +217,7 @@ class ImplantesController extends Controller
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
+                    // $producs_items["estatus"]     = "Vendido";
                     ImplantOutputItems::create($producs_items);
 
                     TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Vendido"]);
@@ -260,6 +263,7 @@ class ImplantesController extends Controller
                 $producs_items["price"]         = str_replace(",", "", $request["price"][$key]);
                 $producs_items["vat"]           = 0;
                 $producs_items["total"]         = str_replace(",", "", $request->total_invoice);
+                // $producs_items["estatus"]     = "Vendido";
 
                 TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Vendido"]);
                 ImplantOutputItems::create($producs_items);

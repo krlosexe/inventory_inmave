@@ -237,12 +237,10 @@ class ReemisionesController extends Controller
     public function ImplantesRemisionToInvoice($id,$user)
     {
         try {
-            // dd('adss');
+
             $head = ImplanteReemision::where('id',$id)->first();
-            // dd($head);
             $items = ImplanteReemisionesItem::where('id_implante_reemision',$head->id)->get();
-            // dd($items);
-            // dd($head->warehouse);
+           
             $output                         = new ImplantOutput;
             $output->warehouse              = $head->warehouse;
             $output->id_client              = $head->id_client;
@@ -254,7 +252,6 @@ class ReemisionesController extends Controller
             $output->rte_fuente             = $head->rte_fuente;
             $output->total_invoice          = $head->total_invoice;
             $output->observations           = $head->observations;
-            // $output->estatus                = "Vendido";
             $output->save();
 
             $auditoria              = new Auditoria;
@@ -276,11 +273,12 @@ class ReemisionesController extends Controller
                 $producs_items->total       = str_replace(",", "", $value->total);
                 // $producs_items->estatus     = "Vendido";
                 $producs_items->save();
-
-                $detail = TechnicalReceptionProductoImplante::where('serial',$value->serial)->update(["estatus" => "Vendido"]);
+                
+                TechnicalReceptionProductoImplante::where('serial',$value->serial)->update(["estatus" => "Vendido"]);
 
             }
             
+            //  ImplanteReemisionesItem::where('id_implante_reemision',$id)->update(["estatus" => "Vendido"]);
             ImplanteReemision::where('id',$id)->Delete();
             ImplanteReemisionesItem::where('id_implante_reemision',$id)->Delete();
 
