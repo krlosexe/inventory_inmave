@@ -38,6 +38,12 @@
                             <input type="text" maxlength="15" name="warehouse" id="warehouse" class="form-control form-control-user" readonly>
                             </div>
                         </div>
+                        <div class="col-2">
+                            <label for=""><b>Items</b></label>
+                            <div class="form-group valid-required">
+                            <input type="text" maxlength="15" name="items" id="items" class="form-control form-control-user" readonly>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
