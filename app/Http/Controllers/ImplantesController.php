@@ -110,11 +110,11 @@ class ImplantesController extends Controller
                 foreach ($request["referencia"] as $key => $value) {
                     $producs_items = [];
                     $producs_items["id_implante_reemision"] = $update->id;
-                    $producs_items["id_product"]  = $request["id_product"][$key];
+                    // $producs_items["id_product"]  = $request["id_product"][$key];
                     $producs_items["referencia"]  = $value;
                     $producs_items["serial"]      = $request["serial"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
-                    $producs_items["price"]       = str_replace(",", "", $request["total"][$key]);
+                    $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
                     ImplanteReemisionesItem::create($producs_items);                
