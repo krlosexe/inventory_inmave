@@ -467,9 +467,11 @@
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
-				error: function() {},
+				error: function(data) {
+					alert(data.responseJSON.mensaje)
+				},
 				success: function(data) {
-					console.log(data)
+					// console.log(data)
 					// $("#table_products_edit_rem tbody").html("")
 					var html = "";
 					var validaProduct = false
