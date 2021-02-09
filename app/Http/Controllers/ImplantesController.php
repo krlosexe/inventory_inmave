@@ -71,6 +71,7 @@ class ImplantesController extends Controller
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
+                    // $producs_items["estatus"]     = "Remitido";
 
                     ImplanteReemisionesItem::create($producs_items);
 
@@ -105,7 +106,13 @@ class ImplantesController extends Controller
             $update->total_invoice          = $request->total_invoice;
             $update->save();
 
-            // TechnicalReceptionProductoImplante::where('serial','!=',$request["serial"])->where('estatus','Remitido')->update(["estatus" => "Disponible"]);
+            $remi = ImplanteReemisionesItem::where("id_implante_reemision", $remision)->get();
+
+            foreach ($remi as $key => $value) {
+             
+                TechnicalReceptionProductoImplante::where('serial',$value["serial"])->update(["estatus" => "Disponible"]);
+            }
+
             ImplanteReemisionesItem::where("id_implante_reemision", $remision)->delete();
             // if (isset($request["referencia"])) {
                 foreach ($request->referencia as $key => $value) {
@@ -118,6 +125,7 @@ class ImplantesController extends Controller
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
+                    // $producs_items["estatus"]     = "Remitido";
                     TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Remitido"]);
                     ImplanteReemisionesItem::create($producs_items);                
                 }
@@ -215,6 +223,7 @@ class ImplantesController extends Controller
                     $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
                     $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
+                    // $producs_items["estatus"]     = "Vendido";
                     ImplantOutputItems::create($producs_items);
 
                     TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Vendido"]);
@@ -247,9 +256,16 @@ class ImplantesController extends Controller
         $update->total_invoice          = $request->total_invoice;
         $update->save();
 
-        ImplantOutputItems::where("id_implant_output",$output)->delete();
         
-        if(isset($request->referencia)){
+        $out = ImplantOutputItems::where("id_implant_output",$output)->get();
+        
+        foreach ($out as $key => $value) {
+            
+            TechnicalReceptionProductoImplante::where('serial',$value["serial"])->update(["estatus" => "Disponible"]);
+        }
+        ImplantOutputItems::where("id_implant_output",$output)->delete();
+       
+       if(isset($request->referencia)){
             foreach($request['referencia'] as $key => $value){
                 $producs_items= [];
                 $producs_items["id_implant_output"]  = $update->id;
@@ -260,6 +276,7 @@ class ImplantesController extends Controller
                 $producs_items["price"]         = str_replace(",", "", $request["price"][$key]);
                 $producs_items["vat"]           = 0;
                 $producs_items["total"]         = str_replace(",", "", $request->total_invoice);
+                // $producs_items["estatus"]     = "Vendido";
 
                 TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Vendido"]);
                 ImplantOutputItems::create($producs_items);
