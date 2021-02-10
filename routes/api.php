@@ -153,4 +153,5 @@ Route::post('implantes/products/movimiento/output', 'TraspasoController@createIm
 Route::get('implantes/products/movimiento/list', 'TraspasoController@ListImplanteOuptTraspase');
 Route::get('implantes/products/movimiento/detail/{id}', 'TraspasoController@ListImplanteOuptTraspaseById');
 Route::get('implantes/products/get/existence/warehouse/{warehouse}', 'ProductImplanteController@GetExistenceWarehouse');
+Route::get('implantes/reemisiones/status/{id}', 'ImplantesController@UpdateHeadRemision');
 
