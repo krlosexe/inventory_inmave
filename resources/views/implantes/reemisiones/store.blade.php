@@ -16,12 +16,6 @@
                                 <input type="text" maxlength="15" name="number" id="serial" class="form-control form-control-user">
                             </div>
                         </div>
-                        <!-- <div class="col-md-4">
-                            <div class="form-group valid-required" style="text-align: center;">
-                                <label for="reissue"> <b>Reemision ?</b> </label>
-                                <input type="checkbox" name="reissue" id="reissue" class="form-control" value="1">
-                            </div>
-                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -39,19 +33,12 @@
                             <input type="text" maxlength="15" name="warehouse" id="warehouse" class="form-control form-control-user" readonly>
                             </div>
                         </div>
-
                         <div class="col-2">
                             <label for=""><b>Items</b></label>
                             <div class="form-group valid-required">
                             <input type="text" maxlength="15" name="items" id="items" class="form-control form-control-user" readonly>
                             </div>
                         </div>
-                        <!-- <div class="col-md-2">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-user" id="add_product">
-                                Agregar
-                            </button>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -81,7 +68,6 @@
                                         <input type="checkbox"  name="discount" id="apply_discount" class="form-control">
                                         <br><br>
                                         <label for="apply_discount2">¿ Quieres Aplicar Descuento (15%)?</label>
-                                        <!-- <input style="text-align: right;" type="text" class="form-control monto_formato_decimales discount" name="discount" id="discount" value="0">--> 
                                         <input type="checkbox"  name="discount" id="apply_discount2" class="form-control">
                                     </th>
                                     <th colspan="6" style="text-align: right;">Subtotal
@@ -110,14 +96,6 @@
                                 </tr>
                             </tfoot>
                         </table> 
-                        <!-- <div class="row">
-                        <div class="col-md-6">
-                          <label for=""><b>Observaciones</b></label>
-                            <div class="form-group valid-required">
-                              <textarea class="form-control" name="observations" id="observations" cols="30" rows="10"></textarea>
-                            </div>
-                        </div>
-                      </div> -->
                     </div>
                 </div>
             </div>

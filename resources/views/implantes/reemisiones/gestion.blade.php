@@ -100,7 +100,6 @@
 		store();
 		list();
 		update();
-		// socket_referencia();
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_reemisiones_implantes, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "reemisiones_implantes");
@@ -208,16 +207,11 @@
 	function nuevo() {
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
-		// AddProductos("#add_product", "#serial", "#table_products")
-		// ProductsGetExistence("#warehouse", "#products", "#table_products")
 		getClients("#clients")
-		// searchSerial("#add_product")
+
 		$("#indicador_edit").val(0)
 		$("#reissue").val(1)
 		cuadros("#cuadro1", "#cuadro2");
-		// $('#serial').empty();
-		// $('#warehouse').empty()
-		// $('#clients').empty()
 		$("#table_products_rem tbody").html("")
 		$('#table_products_edit_rem tbody').empty();
 		$('#subtotal_text').empty(0)
@@ -231,25 +225,7 @@
 			serial($("#serial").val());
 		});
 	}
-	// function socket_referencia() {
-	// 	var socket = io.connect("http://31.220.60.218:5026");
-	// 	socket.on('askForUserId', () => {
-	// 		console.log(socket);
-	// 	});
-	// 	socket.emit('userIdReceived', 'Pc');
-	// 	socket.on('sendSerial', (data) => {
-	// 		console.log('crear', data);
-	// 		$('#table_products_rem tbody tr').each(function() {
-	// 			if ($(this).find(".serial").val() == '') {
-	// 				$(this).find(".serial").val(data);
-	// 			}
-	// 		});
-	// 	});
-	// 	// socket.on('sendReference', (data) => {
-
-	// 	// });
-	// }
-		let contador = 0
+	let contador = 0
 	function serial(data){
 		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
@@ -290,8 +266,6 @@
 						$('#serial').focus();
 						calcProduc();
 					}, 1000);
-					// $('#warehouse').empty()
-					// $('#clients').empty()
 				}
 			});
 	}
@@ -302,7 +276,6 @@
 	function InvoiceToremition(data) {
 		try {
 			$("#add_remision_invoice_implant").click(function(e) {
-				// console.log("hola mundo",id);
 				$.ajax({
 					url: `${document.getElementById('ruta').value}/api/implantes/remision/invoice/${data.id}/${id_user}`,
 					type: 'GET',
@@ -468,9 +441,9 @@
 		});
 	}
 	function AddProductosEdit(data) {
-		socket_referencia_edit(data);
+		referencia_edit(data);
 	}
-	function socket_referencia_edit(data) {
+	function referencia_edit(data) {
 		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
 				type: 'GET',
@@ -512,7 +485,6 @@
 	}
 	function ShowProducts(table, data) {
 		$(table + " tbody").html("")
-		// console.log(data);
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
@@ -598,7 +570,6 @@
 		var vat = $(element).parent("td").parent("tr").children("td").find(".vat_product")
 		var existence = $(element).parent("td").parent("tr").children("td").find(".existence")
 		var existence_hidden = $(element).parent("td").parent("tr").children("td").find(".existence_hidden")
-			// console.log(price,qty);
 		if (edit != '') {
 			var qty_hidden = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
 			// existence.val((existence_hidden.val() - qty) + qty_hidden)
@@ -635,37 +606,25 @@
 		var discount_field = $(`#apply_discount${edit}`)
 		let discount_ammount
 		if (discount_field.is(':checked')) {
-			//console.log("SI Descuento")
 			discount_ammount = subtotal * 0.10
-			//subtotal = subtotal - discount_ammount
-			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
 		} else {
-			//	console.log("NO Descuento")
 			discount_ammount = 0
-			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 		}
 		var discount_field2 = $(`#apply_discount2${edit}`)
 		let discount_ammount2
 		if (discount_field2.is(':checked')) {
-			//console.log("SI Descuento")
 			discount_ammount2 = subtotal * 0.15
-			//subtotal = subtotal - discount_ammount2
-			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
+
 		} else {
-			//	console.log("NO Descuento")
 			discount_ammount2 = 0
-			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
+			
 		}
 		var discount_field3 = $(`#apply_discount3${edit}`)
 		let discount_ammount3
 		if (discount_field3.is(':checked')) {
-			//console.log("SI Descuento")
 			discount_ammount3 = subtotal / 100 * 5
-			//subtotal = subtotal - discount_ammount2
-			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
 		} else {
 			discount_ammount3 = 0
-			//$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
 		}
 		$(`#discount_total${edit}`).val((parseFloat(discount_ammount) + parseFloat(discount_ammount2) + parseFloat(discount_ammount3)))
 		$(`#discount_total_text${edit}`).text(`$ ${number_format((parseFloat(discount_ammount)  + parseFloat(discount_ammount2) + parseFloat(discount_ammount3)), 2)}`)
@@ -719,7 +678,6 @@
 			$("#type_discount").val(0)
 		}
 		calcSubTotal(".price_product")
-		// calcTotalVat(".vat_product")
 		calTotal(".price_product")
 	});
 	$("#apply_discount2").change(function(e) {
@@ -729,7 +687,6 @@
 			$("#type_discount").val(0)
 		}
 		calcSubTotal(".price_product")
-		// calcTotalVat(".vat_product")
 		calTotal(".price_product")
 	});
 	$("#apply_discount3").change(function(e) {
@@ -739,7 +696,6 @@
 			$("#type_discount").val(0)
 		}
 		calcSubTotal(".price_product")
-		// calcTotalVat(".vat_product")
 		calTotal(".price_product")
 	});
 	$("#apply_discount_edit").change(function(e) {
@@ -749,7 +705,6 @@
 			$("#type_discount_edit").val(0)
 		}
 		calcSubTotal(".price_product", '_edit')
-		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
 	$("#apply_discount2_edit").change(function(e) {
@@ -759,7 +714,6 @@
 			$("#type_discount_edit").val(0)
 		}
 		calcSubTotal(".price_product", '_edit')
-		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
 	$("#apply_discount3_edit").change(function(e) {
@@ -769,17 +723,14 @@
 			$("#type_discount_edit").val(0)
 		}
 		calcSubTotal(".price_product", '_edit')
-		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
 	$(".discount").keyup(function(e) {
 		calcSubTotal(".price_product")
-		// calcTotalVat(".vat_product")
 		calTotal(".price_product")
 	});
 	$(".discount_edit").keyup(function(e) {
 		calcSubTotal(".price_product", '_edit')
-		// calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
 
