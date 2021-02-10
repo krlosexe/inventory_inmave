@@ -1,8 +1,5 @@
 @extends('layouts.app')
-	
-
 	@section('CustomCss')
-
 		<style>
 			.kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
 			    margin: 0;
@@ -24,41 +21,27 @@
 			    font-weight: normal;
 			}
 		</style>
-
-
 	@endsection
-
-
 	@section('content')
 	     <!-- Page Wrapper -->
 		  <div id="wrapper">
-
 		    @include('layouts.sidebar')
-
 		    <!-- Content Wrapper -->
 		    <div id="content-wrapper" class="d-flex flex-column">
-
 		      <!-- Main Content -->
 		      <div id="content">
-
 				@include('layouts.topBar') 
-		       
-
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
-
 			          <!-- Page Heading -->
 			          <h1 class="h3 mb-2 text-gray-800">Stock de Productos</h1>
-
 			          <div id="alertas"></div>
 			          <input type="hidden" class="id_user">
 			          <input type="hidden" class="token">
-
 			          <!-- DataTales Example -->
 			          <div class="card shadow mb-4" id="cuadro1">
 			            <div class="card-header py-3">
 			              <h6 class="m-0 font-weight-bold text-primary">Gestion de Stock de Productos</h6>
-
 			              <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 		                    <span class="icon text-white-50">
 		                      <i class="fas fa-plus"></i>
@@ -79,25 +62,18 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody>
-			                    
 			                  </tbody>
 			                </table>
 			              </div>
 			            </div>
 			          </div>
-
-
 			          @include('warehouse.stock.store')
 					  @include('warehouse.stock.view')
 					  @include('warehouse.stock.edit')
-
-
 			        </div>
 			        <!-- /.container-fluid -->
-
 		      </div>
 		      <!-- End of Main Content -->
-
 		      <!-- Footer -->
 		      <footer class="sticky-footer bg-white">
 		        <div class="container my-auto">
@@ -107,20 +83,12 @@
 		        </div>
 		      </footer>
 		      <!-- End of Footer -->
-
 		    </div>
 		    <!-- End of Content Wrapper -->
-
 		  </div>
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
 	@endsection
-
-
-
-
-
 	@section('CustomJs')
-
 		<script>
 			$(document).ready(function(){
 				store();
@@ -132,22 +100,13 @@
 
 				verifyPersmisos(id_user, tokens, "stock");
 			});
-
-
-
 			function update(){
 				enviarFormularioPut("#form-update", 'api/products/entry/stock', '#cuadro4', false, "#avatar-edit");
 			}
-
-
 			function store(){
 				enviarFormulario("#store", 'api/products/entry/stock', '#cuadro2');
 			}
-
-
-
 			function getProducts(select, select_default = false){
-			
 				$.ajax({
 					url: ''+document.getElementById('ruta').value+'/api/products',
 					type:'GET',
@@ -178,11 +137,7 @@
 								selected : select_default == item.id ? true : false
 								
 							}));
-
-							
 						});
-
-
 						$(select).select2({
 							width : "100%",
 							sorter: function(data) {
@@ -199,19 +154,10 @@
 								});
 							}
 						});
-
 					}
-				
 				});
 			}
-
-
-
-
-
-
 			function list(cuadro) {
-				
 				var data = {
 					"id_user": id_user,
 					"token"  : tokens,
@@ -258,20 +204,12 @@
 						'copy', 'csv', 'excel', 'pdf', 'print'
 					]
 				});
-
-
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
-
-
 			}
-
-
-
-
 			function AddProductos(btn, select_product, table){
 				$(btn).unbind().click(function (e) { 
 					
@@ -289,7 +227,6 @@
 						},
 						success: function(data){
 							var html 
-
 							var validaProduct = false
 							$(table + " tbody tr").each(function() {
 								if (data.id == $(this).find(".id_product").val()) {
@@ -307,12 +244,7 @@
 							}else{
 								warning('¡La opción seleccionada ya se encuentra agregada!');
 							}
-							
-
-
 							$(table+" tbody").append(html)
-
-					
 							$(".monto_formato_decimales").change(function() {   
 								if($(this).val() != ""){  
 									$(this).val(number_format($(this).val(), 2));   
