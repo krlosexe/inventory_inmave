@@ -11,13 +11,9 @@ class ProductImplanteController extends Controller
 
     public function ListProductImplante($das)
     {
-        // dd($das);
         try {
             $products = ProductImplantes::select("products_implantes.*", "user_registro.email as email_regis")
-            // ->join("auditoria", "auditoria.cod_reg", "=", "products_implantes.id")
             ->join("users as user_registro", "user_registro.id", "=", "products_implantes.id_user")
-            // ->where("auditoria.tabla", "products_implantes")
-            // ->where("auditoria.status", "!=", "0")
             ->orderBy("products_implantes.id", "DESC")
             ->get();
 
@@ -33,9 +29,7 @@ class ProductImplanteController extends Controller
     public function CreateProductImplante(Request $request)
     {
         try {
-            // dd($request->all());
             $create = ProductImplantes::create($request->all());
-
             $auditoria              = new Auditoria;
             $auditoria->tabla       = "products_implantes";
             $auditoria->cod_reg     = $create->id;
@@ -49,7 +43,6 @@ class ProductImplanteController extends Controller
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
             }
-
         } catch (\Throwable $th) {
             return $th;
         }
@@ -67,7 +60,6 @@ class ProductImplanteController extends Controller
             $update->perfil = $request->perfil;
             $update->id_user = $request->id_user;
             $update->save();
-
             if ($update) {
                 $data = array('mensagge' => "Los datos fueron editados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
@@ -90,7 +82,6 @@ class ProductImplanteController extends Controller
             return $th;
         }
     }
-
     public function GetExistence($id_product,$rol){
         try {
                     $entry_medellin = DB::table("technical_reception_products_implante")
@@ -211,7 +202,6 @@ class ProductImplanteController extends Controller
                 }else{
                     $data_medellin["medellin"]["total"] = 0;
                 }
-
                 if($entry_cali){
                     $total_output_cali           = 0;
                     $total_output_cali_reemision = 0;
@@ -229,7 +219,6 @@ class ProductImplanteController extends Controller
                 }else{
                     $data_medellin["cali"]["total"] = 0;
                 }
-
                 if($entry_bogota){
                     $total_output_bogota           = 0;
                     $total_output_bogota_reemision = 0;
@@ -351,7 +340,6 @@ class ProductImplanteController extends Controller
                 }
             }
         }
-        // dd($entry);
         return response()->json($entry)->setStatusCode(200);
     }
 

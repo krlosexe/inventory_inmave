@@ -49,7 +49,6 @@
           </div>
         </div>
 
-        <!-- <input type="hidden" name="inicial" id="inicial"> -->
         <input type="hidden" name="id_user" class="id_user">
         <input type="hidden" name="token" class="token">
         <input type="hidden" name="id_user_edit" id="id_edit">
