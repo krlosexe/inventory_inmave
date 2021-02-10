@@ -136,6 +136,8 @@
 				{
 					"data": null,
 					render: function(data, type, row) {
+						console.log('a',data)
+						console.log('b',row)
 						var botones = "";
 						if (consultar == 1)
 							botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
@@ -143,6 +145,10 @@
 							botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 						if (actualizar == 1)
 							botones += "<a href='api/reemision/implante/print/" + row.id + "' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
+						if(row.items == 0){
+						if (borrar == 1)
+							botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+						}
 						return botones;
 					}
 				},
@@ -416,7 +422,7 @@
 	function eliminar(tbody, table) {
 		$(tbody).on("click", "span.eliminar", function() {
 			var data = table.row($(this).parents("tr")).data();
-			statusConfirmacion('api/reemisiones/status/' + data.id + "/" + 0, "¿Esta seguro de eliminar el registro?", 'Eliminar');
+			statusConfirmacion('api/implantes/reemisiones/status/' + data.id , "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
 	function getProducts(select, select_default = false) {
