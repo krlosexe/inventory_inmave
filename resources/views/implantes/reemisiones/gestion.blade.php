@@ -136,8 +136,6 @@
 				{
 					"data": null,
 					render: function(data, type, row) {
-						console.log('a',data)
-						console.log('b',row)
 						var botones = "";
 						if (consultar == 1)
 							botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
