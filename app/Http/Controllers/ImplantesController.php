@@ -11,7 +11,6 @@ use App\{
     ImplantOutput,
     ImplantOutputItems,
     ProductImplantes,
-    TechnicalReceptionImplante
 };
 
 class ImplantesController extends Controller
@@ -36,7 +35,6 @@ class ImplantesController extends Controller
     }
     public function CreateImplanteRemision(Request $request)
     {
-        // dd($request->all());
         try {
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $output = new ImplanteReemision;
@@ -89,7 +87,6 @@ class ImplantesController extends Controller
     }
     public function UpdateImplanteRemision(Request $request, $remision)
     {
-        // dd($request->all());
         try {
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $update =  ImplanteReemision::find($remision);
@@ -118,7 +115,6 @@ class ImplantesController extends Controller
                 foreach ($request->referencia as $key => $value) {
                     $producs_items = [];
                     $producs_items["id_implante_reemision"] = $update->id;
-                    // $producs_items["id_product"]  = $request["id_product"][$key];
                     $producs_items["referencia"]  = $value;
                     $producs_items["serial"]      = $request["serial"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
@@ -185,7 +181,6 @@ class ImplantesController extends Controller
     }
     public function CreateImplanteOutput(Request $request)
     {
-        // dd($request->all());
         try {
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $output = new ImplantOutput;
@@ -239,7 +234,6 @@ class ImplantesController extends Controller
     }
     public function UpdateImplanteOutput(Request $request, $output)
     {
-        // dd($request->all());
         $update = ImplantOutput::find($output);
         $update->warehouse              = $request->warehouse;
         $update->id_client              = $request->id_client;
@@ -267,7 +261,6 @@ class ImplantesController extends Controller
             foreach ($request['referencia'] as $key => $value) {
                 $producs_items = [];
                 $producs_items["id_implant_output"]  = $update->id;
-                // $producs_items["id_product"]    = $request["id_product"][$key];
                 $producs_items["referencia"]    = $value;
                 $producs_items["serial"]        = $request["serial"][$key];
                 $producs_items["qty"]           = $request["qty"][$key];
@@ -289,7 +282,6 @@ class ImplantesController extends Controller
     }
     public function ListImplanteOutput($id)
     {
-        // dd($id);
         if ($id == "Administrador") {
             $data = ImplantOutput::select("implantes_output.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
                 ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
@@ -343,7 +335,6 @@ class ImplantesController extends Controller
     public function UpdateHeadRemision($id)
     {
         try {
-
             ImplanteReemision::whereId($id)->delete();
 
             $data = array('mensagge' => "Los datos fueron Eliminados satisfactoriamente");

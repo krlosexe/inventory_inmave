@@ -14,7 +14,6 @@
                     <div class="col-md-4">
                         <label for=""><b>Serial</b></label>
                         <div class="form-group valid-required">
-                            <!-- <select name="products" class="form-control select2" id="products_edit"></select> -->
                             <input type="text" maxlength="15" id="serial_edit" class="form-control form-control-user">
                         </div>
                     </div>
@@ -47,12 +46,6 @@
                             <input type="text" maxlength="15" name="items" id="items_id" class="form-control form-control-user" readonly>
                             </div>
                         </div>
-                        <!-- <div class="col-md-2">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-user" id="add_product_edit">
-                                Agregar
-                            </button>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -66,7 +59,6 @@
                                     <th>Serial</th>
                                     <th>Salida (Cantidad)</th>
                                     <th>Existencia Actual</th>
-                                    <!-- <th>%IVA</th> -->
                                     <th>Total</th>
                                     <th></th>
                                 </tr>
@@ -76,9 +68,6 @@
                             <tfoot>
                                 <tr>
                                     <th style="text-align: center;" id="descuento_text">
-                                        <!-- <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
-                                        <input type="checkbox" id="apply_discount_edit" class="form-control"> -->
-
                                         <label for="apply_discount3">¿ Quieres Aplicar Descuento (5%)?</label>
                                         <input type="checkbox" id="apply_discount3_edit" class="form-control">
                                         <br><br>
@@ -87,7 +76,6 @@
                                         <input type="checkbox" id="apply_discount_edit" class="form-control">
                                         <br><br>
                                         <label for="apply_discount2">¿ Quieres Aplicar Descuento (15%)?</label>
-                                        <!-- <input style="text-align: right;" type="text" class="form-control monto_formato_decimales discount" name="discount" id="discount" value="0">--> 
                                         <input type="checkbox" id="apply_discount2_edit" class="form-control">
                                     </th>
                                     <th colspan="6" style="text-align: right;">Subtotal
@@ -116,14 +104,6 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        <!-- <div class="row">
-                            <div class="col-md-6">
-                                <label for=""><b>Observaciones</b></label>
-                                <div class="form-group valid-required">
-                                    <textarea class="form-control" name="observations" id="observations_edit" cols="30" rows="10"></textarea>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>

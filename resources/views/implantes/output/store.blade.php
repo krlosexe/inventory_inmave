@@ -24,12 +24,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!-- <div class="col-md-4">
-                            <div class="form-group valid-required" style="text-align: center;">
-                                <label for="reissue"> <b>Reemision ?</b> </label>
-                                <input type="checkbox" name="reissue" id="reissue" class="form-control" value="1">
-                            </div>
-                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -103,14 +97,6 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        <!-- <div class="row">
-                            <div class="col-md-6">
-                                <label for=""><b>Observaciones</b></label>
-                                <div class="form-group valid-required">
-                                    <textarea class="form-control" name="observations" id="observations" cols="30" rows="10"></textarea>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
