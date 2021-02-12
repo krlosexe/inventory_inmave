@@ -36,6 +36,9 @@ class ImplantesController extends Controller
     public function CreateImplanteRemision(Request $request)
     {
         try {
+            
+          
+
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $output = new ImplanteReemision;
             $output->warehouse              = $request->warehouse;
@@ -182,6 +185,7 @@ class ImplantesController extends Controller
     public function CreateImplanteOutput(Request $request)
     {
         try {
+            // dd($request->all());
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $output = new ImplantOutput;
             $output->warehouse              = $request->warehouse;
@@ -220,6 +224,11 @@ class ImplantesController extends Controller
                     ImplantOutputItems::create($producs_items);
 
                     TechnicalReceptionProductoImplante::where('serial', $request["serial"][$key])->update(["estatus" => "Vendido"]);
+                   
+                    $line =  ImplanteReemisionesItem::where('serial', $request["serial"][$key])->first();
+
+                    ImplanteReemision::where('id',$line->id_implante_reemision)->delete();
+                    ImplanteReemisionesItem::where("serial", $request["serial"][$key])->delete();
                 }
             }
             if ($output) {
@@ -342,6 +351,29 @@ class ImplantesController extends Controller
                 return response()->json($data)->setStatusCode(200);
             } else {
                 return response()->json("A ocurrido un error")->setStatusCode(400);
+            }
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+    public function GetImplante($serial)
+    {
+        try {
+            // dd($serial);
+            $data = TechnicalReceptionProductoImplante::with('head')
+                    ->where('estatus','Disponible')
+                    ->orWhere('estatus','Remitido')
+                    ->where('serial',$serial)
+                    ->get();
+            $data->map(function ($item) {
+                $item->products = ProductImplantes::where('referencia', $item->referencia)->first();
+                return $item;
+            });
+
+            if (sizeof($data) > 0) {
+                return response()->json($data[0])->setStatusCode(200);
+            } else {
+                return response()->json(["mensaje" => "No Existe el serial $serial"])->setStatusCode(400);
             }
         } catch (\Throwable $th) {
             return $th;

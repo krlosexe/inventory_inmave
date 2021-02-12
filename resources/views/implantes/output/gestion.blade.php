@@ -117,7 +117,7 @@
 	let contador = 0
 	function serial(data){
 		$.ajax({
-				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
+				url: '' + document.getElementById('ruta').value + '/api/get/implante/' + data,
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
