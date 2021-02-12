@@ -365,7 +365,7 @@ class ImplantesController extends Controller
         try {
             // dd($serial);
             $data = TechnicalReceptionProductoImplante::where('serial',$serial)
-            ->where('estatus','Disponible')->orWhere('estatus','Remitido')->with('head')->get();
+            ->where('estatus','!=','Vendido')->with('head')->get();
                     // dd($data);
             $data->map(function ($item) {
                 $item->products = ProductImplantes::where('referencia', $item->referencia)->first();
