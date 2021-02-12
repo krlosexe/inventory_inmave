@@ -375,16 +375,8 @@ class InvoiceController extends Controller
     {
 
         $data = ImplantOutput::select(
-            "implantes_output.*",
-            "implantes_clients.name as name_client",
-            "implantes_clients.address as address_client",
-            "implantes_clients.nit",
-            "implantes_clients.phone",
-            "implantes_clients.email",
-            "implantes_clients.city"
+            "implantes_output.*","implantes_output.name as name_client","implantes_output.address as address_client"
         )
-
-            ->join("implantes_clients", "implantes_clients.id", "=", "implantes_output.id_client")
             ->with("items")
             ->where("implantes_output.id", $id)
             ->first();

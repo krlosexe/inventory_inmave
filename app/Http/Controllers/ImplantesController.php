@@ -37,8 +37,6 @@ class ImplantesController extends Controller
     {
         try {
             
-          
-
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $output = new ImplanteReemision;
             $output->warehouse              = $request->warehouse;
@@ -189,7 +187,7 @@ class ImplantesController extends Controller
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $output = new ImplantOutput;
             $output->warehouse              = $request->warehouse;
-            $output->id_client              = $request->id_client;
+            $output->id_client              = 0;
             $output->reissue                = $request->reissue;
             $output->subtotal               = $request->total_invoice;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
@@ -199,6 +197,12 @@ class ImplantesController extends Controller
             $output->rte_fuente             = $request->rte_fuente;
             $output->rte_fuente_total       = $request->rte_fuente_total;
             $output->total_invoice          = $request->total_invoice;
+            $output->name                   = $request->name;
+            $output->nit                    = $request->nit;
+            $output->phone                  = $request->phone;
+            $output->email                  = $request->email;
+            $output->address                = $request->address;
+            $output->city                   = $request->city;
             $output->save();
 
             $auditoria              = new Auditoria;
@@ -225,9 +229,6 @@ class ImplantesController extends Controller
 
                     TechnicalReceptionProductoImplante::where('serial', $request["serial"][$key])->update(["estatus" => "Vendido"]);
                    
-                    $line =  ImplanteReemisionesItem::where('serial', $request["serial"][$key])->first();
-
-                    ImplanteReemision::where('id',$line->id_implante_reemision)->delete();
                     ImplanteReemisionesItem::where("serial", $request["serial"][$key])->delete();
                 }
             }
@@ -243,6 +244,7 @@ class ImplantesController extends Controller
     }
     public function UpdateImplanteOutput(Request $request, $output)
     {
+        // dd($request->all());
         $update = ImplantOutput::find($output);
         $update->warehouse              = $request->warehouse;
         $update->id_client              = $request->id_client;
@@ -255,8 +257,13 @@ class ImplantesController extends Controller
         $update->rte_fuente             = $request->rte_fuente;
         $update->rte_fuente_total       = $request->rte_fuente_total;
         $update->total_invoice          = $request->total_invoice;
+        $update->name                   = $request->name;
+        $update->nit                    = $request->nit;
+        $update->phone                  = $request->phone;
+        $update->email                  = $request->email;
+        $update->address                = $request->address;
+        $update->city                   = $request->city;
         $update->save();
-
 
         $out = ImplantOutputItems::where("id_implant_output", $output)->get();
 
@@ -292,9 +299,8 @@ class ImplantesController extends Controller
     public function ListImplanteOutput($id)
     {
         if ($id == "Administrador") {
-            $data = ImplantOutput::select("implantes_output.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+            $data = ImplantOutput::select("implantes_output.*", "auditoria.*", "user_registro.email as email_regis")
                 ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
-                ->join("implantes_clients", "implantes_clients.id", "=", "implantes_output.id_client")
                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                 ->where("auditoria.tabla", "implantes_output")
                 ->where("auditoria.status", "!=", "0")
@@ -303,9 +309,8 @@ class ImplantesController extends Controller
                 ->get();
         }
         if ($id == "Silimed_Cali") {
-            $data = ImplantOutput::select("implantes_output.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+            $data = ImplantOutput::select("implantes_output.*","auditoria.*", "user_registro.email as email_regis")
                 ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
-                ->join("implantes_clients", "implantes_clients.id", "=", "implantes_output.id_client")
                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                 ->where("auditoria.tabla", "implantes_output")
                 ->where("implantes_output.warehouse", "Cali")
@@ -315,9 +320,8 @@ class ImplantesController extends Controller
                 ->get();
         }
         if ($id == "Silimed_Bog") {
-            $data = ImplantOutput::select("implantes_output.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+            $data = ImplantOutput::select("implantes_output.*","auditoria.*", "user_registro.email as email_regis")
                 ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
-                ->join("implantes_clients", "implantes_clients.id", "=", "implantes_output.id_client")
                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                 ->where("auditoria.tabla", "implantes_output")
                 ->where("implantes_output.warehouse", "Bogota")
@@ -359,7 +363,6 @@ class ImplantesController extends Controller
     public function GetImplante($serial)
     {
         try {
-            // dd($serial);
             $data = TechnicalReceptionProductoImplante::with('head')
                     ->where('estatus','Disponible')
                     ->orWhere('estatus','Remitido')

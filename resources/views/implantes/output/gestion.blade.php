@@ -201,7 +201,7 @@
 					}
 				},
 				{
-					"data": "name_client"
+					"data": "name"
 				},
 				{
 					"data": "warehouse"
@@ -305,6 +305,13 @@
 			$("#indicador_edit").val(1)
 
 			$("#items_id").val(data.items.length)
+			$("#name_edit").val(data.name)
+			$("#nit_edit").val(data.nit)
+			$("#phone_edit").val(data.phone)
+			$("#email_edit").val(data.email)
+			$("#city_edit").val(data.city)
+			$("#address_edit").val(data.address)
+
 			$("#table_products_out").focus();
 			$("#serial_edit").focus();
 			$("#serial_edit").change(function() {
