@@ -10,14 +10,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                             <label for=""><b>Serial</b></label>
                             <div class="form-group valid-required">
-                            <input type="text" maxlength="15"  id="serial_edit" class="form-control form-control-user">
+                                <input type="text" maxlength="15" id="serial_edit" class="form-control form-control-user">
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <label for=""><b>Cliente</b></label>
                             <div class="form-group valid-required">
@@ -25,19 +25,61 @@
                                 </select>
                             </div>
                         </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for=""><b>Nombre</b></label>
+                            <div class="form-group valid-required">
+                                <input type="text" name="name" class="form-control form-control-user" id="name_edit" placeholder="Nombre" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for=""><b>Identificación</b></label>
+                            <div class="form-group valid-required">
+                                <input type="text" name="nit" class="form-control form-control-user" id="nit_edit" placeholder="Identificación">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for=""><b>Telefono</b></label>
+                            <div class="form-group valid-required">
+                                <input type="text" name="phone" class="form-control form-control-user" id="phone_edit" placeholder="Pj: 3152077862">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for=""><b>Email</b></label>
+                            <div class="form-group valid-required">
+                                <input type="email" name="email" class="form-control form-control-user" id="email_edit" placeholder="Pj: cardenascarlos18@gmail.com">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for=""><b>Ciudad</b></label>
+                            <div class="form-group valid-required">
+                                <input type="text" name="city" class="form-control form-control-user" id="city_edit" placeholder="Pj: Medellin">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for=""><b>Direccion</b></label>
+                            <div class="form-group valid-required">
+                                <textarea name="address" class="form-control" id="address_edit" placeholder="Pj: cra 107 - 30 #108 99" cols="30" rows="10"></textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <label for=""><b>Bodega</b></label>
                             <div class="form-group valid-required">
-                            <input type="text" maxlength="15" name="warehouse" id="warehouse_edit" class="form-control form-control-user" readonly>
+                                <input type="text" maxlength="15" name="warehouse" id="warehouse_edit" class="form-control form-control-user" readonly>
                             </div>
                         </div>
 
                         <div class="col-2">
                             <label for=""><b>Items</b></label>
                             <div class="form-group valid-required">
-                            <input type="text" maxlength="15" name="items" id="items_id" class="form-control form-control-user" readonly>
+                                <input type="text" maxlength="15" name="items" id="items_id" class="form-control form-control-user" readonly>
                             </div>
                         </div>
                     </div>
@@ -62,7 +104,7 @@
                             <tfoot>
                                 <tr>
                                     <th style="text-align: center;" id="descuento_text">
-                                    <label for="apply_discount3_edit">¿ Quieres Aplicar Descuento (5%)?</label>
+                                        <label for="apply_discount3_edit">¿ Quieres Aplicar Descuento (5%)?</label>
                                         <input type="checkbox" id="apply_discount3_edit" class="form-control">
                                         <br><br>
 
