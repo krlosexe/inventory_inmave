@@ -125,7 +125,7 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-
+					
 					$('#warehouse').val(data.head.warehouse)
 					var html = "";
 					var validaProduct = false
