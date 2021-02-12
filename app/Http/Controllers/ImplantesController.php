@@ -363,11 +363,10 @@ class ImplantesController extends Controller
     public function GetImplante($serial)
     {
         try {
-            $data = TechnicalReceptionProductoImplante::with('head')
-                    ->where('estatus','Disponible')
-                    ->orWhere('estatus','Remitido')
-                    ->where('serial',$serial)
-                    ->get();
+            // dd($serial);
+            $data = TechnicalReceptionProductoImplante::where('serial',$serial)
+            ->where('estatus','Disponible')->orWhere('estatus','Remitido')->with('head')->get();
+                    // dd($data);
             $data->map(function ($item) {
                 $item->products = ProductImplantes::where('referencia', $item->referencia)->first();
                 return $item;
