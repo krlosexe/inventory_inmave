@@ -125,7 +125,7 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-					
+
 					$('#warehouse').val(data.head.warehouse)
 					var html = "";
 					var validaProduct = false
@@ -424,7 +424,7 @@
 	}
 	function socket_referencia_edit(data) {
 		$.ajax({
-				url: '' + document.getElementById('ruta').value + '/api/products/get/implante/' + data,
+				url: '' + document.getElementById('ruta').value + '/api/get/implante/' + data,
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
