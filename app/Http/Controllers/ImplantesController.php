@@ -382,3 +382,4 @@ class ImplantesController extends Controller
         }
     }
 }
+
