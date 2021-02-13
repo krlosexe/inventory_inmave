@@ -19,7 +19,15 @@ class ImplantesController extends Controller
     public function GetExistenceImplante($serial)
     {
         try {
-            $data = TechnicalReceptionProductoImplante::with('head')->where(['estatus' => 'Disponible', 'serial' => $serial])->get();
+            // $data = TechnicalReceptionProductoImplante::with('head')->where(['estatus' => 'Disponible', 'serial' => $serial])->get();
+
+            $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*")
+            ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
+            ->where('technical_reception_products_implante.serial',$serial)
+            ->where('technical_reception_products_implante.estatus','Disponible')
+            ->orderBy("technical_reception_implante.created_at","DESC")
+            ->get();
+
             $data->map(function ($item) {
                 $item->products = ProductImplantes::where('referencia', $item->referencia)->first();
                 return $item;

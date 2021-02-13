@@ -236,7 +236,7 @@
 					alert(data.responseJSON.mensaje);
 				},
 				success: function(data) {
-					$('#warehouse').val(data.head.warehouse)
+					$('#warehouse').val(data.warehouse)
 					var html = "";
 					var validaProduct = false
 					$("#table_products_rem tbody tr").each(function() {

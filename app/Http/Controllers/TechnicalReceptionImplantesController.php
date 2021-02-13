@@ -104,7 +104,7 @@ class TechnicalReceptionImplantesController extends Controller
             // ->with('detalle')
             ->get();
             $data->map(function($item){
-                $item->detalle = TechnicalReceptionProductoImplante::where(['estatus'=>'Disponible','id_technical_reception_implante' => $item->id])->get();
+                $item->detalle = TechnicalReceptionProductoImplante::where('id_technical_reception_implante',$item->id)->get();
               return $item;
             });
             return response()->json($data)->setStatusCode(200);
