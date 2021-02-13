@@ -35,14 +35,14 @@
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
 				<!-- Page Heading -->
-				<h1 class="h3 mb-2 text-gray-800">Salida de Productos</h1>
+				<h1 class="h3 mb-2 text-gray-800">Ventas por Clientes </h1>
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
 				<input type="hidden" class="token">
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Gestion de Salida de Productos</h6>
+						<h6 class="m-0 font-weight-bold text-primary">Reporte de Ventas por Clientes</h6>
 						<!-- <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
