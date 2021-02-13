@@ -240,16 +240,16 @@
 		activar("#table tbody", table)
 		desactivar("#table tbody", table)
 		eliminar("#table tbody", table)
-		$(".buttons-excel").remove()
-		var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
-		$(".dt-buttons").append(a)
-		var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
-		$('.dt-buttons').append(b);
-		$("#xls").click(function(e) {
-			url = $("#view_xls").attr("href");
-			console.log(url)
-			window.open(url, '_blank');
-		});
+		// $(".buttons-excel").remove()
+		// var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
+		// $(".dt-buttons").append(a)
+		// var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
+		// $('.dt-buttons').append(b);
+		// $("#xls").click(function(e) {
+		// 	url = $("#view_xls").attr("href");
+		// 	console.log(url)
+		// 	window.open(url, '_blank');
+		// });
 	}
 	function nuevo() {
 		$("#alertas").css("display", "none");
