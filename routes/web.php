@@ -129,3 +129,7 @@ Route::get('traslados', function () {
     return view('implantes.movimientos.gestion');
 });
 
+Route::get('ventas-clientes', function () {
+    return view('implantes.reportes.ventas_clientes.gestion');
+});
+

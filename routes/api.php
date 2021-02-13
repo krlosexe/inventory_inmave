@@ -155,4 +155,4 @@ Route::get('implantes/products/movimiento/detail/{id}', 'TraspasoController@List
 Route::get('implantes/products/get/existence/warehouse/{warehouse}', 'ProductImplanteController@GetExistenceWarehouse');
 Route::get('implantes/reemisiones/status/{id}', 'ImplantesController@UpdateHeadRemision');
 Route::get('get/implante/{id}', 'ImplantesController@GetImplante');
-
+Route::get('get/clientes/implantes/list/{id}', 'ImplantesController@ListClienteImplanteOutput');

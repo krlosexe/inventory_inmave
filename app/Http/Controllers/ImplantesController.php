@@ -381,5 +381,60 @@ class ImplantesController extends Controller
             return $th;
         }
     }
+    public function ListClienteImplanteOutput($id)
+    {
+        // dd($id);
+        if ($id == "Administrador") {
+            $data = ImplantOutputItems::select("implantes_output_items.*",
+            "implantes_output.name",
+            "implantes_output.warehouse",
+            "implantes_output.total_invoice",
+            "auditoria.*",
+            "user_registro.email as email_regis"
+             )
+            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")    
+            ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
+                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                ->where("auditoria.tabla", "implantes_output")
+                ->where("auditoria.status", "!=", "0")
+                ->orderBy("implantes_output.id", "DESC")
+                ->get();
+        }
+        if ($id == "Silimed_Cali") {
+            $data = ImplantOutputItems::select("implantes_output_items.*",
+            "implantes_output.name",
+            "implantes_output.warehouse",
+            "implantes_output.total_invoice",
+            "auditoria.*",
+            "user_registro.email as email_regis"
+             )
+            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")    
+            ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
+                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                ->where("auditoria.tabla", "implantes_output")
+                ->where("implantes_output.warehouse", "Cali")
+                ->where("auditoria.status", "!=", "0")
+                ->orderBy("implantes_output.id", "DESC")
+                ->get();
+        }
+        if ($id == "Silimed_Bog") {
+            $data = ImplantOutputItems::select("implantes_output_items.*",
+            "implantes_output.name",
+            "implantes_output.warehouse",
+            "implantes_output.total_invoice",
+            "auditoria.*",
+            "user_registro.email as email_regis"
+             )
+            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")    
+            ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
+                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                ->where("auditoria.tabla", "implantes_output")
+                ->where("implantes_output.warehouse", "Bogota")
+                ->where("auditoria.status", "!=", "0")
+                ->orderBy("implantes_output.id", "DESC")
+                ->get();
+        }
+        return $data;
+    }
 }
 
