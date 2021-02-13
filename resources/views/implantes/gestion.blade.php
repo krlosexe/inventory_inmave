@@ -385,6 +385,7 @@
 		}
 	}
 	function AddProductosEdit(data) {
+		
 		let contador = 0
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/implantes/search/' + data,
@@ -546,6 +547,7 @@
 		});
 	}
 	function ShowProducts(table, data) {
+		console.log('sadd',data);
 		let html = ""
 		$.map(data.detalle, function(item, key) {
 			html += "<tr>"
