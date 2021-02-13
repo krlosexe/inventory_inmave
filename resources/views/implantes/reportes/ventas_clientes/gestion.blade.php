@@ -61,6 +61,7 @@
 										<th>Serial</th>
 										<th>Tipo</th>
 										<th>Cliente</th>
+										<th>Identificación</th>
 										<th>Bodega</th>
 										<th>Valor de Factura</th>
 										<th>Fecha de registro</th>
@@ -210,6 +211,9 @@
 				},
 				{
 					"data": "name"
+				},
+				{
+					"data": "nit"
 				},
 				{
 					"data": "warehouse"

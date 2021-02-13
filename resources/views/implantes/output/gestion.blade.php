@@ -126,7 +126,7 @@
 				},
 				success: function(data) {
 
-					$('#warehouse').val(data.head.warehouse)
+					$('#warehouse').val(data.warehouse)
 					var html = "";
 					var validaProduct = false
 					$("#table_products_out tbody tr").each(function() {
