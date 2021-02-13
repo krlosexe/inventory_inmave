@@ -72,6 +72,7 @@ class ProvidersController extends Controller
      */
     public function show($provider)
     {
+        // dd($provider);
         $providers = Providers::select("providers.*", "auditoria.*", "user_registro.email as email_regis")
                             ->join("auditoria", "auditoria.cod_reg", "=", "providers.id")
                             ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
