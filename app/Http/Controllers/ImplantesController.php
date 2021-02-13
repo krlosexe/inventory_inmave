@@ -11,6 +11,7 @@ use App\{
     ImplantOutput,
     ImplantOutputItems,
     ProductImplantes,
+    TechnicalReceptionImplante
 };
 
 class ImplantesController extends Controller
@@ -364,8 +365,12 @@ class ImplantesController extends Controller
     {
         try {
             // dd($serial);
-            $data = TechnicalReceptionProductoImplante::where('serial',$serial)
-            ->where('estatus','!=','Vendido')->with('head')->get();
+            $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*")
+            ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
+            ->where('technical_reception_products_implante.serial',$serial)
+            ->where('technical_reception_products_implante.estatus','!=','Vendido')
+            ->orderBy("technical_reception_implante.created_at","DESC")
+            ->get();
                     // dd($data);
             $data->map(function ($item) {
                 $item->products = ProductImplantes::where('referencia', $item->referencia)->first();
@@ -387,6 +392,7 @@ class ImplantesController extends Controller
         if ($id == "Administrador") {
             $data = ImplantOutputItems::select("implantes_output_items.*",
             "implantes_output.name",
+            "implantes_output.nit",
             "implantes_output.warehouse",
             "implantes_output.total_invoice",
             "auditoria.*",
