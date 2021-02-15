@@ -238,7 +238,8 @@ class ImplantesController extends Controller
 
                     TechnicalReceptionProductoImplante::where('serial', $request["serial"][$key])->update(["estatus" => "Vendido"]);
                    
-                    ImplanteReemisionesItem::where("serial", $request["serial"][$key])->delete();
+                    // ImplanteReemisionesItem::where("serial", $request["serial"][$key])->delete();
+                    
                 }
             }
             if ($output) {
@@ -280,7 +281,7 @@ class ImplantesController extends Controller
 
             TechnicalReceptionProductoImplante::where('serial', $value["serial"])->update(["estatus" => "Disponible"]);
         }
-        ImplantOutputItems::where("id_implant_output", $output)->delete();
+        // ImplantOutputItems::where("id_implant_output", $output)->delete();
 
         if (isset($request->referencia)) {
             foreach ($request['referencia'] as $key => $value) {
