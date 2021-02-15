@@ -417,7 +417,6 @@
 					html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
 					html += "<td><input type='text' class='form-control' name='register_invima[]' value='" + data.register_invima + "' required></td>"
 					html += "<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
-					html += "<td><input style='text-align: right;width: 142px;' type='number'  class='form-control price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
 					html += "<td><input type='text' class='form-control' name='description[]' value='" + data.description + "' readonly></td>"
 					html += "<td><input type='text' class='form-control' name='gramaje[]' value='" + data.gramaje + "' required></td>"
 					html += "<td><input type='text' class='form-control' name='perfil[]' value='" + data.perfil + "' required></td>"
