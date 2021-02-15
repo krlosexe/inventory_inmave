@@ -450,5 +450,36 @@ class ImplantesController extends Controller
         }
         return $data;
     }
+    public function ListImplanteTrazabilidad($id)
+    {
+        try {
+            // dd($id);
+            if ($id == "Administrador") {
+                $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*","products_implantes.*")
+                    ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
+                    // ->join("auditoria", "auditoria.cod_reg","technical_reception_products_implante.id")
+                    // ->join("users as user_registro", "user_registro.id","auditoria.usr_regins")
+                    ->join("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
+                    ->get();
+            }
+            if ($id == "Silimed_Cali") {
+                $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*","products_implantes.*")
+                    ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
+                    ->join("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
+                    ->where("technical_reception_implante.warehouse", "Cali")                   
+                    ->get();
+            }
+            if ($id == "Silimed_Bog") {
+                $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*","products_implantes.*")
+                    ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
+                    ->join("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
+                    ->where("technical_reception_implante.warehouse", "Bogota")                   
+                    ->get();
+            }
+            return $data;
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
 }
 
