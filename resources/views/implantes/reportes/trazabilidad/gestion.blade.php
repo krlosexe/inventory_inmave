@@ -60,7 +60,7 @@
 										<th>Referencia</th>
 										<th>Serial</th>
 										<th>Descripción</th>
-										<th>Gramaje</th>
+										<!-- <th>Gramaje</th> -->
 										<th>Bodega Origen</th>
 										<th>Bodega Destino</th>
 										<th>Estatus</th>
@@ -203,9 +203,9 @@
 				{
 					"data":"description"
 				},
-				{
-					"data":"gramaje"
-				},
+				// {
+				// 	"data":"gramaje"
+				// },
 				{
 					"data": "bodega_origen"
 				},
