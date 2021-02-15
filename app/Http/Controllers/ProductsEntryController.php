@@ -48,6 +48,7 @@ class ProductsEntryController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $entry = ProductsEntry::create($request->all());
 
         $auditoria              = new Auditoria;

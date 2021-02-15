@@ -61,8 +61,8 @@
 										<th>Serial</th>
 										<th>Descripción</th>
 										<!-- <th>Gramaje</th> -->
-										<th>Bodega Origen</th>
-										<th>Bodega Destino</th>
+										<!-- <th>Bodega Origen</th> -->
+										<th>Bodega</th>
 										<th>Estatus</th>
 										<th>Fecha de registro</th>
 										<!-- <th>Registrado por</th> -->
@@ -206,9 +206,9 @@
 				// {
 				// 	"data":"gramaje"
 				// },
-				{
-					"data": "bodega_origen"
-				},
+				// {
+				// 	"data": "bodega_origen"
+				// },
 				{
 					"data": "warehouse"
 				},
