@@ -394,6 +394,7 @@
 			async: false,
 			error: function() {},
 			success: function(data) {
+				// console.log('hola1');
 				var valid = false
 				$('#table_products_edit tbody tr').each(function() {
 					if ($(this).find(".serial").val() == '') {
@@ -408,7 +409,7 @@
 				// });
 				contador++
 				var html = "";
-				$('#table_products_edit tbody').empty();
+				// $('#table_products_edit tbody').empty();
 				if (!valid) {
 					html += "<tr>"
 					html += "<td><input type='text' class='form-control' name='referencia[]' value='" + data.referencia + "' required><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ></td>"
@@ -547,7 +548,7 @@
 		});
 	}
 	function ShowProducts(table, data) {
-		console.log('sadd',data);
+		console.log('hola2');
 		let html = ""
 		$.map(data.detalle, function(item, key) {
 			html += "<tr>"
