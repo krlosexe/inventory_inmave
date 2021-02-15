@@ -394,7 +394,6 @@
 			async: false,
 			error: function() {},
 			success: function(data) {
-				// console.log('hola1');
 				var valid = false
 				$('#table_products_edit tbody tr').each(function() {
 					if ($(this).find(".serial").val() == '') {
