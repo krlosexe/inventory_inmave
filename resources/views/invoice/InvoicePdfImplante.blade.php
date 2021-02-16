@@ -35,8 +35,8 @@
         <h3>NIT: 900 887 221-2</h3>
         @if($reissue ==1)
         @else
-        <p>Resolucion Autorizada por la DIAN No. 18763006154625</p>
-        <p>De Junio 02 de 2020 Numeracion 0041 a 0140</p>
+        <p>Resolucion Autorizada por la DIAN No. 18764009851447</p>
+        <p>Hasta Enero 20 de 2022 Numeracion 0300 a 1300</p>
         <p>Facturacion por Computador</p>
         <p>No somos Autorretenedores</p>
         <p>No somos Grandes Contribuyentes</p>
