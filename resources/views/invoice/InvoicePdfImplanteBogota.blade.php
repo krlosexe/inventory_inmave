@@ -5,30 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
-
     <style>
         .resolucion p{
             font-size: 12px;
             line-height: .5em;
             font-family: "Times New Roman";
         }
-
         body {
             font-family:"Times New Roman";
         }
-
         td {
             font-size: 12px;
         }
-
         #fechas td {
             padding-bottom: 2%;
         }
-
         #client td {
             padding-bottom: 1%;
         }
-
         #fechas .b {
             position: absolute;
             top: -10px;
@@ -44,13 +38,10 @@
         }
     </style>
 </head>
-
 <body>
     @if($warehouse == "Bogota" )
     <img class="bogota" src="http://pdtclientsolutions.com/inventory_inmave/img/silimed.jpeg" width="250">
-
     @endif
-
     <div class="resolucion">
         @if($warehouse == "Bogota" )
         <h3>NIT: 901 428 514-0</h3>
@@ -79,7 +70,6 @@
         @endif
     </div>
     <div id="fechas" class="b">
-
         @if($reissue == 0)
         @if($warehouse == "Bogota" )
         <h4>FACTURA PROFORMA {{"BOG-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
@@ -103,7 +93,6 @@
                 <td><b>Fecha de Vencimiento:</b></td>
                 <td>{{$created_at}}</td>
             </tr>
-
         </table>
     </div>
     <div id="client">
@@ -119,14 +108,13 @@
                 <td><b>Ciudad:</b></td>
                 <td>{{$city}}</td>
             </tr>DEL</td>
-
             </tr>
         </table>
         <br>
         <b>Dirección:</b>
         <span style="font-size:8"> {{ $address_client }}</span>
         <br><br>
-        <br><br>
+        <br>
         <table>
             <tr>
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 90px;"><b>REFERENCIA</b></td>
@@ -148,10 +136,8 @@
             </tr>
             @endforeach
         </table>
-        <br> <br> <br>
+        <br><br>
         <p style="font-size: 11px;">Obervaciones: {{ $observations}}</p>
-
-        <br>
         <table width="100%" border="1" cellspacing="0" cellpadding="0">
             <tr>
                 <td rowspan="5" style="border: 1px solid black; text-align: center;  width: 50px;"><b>SON:</b></td>
@@ -225,6 +211,17 @@
         </table>
         <br><br>
         @if($warehouse == "Bogota" )
+        @if($name)
+        Nombre del Paciente: {{$name}} 
+        @else
+        Nombre del Paciente: SIN NOMBRE
+        @endif
+        <br>
+        @if($nit_c)
+        Identificación: {{$nit_c}} 
+        @else
+        Identificación: SIN IDENTIFICACIÒN
+        @endif
         <p style="font-size: 11px"><b>SILIMED COLOMBIA SAS - NIT 901130935, CUENTA CORRIENTE BANCOLOMBIA N° 67400012942</b></p>
         <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: contabilidad@inmavecolombia.com www.inmavecolombia.com</p>
         @endif

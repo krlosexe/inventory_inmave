@@ -97,7 +97,7 @@
         <b>Dirección:</b>
       <span style="font-size:8"> {{ $address_client }}</span> 
         <br><br>
-        <br><br>
+        <br>
         <table>
             <tr>
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 90px;"><b>REFERENCIA</b></td>
@@ -118,7 +118,7 @@
                 </tr>
             @endforeach
         </table>
-        <br>   <br>   <br>
+        <br><br>
         <p style="font-size: 11px;" >Obervaciones: {{ $observations}}</p>
         <br>
         <table  width="100%" border="1" cellspacing="0" cellpadding="0">
@@ -181,6 +181,18 @@
             </tr>
         </table>
         <br><br>
+        @if($name)
+        Nombre del Paciente: {{$name}} 
+        @else
+        Nombre del Paciente: SIN NOMBRE
+        @endif
+        <br>
+        @if($nit_c)
+        Identificación: {{$nit_c}} 
+        @else
+        Identificación: SIN IDENTIFICACIÒN
+        @endif
+        
         <p style="font-size: 11px"><b>SILIMED COLOMBIA SAS - NIT 901130935, CUENTA CORRIENTE BANCOLOMBIA N° 67400012942</b></p>
         <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: contabilidad@inmavecolombia.com www.inmavecolombia.com</p>
 
