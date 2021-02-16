@@ -45,7 +45,7 @@
     <div class="resolucion">
         <h3>NIT: 900 887 221-2</h3>
         <p>Resolucion Autorizada por la DIAN No. 18764009851447</p>
-        <p>Hasta Enero 20 de 2022 Numeracion 0300 a 1300</p>
+        <p>Hasta Enero 20 de 2022 Numeración 0300 a 1300</p>
         <p>Facturacion por Computador</p>
         <p>No somos Autorretenedores</p>
         <p>No somos Grandes Contribuyentes</p>
