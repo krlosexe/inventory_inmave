@@ -184,13 +184,13 @@
         @if($name)
         Nombre del Paciente: {{$name}} 
         @else
-        Nombre del Paciente: SIN NOMBRE
+        Nombre del Paciente: 
         @endif
         <br>
         @if($nit_c)
         Identificación: {{$nit_c}} 
         @else
-        Identificación: SIN IDENTIFICACIÒN
+        Identificación: 
         @endif
         
         <p style="font-size: 11px"><b>SILIMED COLOMBIA SAS - NIT 901130935, CUENTA CORRIENTE BANCOLOMBIA N° 67400012942</b></p>
