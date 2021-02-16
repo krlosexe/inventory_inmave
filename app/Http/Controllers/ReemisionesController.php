@@ -250,7 +250,8 @@ class ReemisionesController extends Controller
             $output->vat_total              = $head->vat_total;
             $output->discount_total         = $head->discount_total;
             $output->rte_fuente             = $head->rte_fuente;
-            $output->total_invoice          = $head->total_invoice;
+            $output->name                   = $head->name;
+            $output->nit                    = $head->nit;
             $output->observations           = $head->observations;
             $output->save();
 

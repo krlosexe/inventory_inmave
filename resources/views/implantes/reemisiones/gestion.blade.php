@@ -329,6 +329,8 @@
 			var data = table.row($(this).parents("tr")).data();
 
 			$("#items_id").val(data.items.length)
+			$("#name_edit").val(data.name)
+			$("#nit_edit").val(data.nit)
 			$("#table_products_rem tbody").html("")
 			$("#indicador_edit").val(1)
 			$("#serial_edit").focus();

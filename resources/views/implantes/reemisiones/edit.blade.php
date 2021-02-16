@@ -46,6 +46,18 @@
                             <input type="text" maxlength="15" name="items" id="items_id" class="form-control form-control-user" readonly>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <label for=""><b>Nombre Paciente</b></label>
+                            <div class="form-group valid-required">
+                                <input type="text" name="name" class="form-control form-control-user" id="name_edit" placeholder="Nombre" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for=""><b>Identificación</b></label>
+                            <div class="form-group valid-required">
+                                <input type="text" name="nit" class="form-control form-control-user" id="nit_edit" placeholder="Identificación">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
