@@ -118,9 +118,8 @@
                 </tr>
             @endforeach
         </table>
-        <br><br>
-        <p style="font-size: 11px;" >Obervaciones: {{ $observations}}</p>
         <br>
+        <p style="font-size: 11px;" >Obervaciones: {{ $observations}}</p>
         <table  width="100%" border="1" cellspacing="0" cellpadding="0">
             <tr>
                 <td rowspan="5" style="border: 1px solid black; text-align: center;  width: 50px;"><b>SON:</b></td>
