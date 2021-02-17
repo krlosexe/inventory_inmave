@@ -136,7 +136,7 @@
             </tr>
             @endforeach
         </table>
-        <br><br>
+        <br>
         <p style="font-size: 11px;">Obervaciones: {{ $observations}}</p>
         <table width="100%" border="1" cellspacing="0" cellpadding="0">
             <tr>
@@ -178,7 +178,6 @@
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($total_invoice, 2, ',', '.')}}</b></td>
             </tr>
         </table>
-
         <br>
         <p style="font-size: 11px;">Se deben efectuar el pago en Bancolombia "convenio de recaudo 87622", se debe indicar en la referencia el número de factura a pagar, Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
         <table width="100%" style="font-size: 11px">
@@ -198,7 +197,6 @@
                 <th style="padding-top: 20px;"> </th>
                 <th style="padding-top: 20px;"></th>
             </tr>
-
             <tr>
                 @if($warehouse == "Bogota" )
                 <th style="border-top: 1px solid black;">S&S MEDICAL DISPOSITVES SAS</th>
