@@ -8,5 +8,6 @@ class ImplanteReemisionesItem extends Model
 {
     protected $table ="implantes_reemisiones_items";
     protected $guarded = [];
-    public    $timestamps    = false; 
+    public    $timestamps    = false;
+
 }
