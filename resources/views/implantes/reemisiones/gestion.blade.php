@@ -21,8 +21,14 @@
 		font-family: monospace;
 		font-weight: normal;
 	}
-	.color {
+	.color1 {
 		color: red;
+	}
+	.color2 {
+		color: yellow;
+	}
+	.color3 {
+		color: green;
 	}
 
 </style>
@@ -501,9 +507,14 @@
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' min='" + item.qty + "' max='" + item.qty + "'readonly><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.qty + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.qty + "' disabled></td>"
 			if(item.estatus == "Vendido"){
-			 html += "<td class='color'>" + item.estatus + "</td>"
+			    html += "<td class='color1'>" + item.estatus + "</td>"
+			}else if(item.estatus == "Remitido"){
+				html += "<td class='color2'>" + item.estatus + "</td>"
+			}
+			else if(item.estatus == "Disponible"){
+				html += "<td class='color3'>" + item.estatus + "</td>"
 			}else{
-			  html += "<td>" + item.estatus + "</td>"
+				html += "<td>" + item.estatus + "</td>"
 			}
 			html += "<td><input style='text-align: right;width: 142px;' type='text' class=' price_product form-control monto_formato_decimales total_product' value='" + number_format(item.price, 2) + "' onchange='calcProduc(this, " + '"_edit"' + ")'  name='total[]' required></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
