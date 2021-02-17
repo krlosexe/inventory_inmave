@@ -4,33 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
-
-
     <style>
         .resolucion p{
             font-size : 12px;
             line-height: .5em;
             font-family: Arial, Helvetica, sans-serif;
         }
-
         body{
             font-family: Arial, Helvetica, sans-serif;
         }
-
         td{
             font-size : 12px;
         }
         #fechas td{
             padding-bottom: 2%;
         }
-
-
         #client td{
             padding-bottom: 1%;
         }
-
-
-
         #fechas{
             position: absolute;
             top: -10px;
@@ -40,8 +31,6 @@
 </head>
 <body>
     <img src="http://pdtclientsolutions.com/inventory_inmave/img/inmave.png"  width="300">
-
-
     <div class="resolucion">
         <h3>NIT: 900 887 221-2</h3>
         <p>Resolucion Autorizada por la DIAN No. 18764009851447</p>
@@ -51,10 +40,7 @@
         <p>No somos Grandes Contribuyentes</p>
         <p>Actividad Economica 4645</p>
     </div>
-
-
     <div id="fechas">
-
         @if($reissue == 0)
         @if($warehouse  == "Medellin" )
          <h4>FACTURA PROFORMA {{"MED-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
@@ -73,31 +59,20 @@
          @else
          <h4>REMISIÓN {{"CALI-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
           @endif
-
         @endif
-
-
         <table>
-
             <tr>
                 <td><b>Fecha de Factura:</b></td></td>
                 <td>{{$created_at}}</td>
             </tr>
-
             <tr>
                 <td><b>Fecha de Vencimiento:</b></td>
                 <td>{{$created_at}}</td>
             </tr>
-
         </table>
     </div>
-
-
-
     <div id="client">
-
         <table>
-
             <tr>
                 <td><b>Señores:</b></td></td>
                 <td>{{$name_client}}</td>
@@ -107,12 +82,10 @@
                 <td>{{$phone}}</td>
                 <td><b>Ciudad:</b></td>
                 <td>{{$city}}</td>
-
             </tr>
             <tr>
                 <td><b>Correo:</b></td>
                 <td>{{$email}}</td>
-
             </tr>
         </table>
         <br>
@@ -136,13 +109,9 @@
                     <td style="text-align: center">{{number_format(($value["price"] * $value["qty"]), 2, ',', '.')}}</td>
                 </tr>
             @endforeach
-
         </table>
-
         <br>   <br>   <br>
-
         <p style="font-size: 11px;" >Obervaciones: {{ $observations}}</p>
-
         <br>
         <table  width="100%" border="1" cellspacing="0" cellpadding="0">
             <tr>
@@ -155,27 +124,21 @@
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>IVA</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($vat_total, 2, ',', '.')}} </b></td>
             </tr>
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>DESCUENTO (10%)</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($discount_total, 2, ',', '.')}}</b></td>
             </tr>
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>RTE FUENTE ({{$rte_fuente}} %)</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($rte_fuente_total, 2, ',', '.')}}</b></td>
             </tr>
-
             <tr>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>TOTAL</b></td>
                 <td style="border: 1px solid black; text-align: center;  width: 100px;"><b>{{number_format($total_invoice, 2, ',', '.')}}</b></td>
             </tr>
         </table>
-
         <br>
-
         <p style="font-size: 11px;" >Al efectuar su pago gire cheque a favor de  INMAVE COLOMBIA SAS NIT: 900 887 221-2,  Apartir del vencimiento causara el maximo interes permitido por la ley mensualmente. Esta factura se asimila en sus efectos legales a la letra de cambio art.774 C.C</p>
-
         <table width="100%" style="font-size: 11px">
             <tr>
                 <th>Ventas: </th>
