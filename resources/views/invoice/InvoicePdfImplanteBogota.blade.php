@@ -114,7 +114,6 @@
         <b>Dirección:</b>
         <span style="font-size:8"> {{ $address_client }}</span>
         <br><br>
-        <br>
         <table>
             <tr>
                 <td style="border-bottom: 1px solid black; text-align: center;  width: 90px;"><b>REFERENCIA</b></td>
