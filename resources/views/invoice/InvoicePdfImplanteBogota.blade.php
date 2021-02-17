@@ -76,7 +76,7 @@
         @endif
         @else
         @if($warehouse == "Bogota" )
-        <h4>REEMISIÓN {{"BOG-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
+        <h4>REMISIÓN {{"BOG-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
         @endif
         @endif
         <table>
