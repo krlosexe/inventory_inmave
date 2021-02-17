@@ -60,7 +60,7 @@ class ImplantesController extends Controller
             $output->rte_fuente_total       = $request->rte_fuente_total;
             $output->total_invoice          = $request->total_invoice;
             $output->name                   = $request->name;
-            $output->nit                    = $request->nit;
+            $output->nit_c                    = $request->nit;
             $output->save();
 
             $auditoria              = new Auditoria;
@@ -115,7 +115,7 @@ class ImplantesController extends Controller
             $update->rte_fuente_total       = $request->rte_fuente_total;
             $update->total_invoice          = $request->total_invoice;
             $update->name                   = $request->name;
-            $update->nit                    = $request->nit;
+            $update->nit_c                    = $request->nit;
             $update->save();
 
             $remi = ImplanteReemisionesItem::where("id_implante_reemision", $remision)->get();
