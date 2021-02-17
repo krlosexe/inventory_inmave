@@ -66,7 +66,7 @@
             @if($reissue ==0)
             <td><b>Fecha de Factura:</b></td></td>
             @else
-            <td><b>Fecha de Remsión:</b></td></td>
+            <td><b>Fecha de Remisión:</b></td></td>
             @endif
                 <td>{{$created_at}}</td>
             </tr>
