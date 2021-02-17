@@ -506,11 +506,9 @@
 			if(item.estatus == "Vendido"){
 			    html += "<td class='color1'>" + item.estatus + "</td>"
 			}
-			
 		    if(item.estatus == "Remitido"){
 			    html += "<td class='color2'>" + item.estatus + "</td>"
 			}
-			
 			html += "<td><input style='text-align: right;width: 142px;' type='text' class=' price_product form-control monto_formato_decimales total_product' value='" + number_format(item.price, 2) + "' onchange='calcProduc(this, " + '"_edit"' + ")'  name='total[]' required></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
