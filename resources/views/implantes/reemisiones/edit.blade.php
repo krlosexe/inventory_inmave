@@ -71,6 +71,7 @@
                                     <th>Serial</th>
                                     <th>Salida (Cantidad)</th>
                                     <th>Existencia Actual</th>
+                                    <th>Estatus</th>
                                     <th>Total</th>
                                     <th></th>
                                 </tr>
