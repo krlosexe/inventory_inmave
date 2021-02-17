@@ -25,7 +25,7 @@
 		color: red;
 	}
 	.color2 {
-		color: yellow;
+		color: #a28844;
 	}
 	.color3 {
 		color: green;
