@@ -21,6 +21,10 @@
 		font-family: monospace;
 		font-weight: normal;
 	}
+	.color {
+		color: red;
+	}
+
 </style>
 @endsection
 @section('content')
@@ -328,6 +332,8 @@
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
 
+			console.log('aqui',data);
+
 			$("#items_id").val(data.items.length)
 			$("#name_edit").val(data.name)
 			$("#nit_edit").val(data.nit)
@@ -494,6 +500,11 @@
 			html += "<td>" + item.serial + " <input type='hidden' class='id_product' name='serial[]' value='" + item.serial + "' > </td>"
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' min='" + item.qty + "' max='" + item.qty + "'readonly><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.qty + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.qty + "' disabled></td>"
+			if(item.estatus == "Vendido"){
+			 html += "<td class='color'>" + item.estatus + "</td>"
+			}else{
+			  html += "<td>" + item.estatus + "</td>"
+			}
 			html += "<td><input style='text-align: right;width: 142px;' type='text' class=' price_product form-control monto_formato_decimales total_product' value='" + number_format(item.price, 2) + "' onchange='calcProduc(this, " + '"_edit"' + ")'  name='total[]' required></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
