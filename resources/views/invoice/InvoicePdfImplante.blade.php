@@ -192,13 +192,8 @@
         @else
         Identificación: 
         @endif
-        
         <p style="font-size: 11px"><b>SILIMED COLOMBIA SAS - NIT 901130935, CUENTA CORRIENTE BANCOLOMBIA N° 67400012942</b></p>
         <p style="font-size: 11px">Cra 43A #17-106 of 902 Telefono: 3220471 Correo: contabilidad@inmavecolombia.com www.inmavecolombia.com</p>
-
     </div>
-
-
-
 </body>
 </html>
