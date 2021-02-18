@@ -495,7 +495,7 @@
 			});
 	}
 	function ShowProducts(table, data) {
-		$(table + " tbody").html("")
+		// $(table + " tbody").html("")
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
