@@ -96,23 +96,25 @@ class ProductImplanteController extends Controller
                     ->selectRaw("(count(implantes_output_items.referencia))  as total")
                     ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
                     ->where("implantes_output.warehouse", "Medellin")
+                    ->where("implantes_output_items.estatus","Remitido")
                     ->where("implantes_output_items.referencia",$id_product)
                     ->groupBy("implantes_output_items.referencia")
                     ->first();
 
-                    $traspase_medellin = DB::table("implante_product_output_items_trapase")
-                    ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
-                    ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
-                    ->where("implante_product_output_traspase.warehouse", "Medellin")
-                    ->where("implante_product_output_items_trapase.referencia", $id_product)
-                    ->groupBy("implante_product_output_items_trapase.referencia")
-                    ->first();
+                    // $traspase_medellin = DB::table("implante_product_output_items_trapase")
+                    // ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
+                    // ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
+                    // ->where("implante_product_output_traspase.warehouse", "Medellin")
+                    // ->where("implante_product_output_items_trapase.referencia", $id_product)
+                    // ->groupBy("implante_product_output_items_trapase.referencia")
+                    // ->first();
 
 
                     $output_medellin_reemision = DB::table("implantes_reemisiones_items")
                     ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
                     ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
                     ->where("implantes_reemisiones.warehouse", "Medellin")
+                    ->where("implantes_reemisiones_items.estatus","Vendido")
                     ->where("implantes_reemisiones_items.referencia", $id_product)
                     ->groupBy("implantes_reemisiones_items.referencia")
                     ->first();
@@ -130,22 +132,24 @@ class ProductImplanteController extends Controller
                         ->selectRaw("(count(implantes_output_items.referencia))  as total")
                         ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
                         ->where("implantes_output.warehouse", "Bogota")
+                        ->where("implantes_output_items.estatus", "Vendido")
                         ->where("implantes_output_items.referencia", $id_product)
                         ->groupBy("implantes_output_items.referencia")
                         ->first();
 
-                        $traspase_bogota = DB::table("implante_product_output_items_trapase")
-                        ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
-                        ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
-                        ->where("implante_product_output_traspase.warehouse", "Bogota")
-                        ->where("implante_product_output_items_trapase.referencia", $id_product)
-                        ->groupBy("implante_product_output_items_trapase.referencia")
-                        ->first();
+                        // $traspase_bogota = DB::table("implante_product_output_items_trapase")
+                        // ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
+                        // ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
+                        // ->where("implante_product_output_traspase.warehouse", "Bogota")
+                        // ->where("implante_product_output_items_trapase.referencia", $id_product)
+                        // ->groupBy("implante_product_output_items_trapase.referencia")
+                        // ->first();
 
                         $output_bogota_reemision = DB::table("implantes_reemisiones_items")
                         ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
                         ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
                         ->where("implantes_reemisiones.warehouse", "Bogota")
+                        ->where("implantes_reemisiones_items.estatus", "Remitido")
                         ->where("implantes_reemisiones_items.referencia", $id_product)
                         ->groupBy("implantes_reemisiones_items.referencia")
                         ->first();
@@ -162,22 +166,24 @@ class ProductImplanteController extends Controller
                         ->selectRaw(" (count(implantes_output_items.referencia))  as total")
                         ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
                         ->where("implantes_output.warehouse", "Cali")
+                        ->where("implantes_output_items.estatus", "Vendido")
                         ->where("implantes_output_items.referencia", $id_product)
                         ->groupBy("implantes_output_items.referencia")
                         ->first();
 
-                        $traspase_cali = DB::table("implante_product_output_items_trapase")
-                        ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
-                        ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
-                        ->where("implante_product_output_traspase.warehouse", "Cali")
-                        ->where("implante_product_output_items_trapase.referencia",$id_product)
-                        ->groupBy("implante_product_output_items_trapase.referencia")
-                        ->first();
+                        // $traspase_cali = DB::table("implante_product_output_items_trapase")
+                        // ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
+                        // ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
+                        // ->where("implante_product_output_traspase.warehouse", "Cali")
+                        // ->where("implante_product_output_items_trapase.referencia",$id_product)
+                        // ->groupBy("implante_product_output_items_trapase.referencia")
+                        // ->first();
 
                         $output_cali_reemision = DB::table("implantes_reemisiones_items")
                         ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
                         ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
                         ->where("implantes_reemisiones.warehouse", "Cali")
+                        ->where("implantes_reemisiones_items.estatus", "Remitido")
                         ->where("implantes_reemisiones_items.referencia", $id_product)
                         ->groupBy("implantes_reemisiones_items.referencia")
                         ->first();
@@ -188,51 +194,55 @@ class ProductImplanteController extends Controller
                 if($entry_medellin){
                     $total_output_medellin           = 0;
                     $total_output_medellin_reemision = 0;
-                    $total_traspaso_medellin = 0;
+                    // $total_traspaso_medellin = 0;
                     if($output_medellin){
                         $total_output_medellin = $output_medellin->total;
                     }
                     if($output_medellin_reemision){
                         $total_output_medellin_reemision = $output_medellin_reemision->total;
                     }
-                    if($traspase_medellin){
-                        $total_traspaso_medellin = $traspase_medellin->total;
+                    // if($traspase_medellin){
+                        //     $total_traspaso_medellin = $traspase_medellin->total;
+                        // }
+                        // $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
+                        $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision;
+                    }else{
+                        $data_medellin["medellin"]["total"] = 0;
                     }
-                    $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
-                }else{
-                    $data_medellin["medellin"]["total"] = 0;
-                }
-                if($entry_cali){
-                    $total_output_cali           = 0;
-                    $total_output_cali_reemision = 0;
-                    $total_traspaso_cali = 0;
-                    if($output_cali){
+                    if($entry_cali){
+                        $total_output_cali           = 0;
+                        $total_output_cali_reemision = 0;
+                        // $total_traspaso_cali = 0;
+                        if($output_cali){
                         $total_output_cali = $output_cali->total;
                     }
                     if($output_cali_reemision){
                         $total_output_cali_reemision = $output_cali_reemision->total;
                     }
-                    if($traspase_cali){
-                        $total_traspaso_cali = $traspase_cali->total;
-                    }
-                    $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
+                    // if($traspase_cali){
+                    //     $total_traspaso_cali = $traspase_cali->total;
+                    // }
+                    // $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
+                        // dd($entry_cali->total);
+                    $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision;
                 }else{
                     $data_medellin["cali"]["total"] = 0;
                 }
                 if($entry_bogota){
                     $total_output_bogota           = 0;
                     $total_output_bogota_reemision = 0;
-                    $total_traspaso_bogota = 0;
+                    // $total_traspaso_bogota = 0;
                     if($output_bogota){
                         $total_output_bogota = $output_bogota->total;
                     }
                     if($output_bogota_reemision){
                         $total_output_bogota_reemision = $output_bogota_reemision->total;
                     }
-                    if($traspase_bogota){
-                        $total_traspaso_bogota = $traspase_bogota->total;
-                    }
-                    $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
+                    // if($traspase_bogota){
+                    //     $total_traspaso_bogota = $traspase_bogota->total;
+                    // }
+                    // $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
+                    $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision;
                 }else{
                     $data_medellin["bogota"]["total"] = 0;
                 }
@@ -241,17 +251,18 @@ class ProductImplanteController extends Controller
                 if($entry_cali){
                     $total_output_cali           = 0;
                     $total_output_cali_reemision = 0;
-                    $total_traspaso_cali = 0;
+                    // $total_traspaso_cali = 0;
                     if($output_cali){
                         $total_output_cali = $output_cali->total;
                     }
                     if($output_cali_reemision){
                         $total_output_cali_reemision = $output_cali_reemision->total;
                     }
-                    if($traspase_cali){
-                        $total_traspaso_cali = $traspase_cali->total;
-                    }
-                    $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
+                    // if($traspase_cali){
+                    //     $total_traspaso_cali = $traspase_cali->total;
+                    // }
+                    // $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
+                    $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision;
                 }else{
                     $data_medellin["cali"]["total"] = 0;
                 }
@@ -260,17 +271,18 @@ class ProductImplanteController extends Controller
                 if($entry_bogota){
                     $total_output_bogota           = 0;
                     $total_output_bogota_reemision = 0;
-                    $total_traspaso_bogota = 0;
+                    // $total_traspaso_bogota = 0;
                     if($output_bogota){
                         $total_output_bogota = $output_bogota->total;
                     }
                     if($output_bogota_reemision){
                         $total_output_bogota_reemision = $output_bogota_reemision->total;
                     }
-                    if($traspase_bogota){
-                        $total_traspaso_bogota = $traspase_bogota->total;
-                    }
-                    $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
+                    // if($traspase_bogota){
+                    //     $total_traspaso_bogota = $traspase_bogota->total;
+                    // }
+                    // $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
+                    $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision;
                 }else{
                     $data_medellin["bogota"]["total"] = 0;
                 }
