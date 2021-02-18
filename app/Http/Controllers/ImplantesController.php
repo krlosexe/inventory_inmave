@@ -122,7 +122,7 @@ class ImplantesController extends Controller
 
             foreach ($remi as $key => $value) {
 
-                TechnicalReceptionProductoImplante::where('serial', $value["serial"])->update(["estatus" => "Disponible"]);
+                TechnicalReceptionProductoImplante::where('serial', $value["serial"])->where('estatus','Remitido')->update(["estatus" => "Disponible"]);
             }
 
             ImplanteReemisionesItem::where("id_implante_reemision", $remision)->delete();
@@ -137,7 +137,7 @@ class ImplantesController extends Controller
                     $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
                     $producs_items["estatus"]     = "Remitido";
-                    TechnicalReceptionProductoImplante::where('serial', $request["serial"][$key])->update(["estatus" => "Remitido"]);
+                    TechnicalReceptionProductoImplante::where('serial', $request["serial"][$key])->where('estatus','Disponible')->update(["estatus" => "Remitido"]);
                     ImplanteReemisionesItem::create($producs_items);
                 }
             }
@@ -273,7 +273,7 @@ class ImplantesController extends Controller
         $update->rte_fuente_total       = $request->rte_fuente_total;
         $update->total_invoice          = $request->total_invoice;
         $update->name                   = $request->name;
-        $update->nit                    = $request->nit;
+        $update->nit_c                    = $request->nit;
         $update->phone                  = $request->phone;
         $update->email                  = $request->email;
         $update->address                = $request->address;
