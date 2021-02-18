@@ -306,7 +306,7 @@
 
 			$("#items_id").val(data.items.length)
 			$("#name_edit").val(data.name)
-			$("#nit_edit").val(data.nit)
+			$("#nit_edit").val(data.nit_c)
 			$("#phone_edit").val(data.phone)
 			$("#email_edit").val(data.email)
 			$("#city_edit").val(data.city)

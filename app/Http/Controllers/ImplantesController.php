@@ -99,7 +99,7 @@ class ImplantesController extends Controller
     }
     public function UpdateImplanteRemision(Request $request, $remision)
     {
-        // dd($request->all());    
+          
         try {
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $update =  ImplanteReemision::find($remision);
@@ -115,7 +115,7 @@ class ImplantesController extends Controller
             $update->rte_fuente_total       = $request->rte_fuente_total;
             $update->total_invoice          = $request->total_invoice;
             $update->name                   = $request->name;
-            $update->nit_c                    = $request->nit;
+            $update->nit_c                  = $request->nit;
             $update->save();
 
             $remi = ImplanteReemisionesItem::where("id_implante_reemision", $remision)->get();
