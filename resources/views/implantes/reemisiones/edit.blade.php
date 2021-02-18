@@ -49,7 +49,7 @@
                         <div class="col-md-3">
                             <label for=""><b>Nombre Paciente</b></label>
                             <div class="form-group valid-required">
-                                <input type="text" name="name" class="form-control form-control-user" id="name_edit" placeholder="Nombre" required>
+                                <input type="text" name="name" class="form-control form-control-user" id="name_edit" placeholder="Nombre">
                             </div>
                         </div>
                         <div class="col-md-3">
