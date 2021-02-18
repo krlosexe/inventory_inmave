@@ -96,7 +96,7 @@ class ProductImplanteController extends Controller
                     ->selectRaw("(count(implantes_output_items.referencia))  as total")
                     ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
                     ->where("implantes_output.warehouse", "Medellin")
-                    ->where("implantes_output_items.estatus","Remitido")
+                    ->where("implantes_output_items.estatus","Vendido")
                     ->where("implantes_output_items.referencia",$id_product)
                     ->groupBy("implantes_output_items.referencia")
                     ->first();
@@ -114,7 +114,7 @@ class ProductImplanteController extends Controller
                     ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
                     ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
                     ->where("implantes_reemisiones.warehouse", "Medellin")
-                    ->where("implantes_reemisiones_items.estatus","Vendido")
+                    ->where("implantes_reemisiones_items.estatus","Remitido")
                     ->where("implantes_reemisiones_items.referencia", $id_product)
                     ->groupBy("implantes_reemisiones_items.referencia")
                     ->first();
@@ -205,6 +205,7 @@ class ProductImplanteController extends Controller
                         //     $total_traspaso_medellin = $traspase_medellin->total;
                         // }
                         // $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
+                        
                         $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision;
                     }else{
                         $data_medellin["medellin"]["total"] = 0;
