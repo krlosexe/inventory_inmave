@@ -212,7 +212,7 @@ class ImplantesController extends Controller
             $output->rte_fuente_total       = $request->rte_fuente_total;
             $output->total_invoice          = $request->total_invoice;
             $output->name                   = $request->name;
-            $output->nit                    = $request->nit;
+            $output->nit_c                  = $request->nit;
             $output->phone                  = $request->phone;
             $output->email                  = $request->email;
             $output->address                = $request->address;
@@ -273,7 +273,7 @@ class ImplantesController extends Controller
         $update->rte_fuente_total       = $request->rte_fuente_total;
         $update->total_invoice          = $request->total_invoice;
         $update->name                   = $request->name;
-        $update->nit_c                    = $request->nit;
+        $update->nit_c                  = $request->nit;
         $update->phone                  = $request->phone;
         $update->email                  = $request->email;
         $update->address                = $request->address;
