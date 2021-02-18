@@ -494,16 +494,18 @@
 		
 			if(name_rol == "Silimed_Cali"){
 					$("#warehouse_edit option").remove();
-						$("#warehouse").append($('<option>', {
+						$("#warehouse_edit").append($('<option>', {
 							value: "Cali",
-							text: "Cali"
+							text: "Cali",
+							selected: true
 						}));
 		}
 		if(name_rol == "Silimed_Bog"){
 					$("#warehouse_edit option").remove();
-						$("#warehouse").append($('<option>', {
+						$("#warehouse_edit").append($('<option>', {
 							value: "Bogota",
-							text: "Bogota"
+							text: "Bogota",
+							selected: true
 						}));
 		}
 			$("#alertas").css("display", "none");
