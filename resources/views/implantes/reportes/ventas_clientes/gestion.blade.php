@@ -213,7 +213,7 @@
 					"data": "name"
 				},
 				{
-					"data": "nit"
+					"data": "nit_c"
 				},
 				{
 					"data": "warehouse"
