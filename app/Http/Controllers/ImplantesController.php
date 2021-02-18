@@ -123,6 +123,7 @@ class ImplantesController extends Controller
             foreach ($remi as $key => $value) {
 
                 TechnicalReceptionProductoImplante::where('serial', $value["serial"])->where('estatus','Remitido')->update(["estatus" => "Disponible"]);
+                ImplanteReemisionesItem::where("serial",$value["serial"])->delete();
             }
 
             ImplanteReemisionesItem::where("id_implante_reemision", $remision)->delete();
@@ -285,7 +286,7 @@ class ImplantesController extends Controller
         foreach ($out as $key => $value) {
 
             TechnicalReceptionProductoImplante::where('serial', $value["serial"])->update(["estatus" => "Disponible"]);
-            // ImplantOutputItems::where("id_implant_output", $output)->delete();
+            ImplantOutputItems::where("serial",$value["serial"])->delete();
         }
 
         if (isset($request->referencia)) {
