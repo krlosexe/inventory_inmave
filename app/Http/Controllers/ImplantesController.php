@@ -243,7 +243,7 @@ class ImplantesController extends Controller
 
                     TechnicalReceptionProductoImplante::where('serial', $request["serial"][$key])->update(["estatus" => "Vendido"]);
                    
-                    // ImplanteReemisionesItem::where("serial", $request["serial"][$key])->delete();
+                    ImplanteReemisionesItem::where("serial", $request["serial"][$key])->update(["estatus" => "Vendido"]);
                     
                 }
             }
@@ -285,8 +285,8 @@ class ImplantesController extends Controller
         foreach ($out as $key => $value) {
 
             TechnicalReceptionProductoImplante::where('serial', $value["serial"])->update(["estatus" => "Disponible"]);
+            // ImplantOutputItems::where("id_implant_output", $output)->delete();
         }
-        // ImplantOutputItems::where("id_implant_output", $output)->delete();
 
         if (isset($request->referencia)) {
             foreach ($request['referencia'] as $key => $value) {
@@ -300,7 +300,8 @@ class ImplantesController extends Controller
                 $producs_items["total"]         = str_replace(",", "", $request->total_invoice);
                 $producs_items["estatus"]     = "Vendido";
 
-                TechnicalReceptionProductoImplante::where('serial', $request["serial"][$key])->update(["estatus" => "Vendido"]);
+                TechnicalReceptionProductoImplante::where('serial',$request["serial"][$key])->update(["estatus" => "Vendido"]);
+                ImplanteReemisionesItem::where("serial", $request["serial"][$key])->update(["estatus" => "Vendido"]);
                 ImplantOutputItems::create($producs_items);
             }
         }
