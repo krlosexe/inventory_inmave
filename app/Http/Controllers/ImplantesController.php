@@ -408,7 +408,7 @@ class ImplantesController extends Controller
         if ($id == "Administrador") {
             $data = ImplantOutputItems::select("implantes_output_items.*",
             "implantes_output.name",
-            "implantes_output.nit",
+            "implantes_output.nit_c",
             "implantes_output.warehouse",
             "implantes_output.total_invoice",
             "auditoria.*",
