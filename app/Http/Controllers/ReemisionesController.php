@@ -272,7 +272,7 @@ class ReemisionesController extends Controller
                 $producs_items->price       = str_replace(",", "", $value->price);
                 $producs_items->vat         = $value->vat;
                 $producs_items->total       = str_replace(",", "", $value->total);
-                // $producs_items->estatus     = "Vendido";
+                $producs_items->estatus     = "Vendido";
                 $producs_items->save();
                 
                 TechnicalReceptionProductoImplante::where('serial',$value->serial)->update(["estatus" => "Vendido"]);
