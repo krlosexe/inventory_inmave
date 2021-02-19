@@ -280,11 +280,31 @@
 	/*
 		Funcion que muestra el cuadro3 para la consulta del banco.
 	*/
-	function InvoiceToremition(data) {
+	function InvoiceToremitionClients(data) {
 		try {
 			$("#add_remision_invoice_implant").click(function(e) {
 				$.ajax({
-					url: `${document.getElementById('ruta').value}/api/implantes/remision/invoice/${data.id}/${id_user}`,
+					url: `${document.getElementById('ruta').value}/api/implantes/remision/invoice/${data.id}/${id_user}/1/`,
+					type: 'GET',
+					dataType: 'JSON',
+					async: false,
+					error: function() {
+					},
+					success: function(data) {
+						location.href = "http://pdtclientsolutions.com/inventory_inmave/ventas_implantes";
+						// location.href = "http://inmave.localhost/ventas_implantes";
+					}
+				});
+			});
+		} catch (e) {
+			console.log(e)
+		}
+	}
+	function InvoiceToremitionPacient(data) {
+		try {
+			$("#add_remision_invoice_implant_paciente").click(function(e) {
+				$.ajax({
+					url: `${document.getElementById('ruta').value}/api/implantes/remision/invoice/${data.id}/${id_user}/2/`,
 					type: 'GET',
 					dataType: 'JSON',
 					async: false,
@@ -339,7 +359,7 @@
 
 			$("#items_id").val(data.items.length)
 			$("#name_edit").val(data.name)
-			$("#nit_edit").val(data.nit)
+			$("#nit_edit").val(data.nit_c)
 			$("#table_products_rem tbody").html("")
 			$("#indicador_edit").val(1)
 			$("#serial_edit").focus();
@@ -371,7 +391,8 @@
 			$("#total_invoice_edit").val(data.total_invoice)
 			$("#observations_edit").val(data.observations)
 			$("#id_edit").val(data.id)
-			InvoiceToremition(data)
+			InvoiceToremitionClients(data)
+			InvoiceToremitionPacient(data)
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}

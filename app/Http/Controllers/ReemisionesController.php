@@ -11,6 +11,7 @@ use App\{
     ProductusOutputItems,
     ImplanteReemision,
     ImplanteReemisionesItem,
+    ImplantesClientes,
     ImplantOutput,
     ImplantOutputItems,
     TechnicalReceptionImplante,
@@ -234,12 +235,13 @@ class ReemisionesController extends Controller
         }
     }
 
-    public function ImplantesRemisionToInvoice($id,$user)
+    public function ImplantesRemisionToInvoice($id,$user,$option)
     {
         try {
-
+            
             $head = ImplanteReemision::where('id',$id)->first();
             $items = ImplanteReemisionesItem::where('id_implante_reemision',$head->id)->get();
+            $cliente = ImplantesClientes::where('id',$head->id_client)->first();
            
             $output                         = new ImplantOutput;
             $output->warehouse              = $head->warehouse;
@@ -250,9 +252,19 @@ class ReemisionesController extends Controller
             $output->vat_total              = $head->vat_total;
             $output->discount_total         = $head->discount_total;
             $output->rte_fuente             = $head->rte_fuente;
-            $output->name                   = $head->name;
-            $output->nit                    = $head->nit_c;
             $output->observations           = $head->observations;
+            if($option == 1){
+            $output->name     = $cliente->name;    
+            $output->nit_c    = $cliente->nit;     
+            $output->phone    = $cliente->phone;
+            $output->email    = $cliente->email;
+            $output->address  = $cliente->address;
+            $output->city     = $cliente->city;
+            }
+            if($option == 2){
+                $output->name                   = $head->name;    
+                $output->nit_c                  = $head->nit_c;     
+            }
             $output->save();
 
             $auditoria              = new Auditoria;
