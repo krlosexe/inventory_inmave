@@ -100,7 +100,7 @@ Route::post('products/movimiento/output', 'TraspasoController@createOuptTraspase
 Route::get('products/movimiento/list', 'TraspasoController@ListOuptTraspase');
 Route::get('products/movimiento/detail/{id}', 'TraspasoController@ListOuptTraspaseById');
 Route::get('products/remision/invoice/{id}/{user}', 'ReemisionesController@RemisionToInvoice');
-Route::get('implantes/remision/invoice/{id}/{user}', 'ReemisionesController@ImplantesRemisionToInvoice');
+Route::get('implantes/remision/invoice/{id}/{user}/{option}', 'ReemisionesController@ImplantesRemisionToInvoice');
 
 Route::post('implantes/technical/reception', 'TechnicalReceptionImplantesController@CreateTechnicalReceptionImplante');
 Route::put('implantes/technical/reception/edit/{id}', 'TechnicalReceptionImplantesController@EditarTechnicalReceptionImplante');

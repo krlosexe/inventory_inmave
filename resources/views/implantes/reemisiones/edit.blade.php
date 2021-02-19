@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <label for=""><b>Bodega</b></label>
                             <div class="form-group valid-required">
                             <input type="text" maxlength="15" name="warehouse" id="warehouse_edit" class="form-control form-control-user" readonly>
@@ -46,17 +46,23 @@
                             <input type="text" maxlength="15" name="items" id="items_id" class="form-control form-control-user" readonly>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <label for=""><b>Nombre Paciente</b></label>
                             <div class="form-group valid-required">
                                 <input type="text" name="name" class="form-control form-control-user" id="name_edit" placeholder="Nombre">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <label for=""><b>Identificación</b></label>
                             <div class="form-group valid-required">
                                 <input type="text" name="nit" class="form-control form-control-user" id="nit_edit" placeholder="Identificación">
                             </div>
+                        </div>
+                        <div class="col-md-2">
+                            <br>
+                            <button type="button" class="btn btn-primary btn-user" id="add_remision_invoice_implant_paciente">
+                                Facturar
+                            </button>
                         </div>
                     </div>
                 </div>
