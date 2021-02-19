@@ -168,7 +168,6 @@ class ReemisionesController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -179,7 +178,6 @@ class ReemisionesController extends Controller
     {
         //
     }
-
     public function RemisionToInvoice($id,$user)
     {
         try {
@@ -269,6 +267,7 @@ class ReemisionesController extends Controller
             $auditoria->save();
 
             foreach($items as $key => $value){
+
                 $producs_items               = new ImplantOutputItems;
                 $producs_items->id_implant_output      = $output->id;
                 $producs_items->referencia  = $value->referencia;
@@ -281,6 +280,7 @@ class ReemisionesController extends Controller
                 $producs_items->save();
                 
                 TechnicalReceptionProductoImplante::where('serial',$value->serial)->update(["estatus" => "Vendido"]);
+                
             }
             //  ImplanteReemisionesItem::where('id_implante_reemision',$id)->update(["estatus" => "Vendido"]);
             ImplanteReemision::where('id',$id)->Delete();
