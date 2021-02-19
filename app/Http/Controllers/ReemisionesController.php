@@ -14,7 +14,6 @@ use App\{
     ImplantesClientes,
     ImplantOutput,
     ImplantOutputItems,
-    TechnicalReceptionImplante,
     TechnicalReceptionProductoImplante
 };
 
@@ -58,8 +57,6 @@ class ReemisionesController extends Controller
                                     ->where("products.id", $product["id_product"])
                                     ->groupBy("product_output_items.id_product")
                                     ->first();
-
-
                 $total = 0;
                 if($entry_medellin){
                     $total_output_medellin = 0;
@@ -72,7 +69,6 @@ class ReemisionesController extends Controller
                 }
             }
             $product["existence"] = $total;
-
         }
         return response()->json($data)->setStatusCode(200);
     }
@@ -93,7 +89,6 @@ class ReemisionesController extends Controller
      */
     public function store(Request $request)
     {
-
         isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
         $output = Reemisiones::create($request->all());
         $auditoria              = new Auditoria;
@@ -224,7 +219,6 @@ class ReemisionesController extends Controller
                 $producs_items->save();
 
             }
-
              Reemisiones::where('id',$id)->Delete();
              ReemisionesItems::where('id_reemision',$id)->Delete();
 
@@ -234,15 +228,12 @@ class ReemisionesController extends Controller
             return $th;
         }
     }
-
     public function ImplantesRemisionToInvoice($id,$user,$option)
     {
         try {
-            
             $head = ImplanteReemision::where('id',$id)->first();
             $items = ImplanteReemisionesItem::where('id_implante_reemision',$head->id)->get();
-            $cliente = ImplantesClientes::where('id',$head->id_client)->first();
-           
+            
             $output                         = new ImplantOutput;
             $output->warehouse              = $head->warehouse;
             $output->id_client              = $head->id_client;
@@ -253,7 +244,9 @@ class ReemisionesController extends Controller
             $output->discount_total         = $head->discount_total;
             $output->rte_fuente             = $head->rte_fuente;
             $output->observations           = $head->observations;
+            
             if($option == 1){
+            $cliente = ImplantesClientes::where('id',$head->id_client)->first();
             $output->name     = $cliente->name;    
             $output->nit_c    = $cliente->nit;     
             $output->phone    = $cliente->phone;
@@ -262,8 +255,8 @@ class ReemisionesController extends Controller
             $output->city     = $cliente->city;
             }
             if($option == 2){
-                $output->name                   = $head->name;    
-                $output->nit_c                  = $head->nit_c;     
+                $output->name  = $head->name;    
+                $output->nit_c = $head->nit_c;     
             }
             $output->save();
 
@@ -288,9 +281,7 @@ class ReemisionesController extends Controller
                 $producs_items->save();
                 
                 TechnicalReceptionProductoImplante::where('serial',$value->serial)->update(["estatus" => "Vendido"]);
-
             }
-            
             //  ImplanteReemisionesItem::where('id_implante_reemision',$id)->update(["estatus" => "Vendido"]);
             ImplanteReemision::where('id',$id)->Delete();
             ImplanteReemisionesItem::where('id_implante_reemision',$id)->Delete();
