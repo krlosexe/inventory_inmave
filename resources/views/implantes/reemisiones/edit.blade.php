@@ -29,7 +29,7 @@
                         <div class="col-md-2">
                             <br>
                             <button type="button" class="btn btn-primary btn-user" id="add_remision_invoice_implant">
-                                Facturar
+                                Facturar a Cliente
                             </button>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class="col-md-2">
                             <br>
                             <button type="button" class="btn btn-primary btn-user" id="add_remision_invoice_implant_paciente">
-                                Facturar
+                                Facturar a Paciente
                             </button>
                         </div>
                     </div>
