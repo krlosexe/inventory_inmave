@@ -6,6 +6,7 @@
         <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="discount_type" id="type_discount_edit">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">

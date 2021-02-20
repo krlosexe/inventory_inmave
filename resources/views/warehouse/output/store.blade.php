@@ -6,15 +6,10 @@
       <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
         @csrf
         <div class="row">
-
-
-
           <div class="col-md-12">
-
-
               <div class="row">
+              <input type="hidden" name="discount_type" id="type_discount">
                 <div class="col-md-6">
-                  
                     <label for=""><b>Cliente</b></label>
                     <div class="form-group valid-required">
                         <select name="id_client" class="form-control" id="clients" required>
