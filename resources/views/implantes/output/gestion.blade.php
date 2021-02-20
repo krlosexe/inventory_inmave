@@ -599,7 +599,7 @@
 		$(`#vat_total${edit}`).val(totalVat2)
 	}
 	function calTotal(fields, edit = '') {
-		let total_invoice = 0
+		let total_invoice = 0	
 		$.map($(fields), function(item, key) {
 			if ($(item).val() != "") {
 				total_invoice = parseFloat(total_invoice) + parseFloat(inNum($(item).val()))
