@@ -239,8 +239,10 @@ class ReemisionesController extends Controller
             $output->subtotal               = $head->subtotal;
             $output->subtotal_with_discount = $head->subtotal_with_discount;
             $output->vat_total              = $head->vat_total;
+            $output->discount_type          = $head->discount_type;
             $output->discount_total         = $head->discount_total;
             $output->rte_fuente             = $head->rte_fuente;
+            $output->total_invoice         = $head->total_invoice;
             $output->observations           = $head->observations;
             
             if($option == 1){
