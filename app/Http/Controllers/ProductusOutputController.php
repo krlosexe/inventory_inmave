@@ -78,6 +78,7 @@ class ProductusOutputController extends Controller
      */
     public function store(Request $request)
     {   
+        // dd($request->all());
 
         $output = ProductusOutput::create($request->all());
         $auditoria              = new Auditoria;
