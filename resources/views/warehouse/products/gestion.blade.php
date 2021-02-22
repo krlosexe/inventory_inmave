@@ -101,7 +101,6 @@
 				update();
 				$("#collapse_Almacen").addClass("show");
 				$("#nav_products, #modulo_Almacen").addClass("active");
-
 				verifyPersmisos(id_user, tokens, "products");
 			});
 			function update(){
@@ -159,7 +158,6 @@
 							render : (data, type, row) => {
 								return number_format(data, 2)
 							}
-
 						},
 						{"data": null,
 							render : (data, type, row) => {
@@ -177,8 +175,7 @@
 							}
 						},
 						{"data": "fec_regins"},
-						{"data": "email_regis"}
-						
+						{"data": "email_regis"}	
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
@@ -223,7 +220,6 @@
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
 					$("#code_edit").val(data.code)
 					$("#description_edit").val(data.description)
 					$("#register_invima_edit").val(data.register_invima)
@@ -238,11 +234,7 @@
 					$("#id_edit").val(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
-			}
-
-
-
-					
+			}			
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -254,7 +246,6 @@
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
-
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -266,25 +257,13 @@
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
-
-
-
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
 					statusConfirmacion('api/products/status/'+data.id+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}
-
-
-					
-
-
 		</script>
-		
-
-
-
 	@endsection
 
 
