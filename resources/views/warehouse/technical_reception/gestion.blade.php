@@ -157,20 +157,12 @@
 
 		verifyPersmisos(id_user, tokens, "stock");
 	});
-
-
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/products/entry/stock', '#cuadro4', false, "#avatar-edit");
 	}
-
-
 	function store() {
 		enviarFormulario("#store", 'api/products/entry/stock', '#cuadro2');
 	}
-
-
-
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
@@ -182,7 +174,6 @@
 
 		var table = $("#table").DataTable({
 			"destroy": true,
-
 			"stateSave": true,
 			"serverSide": false,
 			"ajax": {
@@ -244,21 +235,13 @@
 				'copy', 'csv', 'excel', 'pdf', 'print'
 			]
 		});
-
-
 		ver("#table tbody", table)
 		edit("#table tbody", table)
 		activar("#table tbody", table)
 		desactivar("#table tbody", table)
 		eliminar("#table tbody", table)
-
-
 	}
-
-
-
 	function getProviders(select, select_default = false) {
-
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/providers',
 			type: 'GET',
@@ -269,7 +252,6 @@
 			dataType: 'JSON',
 			async: false,
 			error: function() {
-
 			},
 			success: function(data) {
 				$(select + " option").remove();
@@ -279,27 +261,18 @@
 				}));
 
 				$.each(data, function(i, item) {
-
-
 					$(select).append($('<option>', {
 						value: item.id,
 						text: item.name,
 						selected: select_default == item.id ? true : false
 
 					}));
-
-
 				});
-
 			}
-
 		});
 	}
-
-
 	function ChangeProviders(select, edit = '') {
 		$(select).change(function(e) {
-
 			$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/providers/' + $(select).val(),
 				type: 'GET',
@@ -318,19 +291,10 @@
 					$(`#phone_provider${edit}`).val(data.phone)
 					$(`#email_provider${edit}`).val(data.email)
 				}
-
 			});
-
 		});
 	}
-
-
-
-
-
-
 	function getProducts(select, select_default = false) {
-
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/products',
 			type: 'GET',
@@ -341,7 +305,6 @@
 			dataType: 'JSON',
 			async: false,
 			error: function() {
-
 			},
 			success: function(data) {
 				$(select + " option").remove();
@@ -349,21 +312,14 @@
 					value: "",
 					text: "Seleccione"
 				}));
-
 				$.each(data, function(i, item) {
-
-
 					$(select).append($('<option>', {
 						value: item.id,
 						text: item.description + " - " + item.code,
 						selected: select_default == item.id ? true : false
 
 					}));
-
-
 				});
-
-
 				$(select).select2({
 					width: "100%",
 					sorter: function(data) {
@@ -380,19 +336,11 @@
 						});
 					}
 				});
-
 			}
-
 		});
 	}
-
-
-
-
-
 	function AddProductos(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
-
 			$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/products/' + $(select_product).val(),
 				type: 'GET',
@@ -407,14 +355,12 @@
 				},
 				success: function(data) {
 					var html
-
 					var validaProduct = false
 					$(table + " tbody tr").each(function() {
 						if (data.id == $(this).find(".id_product").val()) {
 							validaProduct = false;
 						}
 					});
-
 					if (!validaProduct) {
 						html += "<tr>"
 						html += "<td>" + data.description + " " + data.code + " <input type='hidden' class='id_product' name='id_product[]' value='" + data.id + "' > </td>"
@@ -431,27 +377,16 @@
 					} else {
 						warning('¡La opción seleccionada ya se encuentra agregada!');
 					}
-
-
-
 					$(table + " tbody").append(html)
-
-
 					$(".monto_formato_decimales").change(function() {
 						if ($(this).val() != "") {
 							$(this).val(number_format($(this).val(), 2));
 						}
 					});
-
 				}
-
 			});
-
 		});
 	}
-
-
-
 	function AddProductosEdit(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
 
@@ -469,7 +404,6 @@
 				},
 				success: function(data) {
 					var html
-
 					var validaProduct = false
 					$(table + " tbody tr").each(function() {
 						if (data.id == $(this).find(".id_product").val()) {
@@ -492,38 +426,16 @@
 					} else {
 						warning('¡La opción seleccionada ya se encuentra agregada!');
 					}
-
-
-
 					$(table + " tbody").append(html)
-
-
 					$(".monto_formato_decimales").change(function() {
 						if ($(this).val() != "") {
 							$(this).val(number_format($(this).val(), 2));
 						}
 					});
-
-
-
-
-
-
-
 				}
-
 			});
-
 		});
 	}
-
-
-
-
-
-
-
-
 	function nuevo() {
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
@@ -531,31 +443,22 @@
 		getProviders("#provider")
 		ChangeProviders("#provider")
 		AddProductos("#add_product", "#products", "#table_products")
-
 		getProducts("#products")
-
 		GetCategories("#category")
-
 		$('#table_products tbody').empty('');
-
 		$('#subtotal_text').empty(0)
 		$('#vat_total_text').empty(0)
 		$('#discount_total_text').empty(0)
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
-
-
 		$('#table_products_edit tbody').html('')
 		$('#subtotal_text_edit').empty(0)
 		$('#vat_total_text_edit').empty(0)
 		$('#discount_total_text_edit').empty(0)
 		$('#rte_fuente_text_edit').empty(0)
 		$('#total_invoice_text_edit').empty(0)
-
-
 		cuadros("#cuadro1", "#cuadro2");
 	}
-
 	/* ------------------------------------------------------------------------------- */
 	/* 
 		Funcion que muestra el cuadro3 para la consulta del banco.
@@ -570,9 +473,6 @@
 			cuadros('#cuadro1', '#cuadro3');
 		});
 	}
-
-
-
 	/* ------------------------------------------------------------------------------- */
 	/* 
 		Funcion que muestra el cuadro3 para la consulta del banco.
@@ -581,57 +481,34 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-
-
 			$("#indicador_edit").val(1)
-
-
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			$("#number_invoice_edit").val(data.number_invoice)
 			$("#date_invoice_edit").val(data.date_invoice)
-
 			getProducts("#products_edit")
-
-
-
-
 			ShowProdcuts("#table_products_edit", data.products)
-
 			$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.subtotal)
-
 			$("#total_invoice_text_edit").text(`$ ${number_format(data.total_invoice, 2)}`)
 			$("#total_invoice_edit").val(data.total_invoice)
-
 			$("#taxes_edit").val(number_format(data.taxes, 2))
 			$("#transport_edit").val(number_format(data.transport, 2))
-
-
-
 			AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
-
 			GetCategories("#category")
-
 			cuadros('#cuadro1', '#cuadro4');
-
 			$('#table_products tbody').empty('')
 			$('#subtotal_text').empty(0)
 			$('#vat_total_text').empty(0)
 			$('#discount_total_text').empty(0)
 			$('#rte_fuente_text').empty(0)
 			$('#total_invoice_text').empty(0)
-
 			$("#id_edit").val(data.id)
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}
-
-
 	function ShowProdcuts(table, data) {
-
 		let html = ""
 		$.map(data, function(item, key) {
-
 			html += "<tr>"
 			html += "<td>" + item.description + " - " + item.code + " <input type='hidden' class='id_product' name='id_product[]' value='" + item.id_product + "' > </td>"
 			html += "<td>" + item.presentation + "</td>"
@@ -640,18 +517,13 @@
 			html += "<td><input type='date' class='form-control' name='date_expiration[]' value='" + item.date_expiration + "' required></td>"
 			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales price_product items_calc' value='" + number_format(item.price, 2) + "'  onkeyup='calcProduc(this, " + '"_edit"' + ")' name='price[]' required></td>"
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' min='1' value='" + item.qty + "' onkeyup='calcProduc(this, " + '"_edit"' + ")' onchange='calcProduc(this, " + '"_edit"' + ")' required></td>"
-
 			html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='" + number_format(item.total, 2) + "'  name='total[]' readonly required></td>"
 			html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 
 		});
-
 		$(table + " tbody").html(html)
-
-
 	}
-
 	/* ------------------------------------------------------------------------------- */
 	/*
 		Funcion que capta y envia los datos a desactivar
@@ -675,71 +547,46 @@
 		});
 	}
 	/* ------------------------------------------------------------------------------- */
-
-
-
 	function eliminar(tbody, table) {
 		$(tbody).on("click", "span.eliminar", function() {
 			var data = table.row($(this).parents("tr")).data();
 			statusConfirmacion('api/technical/reception/status/' + data.id + "/" + 0, "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
-
-
-
 	function calcProduc(element, edit = '') {
 
 		var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
 		var qty = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product").val())
 		var vat = $(element).parent("td").parent("tr").children("td").find(".vat_product")
-
-
-
 		let total
 		if (vat.is(':checked')) {
 
 			total = ((price * qty) * 1.19)
 			$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(1)
-
 		} else {
 
 			total = (price * qty)
 			$(element).parent("td").parent("tr").children("td").find(".vat_hidden").val(0)
-
 		}
-
 		$(element).parent("td").parent("tr").children("td").find(".total_product").val(number_format(total, 2))
-
 		calcSubTotal(".price_product", edit)
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
-
-
 	}
-
-
 	function deleteProduct(element) {
 		var tr = $(element).parent("td").parent("tr").children("td").find(".price_product").val()
 	}
-
 	function calcSubTotal(fields, edit = '') {
 		let subtotal = 0
 		$.map($(fields), function(item, key) {
-
 			const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
-
-
 			const total = inNum($(item).val()) * qty
 			subtotal = parseFloat(subtotal) + parseFloat(total)
 
 		});
-
 		$(`#subtotal_text${edit}`).text(`$ ${number_format(subtotal, 2)}`)
 		$(`#subtotal${edit}`).val(subtotal)
 	}
-
-
-
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
@@ -747,67 +594,39 @@
 			if ($(item).is(':checked')) {
 				const price = inNum($(item).parent("td").parent("tr").children("td").find(".price_product").val())
 				const qty = $(item).parent("td").parent("tr").children("td").find(".qty_product").val()
-
 				const vat = ((price * qty) * 0.19)
-
 				totalVat = totalVat + vat
 			}
-
 		});
-
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat)
 	}
-
-
 	function calTotal(fields, edit = '') {
-
 		let total_invoice = 0
-
-
 		$.map($(fields), function(item, key) {
-
 			if ($(item).val() != "") {
 				total_invoice = parseFloat(total_invoice) + parseFloat(inNum($(item).val()))
 			}
-
 		});
-
-
-
 		const taxes = inNum($(`#taxes${edit}`).val())
 		const transport = inNum($(`#transport${edit}`).val())
-
 		total_invoice = ((total_invoice + taxes) + transport)
 		$(`#total_invoice_text${edit}`).text(`$ ${number_format(total_invoice, 2)}`)
 		$(`#total_invoice${edit}`).val(total_invoice)
-
 	}
-
-
-
 	$(".taxes").keyup(function(e) {
 		calTotal(".total_product")
 	});
-
-
 	$(".taxes_edit").keyup(function(e) {
 		calTotal(".total_product", '_edit')
 	});
-
-
-
 	function deleteProduct(element, edit = '') {
 		var tr = $(element).parent("td").parent("tr").remove()
-
 		calcSubTotal(".price_product", edit)
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
-
-
 	$("#save_product").click(function(e) {
-
 		const data = {
 			"category": $("#category").val(),
 			"description": $("#description").val(),
@@ -816,9 +635,7 @@
 			"id_user": id_user,
 			"token": tokens
 		}
-
 		var indicador_edit = $("#indicador_edit").val()
-
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/products',
 			type: "POST",
@@ -826,7 +643,6 @@
 			dataType: 'JSON',
 			async: false,
 			error: function() {
-
 			},
 			success: function(data) {
 				$("#modal_product").modal('hide')
@@ -838,55 +654,37 @@
 				html += "<td><input type='text' class='form-control' name='lotes[]' required></td>"
 				html += "<td><input type='text' class='form-control' name='register_invima[]' required></td>"
 				html += "<td><input type='date' class='form-control' name='date_expiration[]' required></td>"
-
 				if (indicador_edit == 0) {
 					html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales price_product items_calc' onkeyup='calcProduc(this)' name='price[]' required></td>"
 				} else {
 					html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales price_product items_calc' onkeyup='calcProduc(this, " + '"_edit"' + ")' name='price[]' required></td>"
 				}
-
-
 				if (indicador_edit == 0) {
 					html += "<td><input type='text' class='form-control qty_product items_calc' name='qty[]' value='1' onkeyup='calcProduc(this)' required></td>"
 				} else {
 					html += "<td><input type='text' class='form-control qty_product items_calc' name='qty[]' value='1' onkeyup='calcProduc(this, " + '"_edit"' + ")' required></td>"
 				}
-
 				if (indicador_edit == 0) {
 					html += "<td><input type='checkbox' class='form-control vat_product items_calc'  onchange='calcProduc(this)'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
 				} else {
 					html += "<td><input type='checkbox' class='form-control vat_product items_calc'  onchange='calcProduc(this, " + '"_edit"' + ")'><input type='hidden' class='vat_hidden' name='vat[]' value='0'></td>"
 				}
-
 				html += "<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' name='total[]' readonly required></td>"
-
 				if (indicador_edit == 0) {
 					html += "<td><span onclick='deleteProduct(this)' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 				} else {
 					html += "<td><span onclick='deleteProduct(this, " + '"_edit"' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 				}
-
 				html += "</tr>"
-
 				$("#table_products tbody").append(html)
-
 				$("#table_products_edit tbody").append(html)
-
 			}
-
 		});
-
 	});
-
 	$('input[name="otros"]').keyup(function(e) {
 		if (/\D/g.test(this.value)) {
 			this.value = this.value.replace(/\D/g, '');
 		}
 	});
-
 </script>
-
-
-
-
 @endsection
