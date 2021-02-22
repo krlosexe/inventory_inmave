@@ -38,12 +38,10 @@
 			          <div id="alertas"></div>
 			          <input type="hidden" class="id_user">
 			          <input type="hidden" class="token">
-
 			          <!-- DataTales Example -->
 			          <div class="card shadow mb-4" id="cuadro1">
 			            <div class="card-header py-3">
 			              <h6 class="m-0 font-weight-bold text-primary">Gestion de Salida de Productos</h6>
-
 			              <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 		                    <span class="icon text-white-50">
 		                      <i class="fas fa-plus"></i>
@@ -67,7 +65,6 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody>
-
 			                  </tbody>
 			                </table>
 			              </div>
@@ -144,14 +141,12 @@
 
 								if(actualizar == 1)
 									botones += "<a href='api/reemision/print/"+row.id+"' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
-
 								return botones;
 							}
 						},
 						{"data":"id"},
 						{"data": "reissue",
 							render : function(data, type, row) {
-
 								if(data == 1){
 									return "Reemisión";
 								}else{
@@ -164,13 +159,11 @@
 						{"data": "total_invoice",
 							render : function(data, type, row) {
 								var botones = "";
-
 								return number_format(data, 2);
 							}
 						},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
-
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
@@ -184,19 +177,13 @@
 				activar("#table tbody", table)
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
-
 				$(".buttons-excel").remove()
-
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$(".dt-buttons").append(a)
-
 				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel/reemision" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
-
 				$("#xls").click(function (e) {
 					url = $("#view_xls").attr("href");
-
-					console.log(url)
 					window.open(url, '_blank');
 				});
 			}
@@ -220,7 +207,6 @@
 				$('#discount_total_text_edit').empty(0)	
 				$('#rte_fuente_text_edit').empty(0)	
 				$('#total_invoice_text_edit').empty(0)		
-
 			}
 			/* ------------------------------------------------------------------------------- */
 			/*
@@ -236,7 +222,6 @@
 							dataType:'JSON',
 							async: false,
 							error: function() {
-
 							},
 							success: function(data){
 								location.href = "http://pdtclientsolutions.com/inventory_inmave/output";
@@ -391,7 +376,6 @@
 							});
 						}
 					});
-
 				});
 			}
 			function getProducts(select, select_default = false){
@@ -484,7 +468,6 @@
 						warning('¡La opción seleccionada ya se encuentra agregada!');
 					}
 					$(table+" tbody").append(html)
-
 				});
 			}
 			function AddProductosEdit(btn, select_product, table){
@@ -531,11 +514,9 @@
 						warning('¡La opción seleccionada ya se encuentra agregada!');
 					}
 					$(table+" tbody").append(html)
-
 				});
 			}
 			function ShowProdcuts(table, data){
-				console.log(data)
 				$(table+" tbody").html("")
 				$.map(data, function (item, key) {
 					let html = ""
@@ -568,7 +549,6 @@
 			}
 			function deleteProduct(element, edit = ''){
 				var tr = $(element).parent("td").parent("tr").remove()
-
 				calcSubTotal(".price_product", edit)
 				calcTotalVat(".vat_product", edit)
 				calTotal(".total_product", edit)
@@ -584,7 +564,6 @@
 					dataType:'JSON',
 					async: false,
 					error: function() {
-
 					},
 					success: function(data){
 						$(select+" option").remove();
@@ -686,9 +665,7 @@
 				/*
 					const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
 					const rte_fuete            = (sub_total_with_discount / 100) * percentage_rte_fuete
-
 					console.log(rte_fuete)
-
 					sub_total_with_discount    = ((sub_total_with_discount - rte_fuete))
 				*/
 				$(`#subtotal_with_discount${edit}`).val(sub_total_with_discount)

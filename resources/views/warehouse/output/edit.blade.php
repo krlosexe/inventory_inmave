@@ -72,10 +72,10 @@
                             <tfoot>
                                 <tr>
                                     <th style="text-align: center;" id="descuento_text">
-                                        <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
+                                        <label for="apply_discount_edit">¿ Quieres Aplicar Descuento (10%)?</label>
                                         <input type="checkbox" id="apply_discount_edit" class="form-control">
                                         <br><br>
-                                        <label for="apply_discount2">¿ Quieres Aplicar Descuento (15%)?</label>
+                                        <label for="apply_discount_edit2">¿ Quieres Aplicar Descuento (15%)?</label>
                                         <!-- <input style="text-align: right;" type="text" class="form-control monto_formato_decimales discount" name="discount" id="discount" value="0">-->
                                         <input type="checkbox" id="apply_discount_edit2" class="form-control">
                                     </th>
@@ -116,11 +116,9 @@
                     </div>
                 </div>
             </div>
-
             <input type="hidden" name="inicial" id="inicial">
             <input type="hidden" name="id_user" class="id_user">
             <input type="hidden" name="token" class="token">
-
             <input type="hidden" name="id_user_edit" id="id_edit">
             <br>
             <br>
