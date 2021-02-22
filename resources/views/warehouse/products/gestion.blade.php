@@ -1,8 +1,5 @@
 @extends('layouts.app')
-	
-
 	@section('CustomCss')
-
 		<style>
 			.kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
 			    margin: 0;
@@ -24,41 +21,27 @@
 			    font-weight: normal;
 			}
 		</style>
-
-
 	@endsection
-
-
 	@section('content')
 	     <!-- Page Wrapper -->
 		  <div id="wrapper">
-
 		    @include('layouts.sidebar')
-
 		    <!-- Content Wrapper -->
 		    <div id="content-wrapper" class="d-flex flex-column">
-
 		      <!-- Main Content -->
 		      <div id="content">
-
 				@include('layouts.topBar') 
-		       
-
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
-
 			          <!-- Page Heading -->
 			          <h1 class="h3 mb-2 text-gray-800">Productos</h1>
-
 			          <div id="alertas"></div>
 			          <input type="hidden" class="id_user">
 			          <input type="hidden" class="token">
-
 			          <!-- DataTales Example -->
 			          <div class="card shadow mb-4" id="cuadro1">
 			            <div class="card-header py-3">
 			              <h6 class="m-0 font-weight-bold text-primary">Gestion de Productos</h6>
-
 			              <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 		                    <span class="icon text-white-50">
 		                      <i class="fas fa-plus"></i>
@@ -84,25 +67,18 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody>
-			                    
 			                  </tbody>
 			                </table>
 			              </div>
 			            </div>
 			          </div>
-
-
 			          @include('warehouse.products.store')
 					  @include('warehouse.products.view')
 					  @include('warehouse.products.edit')
-
-
 			        </div>
 			        <!-- /.container-fluid -->
-
 		      </div>
 		      <!-- End of Main Content -->
-
 		      <!-- Footer -->
 		      <footer class="sticky-footer bg-white">
 		        <div class="container my-auto">
@@ -112,47 +88,29 @@
 		        </div>
 		      </footer>
 		      <!-- End of Footer -->
-
 		    </div>
 		    <!-- End of Content Wrapper -->
-
 		  </div>
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
 	@endsection
-
-
-
-
-
 	@section('CustomJs')
-
 		<script>
 			$(document).ready(function(){
 				store();
 				list();
 				update();
-
 				$("#collapse_Almacen").addClass("show");
 				$("#nav_products, #modulo_Almacen").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "products");
 			});
-
-
-
 			function update(){
 				enviarFormularioPut("#form-update", 'api/products', '#cuadro4', false, "#avatar-edit");
 			}
-
-
 			function store(){
 				enviarFormulario("#store", 'api/products', '#cuadro2');
 			}
-
-
-
 			function list(cuadro) {
-				
 				var data = {
 					"id_user": id_user,
 					"token"  : tokens,
@@ -160,10 +118,8 @@
 				$('#table tbody').off('click');
 				var url=document.getElementById('ruta').value; 
 				cuadros(cuadro, "#cuadro1");
-
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
@@ -231,26 +187,18 @@
 						'copy', 'csv', 'excel', 'pdf', 'print'
 					]
 				});
-
-
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
-
-
 			}
-
-
-
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 				GetCategories("#category")
 				cuadros("#cuadro1", "#cuadro2");
 			}
-
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -259,21 +207,14 @@
 				$(tbody).on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
 					$("#code_view").val(data.code).attr("disabled", "disabled")
 					$("#description_view").val(data.description).attr("disabled", "disabled")
 					$("#price_euro_view").val(data.price_euro).attr("disabled", "disabled")
 					$("#presentation_view").val(data.presentation).attr("disabled", "disabled")
-
 					GetCategories("#category_view", data.category)
-
-
 					cuadros('#cuadro1', '#cuadro3');
 				});
 			}
-
-
-
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -288,14 +229,11 @@
 					$("#register_invima_edit").val(data.register_invima)
 					$("#price_euro_edit").val(data.price_euro)
 					$("#presentation_edit").val(data.presentation)
-
 					$("#price_distributor_x_caja_edit").val(data.price_distributor_x_caja)
 					$("#price_distributor_x_vial_edit").val(data.price_distributor_x_vial)
 					$("#price_cliente_x_caja_edit").val(data.price_cliente_x_caja)
 					$("#price_cliente_x_vial_edit").val(data.price_cliente_x_vial)
-					
-
-
+	
 					GetCategories("#category_edit", data.category)
 					$("#id_edit").val(data.id)
 					cuadros('#cuadro1', '#cuadro4');
