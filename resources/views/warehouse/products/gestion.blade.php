@@ -229,7 +229,6 @@
 					$("#price_distributor_x_vial_edit").val(data.price_distributor_x_vial)
 					$("#price_cliente_x_caja_edit").val(data.price_cliente_x_caja)
 					$("#price_cliente_x_vial_edit").val(data.price_cliente_x_vial)
-	
 					GetCategories("#category_edit", data.category)
 					$("#id_edit").val(data.id)
 					cuadros('#cuadro1', '#cuadro4');

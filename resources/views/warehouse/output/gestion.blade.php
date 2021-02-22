@@ -12,57 +12,40 @@
 		box-shadow: none;
 		text-align: center;
 	}
-
 	.kv-avatar {
 		display: inline-block;
 	}
-
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
-
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
 		font-weight: normal;
 	}
 </style>
-
-
 @endsection
-
-
 @section('content')
 <!-- Page Wrapper -->
 <div id="wrapper">
-
 	@include('layouts.sidebar')
-
 	<!-- Content Wrapper -->
 	<div id="content-wrapper" class="d-flex flex-column">
-
 		<!-- Main Content -->
 		<div id="content">
-
 			@include('layouts.topBar')
-
-
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
-
 				<!-- Page Heading -->
 				<h1 class="h3 mb-2 text-gray-800">Salida de Productos</h1>
-
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
 				<input type="hidden" class="token">
-
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">Gestion de Salida de Productos</h6>
-
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -86,25 +69,18 @@
 									</tr>
 								</thead>
 								<tbody>
-
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-
-
 				@include('warehouse.output.store')
 				@include('warehouse.output.view')
 				@include('warehouse.output.edit')
-
-
 			</div>
 			<!-- /.container-fluid -->
-
 		</div>
 		<!-- End of Main Content -->
-
 		<!-- Footer -->
 		<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
@@ -114,20 +90,13 @@
 			</div>
 		</footer>
 		<!-- End of Footer -->
-
 	</div>
 	<!-- End of Content Wrapper -->
-
 </div>
 <input type="hidden" id="ruta" value="<?= url('/') ?>">
-
 <input type="hidden" id="indicador_edit">
-
 @endsection
-
-
 @section('CustomJs')
-
 <script>
 	$(document).ready(function() {
 		store();
@@ -157,7 +126,6 @@
 		cuadros(cuadro, "#cuadro1");
 		var table = $("#table").DataTable({
 			"destroy": true,
-
 			"stateSave": true,
 			"serverSide": false,
 			"ajax": {
@@ -206,7 +174,6 @@
 					"data": "total_invoice",
 					render: function(data, type, row) {
 						var botones = "";
-
 						return number_format(data, 2);
 					}
 				},
@@ -380,7 +347,6 @@
 				dataType: 'JSON',
 				async: false,
 				error: function() {
-
 				},
 				success: function(data) {
 					$(product + " option").remove();
@@ -669,7 +635,6 @@
 		var discount_field = $(`#apply_discount${edit}`)
 		let discount_ammount
 		if (discount_field.is(':checked')) {
-
 			//console.log("SI Descuento")
 			discount_ammount = subtotal * 0.10
 			//subtotal = subtotal - discount_ammount
@@ -699,13 +664,10 @@
 		/*
 			const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
 			const rte_fuete            = (sub_total_with_discount / 100) * percentage_rte_fuete
-
 			console.log(rte_fuete)
-
 			sub_total_with_discount    = ((sub_total_with_discount - rte_fuete))
 		*/
 		$(`#subtotal_with_discount${edit}`).val(sub_total_with_discount)
-
 	}
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0

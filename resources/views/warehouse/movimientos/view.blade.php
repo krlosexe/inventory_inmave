@@ -4,9 +4,7 @@
   </div>
   <div class="card-body">
     <form class="user" autocomplete="off" method="post" enctype="multipart/form-data">
-
       @csrf
-
       <div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="table_view" width="100%" cellspacing="0">
@@ -26,12 +24,10 @@
 									</tr>
 								</thead>
 								<tbody>
-
 								</tbody>
 							</table>
 						</div>
 					</div>
-
       <!-- <input type="hidden" name="id_user" class="id_user">
       <input type="hidden" name="token" class="token"> -->
       <!-- <br>
@@ -45,5 +41,4 @@
   <br>
   <br>
   </form>
-
 </div>
