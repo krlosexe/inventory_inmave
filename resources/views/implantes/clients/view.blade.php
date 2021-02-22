@@ -4,57 +4,41 @@
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post"  enctype="multipart/form-data">
-      
         @csrf
-
         <div class="row">
-        
            <div class="col-md-3">
              <label for=""><b>Nombre</b></label>
               <div class="form-group valid-required">
                 <input type="text" name="name" class="form-control form-control-user" id="name_view" placeholder="Nombre" required>
               </div>
           </div>
-
           <div class="col-md-3">
              <label for=""><b>NIT</b></label>
               <div class="form-group valid-required">
                 <input type="text" name="nit" class="form-control form-control-user" id="nit_view" placeholder="Nit" required>
               </div>
           </div>
-
           <div class="col-md-3">
              <label for=""><b>Telefono</b></label>
               <div class="form-group valid-required">
                 <input type="text" name="phone" class="form-control form-control-user" id="phone_view" placeholder="Pj: 3152077862">
               </div>
           </div>
-
-
           <div class="col-md-3">
              <label for=""><b>Email</b></label>
               <div class="form-group valid-required">
                 <input type="email" name="email" class="form-control form-control-user" id="email_view" placeholder="Pj: cardenascarlos18@gmail.com">
               </div>
           </div>
-
         </div>
-
-
         <div class="row">
-
          <div class="col-md-3">
            <label for=""><b>Ciudad</b></label>
               <div class="form-group valid-required">
                 <input type="text" name="city" class="form-control form-control-user" id="city_view" placeholder="Pj: Medellin">
               </div>
-          </div>
-              
+          </div>  
         </div>
-
-
-
-
         <div class="row">
           <div class="col-md-12">
               <label for=""><b>Direccion</b></label>
@@ -63,7 +47,6 @@
               </div>
           </div>
         </div>
-
         <input type="hidden" name="id_user" class="id_user">
         <input type="hidden" name="token" class="token">
           <br>
@@ -77,6 +60,5 @@
           <br>
           <br>
       </form>
-      
     </div>
 

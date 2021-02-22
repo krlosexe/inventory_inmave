@@ -109,11 +109,9 @@
 		$("#nav_products_implantes, #modulo_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "products_implantes");
 	});
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/products/implantes/edit', '#cuadro4', false, "#avatar-edit");
 	}
-
 	function store() {
 		enviarFormulario("#store", 'api/products/implantes/create', '#cuadro2');
 	}
@@ -126,7 +124,6 @@
 			$("#medellin").css("display","none");
 			$("#cali").css("display","none");
 		}
-
 		if(name_rol == "Silimed_Cali"){
 			$("#medellin").css("display","none");
 			$("#bogota").css("display","none");
@@ -179,8 +176,6 @@
 							if(name_rol = "Silimed_Cali"){
 								return row.existence.cali.total
 							}
-							
-							
 						}
 					},
 					{
@@ -274,7 +269,6 @@
 				]
 			});
 		}
-		
 		if(name_rol == "Administrador"){
 			var table = $("#table").DataTable({
 				"destroy": true,
