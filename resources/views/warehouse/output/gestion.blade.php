@@ -1,8 +1,5 @@
 @extends('layouts.app')
-
-
 @section('CustomCss')
-
 <style>
 	.kv-avatar .krajee-default.file-preview-frame,
 	.kv-avatar .krajee-default.file-preview-frame:hover {
@@ -137,7 +134,8 @@
 				},
 				"dataSrc": ""
 			},
-			"columns": [{
+			"columns": [
+				{
 					"data": null,
 					render: function(data, type, row) {
 						var botones = "";
