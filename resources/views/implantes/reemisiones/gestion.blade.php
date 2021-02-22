@@ -215,7 +215,6 @@
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
 		getClients("#clients")
-
 		$("#indicador_edit").val(0)
 		$("#reissue").val(1)
 		cuadros("#cuadro1", "#cuadro2");
@@ -354,9 +353,6 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-
-			console.log('aqui',data);
-
 			$("#items_id").val(data.items.length)
 			$("#name_edit").val(data.name)
 			$("#nit_edit").val(data.nit_c)
@@ -698,12 +694,9 @@
 		const discount = inNum($(`#discount_total${edit}`).val())
 		const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
 		const rte_fuete = ($(`#subtotal_with_discount${edit}`).val() / 100) * percentage_rte_fuete
-
 		total_invoice = (($(`#subtotal_with_discount${edit}`).val()))
 		// total_invoice = (($(`#subtotal_with_discount${edit}`).val()) * 1.19)
-
 		total_invoice = total_invoice - rte_fuete
-
 		$(`#rte_fuente_text${edit}`).text(`$ ${number_format(rte_fuete, 2)}`)
 		$(`#rte_fuente_total${edit}`).val(rte_fuete)
 		$(`#total_invoice_text${edit}`).text(`$ ${number_format(total_invoice, 2)}`)
@@ -771,6 +764,5 @@
 		calcSubTotal(".price_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-
 </script>
 @endsection
