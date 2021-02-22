@@ -125,7 +125,6 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-
 					$('#warehouse').val(data.warehouse)
 					var html = "";
 					var validaProduct = false
@@ -256,7 +255,6 @@
 		$('#discount_total_text').empty(0)
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
-
 		$("#table_products_out tbody").html("")
 		$("#serial").focus();
 		$("#serial").change(function() {
@@ -303,7 +301,6 @@
 			var data = table.row($(this).parents("tr")).data();
 			$("#table_products_out tbody").html("")
 			$("#indicador_edit").val(1)
-
 			$("#items_id").val(data.items.length)
 			$("#name_edit").val(data.name)
 			$("#nit_edit").val(data.nit_c)
@@ -311,7 +308,6 @@
 			$("#email_edit").val(data.email)
 			$("#city_edit").val(data.city)
 			$("#address_edit").val(data.address)
-
 			$("#table_products_out").focus();
 			$("#serial_edit").focus();
 			$("#serial_edit").change(function() {
@@ -330,7 +326,6 @@
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
 			}
-
 			$("#subtotal_text_edit").text(`$ ${number_format(data.discount_total + data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.discount_total + data.subtotal)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
@@ -473,7 +468,6 @@
 			html += "</tr>"
 			$(table + " tbody").append(html)
 			$("#price_edit_" + item.id).val(item.price)
-
 		});
 	}
 	function deleteProduct(element, edit = '') {
