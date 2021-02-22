@@ -1,8 +1,5 @@
 @extends('layouts.app')
-
-
 @section('CustomCss')
-
 <style>
 	.kv-avatar .krajee-default.file-preview-frame,
 	.kv-avatar .krajee-default.file-preview-frame:hover {
@@ -12,16 +9,13 @@
 		box-shadow: none;
 		text-align: center;
 	}
-
 	.kv-avatar {
 		display: inline-block;
 	}
-
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
-
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
@@ -165,13 +159,11 @@
 					"data": "email",
 					render: function(data, type, row) {
 						return row.usuario.email;
-
 					}
 				},
 				{
 					"data": "created_at"
 				},
-
 			],
 			"language": idioma_espanol,
 			"dom": 'Bfrtip',
@@ -207,8 +199,7 @@
 			$('#table_products tbody').empty();
 				// $('#destiny').empty(0);
 				// $('#warehouse').empty(0);
-				$('#products').empty(0);
-				
+				$('#products').empty(0);		
 	}
 	function getClients(select, select_default = false) {
 		$.ajax({
@@ -235,7 +226,6 @@
 						value: item.id,
 						text: item.name,
 						selected: select_default == item.id ? true : false
-
 					}));
 				});
 				$(select).select2({
@@ -307,10 +297,8 @@
 				success: function(data) {
 					var html
 					if ($("#warehouse").val() == 'Medellin') {
-
 						html += '<option value="Bogota">Bogota</option>'
 						html += '<option value="Cali">Cali</option>'
-
 						// $(product + " option").remove();
 						// 	$(product).append($('<option>', {
 						// 		value: "",
@@ -318,10 +306,8 @@
 						// 	}));
 					}
 					if ($("#warehouse").val() == 'Bogota') {
-
 						html += '<option value="Medellin">Medellin</option>'
 						html += '<option value="Cali">Cali</option>'
-
 						// $(product + " option").remove();
 						// 	$(product).append($('<option>', {
 						// 		value: "",
@@ -331,7 +317,6 @@
 					if ($("#warehouse").val() == 'Cali') {
 						html += '<option value="Bogota">Bogota</option>'
 						html += '<option value="Medellin">Medellin</option>'
-
 					}
 					$("#destiny").html(html)
 					$(product + " option").remove();
@@ -390,25 +375,21 @@
 					"dataSrc": ""
 				},
 				"columns": [
-
 					{
 						"data": "code",
 						render: function(data, type, row) {
 							return row.product.code;
-
 						}
 					},
 					{
 						"data": "description",
 						render: function(data, type, row) {
 							return row.product.description;
-
 						}
 					},
 					{
 						"data": "qty"
 					},
-
 				],
 				"language": idioma_espanol,
 				"dom": 'Bfrtip',

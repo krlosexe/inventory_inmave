@@ -447,7 +447,6 @@
 						html += "<tr>"
 							html +="<td>"+description+" <input type='hidden' class='id_product' name='id_product[]' value='"+id_product+"' > </td>"
 							html +="<td>"+presentation+" </td>"
-
 							html +="<td>"
 								html += "<select class='form-control items_calc price_product' name='price[]' onchange='calcProduc(this)' required>"
 									html += "<option value=''>Seleccione el precio</option>"
@@ -493,7 +492,6 @@
 						html += "<tr>"
 							html +="<td>"+description+" <input type='hidden' class='id_product' name='id_product[]' value='"+id_product+"' > </td>"
 							html +="<td>"+presentation+" </td>"
-
 							html +="<td>"
 								html += "<select class='form-control items_calc price_product' name='price[]' onchange='calcProduc(this, "+'"_edit"'+")' required>"
 									html += "<option value=''>Seleccione el precio</option>"

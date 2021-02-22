@@ -1,8 +1,5 @@
 @extends('layouts.app')
-
-
 @section('CustomCss')
-
 <style>
 	.kv-avatar .krajee-default.file-preview-frame,
 	.kv-avatar .krajee-default.file-preview-frame:hover {
@@ -12,57 +9,40 @@
 		box-shadow: none;
 		text-align: center;
 	}
-
 	.kv-avatar {
 		display: inline-block;
 	}
-
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
-
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
 		font-weight: normal;
 	}
 </style>
-
-
 @endsection
-
-
 @section('content')
 <!-- Page Wrapper -->
 <div id="wrapper">
-
 	@include('layouts.sidebar')
-
 	<!-- Content Wrapper -->
 	<div id="content-wrapper" class="d-flex flex-column">
-
 		<!-- Main Content -->
 		<div id="content">
-
 			@include('layouts.topBar')
-
-
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
-
 				<!-- Page Heading -->
 				<h1 class="h3 mb-2 text-gray-800">Compras</h1>
-
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
 				<input type="hidden" class="token">
-
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">Gestion de Compras</h6>
-
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -86,25 +66,18 @@
 									</tr>
 								</thead>
 								<tbody>
-
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-
-
 				@include('warehouse.technical_reception.store')
 				@include('warehouse.technical_reception.view')
 				@include('warehouse.technical_reception.edit')
-
-
 			</div>
 			<!-- /.container-fluid -->
-
 		</div>
 		<!-- End of Main Content -->
-
 		<!-- Footer -->
 		<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
@@ -114,25 +87,16 @@
 			</div>
 		</footer>
 		<!-- End of Footer -->
-
-
-
-
 		<div class="modal fade bd-example-modal-lg" id="modal_product" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Agregar un Producto</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-
 					<div class="modal-body">
-
-
-
 						<div class="row">
 							<div class="col-md-12">
 								<label for=""><b>Categorias</b></label>
@@ -143,9 +107,6 @@
 								</div>
 							</div>
 						</div>
-
-
-
 						<div class="row">
 							<div class="col-md-12">
 								<label for=""><b>Descripcion</b></label>
@@ -154,9 +115,6 @@
 								</div>
 							</div>
 						</div>
-
-
-
 						<div class="row">
 							<div class="col-md-12">
 								<label for=""><b>Laboratorio</b></label>
@@ -165,7 +123,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="row">
 							<div class="col-md-12">
 								<label for=""><b>Presentacion Comercial</b></label>
@@ -174,35 +131,21 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
-
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 						<button type="button" id="save_product" class="btn btn-primary">Guardar</button>
 					</div>
-
 				</div>
 			</div>
 		</div>
-
-
-
-
 	</div>
 	<!-- End of Content Wrapper -->
-
 </div>
 <input type="hidden" id="indicador_edit">
 <input type="hidden" id="ruta" value="<?= url('/') ?>">
 @endsection
-
-
-
-
-
 @section('CustomJs')
-
 <script>
 	$(document).ready(function() {
 		store();
