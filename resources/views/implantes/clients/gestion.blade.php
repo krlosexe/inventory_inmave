@@ -116,7 +116,6 @@
 				cuadros(cuadro, "#cuadro1");
 				var table=$("#table").DataTable({
 					"destroy":true,
-
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
@@ -179,7 +178,6 @@
 				$(tbody).on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
 					$("#name_view").val(data.name).attr("disabled", "disabled")
 					$("#nit_view").val(data.nit).attr("disabled", "disabled")
 					$("#phone_view").val(data.phone).attr("disabled", "disabled")
@@ -198,7 +196,6 @@
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
 					$("#name_edit").val(data.name)
 					$("#nit_edit").val(data.nit)
 					$("#phone_edit").val(data.phone)

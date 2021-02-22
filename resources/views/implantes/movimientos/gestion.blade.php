@@ -36,34 +36,23 @@
 @section('content')
 <!-- Page Wrapper -->
 <div id="wrapper">
-
 	@include('layouts.sidebar')
-
 	<!-- Content Wrapper -->
 	<div id="content-wrapper" class="d-flex flex-column">
-
 		<!-- Main Content -->
 		<div id="content">
-
 			@include('layouts.topBar')
-
-
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
-
 				<!-- Page Heading -->
 				<h1 class="h3 mb-2 text-gray-800">Traspaso de Implantes</h1>
-
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
 				<input type="hidden" class="token">
-
-
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">Gestion de Traspaso de Implantes</h6>
-
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -90,7 +79,6 @@
 									</tr>
 								</thead>
 								<tbody>
-
 								</tbody>
 							</table>
 						</div>
@@ -101,10 +89,8 @@
 				@include('implantes.movimientos.edit')
 			</div>
 			<!-- /.container-fluid -->
-
 		</div>
 		<!-- End of Main Content -->
-
 		<!-- Footer -->
 		<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
@@ -114,44 +100,29 @@
 			</div>
 		</footer>
 		<!-- End of Footer -->
-
 	</div>
 	<!-- End of Content Wrapper -->
-
 </div>
 <input type="hidden" id="ruta" value="<?= url('/') ?>">
-
 <input type="hidden" id="indicador_edit">
-
 @endsection
-
 @section('CustomJs')
-
 <script>
 	$(document).ready(function() {
 		store();
 		list();
 		update();
-
 		$("#collapse_Implantes").addClass("show");
 		$("#nav_traslados, #collapse_Implantes").addClass("active");
-
 		verifyPersmisos(id_user, tokens, "output");
 	});
-
-
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
 	}
-
-
 	function store() {
 		enviarFormulario("#store", 'api/implantes/products/movimiento/output', '#cuadro2');
 	}
-
 	function list(cuadro) {
-
 		var data = {
 			"id_user": id_user,
 			"token": tokens,
@@ -159,10 +130,8 @@
 		$('#table tbody').off('click');
 		var url = document.getElementById('ruta').value;
 		cuadros(cuadro, "#cuadro1");
-
 		var table = $("#table").DataTable({
 			"destroy": true,
-
 			"stateSave": true,
 			"serverSide": false,
 			"ajax": {
@@ -180,7 +149,6 @@
 						var botones = "";
 						if (consultar == 1)
 							botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
-
 						return botones;
 					}
 				},
@@ -190,7 +158,6 @@
 				// {
 				// 	"data": "price"
 				// },
-
 				{
 					"data": "warehouse"
 				},
@@ -201,13 +168,11 @@
 					"data": "email",
 					render: function(data, type, row) {
 						return row.usuario.email;
-
 					}
 				},
 				{
 					"data": "created_at"
 				},
-
 			],
 			"language": idioma_espanol,
 			"dom": 'Bfrtip',
@@ -216,7 +181,6 @@
 				'copy', 'csv', 'excel', 'pdf', 'print'
 			]
 		});
-
 		ver("#table tbody", table)
 		// edit("#table tbody", table)
 		// activar("#table tbody", table)
@@ -225,17 +189,13 @@
 		$(".buttons-excel").remove()
 		var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 		$(".dt-buttons").append(a)
-
 		var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
 		$('.dt-buttons').append(b);
 		$("#xls").click(function(e) {
 			url = $("#view_xls").attr("href");
-
-			console.log(url)
 			window.open(url, '_blank');
 		});
 	}
-
 	function nuevo() {
 		$("#table_products" + " tbody").html("")
 		$("#alertas").css("display", "none");
@@ -245,14 +205,9 @@
 		getClients("#clients")
 		$("#indicador_edit").val(0)
 		cuadros("#cuadro1", "#cuadro2");
-
 			$('#table_products tbody').empty();
-
-				// $('#destiny').empty(0);
-				// $('#warehouse').empty(0);
-				$('#products').empty(0);
+			$('#products').empty(0);
 	}
-
 	function getClients(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/clients',
@@ -264,7 +219,6 @@
 			dataType: 'JSON',
 			async: false,
 			error: function() {
-
 			},
 			success: function(data) {
 				$(select + " option").remove();
@@ -272,17 +226,13 @@
 					value: "",
 					text: "- Seleccione"
 				}));
-
 				$.each(data, function(i, item) {
-
 					if (data.status == 1) {
-
 					}
 					$(select).append($('<option>', {
 						value: item.id,
 						text: item.name,
 						selected: select_default == item.id ? true : false
-
 					}));
 				});
 				$(select).select2({
@@ -307,9 +257,6 @@
 	function AddProductos(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
 			const array_product = $(select_product).val().split("|")
-
-			console.log('array_product',array_product);
-
 			const serial = array_product[1]
 			const gramaje = array_product[2]
 			const total = array_product[3]
@@ -357,8 +304,6 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
-
-					console.log(data);
 					var html
 					if ($("#warehouse").val() == 'Medellin') {
 						html += '<option value="Bogota">Bogota</option>'
@@ -383,7 +328,6 @@
 						html += '<option value="Bogota">Bogota</option>'
 						html += '<option value="Medellin">Medellin</option>'
 					}
-
 					$("#destiny").html(html)
 					$(product + " option").remove();
 					$(product).append($('<option>', {
@@ -391,15 +335,10 @@
 						text: "-Seleccione"
 					}));
 					$.each(data, function(i, item) {
-
-						console.log('este item',item);
-
 						$(product).append($('<option>', {
 							value: `${item.referencia}|${item.serial}|${item.gramaje}|${item.total}|${item.precio}|${item.id_product}|${item.lote}|${item.date_expiration}|${item.register_invima}|${item.perfil}|${item.description}|${item.id_provider}`,
 							text: item.referencia,
-
 						}));
-
 					});
 					$(product).select2({
 						width: "100%",
@@ -418,33 +357,22 @@
 						}
 					});
 				}
-
 			});
-
 		});
 	}
-
 	function deleteProduct(element, edit = '') {
 		var tr = $(element).parent("td").parent("tr").remove()
-
 		calcSubTotal(".price_product", edit)
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
-
 	function ver(tbody, table) {
 		$(tbody).on("click", "span.consultar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-
-			console.log({
-				data
-			})
-
 			var url = document.getElementById('ruta').value;
 			var table2 = $("#table_view").DataTable({
 				"destroy": true,
-
 				"stateSave": true,
 				"serverSide": false,
 				"ajax": {
@@ -457,7 +385,6 @@
 					"dataSrc": ""
 				},
 				"columns": [
-
 					{
 					   "data": "referencia",
 					},
@@ -467,7 +394,6 @@
 					{
 						"data": "qty"
 					},
-
 				],
 				"language": idioma_espanol,
 				"dom": 'Bfrtip',
@@ -476,17 +402,9 @@
 					'copy', 'csv', 'excel', 'pdf', 'print'
 				]
 			});
-
-
-
 			// ShowProdcuts("#table_products_view", data.products)
 			cuadros('#cuadro1', '#cuadro3');
 		});
 	}
-
 </script>
-
-
-
-
 @endsection

@@ -269,7 +269,6 @@
 				]
 			});
 		}
-		
 		if(name_rol == "Administrador"){
 			var table = $("#table").DataTable({
 				"destroy": true,
