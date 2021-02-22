@@ -42,7 +42,6 @@
 			          <div class="card shadow mb-4" id="cuadro1">
 			            <div class="card-header py-3">
 			              <h6 class="m-0 font-weight-bold text-primary">Gestion de Clientes</h6>
-
 			              <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 		                    <span class="icon text-white-50">
 		                      <i class="fas fa-plus"></i>
@@ -86,17 +85,11 @@
 		        </div>
 		      </footer>
 		      <!-- End of Footer -->
-
 		    </div>
 		    <!-- End of Content Wrapper -->
           </div>
-
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
     @endsection
-
-
-
-
 	@section('CustomJs')
 		<script>
 			$(document).ready(function(){
@@ -107,7 +100,6 @@
 		        $("#nav_implantes-clientes, #modulo_Implantes").addClass("active");
 				verifyPersmisos(id_user, tokens, "implantes-clientes");
 			});
-
 			function update(){
 				enviarFormularioPut("#form-update", 'api/implantes-clientes', '#cuadro4', false, "#avatar-edit");
 			}
@@ -173,7 +165,6 @@
 				activar("#table tbody", table)
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
-
 			}
 			function nuevo() {
 				$("#alertas").css("display", "none");
@@ -229,7 +220,6 @@
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
-
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
