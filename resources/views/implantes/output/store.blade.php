@@ -16,7 +16,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- <div class="row">
                         <div class="col-md-6">
                             <label for=""><b>Cliente</b></label>
@@ -107,7 +106,6 @@
                                         <label for="apply_discount3">¿ Quieres Aplicar Descuento (5%)?</label>
                                         <input type="checkbox" id="apply_discount3" class="form-control">
                                         <br><br>
-
                                         <label for="apply_discount">¿ Quieres Aplicar Descuento (10%)?</label>
                                         <input type="checkbox" id="apply_discount" class="form-control">
                                         <br><br>

@@ -28,42 +28,27 @@
 		font-weight: normal;
 	}
 </style>
-
-
 @endsection
-
-
 @section('content')
 <!-- Page Wrapper -->
 <div id="wrapper">
-
 	@include('layouts.sidebar')
-
 	<!-- Content Wrapper -->
 	<div id="content-wrapper" class="d-flex flex-column">
-
 		<!-- Main Content -->
 		<div id="content">
-
 			@include('layouts.topBar')
-
-
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
-
 				<!-- Page Heading -->
 				<h1 class="h3 mb-2 text-gray-800">Traspaso de Productos</h1>
-
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
 				<input type="hidden" class="token">
-
-
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">Gestion de Traspaso de Productos</h6>
-
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
 								<i class="fas fa-plus"></i>
@@ -90,25 +75,18 @@
 									</tr>
 								</thead>
 								<tbody>
-
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-
-
 				@include('warehouse.movimientos.store')
 				@include('warehouse.movimientos.view')
 				@include('warehouse.movimientos.edit')
-
-
 			</div>
 			<!-- /.container-fluid -->
-
 		</div>
 		<!-- End of Main Content -->
-
 		<!-- Footer -->
 		<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
@@ -118,49 +96,29 @@
 			</div>
 		</footer>
 		<!-- End of Footer -->
-
 	</div>
 	<!-- End of Content Wrapper -->
-
 </div>
 <input type="hidden" id="ruta" value="<?= url('/') ?>">
-
 <input type="hidden" id="indicador_edit">
-
-
 @endsection
-
-
-
-
-
 @section('CustomJs')
-
 <script>
 	$(document).ready(function() {
 		store();
 		list();
 		update();
-
 		$("#collapse_Almacen").addClass("show");
 		$("#nav_movimientos, #modulo_Almacen").addClass("active");
-
 		verifyPersmisos(id_user, tokens, "output");
 	});
-
-
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
 	}
-
-
 	function store() {
 		enviarFormulario("#store", 'api/products/movimiento/output', '#cuadro2');
 	}
-
 	function list(cuadro) {
-
 		var data = {
 			"id_user": id_user,
 			"token": tokens,
@@ -168,10 +126,8 @@
 		$('#table tbody').off('click');
 		var url = document.getElementById('ruta').value;
 		cuadros(cuadro, "#cuadro1");
-
 		var table = $("#table").DataTable({
 			"destroy": true,
-
 			"stateSave": true,
 			"serverSide": false,
 			"ajax": {
@@ -189,7 +145,6 @@
 						var botones = "";
 						if (consultar == 1)
 							botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
-
 						return botones;
 					}
 				},
@@ -225,63 +180,37 @@
 				'copy', 'csv', 'excel', 'pdf', 'print'
 			]
 		});
-
-
 		ver("#table tbody", table)
 		// edit("#table tbody", table)
 		// activar("#table tbody", table)
 		// desactivar("#table tbody", table)
 		// eliminar("#table tbody", table)
-
-
-
 		$(".buttons-excel").remove()
-
-
 		var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 		$(".dt-buttons").append(a)
-
 		var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
 		$('.dt-buttons').append(b);
-
-
-
 		$("#xls").click(function(e) {
 			url = $("#view_xls").attr("href");
-
-			console.log(url)
 			window.open(url, '_blank');
 		});
-
-
 	}
-
 	function nuevo() {
 		$("#table_products" + " tbody").html("")
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
 		AddProductos("#add_product", "#products", "#table_products")
 		ProductsGetExistence("#warehouse", "#products", "#table_products")
-
 		getClients("#clients")
-
 		$("#indicador_edit").val(0)
-
-
 		cuadros("#cuadro1", "#cuadro2");
-
 			$('#table_products tbody').empty();
-
 				// $('#destiny').empty(0);
 				// $('#warehouse').empty(0);
 				$('#products').empty(0);
 				
-				
-
 	}
-
 	function getClients(select, select_default = false) {
-
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/clients',
 			type: 'GET',
@@ -292,7 +221,6 @@
 			dataType: 'JSON',
 			async: false,
 			error: function() {
-
 			},
 			success: function(data) {
 				$(select + " option").remove();
@@ -300,11 +228,8 @@
 					value: "",
 					text: "- Seleccione"
 				}));
-
 				$.each(data, function(i, item) {
-
 					if (data.status == 1) {
-
 					}
 					$(select).append($('<option>', {
 						value: item.id,
@@ -313,8 +238,6 @@
 
 					}));
 				});
-
-
 				$(select).select2({
 					width: "100%",
 					sorter: function(data) {
@@ -331,17 +254,11 @@
 						});
 					}
 				});
-
 			}
-
 		});
 	}
-
 	function AddProductos(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
-
-
-
 			const array_product = $(select_product).val().split("|")
 			const id_product = array_product[0]
 			const total = array_product[1]
@@ -352,9 +269,7 @@
 			const date_expiration = array_product[6]
 			const register_invima = array_product[7]
 			const description = $(`${select_product} option:selected`).text()
-
 			var html
-
 			var validaProduct = false
 			$(table + " tbody tr").each(function() {
 				if (id_product == $(this).find(".id_product").val()) {
@@ -372,21 +287,12 @@
 			} else {
 				warning('¡La opción seleccionada ya se encuentra agregada!');
 			}
-
-
-
 			$(table + " tbody").append(html)
-			
-
 		});
 	}
-
 	function ProductsGetExistence(warehouse, product, table) {
 		$(warehouse).unbind().change(function(e) {
-
 			$(table + " tbody").html("")
-
-
 			$.ajax({
 				url: `${document.getElementById('ruta').value}/api/products/get/existence/warehouse/${$(this).val()}`,
 				type: 'GET',
@@ -397,11 +303,9 @@
 				dataType: 'JSON',
 				async: false,
 				error: function() {
-
 				},
 				success: function(data) {
 					var html
-
 					if ($("#warehouse").val() == 'Medellin') {
 
 						html += '<option value="Bogota">Bogota</option>'
@@ -413,7 +317,6 @@
 						// 		text: "-Seleccione"
 						// 	}));
 					}
-
 					if ($("#warehouse").val() == 'Bogota') {
 
 						html += '<option value="Medellin">Medellin</option>'
@@ -425,33 +328,22 @@
 						// 		text: "-Seleccione"
 						// 	}));
 					}
-
 					if ($("#warehouse").val() == 'Cali') {
-
 						html += '<option value="Bogota">Bogota</option>'
 						html += '<option value="Medellin">Medellin</option>'
 
 					}
-
 					$("#destiny").html(html)
-
-
 					$(product + " option").remove();
 					$(product).append($('<option>', {
 						value: "",
 						text: "-Seleccione"
 					}));
-
 					$.each(data, function(i, item) {
-
-						// console.log(item);
-
 						$(product).append($('<option>', {
 							value: `${item.id_product}|${item.total}|${item.price_cop}|${item.lote}|${item.price_euro}|${item.presentation}|${item.date_expiration}|${item.register_invima}`,
 							text: item.description,
-
 						}));
-
 					});
 					$(product).select2({
 						width: "100%",
@@ -469,36 +361,23 @@
 							});
 						}
 					});
-
-
 				}
-
 			});
-
 		});
 	}
-
 	function deleteProduct(element, edit = '') {
 		var tr = $(element).parent("td").parent("tr").remove()
-
 		calcSubTotal(".price_product", edit)
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
-
 	function ver(tbody, table) {
 		$(tbody).on("click", "span.consultar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-
-			console.log({
-				data
-			})
-
 			var url = document.getElementById('ruta').value;
 			var table2 = $("#table_view").DataTable({
 				"destroy": true,
-
 				"stateSave": true,
 				"serverSide": false,
 				"ajax": {
@@ -538,17 +417,9 @@
 					'copy', 'csv', 'excel', 'pdf', 'print'
 				]
 			});
-
-
-
 			// ShowProdcuts("#table_products_view", data.products)
 			cuadros('#cuadro1', '#cuadro3');
 		});
 	}
-
 </script>
-
-
-
-
 @endsection
