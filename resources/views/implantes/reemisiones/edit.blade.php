@@ -90,7 +90,6 @@
                                         <label for="apply_discount3">¿ Quieres Aplicar Descuento (5%)?</label>
                                         <input type="checkbox" id="apply_discount3_edit" class="form-control">
                                         <br><br>
-
                                         <label for="apply_discount_edit">¿ Quieres Aplicar Descuento (10%)?</label>
                                         <input type="checkbox" id="apply_discount_edit" class="form-control">
                                         <br><br>
