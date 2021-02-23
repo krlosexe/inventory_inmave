@@ -459,7 +459,7 @@
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
-			html += "<td>" + item.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + item.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ><input type='hidden' class='id_product' name='price[]' value='" + item.price + "' ></td>"
+			html += "<td>" + item.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + item.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' ></td>"
 			html += "<td>" + item.serial + " <input type='hidden' class='id_product' name='serial[]' value='" + item.serial + "' > </td>"
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' max='" + item.qty + "' readonly><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.qty + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.qty + "' disabled></td>"
