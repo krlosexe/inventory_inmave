@@ -481,57 +481,54 @@ class ImplantesController extends Controller
             }
             if ($id == "Silimed_Cali") {
 
-                // $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*","products_implantes.*")
-                //     ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
-                //     ->join("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
-                //     ->where("technical_reception_implante.warehouse", "Cali")                   
-                //     ->get();
+                $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*","products_implantes.*")
+                    ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
+                    ->join("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
+                    ->where("technical_reception_implante.warehouse", "Cali")                   
+                    ->get();
 
-                    $data = TechnicalReceptionProductoImplante::select(
-                        "technical_reception_products_implante.referencia",
-                        "technical_reception_products_implante.serial",
-                        "technical_reception_products_implante.estatus",
-                        "products_implantes.description",
-                        "technical_reception_products_implante.id_technical_reception_implante",
-                        "implantes_reemisiones_items.id_implante_reemision",
-                        "implantes_output_items.id_implant_output",
-                        )
-                        ->leftJoin("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
-                        ->leftJoin("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
-                        ->leftJoin("implantes_output_items","technical_reception_products_implante.serial","implantes_output_items.serial")
-                        ->leftJoin("implantes_reemisiones_items","technical_reception_products_implante.serial","implantes_reemisiones_items.serial")
-                        ->with('head:id,warehouse,created_at')
-                        ->where("technical_reception_implante.warehouse", "Cali")
-                        ->get();
-                
-
-
+                    // $data = TechnicalReceptionProductoImplante::select(
+                    //     "technical_reception_products_implante.referencia",
+                    //     "technical_reception_products_implante.serial",
+                    //     "technical_reception_products_implante.estatus",
+                    //     "products_implantes.description",
+                    //     "technical_reception_products_implante.id_technical_reception_implante",
+                    //     "implantes_reemisiones_items.id_implante_reemision",
+                    //     "implantes_output_items.id_implant_output",
+                    //     )
+                    //     ->leftJoin("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
+                    //     ->leftJoin("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
+                    //     ->leftJoin("implantes_output_items","technical_reception_products_implante.serial","implantes_output_items.serial")
+                    //     ->leftJoin("implantes_reemisiones_items","technical_reception_products_implante.serial","implantes_reemisiones_items.serial")
+                    //     ->with('head:id,warehouse,created_at')
+                    //     ->where("technical_reception_implante.warehouse", "Cali")
+                    //     ->get();
 
             }
             if ($id == "Silimed_Bog") {
 
-                // $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*","products_implantes.*")
-                //     ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
-                //     ->join("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
-                //     ->where("technical_reception_implante.warehouse", "Bogota")                   
-                //     ->get();
-
-                $data = TechnicalReceptionProductoImplante::select(
-                    "technical_reception_products_implante.referencia",
-                    "technical_reception_products_implante.serial",
-                    "technical_reception_products_implante.estatus",
-                    "products_implantes.description",
-                    "technical_reception_products_implante.id_technical_reception_implante",
-                    "implantes_reemisiones_items.id_implante_reemision",
-                    "implantes_output_items.id_implant_output"
-                    )
-                    ->leftJoin("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
-                    ->leftJoin("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
-                    ->leftJoin("implantes_output_items","technical_reception_products_implante.serial","implantes_output_items.serial")
-                    ->leftJoin("implantes_reemisiones_items","technical_reception_products_implante.serial","implantes_reemisiones_items.serial")
-                    ->with('head:id,warehouse,created_at')
-                    ->where("technical_reception_implante.warehouse", "Bogota")
+                $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*","products_implantes.*")
+                    ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
+                    ->join("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
+                    ->where("technical_reception_implante.warehouse", "Bogota")                   
                     ->get();
+
+                // $data = TechnicalReceptionProductoImplante::select(
+                //     "technical_reception_products_implante.referencia",
+                //     "technical_reception_products_implante.serial",
+                //     "technical_reception_products_implante.estatus",
+                //     "products_implantes.description",
+                //     "technical_reception_products_implante.id_technical_reception_implante",
+                //     "implantes_reemisiones_items.id_implante_reemision",
+                //     "implantes_output_items.id_implant_output"
+                //     )
+                //     ->leftJoin("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
+                //     ->leftJoin("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
+                //     ->leftJoin("implantes_output_items","technical_reception_products_implante.serial","implantes_output_items.serial")
+                //     ->leftJoin("implantes_reemisiones_items","technical_reception_products_implante.serial","implantes_reemisiones_items.serial")
+                //     ->with('head:id,warehouse,created_at')
+                //     ->where("technical_reception_implante.warehouse", "Bogota")
+                //     ->get();
             }
             return $data;
         } catch (\Throwable $th) {
