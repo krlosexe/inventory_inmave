@@ -17,4 +17,12 @@ class TechnicalReceptionProductoImplante extends Model
       return $this->belongsTo(TechnicalReceptionImplante::class, 'id_technical_reception_implante');
     
     }
+
+    // public function remision(){
+    //   return $this->hasOne(ImplanteReemisionesItem::class,'serial');
+    // }
+    // public function venta(){
+    //   return $this->hasOne(ImplantOutputItems::class,'serial');
+    // }
+
 }

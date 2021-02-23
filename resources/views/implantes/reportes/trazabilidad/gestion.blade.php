@@ -60,8 +60,9 @@
 										<th>Referencia</th>
 										<th>Serial</th>
 										<th>Descripción</th>
-										<!-- <th>Gramaje</th> -->
-										<!-- <th>Bodega Origen</th> -->
+										<th>Nro. Recepción</th>
+										<th>Nro. Remisión</th>
+										<th>Nro. Venta</th>
 										<th>Bodega</th>
 										<th>Estatus</th>
 										<th>Fecha de registro</th>
@@ -203,20 +204,23 @@
 				{
 					"data":"description"
 				},
-				// {
-				// 	"data":"gramaje"
-				// },
-				// {
-				// 	"data": "bodega_origen"
-				// },
 				{
-					"data": "warehouse"
+					"data":"id_technical_reception_implante"
+				},
+				{
+					"data": "id_implante_reemision"
+				},
+				{
+					"data": "id_implant_output"
+				},
+				{
+					"data": "head.warehouse"
 				},
 				{
 					"data": "estatus"
 				},
 				{
-					"data": "created_at"
+					"data": "head.created_at"
 				}
 				// ,
 				// {
