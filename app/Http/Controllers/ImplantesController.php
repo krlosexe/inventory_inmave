@@ -470,7 +470,7 @@ class ImplantesController extends Controller
                     "products_implantes.description",
                     "technical_reception_products_implante.id_technical_reception_implante",
                     "implantes_reemisiones_items.id_implante_reemision",
-                    "implantes_output_items.id_implant_output",
+                    "implantes_output_items.id_implant_output"
                     )
                     ->leftJoin("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
                     ->leftJoin("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
@@ -509,7 +509,7 @@ class ImplantesController extends Controller
 
             }
             if ($id == "Silimed_Bog") {
-                
+
                 // $data = TechnicalReceptionProductoImplante::select("technical_reception_implante.*","technical_reception_products_implante.*","products_implantes.*")
                 //     ->join("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
                 //     ->join("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
@@ -523,7 +523,7 @@ class ImplantesController extends Controller
                     "products_implantes.description",
                     "technical_reception_products_implante.id_technical_reception_implante",
                     "implantes_reemisiones_items.id_implante_reemision",
-                    "implantes_output_items.id_implant_output",
+                    "implantes_output_items.id_implant_output"
                     )
                     ->leftJoin("technical_reception_implante", "technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
                     ->leftJoin("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
