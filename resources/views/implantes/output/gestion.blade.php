@@ -145,7 +145,7 @@
 						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
 						}else{
-							alert("Por favor cree el Producto.");
+							alert("Debe crear el Implante como Producto.");
 						}
 					} else {
 						warning('¡Recuerde que los campos son obligatorios!');
