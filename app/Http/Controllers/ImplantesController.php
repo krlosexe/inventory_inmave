@@ -134,7 +134,7 @@ class ImplantesController extends Controller
                     $producs_items["referencia"]  = $value;
                     $producs_items["serial"]      = $request["serial"][$key];
                     $producs_items["qty"]         = $request["qty"][$key];
-                    $producs_items["price"]       = str_replace(",", "", $request["price"][$key]);
+                    $producs_items["price"]       = str_replace(",", "", $request["total"][$key]);
                     $producs_items["vat"]         = 0;
                     $producs_items["total"]       = str_replace(",", "", $request->total_invoice);
                     $producs_items["estatus"]     = "Remitido";
@@ -296,7 +296,7 @@ class ImplantesController extends Controller
                 $producs_items["referencia"]    = $value;
                 $producs_items["serial"]        = $request["serial"][$key];
                 $producs_items["qty"]           = $request["qty"][$key];
-                $producs_items["price"]         = str_replace(",", "", $request["price"][$key]);
+                $producs_items["price"]         = str_replace(",", "", $request["total"][$key]);
                 $producs_items["vat"]           = 0;
                 $producs_items["total"]         = str_replace(",", "", $request->total_invoice);
                 $producs_items["estatus"]     = "Vendido";

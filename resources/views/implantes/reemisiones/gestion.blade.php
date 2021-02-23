@@ -215,7 +215,6 @@
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
 		getClients("#clients")
-
 		$("#indicador_edit").val(0)
 		$("#reissue").val(1)
 		cuadros("#cuadro1", "#cuadro2");
@@ -354,9 +353,6 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-
-			console.log('aqui',data);
-
 			$("#items_id").val(data.items.length)
 			$("#name_edit").val(data.name)
 			$("#nit_edit").val(data.nit_c)
@@ -520,7 +516,7 @@
 		$.map(data.items, function(item, key) {
 			let html = ""
 			html += "<tr>"
-			html += "<td>" + item.referencia + "<input type='hidden' class='id_product' name='referencia[]' value='" + item.referencia + "' ><input type='hidden' class='id_product' name='price[]' value='" + item.price + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' > </td>"
+			html += "<td>" + item.referencia + "<input type='hidden' class='id_product' name='referencia[]' value='" + item.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' > </td>"
 			html += "<td>" + item.serial + " <input type='hidden' class='id_product' name='serial[]' value='" + item.serial + "' > </td>"
 			html += "<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='" + item.qty + "' min='" + item.qty + "' max='" + item.qty + "'readonly><input type='hidden' class='form-control qty_product_hidden items_calc' value='" + item.qty + "' disabled></td>"
 			html += "<td><input type='number' class='form-control  items_calc existence' name='existence'  value='" + item.qty + "' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='" + item.qty + "' disabled></td>"
@@ -698,12 +694,9 @@
 		const discount = inNum($(`#discount_total${edit}`).val())
 		const percentage_rte_fuete = inNum($(`#rte_fuente${edit}`).val())
 		const rte_fuete = ($(`#subtotal_with_discount${edit}`).val() / 100) * percentage_rte_fuete
-
 		total_invoice = (($(`#subtotal_with_discount${edit}`).val()))
 		// total_invoice = (($(`#subtotal_with_discount${edit}`).val()) * 1.19)
-
 		total_invoice = total_invoice - rte_fuete
-
 		$(`#rte_fuente_text${edit}`).text(`$ ${number_format(rte_fuete, 2)}`)
 		$(`#rte_fuente_total${edit}`).val(rte_fuete)
 		$(`#total_invoice_text${edit}`).text(`$ ${number_format(total_invoice, 2)}`)
@@ -771,6 +764,5 @@
 		calcSubTotal(".price_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-
 </script>
 @endsection
