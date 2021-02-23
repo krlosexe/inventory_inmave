@@ -252,6 +252,7 @@
 					});
 					contador++
 					if (!validaProduct) {
+						if(data.products){
 						html += "<tr>"
 						html += "<td>" + data.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' > </td>"
 						html += "<td>" + data.serial + " <input type='hidden'  class='serial' name='serial[]' value='" + data.serial + "' > </td>"
@@ -262,6 +263,9 @@
 						// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
+						}else{
+							alert("Debe crear el Implante como Producto.");
+						}
 					} else {
 						warning('¡Recuerde que los campos son obligatorios!');
 					}
