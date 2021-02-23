@@ -419,9 +419,9 @@
 		});
 	}
 	function AddProductosEdit(data) {
-		socket_referencia_edit(data);
+		referencia_edit(data);
 	}
-	function socket_referencia_edit(data) {
+	function referencia_edit(data) {
 		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/get/implante/' + data,
 				type: 'GET',
