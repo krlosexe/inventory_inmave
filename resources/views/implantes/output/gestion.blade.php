@@ -125,7 +125,6 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-					$('#warehouse').val(data.warehouse)
 					var html = "";
 					var validaProduct = false
 					$("#table_products_out tbody tr").each(function() {
@@ -135,7 +134,9 @@
 					});
 					contador++
 					if (!validaProduct) {
-						if(data.products){
+						if(data.products){					   
+					    $('#warehouse').val(data.warehouse);
+						$("#items").val(contador);
 						html += "<tr>"
 						html += "<td>" + data.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + data.referencia + "' ><input type='hidden' class='id_product' name='id_product[]' value='" +  data.id + "' > </td>"
 						html += "<td>" + data.serial + " <input type='hidden'  class='serial' name='serial[]' value='" + data.serial + "' > </td>"
@@ -150,7 +151,6 @@
 					} else {
 						warning('¡Recuerde que los campos son obligatorios!');
 					}
-					$("#items").val(contador);
 					$("#table_products_out tbody").append(html)
 					$('#serial').val("");
 					setTimeout(() => {
