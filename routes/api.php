@@ -37,7 +37,6 @@ Route::get('verify-permiso', 'Login@VerifyPermiso');
 Route::resource('roles', 'RolesController');
 Route::post('status-rol/{id}/{status}', 'RolesController@status');
 
-
 Route::resource('city', 'CityController');
 Route::post('status-city/{id}/{status}', 'CityController@status');
 
@@ -55,7 +54,6 @@ Route::resource('implantes-clientes', 'ImplantesClientesController');
 Route::get('clients/status/{id}/{status}', 'ClientsController@status');
 Route::get('implantes-clientes/status/{id}/{status}', 'ImplantesClientesController@status');
 
-
 Route::resource('categories', 'CategoryController');
 Route::get('categories/status/{id}/{status}', 'CategoryController@status');
 
@@ -65,22 +63,12 @@ Route::get('products/status/{id}/{status}', 'ProductsController@status');
 Route::resource('products/entry/stock', 'ProductsEntryController');
 Route::resource('products/entry/output', 'ProductusOutputController');
 
-
-
 Route::get('products/get/existence/warehouse/{warehouse}', 'ProductsController@GetExistenceWarehouse');
-
-
-
 
 Route::get('invoice/print/{id}', 'InvoiceController@ShowInvoice');
 
-
-
 Route::get('output/export/excel', 'InvoiceController@ExportExcel');
 Route::get('output/export/excel/reemision', 'InvoiceController@ExportExcelReemision');
-
-
-
 
 Route::resource('tasks', 'TasksController');
 
