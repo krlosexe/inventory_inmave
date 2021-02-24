@@ -500,7 +500,7 @@
 						// html +="<td>"+1+" <input type='hidden' class='id_product'  value='1' > </td>"
 						html += "<td><input type='text' class='form-control items_calc qty_product' name='salida[]' value='1'readonly></td>"
 						html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='1' min = '1'  max='1' readonly></td>"
-						html += "<td><input type='text' class='form-control items_calc price_product' name='price[]' value='" + number_format(0, 2) + "' onchange='calcProduc(this," + '"_edit"' + ")'  required></td>"
+						html += "<td><input type='text' class='form-control items_calc price_product' name='total[]' value='" + number_format(0, 2) + "' onchange='calcProduc(this," + '"_edit"' + ")'  required></td>"
 						// html +="<td><input type='text' readonly class='form-control items_calc total_product' name='total[]'  required style='text-align: right'></td>"
 						html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
