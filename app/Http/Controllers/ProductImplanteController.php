@@ -88,7 +88,7 @@ class ProductImplanteController extends Controller
                     ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                     ->where("technical_reception_implante.warehouse", "Medellin")
-                    // ->where("technical_reception_products_implante.estatus","Disponible")
+                    ->where("technical_reception_products_implante.estatus","Disponible")
                     ->where("technical_reception_products_implante.referencia", $referencia)
                     ->groupBy("technical_reception_products_implante.referencia")
                     ->first();
@@ -125,6 +125,7 @@ class ProductImplanteController extends Controller
                         ->selectRaw(" (count(technical_reception_products_implante.referencia))  as total")
                         ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                         ->where("technical_reception_implante.warehouse", "Bogota")
+                        ->where("technical_reception_products_implante.estatus","Disponible")
                         ->where("technical_reception_products_implante.referencia", $referencia)
                         ->groupBy("technical_reception_products_implante.referencia")
                         ->first();
@@ -159,6 +160,7 @@ class ProductImplanteController extends Controller
                         ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
                         ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                         ->where("technical_reception_implante.warehouse", "Cali")
+                        ->where("technical_reception_products_implante.estatus","Disponible")
                         ->where("technical_reception_products_implante.referencia", $referencia)
                         ->groupBy("technical_reception_products_implante.referencia")
                         ->first();
