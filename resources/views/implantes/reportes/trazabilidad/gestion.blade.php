@@ -214,13 +214,13 @@
 					"data": "id_implant_output"
 				},
 				{
-					"data": "head.warehouse"
+					"data": "warehouse"
 				},
 				{
 					"data": "estatus"
 				},
 				{
-					"data": "head.created_at"
+					"data": "created_at"
 				}
 				// ,
 				// {

@@ -466,6 +466,8 @@ class ImplantesController extends Controller
                     "technical_reception_products_implante.referencia",
                     "technical_reception_products_implante.serial",
                     "technical_reception_products_implante.estatus",
+                    "technical_reception_implante.warehouse",
+                    "technical_reception_implante.created_at",
                     "products_implantes.description",
                     "technical_reception_products_implante.id_technical_reception_implante",
                     "implantes_reemisiones_items.id_implante_reemision",
@@ -475,7 +477,6 @@ class ImplantesController extends Controller
                     ->leftJoin("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
                     ->leftJoin("implantes_output_items","technical_reception_products_implante.serial","implantes_output_items.serial")
                     ->leftJoin("implantes_reemisiones_items","technical_reception_products_implante.serial","implantes_reemisiones_items.serial")
-                    ->with('head:id,warehouse,created_at')
                     ->get();
             }
             if ($id == "Silimed_Cali") {
@@ -483,6 +484,8 @@ class ImplantesController extends Controller
                     "technical_reception_products_implante.referencia",
                     "technical_reception_products_implante.serial",
                     "technical_reception_products_implante.estatus",
+                    "technical_reception_implante.warehouse",
+                    "technical_reception_implante.created_at",
                     "products_implantes.description",
                     "technical_reception_products_implante.id_technical_reception_implante",
                     "implantes_reemisiones_items.id_implante_reemision",
@@ -501,6 +504,8 @@ class ImplantesController extends Controller
                     "technical_reception_products_implante.referencia",
                     "technical_reception_products_implante.serial",
                     "technical_reception_products_implante.estatus",
+                    "technical_reception_implante.warehouse",
+                    "technical_reception_implante.created_at",
                     "products_implantes.description",
                     "technical_reception_products_implante.id_technical_reception_implante",
                     "implantes_reemisiones_items.id_implante_reemision",
