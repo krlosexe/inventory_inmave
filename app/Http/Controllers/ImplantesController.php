@@ -461,7 +461,6 @@ class ImplantesController extends Controller
     public function ListImplanteTrazabilidad($id)
     {
         try {
-            // dd($id);
             if ($id == "Administrador") {
                 $data = TechnicalReceptionProductoImplante::select(
                     "technical_reception_products_implante.referencia",
