@@ -206,7 +206,7 @@
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
-		/* ------------------------------------------------------------------------------- */
+		    /* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
 			*/
@@ -216,8 +216,8 @@
 					statusConfirmacion('api/implantes-clientes/status/'+data.id+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
 				});
 			}
-		/* ------------------------------------------------------------------------------- */
-		/* ------------------------------------------------------------------------------- */
+		    /* ------------------------------------------------------------------------------- */
+		    /* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
 			*/
@@ -227,7 +227,7 @@
 					statusConfirmacion('api/implantes-clientes/status/'+data.id+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
 				});
 			}
-		/* ------------------------------------------------------------------------------- */
+		    /* ------------------------------------------------------------------------------- */
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();

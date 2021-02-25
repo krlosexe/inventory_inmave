@@ -330,7 +330,6 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-			console.log('ed',data);
 			$("#indicador_edit").val(1)
 			
 			$("#serial_edit").focus();		
@@ -340,7 +339,6 @@
 			});
 			
 			$.map(data, function(item, key) {
-				// console.log(item)
 				// $("#serial").val(1)
 			})
 			getClients("#clients_edit", data.id_client)
@@ -488,7 +486,6 @@
 	function ShowProdcuts(table, data) {
 		$(table + " tbody").html("")
 		$.map(data.items, function(item, key) {
-		console.log('tabla',data);
 			let html = ""
 			html += "<tr>"
 			html += "<td>" + item.product.referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + item.product.referencia + "' > </td>"

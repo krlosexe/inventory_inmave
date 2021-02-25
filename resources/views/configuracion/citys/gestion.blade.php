@@ -312,7 +312,6 @@
 		              var selectRegistrar = Object.keys(respuesta).length +1;
 		              var selectActualizar = Object.keys(respuesta).length;
 		              for(var i = 1; i <= selectRegistrar; i++){
-		              	console.log(selectRegistrar);
 		                agregarOptions(select, i, i);
 		              }
 		              

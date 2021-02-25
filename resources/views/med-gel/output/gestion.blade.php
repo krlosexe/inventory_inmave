@@ -209,8 +209,6 @@
 		$('.dt-buttons').append(b);
 		$("#xls").click(function(e) {
 			url = $("#view_xls").attr("href");
-
-			console.log(url)
 			window.open(url, '_blank');
 		});
 	}
@@ -251,7 +249,6 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-					console.log('llego',data)
 					$("#table_products tbody").html("")
 					var html = "";
 					var validaProduct = false
@@ -729,7 +726,6 @@
 			}
 		});
 		const totalVat2 = (($(`#subtotal_with_discount${edit}`).val()) * 0.19)
-		console.log(($(`#subtotal_with_discount${edit}`).val()) * 0.19, "IVA")
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat2, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat2)
 	}
