@@ -1,8 +1,5 @@
 @extends('layouts.app')
-	
-
 	@section('CustomCss')
-
 		<style>
 			.kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
 			    margin: 0;
@@ -24,41 +21,27 @@
 			    font-weight: normal;
 			}
 		</style>
-
-
 	@endsection
-
-
 	@section('content')
 	     <!-- Page Wrapper -->
 		  <div id="wrapper">
-
 		    @include('layouts.sidebar')
-
 		    <!-- Content Wrapper -->
 		    <div id="content-wrapper" class="d-flex flex-column">
-
 		      <!-- Main Content -->
 		      <div id="content">
-
 				@include('layouts.topBar') 
-		       
-
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
-
 			          <!-- Page Heading -->
 			          <h1 class="h3 mb-2 text-gray-800">Funciones</h1>
-
 			          <div id="alertas"></div>
 			          <input type="hidden" class="id_user">
 			          <input type="hidden" class="token">
-
 			          <!-- DataTales Example -->
 			          <div class="card shadow mb-4" id="cuadro1">
 			            <div class="card-header py-3">
 			              <h6 class="m-0 font-weight-bold text-primary">Gestion de Funciones</h6>
-
 			              <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 		                    <span class="icon text-white-50">
 		                      <i class="fas fa-plus"></i>
@@ -87,19 +70,13 @@
 			              </div>
 			            </div>
 			          </div>
-
-
 			          @include('perfiles.Funciones.store')
 					  @include('perfiles.Funciones.view')
 					  @include('perfiles.Funciones.edit')
-
-
 			        </div>
 			        <!-- /.container-fluid -->
-
 		      </div>
 		      <!-- End of Main Content -->
-
 		      <!-- Footer -->
 		      <footer class="sticky-footer bg-white">
 		        <div class="container my-auto">
@@ -109,41 +86,28 @@
 		        </div>
 		      </footer>
 		      <!-- End of Footer -->
-
 		    </div>
 		    <!-- End of Content Wrapper -->
-
 		  </div>
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
 	@endsection
-
-
-
-
-
 	@section('CustomJs')
-
 		<script>
 			$(document).ready(function(){
 				store();
 				update();
 				list();
-
 				$("#collapse_Perfiles").addClass("show");
 				$("#nav_funciones, #modulo_Perfiles").addClass("active");
 				verifyPersmisos(id_user, tokens, "funciones");
 
 			});
-
-
 			function store(){
 				enviarFormulario("#store", 'api/funciones', '#cuadro2');
 			}
-
 			function update(){
 				enviarFormularioPut("#form-update", 'api/funciones', '#cuadro4', false);
 			}
-
 			function list(cuadro) {
 				var data = {
 					"id_user": id_user,
@@ -152,10 +116,8 @@
 				$('#table tbody').off('click');
 				var url=document.getElementById('ruta').value; 
 				cuadros(cuadro, "#cuadro1");
-
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
@@ -184,7 +146,6 @@
 								return botones;
 							}
 						},
-
 						{"data":"nombre"},
 						{"data":"descripcion"},
 						{"data":"nombre_modulo"},
@@ -200,29 +161,18 @@
 						'copy', 'csv', 'excel', 'pdf', 'print'
 					]
 				});
-
-
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
 				desactivar("#table tbody", table)
 				eliminar("#table tbody", table)
-
-
-
 			}
-
-
-
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
-
 				listModulos("#modulos_store");
 				cuadros("#cuadro1", "#cuadro2");
 			}
-
-
 			function listModulos(select) {
 				var url=document.getElementById('ruta').value;
 			    $.ajax({
@@ -256,35 +206,18 @@
 			                    }));
 			                }
 			            });
-
 			        }
 			    });
 			}
-
-
-
-
-
 			$("#modulos_store").change(function(){
 				contadorFunciones($(this).val(), "registrar", 0);
 			});
-
-
 			$("#modulos_store-view").change(function(){
 				contadorFunciones($(this).val(), "view", 0);
 			});
-
 			$("#modulos_store-edit").change(function(){
 				contadorFunciones($(this).val(), "edit", 0);
 			});
-
-
-
-
-
-
-
-
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -293,32 +226,19 @@
 				$(tbody).on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
 				//	contarModulos("#posicion-view");
-
-
 					listModulos("#modulos_store-view");
-
 					$("#nombre-view").val(data.nombre).attr("disabled", "disabled")
 					$("#descripcion-view").val(data.descripcion).attr("disabled", "disabled")
 					$("#route-view").val(data.route).attr("disabled", "disabled")
-
 					$("#modulos_store-view").val(data.id_modulo)
 					$("#modulos_store-view").val(data.id_modulo).trigger("change")
 					$("#modulos_store-view").val(data.id_modulo).attr("disabled", "disabled")
-
 					$("#posicion_view").val(data.posicion).attr("disabled", "disabled")
 					$("#visible-view").val(data.visibilidad).attr("disabled", "disabled")
-					
 					cuadros('#cuadro1', '#cuadro3');
 				});
 			}
-
-
-
-
-
-
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -327,27 +247,17 @@
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
 					listModulos("#modulos_store-edit");
-
 					$("#nombre-edit").val(data.nombre)
 					$("#descripcion-edit").val(data.descripcion)
 					$("#route-edit").val(data.route)
-
 					$("#modulos_store-edit").val(data.id_modulo).trigger("change")
-
 					$("#posicion_edit").val(data.posicion)
 					$("#visible-edit").val(data.visibilidad)
-
 					$("#id_edit").val(data.id_funciones)
-
 					cuadros('#cuadro1', '#cuadro4');
 				});
-			}
-
-
-
-					
+			}		
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -359,7 +269,6 @@
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
-
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -371,22 +280,12 @@
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
-
-
-
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
 					statusConfirmacion('api/status-funciones/'+data.id_funciones+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}
-
-
-
-
-
-
-
 			function contadorFunciones(value, select, selected){
 				eliminarOptions("posicion_"+select);
 				if (value != "") {
@@ -408,26 +307,15 @@
 				            if (select == 'registrar' || (selected == 0 && value != document.getElementById('id_modulo_vista_hidden').value)){
 								contador++;
 							}
-
 				            for (var i = 1; i <= contador; i++)
 				            	agregarOptions("#posicion_" + select, i, i);
-				            
 				        }
 				    });
 				} else {
 					warning('¡Debe seleccionar un modulo!');
 				}
 			}
-
-
-
-			
-
 		</script>
-		
-
-
-
 	@endsection
 
 
