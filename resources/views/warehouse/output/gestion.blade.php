@@ -676,7 +676,6 @@
 			}
 		});
 		const totalVat2 = (($(`#subtotal_with_discount${edit}`).val()) * 0.19)
-		// console.log(($(`#subtotal_with_discount${edit}`).val()) * 0.19, "IVA")
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat2, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat2)
 	}

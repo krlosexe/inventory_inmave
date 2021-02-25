@@ -1,8 +1,5 @@
 @extends('layouts.app')
-
-
 @section('CustomCss')
-
 <style>
 	.kv-avatar .krajee-default.file-preview-frame,
 	.kv-avatar .krajee-default.file-preview-frame:hover {
@@ -12,16 +9,13 @@
 		box-shadow: none;
 		text-align: center;
 	}
-
 	.kv-avatar {
 		display: inline-block;
 	}
-
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
-
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
@@ -62,12 +56,7 @@
 								<thead>
 									<tr>
 										<th>Acciones</th>
-										<!-- <th>Codigo Producto</th>
-										<th>Descripcion</th> -->
 										<th>Movimiento</th>
-										<!-- <th>Precio Compra (Euro)</th> -->
-										<!-- <th>Cantidad</th>
-										<th>Lote</th> -->
 										<th>Origen</th>
 										<th>Destino</th>
 										<th>Responsable</th>
@@ -151,9 +140,6 @@
 				{
 					"data": "type"
 				},
-				// {
-				// 	"data": "price"
-				// },
 				{
 					"data": "warehouse"
 				},
@@ -178,10 +164,6 @@
 			]
 		});
 		ver("#table tbody", table)
-		// edit("#table tbody", table)
-		// activar("#table tbody", table)
-		// desactivar("#table tbody", table)
-		// eliminar("#table tbody", table)
 		$(".buttons-excel").remove()
 		var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 		$(".dt-buttons").append(a)
@@ -304,20 +286,10 @@
 					if ($("#warehouse").val() == 'Medellin') {
 						html += '<option value="Bogota">Bogota</option>'
 						html += '<option value="Cali">Cali</option>'
-						// $(product + " option").remove();
-						// 	$(product).append($('<option>', {
-						// 		value: "",
-						// 		text: "-Seleccione"
-						// 	}));
 					}
 					if ($("#warehouse").val() == 'Bogota') {
 						html += '<option value="Medellin">Medellin</option>'
 						html += '<option value="Cali">Cali</option>'
-						// $(product + " option").remove();
-						// 	$(product).append($('<option>', {
-						// 		value: "",
-						// 		text: "-Seleccione"
-						// 	}));
 					}
 					if ($("#warehouse").val() == 'Cali') {
 
@@ -398,7 +370,6 @@
 					'copy', 'csv', 'excel', 'pdf', 'print'
 				]
 			});
-			// ShowProdcuts("#table_products_view", data.products)
 			cuadros('#cuadro1', '#cuadro3');
 		});
 	}

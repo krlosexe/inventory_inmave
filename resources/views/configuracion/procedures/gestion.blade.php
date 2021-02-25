@@ -270,17 +270,13 @@
 							
 						},
 						success: function(data){
-							console.log(data)
 							$(select_sub+" option").remove();
 							$(select_sub).append($('<option>',
 							{
 								value: "",
 								text : "Seleccione"
 							}));
-						
 							$.each(data, function(i, item){
-								
-								
 								$(select_sub).append($('<option>',
 								{
 									value: item.id,

@@ -129,7 +129,6 @@
 					alert(data.responseJSON.mensaje)
 				},
 				success: function(data) {
-
 					$('#warehouse').val(data.head.warehouse)
 					var html = "";
 					var validaProduct = false
@@ -179,22 +178,6 @@
 				"dataSrc": ""
 			},
 			"columns": [
-				// {
-				// 	"data": null,
-				// 	render: function(data, type, row) {
-				// 		var botones = "";
-				// 		// if (consultar == 1)
-				// 		// 	botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
-				// 		// if (actualizar == 1)
-				// 		// 	botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-				// 		// if (actualizar == 1)
-				// 		// 	botones += "<a href='api/invoice/implante/print/" + row.id + "' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
-				// 		return botones;
-				// 	}
-				// },
-				// {
-				// 	"data": "id"
-				// },
 				{
 					"data": "referencia"
 				},
@@ -222,10 +205,6 @@
 				{
 					"data": "created_at"
 				}
-				// ,
-				// {
-				// 	"data": "email_regis"
-				// }
 			],
 			"language": idioma_espanol,
 			"dom": 'Bfrtip',
@@ -239,16 +218,6 @@
 		activar("#table tbody", table)
 		desactivar("#table tbody", table)
 		eliminar("#table tbody", table)
-		// $(".buttons-excel").remove()
-		// var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
-		// $(".dt-buttons").append(a)
-		// var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
-		// $('.dt-buttons').append(b);
-		// $("#xls").click(function(e) {
-		// 	url = $("#view_xls").attr("href");
-		// 	console.log(url)
-		// 	window.open(url, '_blank');
-		// });
 	}
 	function nuevo() {
 		$("#alertas").css("display", "none");
@@ -263,7 +232,6 @@
 		$('#discount_total_text').empty(0)
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
-
 		$("#table_products_out tbody").html("")
 		$("#serial").focus();
 		$("#serial").change(function() {
@@ -310,7 +278,6 @@
 			var data = table.row($(this).parents("tr")).data();
 			$("#table_products_out tbody").html("")
 			$("#indicador_edit").val(1)
-
 			$("#items_id").val(data.items.length)
 			$("#name_edit").val(data.name)
 			$("#nit_edit").val(data.nit)
@@ -318,7 +285,6 @@
 			$("#email_edit").val(data.email)
 			$("#city_edit").val(data.city)
 			$("#address_edit").val(data.address)
-
 			$("#table_products_out").focus();
 			$("#serial_edit").focus();
 			$("#serial_edit").change(function() {
@@ -337,7 +303,6 @@
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
 			}
-
 			$("#subtotal_text_edit").text(`$ ${number_format(data.discount_total + data.subtotal, 2)}`)
 			$("#subtotal_edit").val(data.discount_total + data.subtotal)
 			$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)

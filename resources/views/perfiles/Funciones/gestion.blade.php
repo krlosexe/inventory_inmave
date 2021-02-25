@@ -405,8 +405,6 @@
 		                },
 				        success: function (respuesta) {
 				            var contador = Object.keys(respuesta).length;
-
-				            console.log(contador)
 				            if (select == 'registrar' || (selected == 0 && value != document.getElementById('id_modulo_vista_hidden').value)){
 								contador++;
 							}

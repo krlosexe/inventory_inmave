@@ -401,14 +401,6 @@
             .search("").draw()
         
     });
-
-    // function ProductsGetExistence(element) {
-
-    //     console.log($(element).val());
-        
-       
-
-    // }
 </script>
 
 @endsection

@@ -337,7 +337,6 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
-					// console.log({data})
 					var valid = false
 					$('#table_products_imp tbody tr').each(function() {
 						if ($(this).find(".referencia").val() == '') {

@@ -400,12 +400,6 @@
 						valid = true;
 					}
 				});
-				// $('#table_products_edit tbody tr').each(function() {
-				// 	if ($(this).find(".serial").val() == data) {
-				// 		valid = true;
-				// 		warning('¡El serial ya ha sido agregado !');
-				// 	}
-				// });
 				contador++
 				var html = "";
 				// $('#table_products_edit tbody').empty();
@@ -446,7 +440,6 @@
 		ChangeProviders("#provider")
 		$('#table_products_edit tbody').html("");
 	   $('#table_products_imp tbody').html("");
-	  console.log(name_rol);
 	    if(name_rol == "Silimed_Cali"){
 					$("#warehouse option").remove();
 						$("#warehouse").append($('<option>', {
@@ -548,7 +541,6 @@
 		});
 	}
 	function ShowProducts(table, data) {
-		console.log('hola2');
 		let html = ""
 		$.map(data.detalle, function(item, key) {
 			html += "<tr>"
