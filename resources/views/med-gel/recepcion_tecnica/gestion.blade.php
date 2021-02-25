@@ -9,7 +9,6 @@
 		box-shadow: none;
 		text-align: center;
 	}
-
 	.kv-avatar {
 		display: inline-block;
 	}
@@ -183,7 +182,8 @@
 				"url": '' + url + '/api/medgel/technical/reception/list',
 				"dataSrc": ""
 			},
-			"columns": [{
+			"columns": [
+				{
 					"data": null,
 					render: function(data, type, row) {
 						var botones = "";
@@ -392,12 +392,6 @@
 						valid = true;
 					}
 				});
-				// $('#table_products_edit tbody tr').each(function() {
-				// 	if ($(this).find(".serial").val() == data) {
-				// 		valid = true;
-				// 		warning('¡El serial ya ha sido agregado !');
-				// 	}
-				// });
 				contador++
 				var html = "";
 				$('#table_products_edit tbody').empty();
