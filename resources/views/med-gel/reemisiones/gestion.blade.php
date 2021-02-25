@@ -173,10 +173,7 @@
 				},
 				{
 					"data": "created_at"
-				},
-				// {
-				// 	"data": "email_regis"
-				// }
+				}
 			],
 			"language": idioma_espanol,
 			"dom": 'Bfrtip',
@@ -209,18 +206,15 @@
 		// searchSerial("#add_product")
 		$("#indicador_edit").val(0)
 		cuadros("#cuadro1", "#cuadro2");
-		
 		// $('#serial').empty();
 		// $('#warehouse').empty()
 		// $('#clients').empty()
-		
 		$('#table_products tbody').empty();
 		$('#subtotal_text').empty(0)
 		$('#vat_total_text').empty(0)
 		$('#discount_total_text').empty(0)
 		$('#rte_fuente_text').empty(0)
 		$('#total_invoice_text').empty(0)
-
 		$("#lote").focus();
 		$("#lote").change(function() {
 			var str = $("#lote").val().substr(2)
@@ -229,7 +223,6 @@
 			serial(ref);
 		});
 	}
-
 	function serial(data){
 		$.ajax({
 				url: '' + document.getElementById('ruta').value + '/api/medgel/get/lote/' + data,
