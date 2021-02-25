@@ -475,8 +475,6 @@
 				var modulo   = 0;
 
 				$.each(data, function (i, item) { 
-					console.log(item)	
-
 					if (modulo != item.id_modulo) {
 	            		modulo = item.id_modulo;
 	            		validado = false;

@@ -43,12 +43,6 @@
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">Reporte de Ventas por Clientes</h6>
-						<!-- <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
-							<span class="icon text-white-50">
-								<i class="fas fa-plus"></i>
-							</span>
-							<span class="text">Nuevo registro</span>
-						</button> -->
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -178,19 +172,6 @@
 				"dataSrc": ""
 			},
 			"columns": [
-				// {
-				// 	"data": null,
-				// 	render: function(data, type, row) {
-				// 		var botones = "";
-				// 		// if (consultar == 1)
-				// 		// 	botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
-				// 		// if (actualizar == 1)
-				// 		// 	botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-				// 		// if (actualizar == 1)
-				// 		// 	botones += "<a href='api/invoice/implante/print/" + row.id + "' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
-				// 		return botones;
-				// 	}
-				// },
 				{
 					"data": "id"
 				},
@@ -244,16 +225,6 @@
 		activar("#table tbody", table)
 		desactivar("#table tbody", table)
 		eliminar("#table tbody", table)
-		// $(".buttons-excel").remove()
-		// var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
-		// $(".dt-buttons").append(a)
-		// var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
-		// $('.dt-buttons').append(b);
-		// $("#xls").click(function(e) {
-		// 	url = $("#view_xls").attr("href");
-		// 	console.log(url)
-		// 	window.open(url, '_blank');
-		// });
 	}
 	function nuevo() {
 		$("#alertas").css("display", "none");

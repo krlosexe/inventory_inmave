@@ -242,7 +242,6 @@
 		$('.dt-buttons').append(b);
 		$("#xls").click(function(e) {
 			url = $("#view_xls").attr("href");
-			console.log(url)
 			window.open(url, '_blank');
 		});
 	}
