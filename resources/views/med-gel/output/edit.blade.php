@@ -24,12 +24,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!-- <div class="col-md-2">
-                            <br>
-                            <button type="button" class="btn btn-primary btn-user" id="add_remision_invoice">
-                                Facturar
-                            </button>
-                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -140,10 +134,6 @@
         <button id="print" type="button" class="btn btn-primary btn-user">
             Imprimir
         </button>
-        <!--
-            <button id="send_usuario" class="btn btn-primary btn-user">
-                Guardar
-            </button>-->
     </center>
     <br>
     <br>

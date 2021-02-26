@@ -145,3 +145,4 @@ Route::get('implantes/reemisiones/status/{id}', 'ImplantesController@UpdateHeadR
 Route::get('get/implante/{id}', 'ImplantesController@GetImplante');
 Route::get('get/clientes/implantes/list/{id}', 'ImplantesController@ListClienteImplanteOutput');
 Route::get('get/implantes/list/trazabilidad/{id}', 'ImplantesController@ListImplanteTrazabilidad');
+Route::get('impuesto/transporte/{factura}', 'AlmacenController@GetProductoByCosto');

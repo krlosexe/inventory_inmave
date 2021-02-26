@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\{Products,
          ProductsEntryItems,
          ProductusOutputItems,
-         ReemisionesItems
+         ReemisionesItems,
+         ProductsEntry
         };
 
 class AlmacenController extends Controller
@@ -123,6 +124,44 @@ class AlmacenController extends Controller
         } catch (\Throwable $th) {
             return $th;
         }
+    }
+    public function GetProductoByCosto($factura)
+    {
+        try {
+            // dd($factura);
 
+            $head = ProductsEntry::whereNumber_invoice($factura)->first();
+
+            $total = $head->taxes + $head->transport;
+            $total_factura = $head->total_invoice;
+            $taxes = $head->taxes;
+            $transport = $head->transport;
+            $warehouse = $head->warehouse;
+            $number_invoice = $head->number_invoice;
+
+            $detail = ProductsEntryItems::select('products.price_cop','product_entry_items.qty','product_entry_items.lote','products.code','products.description')
+            ->join('products','product_entry_items.id_product','products.id')
+            ->where('product_entry_items.id_entry',$head->id)
+            ->get();
+            // dd($detail);
+            $detail->map(function($item)use($total,$total_factura,$taxes,$transport,$warehouse,$number_invoice){
+                $item->total_gastos = number_format($total,2, '.', ',');
+                $item->precio_real = $item->price_cop + $item->total_gastos;
+                $item->total_factura = $total_factura;
+                $item->transport = number_format($transport,2, '.', ',');
+                $item->taxes = number_format($taxes,2, '.', ',');
+                $item->warehouse = $warehouse;
+                $item->number_invoice = $number_invoice;
+                $item->total_real = $item->precio_real * $item->qty;
+                $item->ganancia_total = $item->total_real - $total_factura;
+                $item->ganancia_golal = number_format($item->total_real - $item->ganancia_total,2, '.', ',');
+                $item->ganancia_producto = number_format($item->precio_real / $item->qty,2, '.', ',');
+                return $item;
+            });
+
+        return $detail;
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 }
