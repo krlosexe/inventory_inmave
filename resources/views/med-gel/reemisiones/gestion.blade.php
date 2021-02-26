@@ -563,6 +563,7 @@
 			$("#serial").focus();
     });
 	function calcProduc(element, edit = '') {
+
 		var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
 		var qty = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product").val())
 		var vat = $(element).parent("td").parent("tr").children("td").find(".vat_product")
@@ -692,11 +693,6 @@
 		calcTotalVat(".vat_product", '_edit')
 		calTotal(".total_product", '_edit')
 	});
-	// 	$('input[name="price"]').keyup(function(e) {
-	// 	if (/\D/g.test(this.value)) {
-	// 		this.value = this.value.replace(/\D/g, '');
-	// 	}
-	// });
 </script>
 
 

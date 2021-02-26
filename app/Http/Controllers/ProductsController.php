@@ -32,7 +32,6 @@ class ProductsController extends Controller
         }
         return response()->json($products)->setStatusCode(200);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -42,7 +41,6 @@ class ProductsController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -51,11 +49,13 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $config               = DB::table("config")->first();
+        $config = DB::table("config")->first();
         $request["price_cop"] = $config->valuation_euro * $request["price_euro"];
-
+        $iva = $request["price_cop"] * 19 / 100;
+        $impuesto = $request["price_cop"] * 15 /100;
+        $total_iva_imp = $iva + $impuesto;
+        $request["price_cop_iva_imp"] = $total_iva_imp + $request["price_cop"];
         $products = Products::create($request->all());
-
         $auditoria              = new Auditoria;
         $auditoria->tabla       = "products";
         $auditoria->cod_reg     = $products->id;
@@ -71,7 +71,6 @@ class ProductsController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-
     /**
      * Display the specified resource.
      *
@@ -90,7 +89,6 @@ class ProductsController extends Controller
                             ->first();
         return response()->json($products)->setStatusCode(200);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -101,7 +99,6 @@ class ProductsController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -111,11 +108,12 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $products)
     {
-
         $config               = DB::table("config")->first();
         $request["price_cop"] = $config->valuation_euro * $request["price_euro"];
-
-
+        $iva = $request["price_cop"] * 19 / 100;
+        $impuesto = $request["price_cop"] * 15 /100;
+        $total_iva_imp = $iva + $impuesto;
+        $request["price_cop_iva_imp"] = $total_iva_imp + $request["price_cop"];
         $update_product = Products::find($products)->update($request->all());
 
         if ($update_product) {
@@ -125,13 +123,7 @@ class ProductsController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-
-
-
-
     public function GetExistence($id_product){
-
-
         $entry_medellin = DB::table("product_entry_items")
                             ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
                             ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
@@ -205,8 +197,6 @@ class ProductsController extends Controller
                             ->where("products.id", $id_product)
                             ->groupBy("product_output_items_trapase.id_product")
                             ->first();
-
-
 
         $output_bogota_reemision = DB::table("reemisiones_items")
                             ->selectRaw("reemisiones_items.id_product, products.description, (SUM(reemisiones_items.qty))  as total")
@@ -322,7 +312,6 @@ class ProductsController extends Controller
         return $data_medellin;
 
     }
-
     public function GetExistenceWarehouse($warehouse){
 
         $entry = DB::table("product_entry_items")
@@ -359,9 +348,6 @@ class ProductsController extends Controller
                     ->groupBy("product_output_items_trapase.id_product")
                     ->get();
 
-
-
-
         foreach($entry as $value){
             foreach($output as $out){
                 if($value->id_product == $out->id_product){
@@ -370,8 +356,6 @@ class ProductsController extends Controller
                     $value->total = (int)$value->total;
                 }
             }
-
-
             foreach($output_reemision as $out_reemision){
                 if($value->id_product == $out_reemision->id_product){
                     $value->total = $value->total - $out_reemision->total;
@@ -379,7 +363,6 @@ class ProductsController extends Controller
                     $value->total = (int)$value->total;
                 }
             }
-
             foreach($traspase as $out_traspase){
                 if($value->id_product == $out_traspase->id_product){
                     $value->total = $value->total - $out_traspase->total;
@@ -390,16 +373,8 @@ class ProductsController extends Controller
 
 
         }
-
-
         return response()->json($entry)->setStatusCode(200);
     }
-
-
-
-
-
-
     public function status($id, $status, Request $request)
     {
 
@@ -416,12 +391,7 @@ class ProductsController extends Controller
 
         $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
-
     }
-
-
-
-
     /**
      * Remove the specified resource from storage.
      *

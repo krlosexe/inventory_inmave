@@ -59,6 +59,7 @@
 								  <th>Descripcion</th>
 								  <th>Precio Euro</th>
 								  <th>Precio COP</th>
+								  <th>TOTAL COSTO+IVA+IMP</th>
 								  <th>Existencia Medellin</th>
 								  <th>Existencia Bogota</th>
 								  <th>Existencia Cali</th>
@@ -155,6 +156,11 @@
 							}
 						},
 						{"data":"price_cop",
+							render : (data, type, row) => {
+								return number_format(data, 2)
+							}
+						},
+						{"data":"price_cop_iva_imp",
 							render : (data, type, row) => {
 								return number_format(data, 2)
 							}
