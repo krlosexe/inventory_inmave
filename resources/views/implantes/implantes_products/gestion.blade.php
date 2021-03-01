@@ -61,6 +61,7 @@
 										<th>Gramaje</th>
 										<th id="medellin">Existencia Medellin</th>
 										<th id="bogota">Existencia Bogota</th>
+										<th id="barranquilla">Existencia Barranquilla</th>
 										<th id="cali">Existencia Cali</th>
 										<th>Registro INVIMA</th>
 										<th>Precio</th>
@@ -120,10 +121,17 @@
 		if(name_rol == "Silimed_Bog"){
 			$("#medellin").css("display","none");
 			$("#cali").css("display","none");
+			$("#barranquilla").css("display","none");
 		}
 		if(name_rol == "Silimed_Cali"){
 			$("#medellin").css("display","none");
 			$("#bogota").css("display","none");
+			$("#barranquilla").css("display","none");
+		}
+		if(name_rol == "Silimed_Barranquilla"){
+			$("#medellin").css("display","none");
+			$("#bogota").css("display","none");
+			$("#cali").css("display","none");
 		}
 		$('#table tbody').off('click');
 		var url = document.getElementById('ruta').value;
@@ -166,6 +174,69 @@
 						render : (data, type, row) => {
 							if(name_rol = "Silimed_Cali"){
 								return row.existence.cali.total
+							}
+						}
+					},
+					{
+						"data": "register_invima"
+					},
+					{
+						"data": "precio"
+					},
+					{
+						"data": "email_regis",
+	
+					},
+					{
+						"data": "created_at"
+					},
+				],
+				"language": idioma_espanol,
+				"dom": 'Bfrtip',
+				"responsive": true,
+				"buttons": [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+		}
+		if(name_rol == "Silimed_Barranquilla"){
+			var table = $("#table").DataTable({
+				"destroy": true,
+				"stateSave": true,
+				"serverSide": false,
+				"ajax": {
+					"method": "GET",
+					"url": '' + url + '/api/products/implantes/list/' + name_rol,
+					"dataSrc": ""
+				},
+				"columns": [
+					{
+						"data": null,
+						render: function(data, type, row) {
+							var botones = "";
+							if (actualizar == 1)
+								botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+							if (data.status == 1 && actualizar == 1)
+						    if (borrar == 1)
+								botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+							return botones;
+						}
+					},
+					{
+						"data": "referencia"
+					},
+					{
+						"data": "description"
+					},
+					{
+						"data": "gramaje"
+					},
+					{
+						"data": null,
+						"visible":true,
+						render : (data, type, row) => {
+							if(name_rol = "Silimed_Barranquilla"){
+								return row.existence.barranquilla.total
 							}
 						}
 					},
@@ -292,6 +363,15 @@
 						render : (data, type, row) => {
 							if(name_rol = "Administrador"){
 								return row.existence.medellin.total
+							}	
+						}
+					},
+					{
+						"data": null,
+						"visible":true,
+						render : (data, type, row) => {
+							if(name_rol = "Administrador"){
+								return row.existence.barranquilla.total
 							}	
 						}
 					},

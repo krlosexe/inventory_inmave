@@ -41,6 +41,7 @@
                             <option value="Bogota">Bogota</option>
                             <option value="Cali">Cali</option>
                             <option value="Medellin">Medellin</option>
+                            <option value="Barranquilla">Barranquilla</option>
                         </select>
                     </div>
                 </div>
