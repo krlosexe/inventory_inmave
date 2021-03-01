@@ -454,6 +454,14 @@
 							text: "Bogota"
 						}));
 		}
+
+		if(name_rol == "Silimed_Barranquilla"){
+					$("#warehouse option").remove();
+						$("#warehouse").append($('<option>', {
+							value: "Barranquilla",
+							text: "Barranquilla"
+						}));
+		}
 	
 		getProducts("#products")
 		GetCategories("#category")
@@ -499,6 +507,14 @@
 							value: "Bogota",
 							text: "Bogota",
 							selected: true
+						}));
+		}
+
+		if(name_rol == "Silimed_Barranquilla"){
+					$("#warehouse_edit option").remove();
+						$("#warehouse_edit").append($('<option>', {
+							value: "Barranquilla",
+							text: "Barranquilla"
 						}));
 		}
 			$("#alertas").css("display", "none");
