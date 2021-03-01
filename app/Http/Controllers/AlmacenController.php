@@ -101,7 +101,6 @@ class AlmacenController extends Controller
                 //     ->where('product_output.warehouse',$almacen)
                 //     ->sum('product_output_items.total');
 
-
                 // $item->qty_salida = ProductusOutputItems::where('product_output_items.id_product',$item->id)
 
                 //     ->leftJoin('product_output','product_output_items.id_output','product_output.id')
@@ -128,10 +127,7 @@ class AlmacenController extends Controller
     public function GetProductoByCosto($factura)
     {
         try {
-            // dd($factura);
-
             $head = ProductsEntry::whereNumber_invoice($factura)->first();
-
             $total = $head->taxes + $head->transport;
             $total_factura = $head->total_invoice;
             $taxes = $head->taxes;
@@ -143,7 +139,6 @@ class AlmacenController extends Controller
             ->join('products','product_entry_items.id_product','products.id')
             ->where('product_entry_items.id_entry',$head->id)
             ->get();
-            // dd($detail);
             $detail->map(function($item)use($total,$total_factura,$taxes,$transport,$warehouse,$number_invoice){
                 $item->total_gastos = number_format($total,2, '.', ',');
                 $item->precio_real = $item->price_cop + $item->total_gastos;

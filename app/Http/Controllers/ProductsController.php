@@ -142,9 +142,6 @@ class ProductsController extends Controller
                             ->groupBy("product_output_items.id_product")
                             ->first();
 
-
-
-
        $traspase_medellin = DB::table("product_output_items_trapase")
                             ->selectRaw("product_output_items_trapase.id_product, products.description, (SUM(product_output_items_trapase.qty))  as total")
                             ->join("product_output_traspase", "product_output_traspase.id", "product_output_items_trapase.id_output_traspase")
@@ -153,10 +150,6 @@ class ProductsController extends Controller
                             ->where("products.id", $id_product)
                             ->groupBy("product_output_items_trapase.id_product")
                             ->first();
-
-                            // dd($traspase_medellin);
-
-
 
         $output_medellin_reemision = DB::table("reemisiones_items")
                             ->selectRaw("reemisiones_items.id_product, products.description, (SUM(reemisiones_items.qty))  as total")
@@ -167,16 +160,12 @@ class ProductsController extends Controller
                             ->groupBy("reemisiones_items.id_product")
                             ->first();
 
-
-
-
         $entry_bogota = DB::table("product_entry_items")
                             ->selectRaw("product_entry_items.id_product, products.description, (SUM(product_entry_items.qty))  as total")
                             ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
                             ->join("products", "products.id", "product_entry_items.id_product")
                             ->where("products_entry.warehouse", "Bogota")
                             ->where("products.id", $id_product)
-
                             ->groupBy("product_entry_items.id_product")
                             ->first();
 
@@ -248,42 +237,32 @@ class ProductsController extends Controller
             $total_output_medellin           = 0;
             $total_output_medellin_reemision = 0;
             $total_traspaso_medellin = 0;
-
             if($output_medellin){
                 $total_output_medellin = $output_medellin->total;
             }
-
             if($output_medellin_reemision){
                 $total_output_medellin_reemision = $output_medellin_reemision->total;
             }
-
             if($traspase_medellin){
                 $total_traspaso_medellin = $traspase_medellin->total;
             }
-
             $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
         }else{
             $data_medellin["medellin"]["total"] = 0;
         }
-
         if($entry_bogota){
-
             $total_output_bogota           = 0;
             $total_output_bogota_reemision = 0;
             $total_traspaso_bogota = 0;
             if($output_bogota){
                 $total_output_bogota = $output_bogota->total;
             }
-
-
             if($output_bogota_reemision){
                 $total_output_bogota_reemision = $output_bogota_reemision->total;
             }
-
             if($traspase_bogota){
                 $total_traspaso_bogota = $traspase_bogota->total;
             }
-
             $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_bogota - $total_output_bogota_reemision - $total_traspaso_bogota;
         }else{
             $data_medellin["bogota"]["total"] = 0;
@@ -299,21 +278,16 @@ class ProductsController extends Controller
             if($output_cali_reemision){
                 $total_output_cali_reemision = $output_cali_reemision->total;
             }
-
             if($traspase_cali){
                 $total_traspaso_cali = $traspase_cali->total;
             }
-
             $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
         }else{
             $data_medellin["cali"]["total"] = 0;
         }
-
         return $data_medellin;
-
     }
     public function GetExistenceWarehouse($warehouse){
-
         $entry = DB::table("product_entry_items")
                     ->selectRaw("product_entry_items.id_product,products_entry.created_at, products.description,products.price_euro,product_entry_items.lote,product_entry_items.register_invima, product_entry_items.date_expiration, (SUM(product_entry_items.qty))  as total, products.presentation, products.price_cop, products.price_distributor_x_caja, products.price_distributor_x_vial, products.price_cliente_x_caja, products.price_cliente_x_vial")
                     ->join("products_entry", "products_entry.id", "product_entry_items.id_entry")
@@ -370,25 +344,18 @@ class ProductsController extends Controller
                     $value->total = (int)$value->total;
                 }
             }
-
-
         }
         return response()->json($entry)->setStatusCode(200);
     }
     public function status($id, $status, Request $request)
     {
-
-        $auditoria =  Auditoria::where("cod_reg", $id)
-                                    ->where("tabla", "products")->first();
-
+        $auditoria =  Auditoria::where("cod_reg", $id)->where("tabla", "products")->first();
         $auditoria->status = $status;
-
         if($status == 0){
             $auditoria->usr_regmod = $request["id_user"];
             $auditoria->fec_regmod = date("Y-m-d");
         }
         $auditoria->save();
-
         $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
     }

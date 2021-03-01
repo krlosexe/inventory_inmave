@@ -99,7 +99,6 @@ class MedgelRemisionesController extends Controller
     public function MedgelRemisionToInvoice($id,$user)
     {
         try {
-            // dd($id,$user);
             $head = MedgelReemision::where('id',$id)->first();
             $items = MedgelReemisionItems::where('id_medgel_reemision',$head->id)->get();
          
@@ -136,10 +135,8 @@ class MedgelRemisionesController extends Controller
                 $producs_items->save();
 
             }
-           
             MedgelReemision::where('id',$id)->Delete();
             MedgelReemisionItems::where('id_medgel_reemision',$id)->Delete();
-
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente <a href='api/invoice/print/$output->id' target='_blank'>Imprimir Factura</a>");
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
