@@ -49,6 +49,8 @@
          <h4>FACTURA PROFORMA {{"MED-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
          @elseif($warehouse  == "Cali" )
          <h4>FACTURA PROFORMA {{"CALI-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
+         @elseif($warehouse  == "Barranquilla" )
+         <h4>FACTURA PROFORMA {{"BARR-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
          @else
          <h4>FACTURA PROFORMA {{"BOG-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
           @endif
@@ -57,6 +59,8 @@
          <h4>REMISIÓN {{"MED-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
          @elseif($warehouse  == "Cali" )
          <h4>REMISIÓN {{"CALI-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
+         @elseif($warehouse  == "Barranquilla" )
+         <h4>REMISIÓN {{"BARR-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
          @else
          <h4>REMISIÓN {{"BOG-"}}: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{  str_pad($id, 4, "0", STR_PAD_LEFT) }}</h4>
           @endif
