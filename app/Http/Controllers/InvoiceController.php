@@ -436,6 +436,10 @@ class InvoiceController extends Controller
                 $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
                 return $pdf->loadView('invoice.InvoicePdfImplante', $data)->stream('archivo.pdf');
             }
+            if($data->warehouse == "Barranquilla"){
+                $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
+                return $pdf->loadView('invoice.InvoicePdfImplante', $data)->stream('archivo.pdf');
+            }
             
             // else{
             //     $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
