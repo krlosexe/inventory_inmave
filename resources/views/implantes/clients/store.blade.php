@@ -15,7 +15,7 @@
           <div class="col-md-3">
              <label for=""><b>NIT</b></label>
               <div class="form-group valid-required">
-                <input type="text" name="nit" class="form-control form-control-user" id="nit" placeholder="Nit" required>
+                <input type="text" name="nit_c" class="form-control form-control-user" id="nit" placeholder="Nit" required>
               </div>
           </div>
           <div class="col-md-3">
