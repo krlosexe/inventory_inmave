@@ -193,31 +193,31 @@ class ProductImplanteController extends Controller
                     ->groupBy("technical_reception_products_implante.referencia")
                     ->first();
 
-                    $output_barranquilla = DB::table("implantes_output_items")
-                    ->selectRaw(" (count(implantes_output_items.referencia))  as total")
-                    ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
-                    ->where("implantes_output.warehouse", "Barranquilla")
-                    ->where("implantes_output_items.estatus", "Vendido")
-                    ->where("implantes_output_items.referencia", $referencia)
-                    ->groupBy("implantes_output_items.referencia")
-                    ->first();
-
-                    // $traspase_cali = DB::table("implante_product_output_items_trapase")
-                    // ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
-                    // ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
-                    // ->where("implante_product_output_traspase.warehouse", "Cali")
-                    // ->where("implante_product_output_items_trapase.referencia",$referencia)
-                    // ->groupBy("implante_product_output_items_trapase.referencia")
+                    // $output_barranquilla = DB::table("implantes_output_items")
+                    // ->selectRaw(" (count(implantes_output_items.referencia))  as total")
+                    // ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
+                    // ->where("implantes_output.warehouse", "Barranquilla")
+                    // ->where("implantes_output_items.estatus", "Vendido")
+                    // ->where("implantes_output_items.referencia", $referencia)
+                    // ->groupBy("implantes_output_items.referencia")
                     // ->first();
 
-                    $output_barranquilla_reemision = DB::table("implantes_reemisiones_items")
-                    ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
-                    ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
-                    ->where("implantes_reemisiones.warehouse", "Barranquilla")
-                    ->where("implantes_reemisiones_items.estatus", "Remitido")
-                    ->where("implantes_reemisiones_items.referencia", $referencia)
-                    ->groupBy("implantes_reemisiones_items.referencia")
-                    ->first();
+                    // // $traspase_cali = DB::table("implante_product_output_items_trapase")
+                    // // ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
+                    // // ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
+                    // // ->where("implante_product_output_traspase.warehouse", "Cali")
+                    // // ->where("implante_product_output_items_trapase.referencia",$referencia)
+                    // // ->groupBy("implante_product_output_items_trapase.referencia")
+                    // // ->first();
+
+                    // $output_barranquilla_reemision = DB::table("implantes_reemisiones_items")
+                    // ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
+                    // ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
+                    // ->where("implantes_reemisiones.warehouse", "Barranquilla")
+                    // ->where("implantes_reemisiones_items.estatus", "Remitido")
+                    // ->where("implantes_reemisiones_items.referencia", $referencia)
+                    // ->groupBy("implantes_reemisiones_items.referencia")
+                    // ->first();
 
 
             $data_medellin = [];
@@ -283,24 +283,24 @@ class ProductImplanteController extends Controller
                     $data_medellin["bogota"]["total"] = 0;
                 }
 
-                if($entry_barranquilla){
-                    $total_output_barranquilla     = 0;
-                    $total_output_barranquilla_reemision = 0;
-                    // $total_traspaso_bogota = 0;
-                    if($output_barranquilla){
-                        $total_output_barranquilla = $output_barranquilla->total;
-                    }
-                    if($output_barranquilla_reemision){
-                        $total_output_barranquilla_reemision = $output_barranquilla_reemision->total;
-                    }
-                    // if($traspase_bogota){
-                    //     $total_traspaso_bogota = $traspase_bogota->total;
-                    // }
-                    // $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_barranquilla - $total_output_barranquilla_reemision - $total_traspaso_bogota;
-                    $data_medellin["barranquilla"]["total"] = $entry_bogota->total - $total_output_barranquilla - $total_output_barranquilla_reemision;
-                }else{
-                    $data_medellin["barranquilla"]["total"] = 0;
-                }
+                // if($entry_barranquilla){
+                //     $total_output_barranquilla     = 0;
+                //     $total_output_barranquilla_reemision = 0;
+                //     // $total_traspaso_bogota = 0;
+                //     if($output_barranquilla){
+                //         $total_output_barranquilla = $output_barranquilla->total;
+                //     }
+                //     if($output_barranquilla_reemision){
+                //         $total_output_barranquilla_reemision = $output_barranquilla_reemision->total;
+                //     }
+                //     // if($traspase_bogota){
+                //     //     $total_traspaso_bogota = $traspase_bogota->total;
+                //     // }
+                //     // $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_barranquilla - $total_output_barranquilla_reemision - $total_traspaso_bogota;
+                //     $data_medellin["barranquilla"]["total"] = $entry_bogota->total - $total_output_barranquilla - $total_output_barranquilla_reemision;
+                // }else{
+                //     $data_medellin["barranquilla"]["total"] = 0;
+                // }
             }
             if($rol == "Silimed_Cali"){
                 if($entry_cali){
@@ -322,26 +322,26 @@ class ProductImplanteController extends Controller
                     $data_medellin["cali"]["total"] = 0;
                 }
             }
-            if($rol == "Silimed_Barranquilla"){
-                if($entry_barranquilla){
-                    $total_output_barranquilla           = 0;
-                    $total_output_barranquilla_reemision = 0;
-                    // $total_traspaso_cali = 0;
-                    if($output_barranquilla){
-                        $total_output_barranquilla = $output_barranquilla->total;
-                    }
-                    if($output_barranquilla_reemision){
-                        $total_output_barranquilla_reemision = $output_barranquilla_reemision->total;
-                    }
-                    // if($traspase_cali){
-                    //     $total_traspaso_cali = $traspase_cali->total;
-                    // }
-                    // $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
-                    $data_medellin["barranquilla"]["total"] = $entry_barranquilla->total - $total_output_barranquilla - $total_output_barranquilla_reemision;
-                }else{
-                    $data_medellin["barranquilla"]["total"] = 0;
-                }
-            }
+            // if($rol == "Silimed_Barranquilla"){
+            //     if($entry_barranquilla){
+            //         $total_output_barranquilla           = 0;
+            //         $total_output_barranquilla_reemision = 0;
+            //         // $total_traspaso_cali = 0;
+            //         if($output_barranquilla){
+            //             $total_output_barranquilla = $output_barranquilla->total;
+            //         }
+            //         if($output_barranquilla_reemision){
+            //             $total_output_barranquilla_reemision = $output_barranquilla_reemision->total;
+            //         }
+            //         // if($traspase_cali){
+            //         //     $total_traspaso_cali = $traspase_cali->total;
+            //         // }
+            //         // $data_medellin["cali"]["total"] = $entry_cali->total - $total_output_cali - $total_output_cali_reemision - $total_traspaso_cali;
+            //         $data_medellin["barranquilla"]["total"] = $entry_barranquilla->total - $total_output_barranquilla - $total_output_barranquilla_reemision;
+            //     }else{
+            //         $data_medellin["barranquilla"]["total"] = 0;
+            //     }
+            // }
 
             if($rol == "Silimed_Bog"){
                 if($entry_bogota){

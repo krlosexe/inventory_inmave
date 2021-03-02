@@ -366,15 +366,15 @@
 							}	
 						}
 					},
-					{
-						"data": null,
-						"visible":true,
-						render : (data, type, row) => {
-							if(name_rol = "Administrador"){
-								return row.existence.barranquilla.total
-							}	
-						}
-					},
+					// {
+					// 	"data": null,
+					// 	"visible":true,
+					// 	render : (data, type, row) => {
+					// 		if(name_rol = "Administrador"){
+					// 			return row.existence.barranquilla.total
+					// 		}	
+					// 	}
+					// },
 					{
 						"data": null,
 						"visible":true,
