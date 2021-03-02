@@ -194,6 +194,19 @@ class ImplantesController extends Controller
                 ->get();
             return response()->json($data)->setStatusCode(200);
         }
+        if ($id == "Silimed_Barranquilla") {
+            $data = ImplanteReemision::select("implantes_reemisiones.*", "implantes_clients.name as name_client", "auditoria.*", "user_registro.email as email_regis")
+                ->join("auditoria", "auditoria.cod_reg", "=", "implantes_reemisiones.id")
+                ->join("implantes_clients", "implantes_clients.id", "=", "implantes_reemisiones.id_client")
+                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                ->where("auditoria.tabla", "implantes_remision")
+                ->where("implantes_reemisiones.warehouse", "Barranquilla")
+                ->where("auditoria.status", "!=", "0")
+                ->orderBy("implantes_reemisiones.id", "DESC")
+                ->with("items")
+                ->get();
+            return response()->json($data)->setStatusCode(200);
+        }
     }
     public function CreateImplanteOutput(Request $request)
     {
@@ -347,6 +360,17 @@ class ImplantesController extends Controller
                 ->with("items")
                 ->get();
         }
+        if ($id == "Silimed_Barranquilla") {
+            $data = ImplantOutput::select("implantes_output.*","auditoria.*", "user_registro.email as email_regis")
+                ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
+                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                ->where("auditoria.tabla", "implantes_output")
+                ->where("implantes_output.warehouse", "Barranquilla")
+                ->where("auditoria.status", "!=", "0")
+                ->orderBy("implantes_output.id", "DESC")
+                ->with("items")
+                ->get();
+        }
         return $data;
     }
     public function searchSerial($ref)
@@ -452,6 +476,23 @@ class ImplantesController extends Controller
                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                 ->where("auditoria.tabla", "implantes_output")
                 ->where("implantes_output.warehouse", "Bogota")
+                ->where("auditoria.status", "!=", "0")
+                ->orderBy("implantes_output.id", "DESC")
+                ->get();
+        }
+        if ($id == "Silimed_Barranquilla") {
+            $data = ImplantOutputItems::select("implantes_output_items.*",
+            "implantes_output.name",
+            "implantes_output.warehouse",
+            "implantes_output.total_invoice",
+            "auditoria.*",
+            "user_registro.email as email_regis"
+             )
+            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")    
+            ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
+                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                ->where("auditoria.tabla", "implantes_output")
+                ->where("implantes_output.warehouse", "Barranquilla")
                 ->where("auditoria.status", "!=", "0")
                 ->orderBy("implantes_output.id", "DESC")
                 ->get();
