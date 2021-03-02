@@ -197,7 +197,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 					$("#name_edit").val(data.name)
-					$("#nit_edit").val(data.nit)
+					$("#nit_edit").val(data.nit_c)
 					$("#phone_edit").val(data.phone)
 					$("#email_edit").val(data.email)
 					$("#address_edit").val(data.address)
