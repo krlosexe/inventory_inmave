@@ -248,7 +248,7 @@ class ReemisionesController extends Controller
             if($option == 1){
             $cliente = ImplantesClientes::where('id',$head->id_client)->first();
             $output->name     = $cliente->name;    
-            $output->nit_c    = $cliente->nit;     
+            $output->nit_c    = $cliente->nit_c;     
             $output->phone    = $cliente->phone;
             $output->email    = $cliente->email;
             $output->address  = $cliente->address;
