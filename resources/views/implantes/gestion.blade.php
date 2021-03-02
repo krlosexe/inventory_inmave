@@ -181,7 +181,7 @@
 			"serverSide": false,
 			"ajax": {
 				"method": "GET",
-				"url": '' + url + '/api/technical/reception/implante',
+				"url": '' + url + '/api/technical/reception/implante/' + name_rol,
 				"dataSrc": ""
 			},
 			"columns": [{

@@ -95,18 +95,56 @@ class TechnicalReceptionImplantesController extends Controller
             return  $th;
         }
     }
-    public function ListTechnicalReceptionImplante()
+    public function ListTechnicalReceptionImplante($rol)
     {
         try {
-            $data = TechnicalReceptionImplante::
-             with('proveedor')
-            ->with('user')
-            // ->with('detalle')
-            ->get();
-            $data->map(function($item){
-                $item->detalle = TechnicalReceptionProductoImplante::where('id_technical_reception_implante',$item->id)->get();
-              return $item;
-            });
+            // dd($rol);
+            if($rol == "Administrador"){
+                $data = TechnicalReceptionImplante::
+                 with('proveedor')
+                ->with('user')
+                // ->with('detalle')
+                ->get();
+                $data->map(function($item){
+                    $item->detalle = TechnicalReceptionProductoImplante::where('id_technical_reception_implante',$item->id)->get();
+                  return $item;
+                });
+            }
+            if($rol == "Silimed_Barranquilla"){
+                $data = TechnicalReceptionImplante::where('warehouse','Barranquilla')
+                ->with('proveedor')
+                ->with('user')
+                // ->with('detalle')
+                ->get();
+                $data->map(function($item){
+                    $item->detalle = TechnicalReceptionProductoImplante::where('id_technical_reception_implante',$item->id)->get();
+                  return $item;
+                });
+            }
+
+            if($rol == "Silimed_Cali"){
+                $data = TechnicalReceptionImplante::where('warehouse','Cali')
+                ->with('proveedor')
+                ->with('user')
+                // ->with('detalle')
+                ->get();
+                $data->map(function($item){
+                    $item->detalle = TechnicalReceptionProductoImplante::where('id_technical_reception_implante',$item->id)->get();
+                  return $item;
+                });
+            }
+
+            if($rol == "Silimed_Bog"){
+                $data = TechnicalReceptionImplante::where('warehouse','Bogota')
+                ->with('proveedor')
+                ->with('user')
+                // ->with('detalle')
+                ->get();
+                $data->map(function($item){
+                    $item->detalle = TechnicalReceptionProductoImplante::where('id_technical_reception_implante',$item->id)->get();
+                  return $item;
+                });
+            }
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;
