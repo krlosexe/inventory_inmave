@@ -91,7 +91,7 @@ Route::get('implantes/remision/invoice/{id}/{user}/{option}', 'ReemisionesContro
 
 Route::post('implantes/technical/reception', 'TechnicalReceptionImplantesController@CreateTechnicalReceptionImplante');
 Route::put('implantes/technical/reception/edit/{id}', 'TechnicalReceptionImplantesController@EditarTechnicalReceptionImplante');
-Route::get('technical/reception/implante', 'TechnicalReceptionImplantesController@ListTechnicalReceptionImplante');
+Route::get('technical/reception/implante/{rol}', 'TechnicalReceptionImplantesController@ListTechnicalReceptionImplante');
 Route::get('technical/reception/implante/delete/{id}', 'TechnicalReceptionImplantesController@DeleteTechnicalReceptionImplante');
 Route::get('products/get/implante/{id}', 'ImplantesController@GetExistenceImplante');
 
