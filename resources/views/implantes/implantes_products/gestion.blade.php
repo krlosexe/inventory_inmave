@@ -133,6 +133,10 @@
 			$("#bogota").css("display","none");
 			$("#cali").css("display","none");
 		}
+		if(name_rol == "Administrador"){
+			$("#bogota").css("display","none");
+		}
+
 		$('#table tbody').off('click');
 		var url = document.getElementById('ruta').value;
 		cuadros(cuadro, "#cuadro1");
@@ -373,15 +377,6 @@
 							if(name_rol = "Administrador"){
 								return row.existence.barranquilla.total
 							}	
-						}
-					},
-					{
-						"data": null,
-						"visible":true,
-						render : (data, type, row) => {
-							if(name_rol = "Administrador"){
-								return row.existence.bogota.total
-							}
 						}
 					},
 					{
