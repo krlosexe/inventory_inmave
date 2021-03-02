@@ -297,7 +297,7 @@ class ProductImplanteController extends Controller
                     //     $total_traspaso_bogota = $traspase_bogota->total;
                     // }
                     // $data_medellin["bogota"]["total"] = $entry_bogota->total - $total_output_barranquilla - $total_output_barranquilla_reemision - $total_traspaso_bogota;
-                    $data_medellin["barranquilla"]["total"] = $entry_bogota->total - $total_output_barranquilla - $total_output_barranquilla_reemision;
+                    $data_medellin["barranquilla"]["total"] = $entry_barranquilla->total - $total_output_barranquilla - $total_output_barranquilla_reemision;
                 }else{
                     $data_medellin["barranquilla"]["total"] = 0;
                 }
