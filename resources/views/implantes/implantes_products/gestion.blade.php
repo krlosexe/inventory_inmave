@@ -133,6 +133,11 @@
 			$("#bogota").css("display","none");
 			$("#cali").css("display","none");
 		}
+
+		if(name_rol == "Administrador"){
+			$("#bogota").css("display","none");
+		}
+		
 		$('#table tbody').off('click');
 		var url = document.getElementById('ruta').value;
 		cuadros(cuadro, "#cuadro1");
