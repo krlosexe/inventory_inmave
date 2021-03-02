@@ -137,7 +137,7 @@
 		if(name_rol == "Administrador"){
 			$("#bogota").css("display","none");
 		}
-		
+
 		$('#table tbody').off('click');
 		var url = document.getElementById('ruta').value;
 		cuadros(cuadro, "#cuadro1");
@@ -371,24 +371,24 @@
 							}	
 						}
 					},
-					// {
-					// 	"data": null,
-					// 	"visible":true,
-					// 	render : (data, type, row) => {
-					// 		if(name_rol = "Administrador"){
-					// 			return row.existence.barranquilla.total
-					// 		}	
-					// 	}
-					// },
 					{
 						"data": null,
 						"visible":true,
 						render : (data, type, row) => {
 							if(name_rol = "Administrador"){
-								return row.existence.bogota.total
-							}
+								return row.existence.barranquilla.total
+							}	
 						}
 					},
+					// {
+					// 	"data": null,
+					// 	"visible":true,
+					// 	render : (data, type, row) => {
+					// 		if(name_rol = "Administrador"){
+					// 			return row.existence.bogota.total
+					// 		}
+					// 	}
+					// },
 					{
 						"data": null,
 						"visible":true,
