@@ -145,7 +145,7 @@
 							}
 						},
 						{"data":"name"},
-						{"data":"nit"},
+						{"data":"nit_c"},
 						{"data":"phone"},
 						{"data":"city"},
 						{"data": "fec_regins"},
