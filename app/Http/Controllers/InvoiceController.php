@@ -409,7 +409,7 @@ class InvoiceController extends Controller
             "implantes_reemisiones.*",
             "implantes_clients.name as name_client",
             "implantes_clients.address as address_client",
-            "implantes_clients.nit",
+            "implantes_clients.nit_c",
             "implantes_clients.phone",
             "implantes_clients.email",
             "implantes_clients.city"
