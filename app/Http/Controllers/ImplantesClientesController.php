@@ -97,7 +97,7 @@ class ImplantesClientesController extends Controller
     {
         $update_clients = ImplantesClientes::find($clients);
         $update_clients->name      = $request->name;
-        $update_clients->nit       = $request->nit;
+        $update_clients->nit_c     = $request->nit_c;
         $update_clients->phone     = $request->phone;
         $update_clients->email     = $request->email;
         $update_clients->address   = $request->address;
