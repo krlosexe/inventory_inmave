@@ -29,19 +29,25 @@ class ProductImplanteController extends Controller
     public function CreateProductImplante(Request $request)
     {
         try {
-            $create = ProductImplantes::create($request->all());
-            $auditoria              = new Auditoria;
-            $auditoria->tabla       = "products_implantes";
-            $auditoria->cod_reg     = $create->id;
-            $auditoria->status      = 1;
-            $auditoria->fec_regins  = date("Y-m-d H:i:s");
-            $auditoria->usr_regins  = $request["id_user"];
-            $auditoria->save();
-            if($create){
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
-                return response()->json($data)->setStatusCode(200);
+            $ref = ProductImplantes::where('referencia',$request->referencia)->exists();
+            
+            if($ref){
+                return response()->json("Ya existe el producto con referencia $request->referencia")->setStatusCode(400);
             }else{
-                return response()->json("A ocurrido un error")->setStatusCode(400);
+                $create = ProductImplantes::create($request->all());
+                $auditoria              = new Auditoria;
+                $auditoria->tabla       = "products_implantes";
+                $auditoria->cod_reg     = $create->id;
+                $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                $auditoria->usr_regins  = $request["id_user"];
+                $auditoria->save();
+                if($create){
+                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+                    return response()->json($data)->setStatusCode(200);
+                }else{
+                    return response()->json("A ocurrido un error")->setStatusCode(400);
+                }
             }
         } catch (\Throwable $th) {
             return $th;
@@ -80,7 +86,8 @@ class ProductImplanteController extends Controller
             return $th;
         }
     }
-    public function GetExistence($referencia,$rol){
+    public function GetExistence($referencia,$rol)
+    {
         try {
                     $entry_medellin = DB::table("technical_reception_products_implante")
                     ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
