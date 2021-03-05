@@ -26,7 +26,7 @@
                   {{$value2->description}} cantidad : {{$value2->qty}}, <br>
                 @endforeach
             </td>
-            <td>{{ $value->Subtotal }}</td>
+            <td>{{ $value->subtotal }}</td>
             <td>{{ $value->vat_total }}</td>
             <td>{{ $value->total_invoice }}</td>
             <td>{{ $value->fec_regins }}</td>
