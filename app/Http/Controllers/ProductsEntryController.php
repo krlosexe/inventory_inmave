@@ -22,8 +22,6 @@ class ProductsEntryController extends Controller
                                 ->where("auditoria.tabla", "products_entry")
                                 ->where("auditoria.status", "!=", "0")
                                 ->orderBy("products_entry.id", "DESC")
-
-
                                 ->with("products")
                                 ->get();
         
@@ -59,7 +57,6 @@ class ProductsEntryController extends Controller
         $auditoria->usr_regins  = $request["id_user"];
         $auditoria->save();
 
-
         if(isset($request["id_product"])){
             foreach($request["id_product"] as $key => $value){
                 $producs_items["id_entry"]          = $entry->id;
@@ -73,8 +70,6 @@ class ProductsEntryController extends Controller
                 ProductsEntryItems::create($producs_items);
             }   
         }
-        
-
         if ($entry) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
@@ -82,7 +77,6 @@ class ProductsEntryController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-
     /**
      * Display the specified resource.
      *
@@ -93,7 +87,6 @@ class ProductsEntryController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -104,7 +97,6 @@ class ProductsEntryController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -114,18 +106,10 @@ class ProductsEntryController extends Controller
      */
     public function update(Request $request, $productsEntry)
     {
-
-
-       
-
         $update = ProductsEntry::find($productsEntry)->update($request->all());
-
-
         ProductsEntryItems::where("id_entry", $productsEntry)->delete();
-
         if(isset($request["id_product"])){
             foreach($request["id_product"] as $key => $value){
-
                 $producs_items["id_entry"]          = $productsEntry;
                 $producs_items["id_product"]        = $value;
                 $producs_items["lote"]              = $request["lotes"][$key];
@@ -135,10 +119,8 @@ class ProductsEntryController extends Controller
                 $producs_items["price"]             = str_replace(",", "", $request["price"][$key]);
                 $producs_items["total"]             = str_replace(",", "", $request["total"][$key]);
                 ProductsEntryItems::create($producs_items);
-                
             }   
         }
-
 
         if ($update) {
             $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
@@ -147,7 +129,6 @@ class ProductsEntryController extends Controller
             return response()->json("A ocurrido un error")->setStatusCode(400);
         }
     }
-
     /**
      * Remove the specified resource from storage.
      *
