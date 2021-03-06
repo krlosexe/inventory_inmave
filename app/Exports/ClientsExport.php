@@ -51,15 +51,10 @@ class ClientsExport implements FromView
                                 ->with("products")
                                 ->get();
 
-        
-
-
         return view('exports.clients', [
             'data' => $data
         ]);
     }
-
-
 
     public function headings(): array
     {
@@ -67,8 +62,6 @@ class ClientsExport implements FromView
            
         ];
     }
-
-
 
     public function collection()
     {

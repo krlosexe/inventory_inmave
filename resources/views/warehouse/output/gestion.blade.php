@@ -9,7 +9,6 @@
 		box-shadow: none;
 		text-align: center;
 	}
-
 	.kv-avatar {
 		display: inline-block;
 	}
@@ -62,7 +61,6 @@
 									<input type="date" class="form-control" id="date_init">
 								</div>
 							</div>
-
 							<div class="col-md-2">
 								<div class="form-group">
 									<label for=""><b>Fecha hasta</b></label>
@@ -70,7 +68,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="table-responsive">
 							<table class="table table-bordered" id="table" width="100%" cellspacing="0">
 								<thead>
@@ -127,20 +124,15 @@
 			$("#add_remision_invoice").css("display", "none");
 		}
 	});
-
 	function update() {
 		enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
 	}
-
 	function store() {
 		enviarFormulario("#store", 'api/products/entry/output', '#cuadro2');
 	}
-
 	$("#date_init, #date_finish").change(function(e) {
 		list();
 	});
-
-
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
@@ -303,11 +295,6 @@
 			$("#warehouse_edit").val(data.warehouse).trigger("change")
 			ShowProdcuts("#table_products_edit", data.products)
 			AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
-			// if (data.discount_total > 0) {
-			// 	$("#apply_discount_edit").prop("checked", true)
-			// } else {
-			// 	$("#apply_discount_edit").prop("checked", false)
-			// }
 			if (data.discount_type === 10) {
 				$("#apply_discount_edit").prop("checked", true)
 			}

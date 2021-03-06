@@ -428,7 +428,6 @@ class ImplantesController extends Controller
     }
     public function ListClienteImplanteOutput($id)
     {
-        // dd($id);
         if ($id == "Administrador") {
             $data = ImplantOutputItems::select("implantes_output_items.*",
             "implantes_output.name",
