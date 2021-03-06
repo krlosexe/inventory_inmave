@@ -9,13 +9,16 @@
 		box-shadow: none;
 		text-align: center;
 	}
+
 	.kv-avatar {
 		display: inline-block;
 	}
+
 	.kv-avatar .file-input {
 		display: table-cell;
 		width: 213px;
 	}
+
 	.kv-reqd {
 		color: red;
 		font-family: monospace;
@@ -51,6 +54,23 @@
 						</button>
 					</div>
 					<div class="card-body">
+
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for=""><b>Fecha desde</b></label>
+									<input type="date" class="form-control" id="date_init">
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for=""><b>Fecha hasta</b></label>
+									<input type="date" class="form-control" id="date_finish">
+								</div>
+							</div>
+						</div>
+
 						<div class="table-responsive">
 							<table class="table table-bordered" id="table" width="100%" cellspacing="0">
 								<thead>
@@ -107,17 +127,29 @@
 			$("#add_remision_invoice").css("display", "none");
 		}
 	});
+
 	function update() {
 		enviarFormularioPut("#form-update", 'api/products/entry/output', '#cuadro4', false, "#avatar-edit");
 	}
+
 	function store() {
 		enviarFormulario("#store", 'api/products/entry/output', '#cuadro2');
 	}
+
+	$("#date_init, #date_finish").change(function(e) {
+		list();
+	});
+
+
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
 			"token": tokens,
 		};
+
+		const date_init = $("#date_init").val()
+		const date_finish = $("#date_finish").val()
+		
 		$('#table tbody').off('click');
 		var url = document.getElementById('ruta').value;
 		cuadros(cuadro, "#cuadro1");
@@ -131,11 +163,12 @@
 				"data": {
 					"id_user": id_user,
 					"token": tokens,
+					"date_init"   : date_init,
+					"date_finish" : date_finish
 				},
 				"dataSrc": ""
 			},
-			"columns": [
-				{
+			"columns": [{
 					"data": null,
 					render: function(data, type, row) {
 						var botones = "";
@@ -198,13 +231,14 @@
 		$(".buttons-excel").remove()
 		var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 		$(".dt-buttons").append(a)
-		var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/output/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
+		var b = "<button id='view_xls' target='_blank' style='opacity: 0' href='api/output/export/excel/"+ date_init + '/' + date_finish + "'class='dt-button buttons-excel buttons-html5'>xls</button>";
 		$('.dt-buttons').append(b);
 		$("#xls").click(function(e) {
 			url = $("#view_xls").attr("href");
 			window.open(url, '_blank');
 		});
 	}
+
 	function nuevo() {
 		$("#alertas").css("display", "none");
 		$("#store")[0].reset();
@@ -330,6 +364,7 @@
 			statusConfirmacion('api/products/entry/output/status/' + data.id + "/" + 0, "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
+
 	function ProductsGetExistence(warehouse, product, table) {
 		$(warehouse).unbind().change(function(e) {
 			$(table + " tbody").html("")
@@ -342,8 +377,7 @@
 				},
 				dataType: 'JSON',
 				async: false,
-				error: function() {
-				},
+				error: function() {},
 				success: function(data) {
 					$(product + " option").remove();
 					$(product).append($('<option>', {
@@ -376,6 +410,7 @@
 			});
 		});
 	}
+
 	function getProducts(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/products',
@@ -421,6 +456,7 @@
 			}
 		});
 	}
+
 	function AddProductos(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
 			const array_product = $(select_product).val().split("|")
@@ -466,6 +502,7 @@
 			$(table + " tbody").append(html)
 		});
 	}
+
 	function AddProductosEdit(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
 			const array_product = $(select_product).val().split("|")
@@ -511,6 +548,7 @@
 			$(table + " tbody").append(html)
 		});
 	}
+
 	function ShowProdcuts(table, data) {
 		$(table + " tbody").html("")
 		$.map(data, function(item, key) {
@@ -542,12 +580,14 @@
 			$("#price_edit_" + item.id).val(item.price)
 		});
 	}
+
 	function deleteProduct(element, edit = '') {
 		var tr = $(element).parent("td").parent("tr").remove()
 		calcSubTotal(".price_product", edit)
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
+
 	function getClients(select, select_default = false) {
 		$.ajax({
 			url: '' + document.getElementById('ruta').value + '/api/clients',
@@ -558,8 +598,7 @@
 			},
 			dataType: 'JSON',
 			async: false,
-			error: function() {
-			},
+			error: function() {},
 			success: function(data) {
 				$(select + " option").remove();
 				$(select).append($('<option>', {
@@ -567,8 +606,7 @@
 					text: "- Seleccione"
 				}));
 				$.each(data, function(i, item) {
-					if (data.status == 1) {
-					}
+					if (data.status == 1) {}
 					$(select).append($('<option>', {
 						value: item.id,
 						text: `${item.name} - ${item.city ? item.city : 'Sin ciudad'}`,
@@ -594,6 +632,7 @@
 			}
 		});
 	}
+
 	function calcProduc(element, edit = '') {
 		var price = inNum($(element).parent("td").parent("tr").children("td").find(".price_product").val())
 		var qty = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product").val())
@@ -620,6 +659,7 @@
 		calcTotalVat(".vat_product", edit)
 		calTotal(".total_product", edit)
 	}
+
 	function calcSubTotal(fields, edit = '') {
 		let subtotal = 0
 		$.map($(fields), function(item, key) {
@@ -665,6 +705,7 @@
 		*/
 		$(`#subtotal_with_discount${edit}`).val(sub_total_with_discount)
 	}
+
 	function calcTotalVat(fields, edit = '') {
 		let totalVat = 0
 		$.map($(fields), function(item, key) {
@@ -679,6 +720,7 @@
 		$(`#vat_total_text${edit}`).text(`$ ${number_format(totalVat2, 2)}`)
 		$(`#vat_total${edit}`).val(totalVat2)
 	}
+
 	function calTotal(fields, edit = '') {
 		let total_invoice = 0
 		$.map($(fields), function(item, key) {
@@ -719,7 +761,7 @@
 	$("#apply_discount_edit").change(function(e) {
 		if ($("#apply_discount_edit").is(':checked')) {
 			$("#type_discount_edit").val(10)
-		}else{
+		} else {
 			$("#type_discount_edit").val(0)
 		}
 		calcSubTotal(".price_product", '_edit')
@@ -729,7 +771,7 @@
 	$("#apply_discount_edit2").change(function(e) {
 		if ($("#apply_discount_edit2").is(':checked')) {
 			$("#type_discount_edit").val(15)
-		}else{
+		} else {
 			$("#type_discount_edit").val(0)
 		}
 		calcSubTotal(".price_product", '_edit')
