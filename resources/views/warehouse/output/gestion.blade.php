@@ -56,14 +56,14 @@
 					<div class="card-body">
 
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div class="form-group">
 									<label for=""><b>Fecha desde</b></label>
 									<input type="date" class="form-control" id="date_init">
 								</div>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div class="form-group">
 									<label for=""><b>Fecha hasta</b></label>
 									<input type="date" class="form-control" id="date_finish">
