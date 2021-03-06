@@ -72,10 +72,14 @@ class InvoiceController extends Controller
             ->stream('archivo.pdf');
     }
 
-    public function ExportExcel()
+    public function ExportExcel($date_init, $date_finish)
     {
+        
+        // dd($date_init, $date_finish);
 
         $xls = new ClientsExport;
+        $xls->date_init     = $date_init;
+        $xls->date_finish   = $date_finish;
 
         return Excel::download($xls, 'ClientExport.xlsx');
     }
