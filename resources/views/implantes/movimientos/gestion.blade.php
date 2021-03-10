@@ -235,7 +235,7 @@
 	function AddProductos(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
 			const array_product = $(select_product).val().split("|")
-			console.log('select_product',array_product);
+	
 
 			const serial = array_product[1]
 			const gramaje = array_product[2]
@@ -304,7 +304,7 @@
 						text: "-Seleccione"
 					}));
 					$.each(data, function(i, item) {
-						console.log('item',item);
+						
 						$(product).append($('<option>', {
 							value: `${item.referencia}|${item.serial}|${item.gramaje}|${item.total}|${item.precio}|${item.id_product}|${item.lote}|${item.date_expiration}|${item.register_invima}|${item.perfil}|${item.description}|${item.id_provider}`,
 							text: item.serial,
