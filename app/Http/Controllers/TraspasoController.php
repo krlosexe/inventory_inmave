@@ -97,7 +97,7 @@ class TraspasoController extends Controller
 
     public function createImplanteOuptTraspase(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         try {
                 $producs_output = [];
                 $producs_output['warehouse'] = $request->warehouse;
