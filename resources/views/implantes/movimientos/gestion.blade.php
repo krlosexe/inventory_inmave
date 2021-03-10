@@ -98,7 +98,7 @@
 		list();
 		update();
 		$("#collapse_Implantes").addClass("show");
-		$("#nav_traslados, #collapse_Implantes").addClass("active");
+		$("#nav_movimientos-implantes, #collapse_Implantes").addClass("active");
 		verifyPersmisos(id_user, tokens, "output");
 	});
 	function update() {
