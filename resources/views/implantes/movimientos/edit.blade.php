@@ -24,7 +24,8 @@
                           <select name="warehouse" class="form-control" id="warehouse_edit" required>
                             <option value="">Seleccione</option>
                             <option value="Medellin">Medellin</option>
-                            <option value="Bogota">Bogota</option>
+                            <option value="Barranquilla">Barranquilla</option>
+                            <option value="Cali">Cali</option>
                           </select>
                       </div>
                 </div>

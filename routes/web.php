@@ -136,3 +136,7 @@ Route::get('ventas-clientes', function () {
 Route::get('impuesto-transporte', function () {
     return view('reports.impuesto-transporte');
 });
+
+Route::get('movimientos-implantes', function () {
+    return view('implantes.movimientos.gestion');
+});

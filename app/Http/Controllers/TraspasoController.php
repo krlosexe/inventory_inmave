@@ -97,7 +97,6 @@ class TraspasoController extends Controller
 
     public function createImplanteOuptTraspase(Request $request)
     {
-        // dd($request->all());
         try {
                 $producs_output = [];
                 $producs_output['warehouse'] = $request->warehouse;
@@ -106,7 +105,6 @@ class TraspasoController extends Controller
                 $producs_output['type']      = "Traspaso";     
                 $salida =  ImplanteProductOutputTraspase::create($producs_output);
               
-            
             foreach($request["referencia"] as $key => $value){
                 $producs_item_out = [];
                 $producs_item_out["id_implante_output_traspase"]   = $salida->id;
@@ -138,13 +136,14 @@ class TraspasoController extends Controller
                 $products["id_technical_reception_implante"]  = $entrada->id;
                 $products["referencia"]              = $referencia;
                 $products["serial"]                  = $request["serial"][$key];
-                $products["id_product"]              = $request["id_product"][$key];
+                // $products["id_product"]              = $request["id_product"][$key];
                 $products["lote"]                    = $request["lote"][$key];
                 $products["register_invima"]         = $request["register_invima"][$key];
                 $products["date_expiration"]         = $request["date_expiration"][$key];
+                $products["price"]                   = $request["price"][$key];
                 $products["description"]             = $request["description"][$key];
-                $products["gramaje"]                 = $request["gramaje"][$key];
-                $products["perfil"]                  = $request["perfil"][$key];
+                // $products["gramaje"]                 = $request["gramaje"][$key];
+                // $products["perfil"]                  = $request["perfil"][$key];
                 $products["estatus"]                 = "Disponible";
 
                 TechnicalReceptionProductoImplante::create($products);

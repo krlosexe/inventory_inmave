@@ -162,7 +162,7 @@
 				{
 					"data": "reissue",
 					render: function(data, type, row) {
-						if (data == 1) {
+						if (data == 0) {
 							return "Reemisión";
 						} else {
 							return "Factura";
