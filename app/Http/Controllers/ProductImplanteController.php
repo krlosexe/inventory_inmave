@@ -90,10 +90,10 @@ class ProductImplanteController extends Controller
     {
         try {
                     $entry_medellin = DB::table("technical_reception_products_implante")
-                    ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
+                    ->selectRaw("(count(technical_reception_products_implante.serial))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                     ->where("technical_reception_implante.warehouse", "Medellin")
-                    // ->where("technical_reception_products_implante.estatus","!=","Vendido")
+                    ->where("technical_reception_products_implante.estatus","Disponible")
                     ->where("technical_reception_products_implante.referencia", $referencia)
                     ->groupBy("technical_reception_products_implante.referencia")
                     ->first();
@@ -159,9 +159,10 @@ class ProductImplanteController extends Controller
                     ->first();
 
                     $entry_cali = DB::table("technical_reception_products_implante")
-                    ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
+                    ->selectRaw("(count(technical_reception_products_implante.serial))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                     ->where("technical_reception_implante.warehouse", "Cali")
+                    ->where("technical_reception_products_implante.estatus","Disponible")
                     ->where("technical_reception_products_implante.referencia", $referencia)
                     ->groupBy("technical_reception_products_implante.referencia")
                     ->first();
@@ -196,6 +197,7 @@ class ProductImplanteController extends Controller
                     ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                     ->where("technical_reception_implante.warehouse", "Barranquilla")
+                    ->where("technical_reception_products_implante.estatus","Disponible")
                     ->where("technical_reception_products_implante.referencia", $referencia)
                     ->groupBy("technical_reception_products_implante.referencia")
                     ->first();
