@@ -105,7 +105,6 @@ class TraspasoController extends Controller
                 $producs_output['type']      = "Traspaso";     
                 $salida =  ImplanteProductOutputTraspase::create($producs_output);
               
-            
             foreach($request["referencia"] as $key => $value){
                 $producs_item_out = [];
                 $producs_item_out["id_implante_output_traspase"]   = $salida->id;
