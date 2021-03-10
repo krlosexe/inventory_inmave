@@ -97,7 +97,7 @@ class TraspasoController extends Controller
 
     public function createImplanteOuptTraspase(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         try {
                 $producs_output = [];
                 $producs_output['warehouse'] = $request->warehouse;
@@ -138,13 +138,14 @@ class TraspasoController extends Controller
                 $products["id_technical_reception_implante"]  = $entrada->id;
                 $products["referencia"]              = $referencia;
                 $products["serial"]                  = $request["serial"][$key];
-                $products["id_product"]              = $request["id_product"][$key];
+                // $products["id_product"]              = $request["id_product"][$key];
                 $products["lote"]                    = $request["lote"][$key];
                 $products["register_invima"]         = $request["register_invima"][$key];
                 $products["date_expiration"]         = $request["date_expiration"][$key];
+                $products["price"]                   = $request["price"][$key];
                 $products["description"]             = $request["description"][$key];
-                $products["gramaje"]                 = $request["gramaje"][$key];
-                $products["perfil"]                  = $request["perfil"][$key];
+                // $products["gramaje"]                 = $request["gramaje"][$key];
+                // $products["perfil"]                  = $request["perfil"][$key];
                 $products["estatus"]                 = "Disponible";
 
                 TechnicalReceptionProductoImplante::create($products);

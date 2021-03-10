@@ -235,6 +235,8 @@
 	function AddProductos(btn, select_product, table) {
 		$(btn).unbind().click(function(e) {
 			const array_product = $(select_product).val().split("|")
+			console.log('select_product',array_product);
+
 			const serial = array_product[1]
 			const gramaje = array_product[2]
 			const total = array_product[3]
@@ -246,7 +248,7 @@
 			const perfil = array_product[9]
 			const description = array_product[10]
 			const id_provider = array_product[11]
-			const referencia = $(`${select_product} option:selected`).text()
+			const referencia = array_product[0]
 			var html
 			var validaProduct = false
 			$(table + " tbody tr").each(function() {
@@ -256,10 +258,10 @@
 			});
 			if (!validaProduct) {
 				html += "<tr>"
-				html += "<td>" + referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + referencia + "' ><input type='hidden' class='id_product' name='serial[]' value='" + serial + "' ><input type='hidden' class='id_product' name='gramaje[]' value='" + gramaje + "' ><input type='hidden' class='id_product' name='precio[]' value='" + precio + "' ><input type='hidden' class='id_product' name='id_product[]' value='" + id_product + "' ><input type='hidden' class='id_product' name='lote[]' value='" + lote + "' ><input type='hidden' class='id_product' name='date_expiration[]' value='" + date_expiration + "' ><input type='hidden' class='id_product' name='register_invima[]' value='" + register_invima + "' ><input type='hidden' class='id_product' name='perfil[]' value='" + perfil + "' ><input type='hidden' class='id_product' name='description[]' value='" + description + "' ><input type='hidden' class='id_product' name='id_provider' value='" + id_provider + "' ></td>"
+				html += "<td>" + referencia + " <input type='hidden' class='id_product' name='referencia[]' value='" + referencia + "' ><input type='hidden' class='id_product' name='serial[]' value='" + serial + "' ><input type='hidden' class='id_product' name='gramaje[]' value='" + gramaje + "' ><input type='hidden' class='id_product' name='price[]' value='" + precio + "' ><input type='hidden' class='id_product' name='id_product[]' value='" + id_product + "' ><input type='hidden' class='id_product' name='lote[]' value='" + lote + "' ><input type='hidden' class='id_product' name='date_expiration[]' value='" + date_expiration + "' ><input type='hidden' class='id_product' name='register_invima[]' value='" + register_invima + "' ><input type='hidden' class='id_product' name='perfil[]' value='" + perfil + "' ><input type='hidden' class='id_product' name='description[]' value='" + description + "' ><input type='hidden' class='id_product' name='id_provider' value='" + id_provider + "' ></td>"
 				html += "<td>" + serial + " </td>"
-				html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='" + total + "' required></td>"
-				html += "<td><input type='number' disabled class='form-control items_calc existence' value='" + total + "' min = '1' required></td>"
+				html += "<td><input type='number' class='form-control items_calc qty_product' name='qty[]' value='0' min = '1' onchange='calcProduc(this)' max='" + 1 + "' required></td>"
+				html += "<td><input type='number' disabled class='form-control items_calc existence' value='" + 1 + "' min = '1' required></td>"
 				html += "<td><span onclick='deleteProduct(this, " + '""' + ")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 				html += "</tr>"
 			} else {
@@ -284,16 +286,15 @@
 				success: function(data) {
 					var html
 					if ($("#warehouse").val() == 'Medellin') {
-						html += '<option value="Bogota">Bogota</option>'
+						html += '<option value="Barranquilla">Barranquilla</option>'
 						html += '<option value="Cali">Cali</option>'
 					}
-					if ($("#warehouse").val() == 'Bogota') {
+					if ($("#warehouse").val() == 'Barranquilla') {
 						html += '<option value="Medellin">Medellin</option>'
 						html += '<option value="Cali">Cali</option>'
 					}
 					if ($("#warehouse").val() == 'Cali') {
-
-						html += '<option value="Bogota">Bogota</option>'
+						html += '<option value="Barranquilla">Barranquilla</option>'
 						html += '<option value="Medellin">Medellin</option>'
 					}
 					$("#destiny").html(html)
@@ -303,9 +304,10 @@
 						text: "-Seleccione"
 					}));
 					$.each(data, function(i, item) {
+						console.log('item',item);
 						$(product).append($('<option>', {
 							value: `${item.referencia}|${item.serial}|${item.gramaje}|${item.total}|${item.precio}|${item.id_product}|${item.lote}|${item.date_expiration}|${item.register_invima}|${item.perfil}|${item.description}|${item.id_provider}`,
-							text: item.referencia,
+							text: item.serial,
 						}));
 					});
 					$(product).select2({
