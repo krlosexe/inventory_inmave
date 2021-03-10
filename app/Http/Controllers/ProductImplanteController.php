@@ -375,15 +375,6 @@ class ProductImplanteController extends Controller
     }
     public function GetExistenceWarehouse($warehouse){
         // dd($warehouse);
-        // $entry = DB::table("technical_reception_products_implante")
-        //             ->selectRaw("products_implantes.*,technical_reception_products_implante.*,technical_reception_implante.id_provider,(count(technical_reception_products_implante.serial))  as total")
-        //             ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
-        //             ->join("products_implantes", "technical_reception_products_implante.referencia", "products_implantes.referencia")
-        //             ->where("technical_reception_implante.warehouse", $warehouse)
-        //             ->where("technical_reception_products_implante.estatus","Disponible")
-        //             ->get();
-
-
                     $entry = DB::table("technical_reception_products_implante")
                     ->select("products_implantes.*","technical_reception_products_implante.*","technical_reception_implante.id_provider")
                     ->join("technical_reception_implante","technical_reception_products_implante.id_technical_reception_implante","technical_reception_implante.id")
@@ -393,54 +384,7 @@ class ProductImplanteController extends Controller
                     ->get();
 
         
-        // $output = DB::table("implantes_output_items")
-        //             ->selectRaw("products_implantes.*,implantes_output_items.*, (count(implantes_output_items.referencia))  as total")
-        //             ->join("implantes_output", "implantes_output.id", "implantes_output_items.id_implant_output")
-        //             ->join("products_implantes", "implantes_output_items.referencia", "products_implantes.referencia")
-        //             ->where("implantes_output.warehouse", $warehouse)
-                    // ->groupBy("implantes_output_items.referencia")
-                    // ->get();
-
-        // $output_reemision = DB::table("implantes_reemisiones_items")
-        //             ->selectRaw("products_implantes.*,implantes_reemisiones_items.*,(count(implantes_reemisiones_items.referencia))  as total")
-        //             ->join("implantes_reemisiones", "implantes_reemisiones.id", "implantes_reemisiones_items.id_implante_reemision")
-        //             ->join("products_implantes", "implantes_reemisiones_items.referencia", "products_implantes.referencia")
-        //             ->where("implantes_reemisiones.warehouse", $warehouse)
-        //             ->groupBy("implantes_reemisiones_items.referencia")
-        //             ->get();
-
-
-        // $traspase = DB::table("implante_product_output_items_trapase")
-        //             ->selectRaw("products_implantes.*,implante_product_output_items_trapase.*,(SUM(implante_product_output_items_trapase.qty))  as total")
-        //             ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
-        //             ->join("products_implantes", "implante_product_output_items_trapase.referencia", "products_implantes.referencia")
-        //             ->where("implante_product_output_traspase.warehouse", $warehouse)
-        //             ->groupBy("implante_product_output_items_trapase.serial")
-        //             ->get();
-
-        // foreach($entry as $value){
-        //     foreach($output as $out){
-        //         if($value->referencia == $out->referencia){
-        //             $value->total = $value->total - $out->total;
-        //         }else{
-        //             $value->total = (int)$value->total;
-        //         }
-        //     }
-            // foreach($output_reemision as $out_reemision){
-            //     if($value->referencia == $out_reemision->referencia){
-            //         $value->total = $value->total - $out_reemision->total;
-            //     }else{
-            //         $value->total = (int)$value->total;
-            //     }
-            // }
-            // foreach($traspase as $out_traspase){
-            //     if($value->referencia == $out_traspase->referencia){
-            //         $value->total = $value->total - $out_traspase->total;
-            //     }else{
-            //         $value->total = (int)$value->total;
-            //     }
-            // }
-        // }
+       
         return response()->json($entry)->setStatusCode(200);
     }
 
