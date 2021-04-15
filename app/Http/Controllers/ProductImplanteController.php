@@ -30,7 +30,7 @@ class ProductImplanteController extends Controller
     {
         try {
             $ref = ProductImplantes::where('referencia',$request->referencia)->exists();
-            
+
             if($ref){
                 return response()->json("Ya existe el producto con referencia $request->referencia")->setStatusCode(400);
             }else{
@@ -93,7 +93,7 @@ class ProductImplanteController extends Controller
                     ->selectRaw("(count(technical_reception_products_implante.serial))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                     ->where("technical_reception_implante.warehouse", "Medellin")
-                    ->where("technical_reception_products_implante.estatus","Disponible")
+                    //->where("technical_reception_products_implante.estatus","Disponible")
                     ->where("technical_reception_products_implante.referencia", $referencia)
                     ->groupBy("technical_reception_products_implante.referencia")
                     ->first();
@@ -162,7 +162,7 @@ class ProductImplanteController extends Controller
                     ->selectRaw("(count(technical_reception_products_implante.serial))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                     ->where("technical_reception_implante.warehouse", "Cali")
-                    ->where("technical_reception_products_implante.estatus","Disponible")
+                    // ->where("technical_reception_products_implante.estatus","Disponible")
                     ->where("technical_reception_products_implante.referencia", $referencia)
                     ->groupBy("technical_reception_products_implante.referencia")
                     ->first();
@@ -197,7 +197,7 @@ class ProductImplanteController extends Controller
                     ->selectRaw("(count(technical_reception_products_implante.referencia))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                     ->where("technical_reception_implante.warehouse", "Barranquilla")
-                    ->where("technical_reception_products_implante.estatus","Disponible")
+                    // ->where("technical_reception_products_implante.estatus","Disponible")
                     ->where("technical_reception_products_implante.referencia", $referencia)
                     ->groupBy("technical_reception_products_implante.referencia")
                     ->first();
@@ -247,7 +247,7 @@ class ProductImplanteController extends Controller
                             $total_traspaso_medellin = $traspase_medellin->total;
                         }
                         $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
-                        
+
                         // $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision;
                     }else{
                         $data_medellin["medellin"]["total"] = 0;
@@ -385,8 +385,8 @@ class ProductImplanteController extends Controller
                     ->where('technical_reception_implante.warehouse',$warehouse)
                     ->get();
 
-        
-       
+
+
         return response()->json($entry)->setStatusCode(200);
     }
 

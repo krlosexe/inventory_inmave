@@ -45,13 +45,13 @@ class ImplantesController extends Controller
     public function CreateImplanteRemision(Request $request)
     {
         try {
-            
+
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $output = new ImplanteReemision;
             $output->warehouse              = $request->warehouse;
             $output->id_client              = $request->id_client;
             $output->reissue                = $request->reissue;
-            $output->subtotal               = $request->total_invoice;
+            $output->subtotal               = $request->subtotal;
             $output->subtotal_with_discount = $request->subtotal_with_discount;
             $output->vat_total              = $request->vat_total ? $request->vat_total : $request->vat_total = 0;
             $output->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
@@ -99,14 +99,15 @@ class ImplantesController extends Controller
     }
     public function UpdateImplanteRemision(Request $request, $remision)
     {
-          
+
         try {
+            // dd($request->all());
             isset($request["reissue"])  ? $request["reissue"] = 1 : $request["reissue"] = 0;
             $update =  ImplanteReemision::find($remision);
             $update->warehouse              = $request->warehouse;
             $update->id_client              = $request->id_client;
             $update->reissue                = $request->reissue;
-            $update->subtotal               = $request->total_invoice;
+            $update->subtotal               = $request->subtotal;
             $update->subtotal_with_discount = $request->subtotal_with_discount;
             $update->vat_total              = $request->vat_total ? $request->vat_total : $request->vat_total = 0;
             $update->discount_type          = $request->discount_type ? $request->discount_type : $request->discount_type = 0;
@@ -126,7 +127,7 @@ class ImplantesController extends Controller
                 ImplanteReemisionesItem::where("serial",$value["serial"])->delete();
             }
 
-            ImplanteReemisionesItem::where("id_implante_reemision", $remision)->delete();
+
             if (isset($request["referencia"])) {
                 foreach ($request->referencia as $key => $value) {
                     $producs_items = [];
@@ -256,9 +257,9 @@ class ImplantesController extends Controller
                     ImplantOutputItems::create($producs_items);
 
                     TechnicalReceptionProductoImplante::where('serial', $request["serial"][$key])->update(["estatus" => "Vendido"]);
-                   
+
                     ImplanteReemisionesItem::where("serial", $request["serial"][$key])->update(["estatus" => "Vendido"]);
-                    
+
                 }
             }
             if ($output) {
@@ -437,7 +438,7 @@ class ImplantesController extends Controller
             "auditoria.*",
             "user_registro.email as email_regis"
              )
-            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")    
+            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                 ->where("auditoria.tabla", "implantes_output")
@@ -453,7 +454,7 @@ class ImplantesController extends Controller
             "auditoria.*",
             "user_registro.email as email_regis"
              )
-            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")    
+            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                 ->where("auditoria.tabla", "implantes_output")
@@ -470,7 +471,7 @@ class ImplantesController extends Controller
             "auditoria.*",
             "user_registro.email as email_regis"
              )
-            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")    
+            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                 ->where("auditoria.tabla", "implantes_output")
@@ -487,7 +488,7 @@ class ImplantesController extends Controller
             "auditoria.*",
             "user_registro.email as email_regis"
              )
-            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")    
+            ->join("implantes_output", "implantes_output_items.id_implant_output", "=", "implantes_output.id")
             ->join("auditoria", "auditoria.cod_reg", "=", "implantes_output.id")
                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                 ->where("auditoria.tabla", "implantes_output")
@@ -535,7 +536,7 @@ class ImplantesController extends Controller
                     ->leftjoin("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
                     ->leftJoin("implantes_output_items","technical_reception_products_implante.serial","implantes_output_items.serial")
                     ->leftJoin("implantes_reemisiones_items","technical_reception_products_implante.serial","implantes_reemisiones_items.serial")
-                    ->where("technical_reception_implante.warehouse", "Cali")                   
+                    ->where("technical_reception_implante.warehouse", "Cali")
                     ->get();
 
             }
@@ -555,7 +556,7 @@ class ImplantesController extends Controller
                     ->leftjoin("products_implantes", "technical_reception_products_implante.referencia","products_implantes.referencia")
                     ->leftJoin("implantes_output_items","technical_reception_products_implante.serial","implantes_output_items.serial")
                     ->leftJoin("implantes_reemisiones_items","technical_reception_products_implante.serial","implantes_reemisiones_items.serial")
-                    ->where("technical_reception_implante.warehouse", "Bogota")                   
+                    ->where("technical_reception_implante.warehouse", "Bogota")
                     ->get();
             }
             return $data;
