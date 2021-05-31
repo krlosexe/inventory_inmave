@@ -162,11 +162,7 @@
 				{
 					"data": "reissue",
 					render: function(data, type, row) {
-						if (data == 0) {
-							return "Reemisión";
-						} else {
-							return "Factura";
-						}
+						return "Reemisión";
 					}
 				},
 				{
@@ -655,7 +651,7 @@
 
 		} else {
 			discount_ammount2 = 0
-			
+
 		}
 		var discount_field3 = $(`#apply_discount3${edit}`)
 		let discount_ammount3
