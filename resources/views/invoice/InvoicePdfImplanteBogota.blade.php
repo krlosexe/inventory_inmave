@@ -109,6 +109,12 @@
                 <td>{{$city}}</td>
             </tr>DEL</td>
             </tr>
+
+            <tr>
+                <td><b>Correo:</b></td>
+                <td>{{$email}}</td>
+            </tr>
+
         </table>
         <br>
         <b>Dirección:</b>
@@ -206,13 +212,13 @@
         <br><br>
         @if($warehouse == "Bogota" )
         @if($name)
-        Nombre del Paciente: {{$name}} 
+        Nombre del Paciente: {{$name}}
         @else
         Nombre del Paciente:
         @endif
         <br>
         @if($nit_c)
-        Identificación: {{$nit_c}} 
+        Identificación: {{$nit_c}}
         @else
         Identificación:
         @endif
