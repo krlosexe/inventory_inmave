@@ -15,6 +15,7 @@ class ProductImplanteController extends Controller
             $products = ProductImplantes::select("products_implantes.*", "user_registro.email as email_regis")
             ->join("users as user_registro", "user_registro.id", "=", "products_implantes.id_user")
             ->orderBy("products_implantes.id", "DESC")
+          //  ->where("products_implantes.id", 92)
             ->get();
 
             foreach($products as $value){
@@ -93,10 +94,12 @@ class ProductImplanteController extends Controller
                     ->selectRaw("(count(technical_reception_products_implante.serial))  as total")
                     ->join("technical_reception_implante", "technical_reception_implante.id", "technical_reception_products_implante.id_technical_reception_implante")
                     ->where("technical_reception_implante.warehouse", "Medellin")
-                    //->where("technical_reception_products_implante.estatus","Disponible")
+                    ->where("technical_reception_products_implante.estatus","Disponible")
                     ->where("technical_reception_products_implante.referencia", $referencia)
                     ->groupBy("technical_reception_products_implante.referencia")
                     ->first();
+
+
 
                     $output_medellin = DB::table("implantes_output_items")
                     ->selectRaw("(count(implantes_output_items.referencia))  as total")
@@ -107,6 +110,10 @@ class ProductImplanteController extends Controller
                     ->groupBy("implantes_output_items.referencia")
                     ->first();
 
+
+
+
+
                     $traspase_medellin = DB::table("implante_product_output_items_trapase")
                     ->selectRaw("(SUM(implante_product_output_items_trapase.qty))  as total")
                     ->join("implante_product_output_traspase", "implante_product_output_traspase.id", "implante_product_output_items_trapase.id_implante_output_traspase")
@@ -114,6 +121,10 @@ class ProductImplanteController extends Controller
                     ->where("implante_product_output_items_trapase.referencia", $referencia)
                     ->groupBy("implante_product_output_items_trapase.referencia")
                     ->first();
+
+
+
+
 
                     $output_medellin_reemision = DB::table("implantes_reemisiones_items")
                     ->selectRaw("(count(implantes_reemisiones_items.referencia))  as total")
@@ -123,6 +134,7 @@ class ProductImplanteController extends Controller
                     ->where("implantes_reemisiones_items.referencia", $referencia)
                     ->groupBy("implantes_reemisiones_items.referencia")
                     ->first();
+
 
                     $entry_bogota = DB::table("technical_reception_products_implante")
                     ->selectRaw(" (count(technical_reception_products_implante.referencia))  as total")
@@ -246,7 +258,9 @@ class ProductImplanteController extends Controller
                     if($traspase_medellin){
                             $total_traspaso_medellin = $traspase_medellin->total;
                         }
-                        $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
+                        //$data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision - $total_traspaso_medellin;
+
+                        $data_medellin["medellin"]["total"] = $entry_medellin->total;
 
                         // $data_medellin["medellin"]["total"] = $entry_medellin->total - $total_output_medellin - $total_output_medellin_reemision;
                     }else{

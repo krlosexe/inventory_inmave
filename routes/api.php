@@ -143,3 +143,8 @@ Route::get('get/implante/{id}', 'ImplantesController@GetImplante');
 Route::get('get/clientes/implantes/list/{id}', 'ImplantesController@ListClienteImplanteOutput');
 Route::get('get/implantes/list/trazabilidad/{id}', 'ImplantesController@ListImplanteTrazabilidad');
 Route::get('impuesto/transporte/{factura}', 'AlmacenController@GetProductoByCosto');
+
+
+Route::put('save/pay/{id_invoice}', 'InvoiceController@SavePay');
+Route::get('get/pays/{id_invoice}', 'InvoiceController@GetPays');
+Route::get('process/invoice/{id_invoice}', 'InvoiceController@Process');

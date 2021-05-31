@@ -95,7 +95,7 @@ Route::get('almacen', function () {
 
 Route::get('ventas_implantes', function () {
     return view('implantes.output.gestion');
-}); 
+});
 
 Route::get('reemisiones_implantes', function () {
     return view('implantes.reemisiones.gestion');
@@ -140,3 +140,10 @@ Route::get('impuesto-transporte', function () {
 Route::get('movimientos-implantes', function () {
     return view('implantes.movimientos.gestion');
 });
+
+
+
+Route::get('cartera', function () {
+    return view('warehouse.cartera.gestion');
+});
+

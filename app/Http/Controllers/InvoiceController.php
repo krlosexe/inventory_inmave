@@ -11,7 +11,7 @@ use App\{ProductusOutput,
 };
 use App\Exports\{ClientsExport,ClientsExportReemision};
 use Maatwebsite\Excel\Facades\Excel;
-
+use DB;
 class InvoiceController extends Controller
 {
     public function ShowInvoice($id)
@@ -74,7 +74,7 @@ class InvoiceController extends Controller
 
     public function ExportExcel($date_init, $date_finish)
     {
-        
+
         // dd($date_init, $date_finish);
 
         $xls = new ClientsExport;
@@ -448,7 +448,7 @@ class InvoiceController extends Controller
                 $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
                 return $pdf->loadView('invoice.InvoicePdfImplante', $data)->stream('archivo.pdf');
             }
-            
+
             // else{
             //     $data->ammount_text =  $this->convertirNumeroLetra($data["total_invoice"]);
             //     return $pdf->loadView('invoice.InvoicePdfImplante', $data)->stream('archivo.pdf');
@@ -456,4 +456,39 @@ class InvoiceController extends Controller
         }
 
     }
+
+
+    public function SavePay(Request $request, $id){
+
+
+        $insert = [
+            "id_invoice" => $id,
+            "method"     => $request["method_pay"][0],
+            "amount"     => $request["amount_pay"][0]
+        ];
+
+        if($file = $request->file('file_pay')){
+            $destinationPath = 'img/pays';
+            $file->move($destinationPath,$file->getClientOriginalName());
+            $insert["file"] = $file->getClientOriginalName();
+        }
+
+
+        DB::table("pays")->insert($insert);
+        return response()->json("Ok")->setStatusCode(200);
+    }
+
+    public function GetPays($id_invoice){
+        $data = DB::table("pays")->where("id_invoice", $id_invoice)->get();
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+    public function Process($id){
+        $data = DB::table("product_output")->where("id", $id)->update([
+            "state" => "Pagada"
+        ]);
+        return response()->json("Ok")->setStatusCode(200);
+    }
+
 }
