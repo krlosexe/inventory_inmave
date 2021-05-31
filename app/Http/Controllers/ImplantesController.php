@@ -449,6 +449,7 @@ class ImplantesController extends Controller
         if ($id == "Silimed_Cali") {
             $data = ImplantOutputItems::select("implantes_output_items.*",
             "implantes_output.name",
+            "implantes_output.nit_c",
             "implantes_output.warehouse",
             "implantes_output.total_invoice",
             "auditoria.*",
@@ -466,6 +467,7 @@ class ImplantesController extends Controller
         if ($id == "Silimed_Bog") {
             $data = ImplantOutputItems::select("implantes_output_items.*",
             "implantes_output.name",
+            "implantes_output.nit_c",
             "implantes_output.warehouse",
             "implantes_output.total_invoice",
             "auditoria.*",
@@ -483,6 +485,7 @@ class ImplantesController extends Controller
         if ($id == "Silimed_Barranquilla") {
             $data = ImplantOutputItems::select("implantes_output_items.*",
             "implantes_output.name",
+            "implantes_output.nit_c",
             "implantes_output.warehouse",
             "implantes_output.total_invoice",
             "auditoria.*",
