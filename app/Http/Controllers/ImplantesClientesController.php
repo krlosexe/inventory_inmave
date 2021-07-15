@@ -47,7 +47,7 @@ class ImplantesClientesController extends Controller
 
       if($rep_clientes){
             $data = array('mensagge' => "El cliente ya existe en la base de datos");    
-            return response()->json($data)->setStatusCode(200);
+            return response()->json($data)->setStatusCode(400);
         }
         else{
             $clients = ImplantesClientes::create($request->all());
