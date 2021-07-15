@@ -41,20 +41,30 @@ class ImplantesClientesController extends Controller
      */
     public function store(Request $request)
     {
-        $clients = ImplantesClientes::create($request->all());
-        $auditoria              = new Auditoria;
-        $auditoria->tabla       = "implantes_clients";
-        $auditoria->cod_reg     = $clients->id;
-        $auditoria->status      = 1;
-        $auditoria->fec_regins  = date("Y-m-d H:i:s");
-        $auditoria->usr_regins  = $request["id_user"];
-        $auditoria->save();
+        
+        $rep_clientes= ImplantesClientes:: where("implantes_clients.nit_c", $request["nit_c"])
+                                    ->first();
 
-        if ($clients) {
-            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+      if($rep_clientes){
+            $data = array('mensagge' => "El cliente ya existe en la base de datos");    
             return response()->json($data)->setStatusCode(200);
-        }else{
-            return response()->json("A ocurrido un error")->setStatusCode(400);
+        }
+        else{
+            $clients = ImplantesClientes::create($request->all());
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "implantes_clients";
+            $auditoria->cod_reg     = $clients->id;
+            $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
+            $auditoria->usr_regins  = $request["id_user"];
+            $auditoria->save();
+
+            if ($clients) {
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                return response()->json($data)->setStatusCode(200);
+            }else{
+                return response()->json("A ocurrido un error")->setStatusCode(400);
+            }
         }
     }
     /**
@@ -95,22 +105,29 @@ class ImplantesClientesController extends Controller
      */
     public function update(Request $request, $clients)
     {
-        $update_clients = ImplantesClientes::find($clients);
-        $update_clients->name      = $request->name;
-        $update_clients->nit_c     = $request->nit_c;
-        $update_clients->phone     = $request->phone;
-        $update_clients->email     = $request->email;
-        $update_clients->address   = $request->address;
-        $update_clients->city      = $request->city;
-        $update_clients->save();
+        
 
-        if ($update_clients) {
+
+            $update_clients = ImplantesClientes::find($clients);
+            $update_clients->name      = $request->name;
+            $update_clients->nit_c     = $request->nit_c;
+            $update_clients->phone     = $request->phone;
+            $update_clients->email     = $request->email;
+            $update_clients->address   = $request->address;
+            $update_clients->city      = $request->city;
+            $update_clients->save();
+
+            if ($update_clients) {
+            
             $data = array('mensagge' => "Los datos fueron Editados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
-        }else{
+            }else{
             return response()->json("A ocurrido un error")->setStatusCode(400);
-        }
+            }    
+        
     }
+
+
     public function status($id, $status, Request $request)
     {
         $auditoria =  Auditoria::where("cod_reg", $id)->where("tabla", "implantes_clients")->first();
